@@ -7,149 +7,399 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
-    color: #e2e8f0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f6f8;
+    color: #0f1419;
     min-height: 100vh;
-    padding: 20px;
-    line-height: 1.6;
+    line-height: 1.5;
   }
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    background: #1e293b;
-    border-radius: 20px;
-    padding: 32px 28px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    border: 1px solid #334155;
+  .topbar {
+    background: #0f1419;
+    color: white;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 4px solid #00d563;
   }
-  h1 {
-    font-size: 26px;
-    margin-bottom: 6px;
-    background: linear-gradient(135deg, #38bdf8, #3b82f6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .season {
-    color: #94a3b8;
-    font-size: 14px;
-    margin-bottom: 14px;
-  }
-  .tour {
-    display: inline-block;
-    background: #334155;
-    color: #38bdf8;
-    padding: 5px 14px;
+  .topbar-left { display: flex; align-items: center; gap: 12px; }
+  .topbar-logo {
+    width: 40px; height: 40px;
+    background: #00d563;
     border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
   }
-  .playlist-btn {
-    display: block;
-    text-align: center;
-    background: linear-gradient(135deg, #38bdf8, #3b82f6);
-    color: white !important;
-    padding: 16px;
-    border-radius: 14px;
-    font-weight: 600;
-    margin: 0 0 28px 0;
-    font-size: 16px;
-    text-decoration: none;
-    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3);
-    transition: transform 0.15s, box-shadow 0.15s;
+  .topbar h1 { font-size: 17px; font-weight: 800; letter-spacing: -0.2px; }
+  .topbar-sub {
+    font-size: 11px; color: #7a8493;
+    text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
   }
-  .playlist-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #ff2d55; color: white;
+    padding: 5px 11px; border-radius: 6px;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.5px;
   }
-  h2 {
-    font-size: 16px;
-    margin: 28px 0 14px 0;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
+  .live-badge::before {
+    content: ''; width: 6px; height: 6px;
+    background: white; border-radius: 50%;
+    animation: blink 1.2s infinite;
   }
-  ul {
-    list-style: none;
+  @keyframes blink { 0%,100% {opacity:1;} 50% {opacity:0.3;} }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 28px 20px 40px; }
+
+  .tour-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 20px; padding-bottom: 16px;
+    border-bottom: 2px solid #e2e5eb;
   }
-  li {
-    margin-bottom: 8px;
-    background: #0f172a;
+  .tour-title { font-size: 32px; font-weight: 900; letter-spacing: -1px; color: #0f1419; }
+  .tour-title span { color: #00d563; }
+  .tour-count {
+    font-size: 13px; font-weight: 700; color: #6b7280;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  .matches { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+  .match {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    background: white;
+    padding: 16px 20px;
     border-radius: 12px;
-    border-left: 3px solid #38bdf8;
-    transition: transform 0.15s, background 0.15s;
+    border: 1px solid #e2e5eb;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+    position: relative;
     overflow: hidden;
   }
-  li:hover {
-    transform: translateX(4px);
-    background: #1a2438;
+  .match::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 4px;
+    background: #00d563; opacity: 0; transition: opacity 0.2s;
   }
-  li a {
-    color: #e2e8f0;
-    text-decoration: none;
-    display: block;
-    padding: 12px 16px;
-    font-size: 14px;
+  .match:hover {
+    border-color: #00d563;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 213, 99, 0.15);
   }
-  li a:hover {
-    color: #38bdf8;
+  .match:hover::before { opacity: 1; }
+
+  .match-date { display: flex; flex-direction: column; gap: 2px; }
+  .match-day { font-size: 20px; font-weight: 900; color: #0f1419; line-height: 1; }
+  .match-month {
+    font-size: 11px; font-weight: 700; color: #6b7280;
+    text-transform: uppercase; letter-spacing: 0.8px;
+  }
+  .match-time {
+    font-size: 12px; font-weight: 800; color: #00d563;
+    margin-top: 4px; letter-spacing: 0.3px;
+  }
+
+  .match-teams { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .team {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 15px; font-weight: 700; color: #0f1419;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .team-flag {
+    width: 20px; height: 20px; border-radius: 4px;
+    background: linear-gradient(135deg, #e2e5eb, #cbd0d9);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 900; color: #6b7280;
+  }
+
+  .match-right {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
   }
   .badge-4k {
-    display: inline-block;
-    background: linear-gradient(135deg, #7c3aed, #a855f7);
-    color: white;
-    padding: 2px 8px;
-    border-radius: 5px;
-    font-size: 11px;
-    font-weight: 700;
-    margin-left: 8px;
-    vertical-align: middle;
+    background: #ff2d55; color: white;
+    padding: 3px 8px; border-radius: 5px;
+    font-size: 10px; font-weight: 900; letter-spacing: 0.8px;
+    box-shadow: 0 3px 10px rgba(255, 45, 85, 0.3);
   }
+  .match-play {
+    display: flex; align-items: center; gap: 6px;
+    color: #00d563; font-size: 11px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.8px;
+  }
+  .play-icon {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: #00d563;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 10px;
+    transition: transform 0.2s;
+  }
+  .match:hover .play-icon { transform: scale(1.15); }
+
+  .playlist-btn {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    background: #0f1419; color: white !important;
+    padding: 18px; border-radius: 12px;
+    font-weight: 800; font-size: 15px;
+    text-decoration: none; letter-spacing: 0.3px;
+    margin-bottom: 36px;
+    transition: background 0.2s, transform 0.2s;
+    border: 2px solid #0f1419;
+  }
+  .playlist-btn:hover {
+    background: #00d563; border-color: #00d563;
+    transform: translateY(-2px); color: white;
+  }
+
+  .section-title {
+    font-size: 14px; font-weight: 900;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: #0f1419; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 2px; background: #e2e5eb;
+  }
+
+  .tours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .tour-card {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; background: white; padding: 14px 16px;
+    border-radius: 10px; border: 1px solid #e2e5eb;
+    text-decoration: none; color: #0f1419;
+    font-size: 14px; font-weight: 700;
+    transition: all 0.2s;
+  }
+  .tour-card:hover {
+    background: #0f1419; color: white;
+    border-color: #0f1419; transform: translateY(-2px);
+  }
+  .tour-card .arrow {
+    color: #00d563; font-size: 14px; transition: transform 0.2s;
+  }
+  .tour-card:hover .arrow { transform: translateX(3px); }
+
   .footer {
-    text-align: center;
-    color: #64748b;
-    font-size: 12px;
-    margin-top: 32px;
-    padding-top: 20px;
-    border-top: 1px solid #334155;
+    margin-top: 40px; padding-top: 20px;
+    border-top: 2px solid #e2e5eb;
+    text-align: center; color: #8892a0;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.3px;
+  }
+  .footer strong { color: #00d563; font-weight: 800; }
+
+  @media (max-width: 600px) {
+    .topbar { padding: 16px 20px; }
+    .topbar h1 { font-size: 15px; }
+    .topbar-logo { width: 34px; height: 34px; font-size: 18px; }
+    .container { padding: 20px 16px 32px; }
+    .tour-title { font-size: 24px; }
+    .match { grid-template-columns: 70px 1fr; padding: 14px 16px; gap: 12px; }
+    .match-right {
+      grid-column: 2; flex-direction: row;
+      align-items: center; justify-content: flex-end; margin-top: 4px;
+    }
+    .match-day { font-size: 17px; }
+    .team { font-size: 14px; }
+    .playlist-btn { font-size: 14px; padding: 16px; }
+    .tours-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
 <body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo">⚽</div>
+      <div>
+        <h1>Российская Премьер-Лига</h1>
+        <div class="topbar-sub">Сезон 2026-2027</div>
+      </div>
+    </div>
+    <div class="live-badge">LIVE</div>
+  </div>
+
   <div class="container">
-    <h1>⚽ Чемпионат России по футболу</h1>
-    <div class="season">Сезон 2026-2027</div>
-    <div class="tour">10-ый тур</div>
+    <div class="tour-header">
+      <div class="tour-title">ТУР <span>10</span></div>
+      <div class="tour-count">8 матчей · 1 в 4K</div>
+    </div>
 
-    <a class="playlist-btn" href="playlist.m3u">📺 Открыть плейлист</a>
+    <a class="playlist-btn" href="playlist.m3u">
+      ▶ СМОТРЕТЬ ПЛЕЙЛИСТ
+    </a>
 
-    <h2>Матчи тура</h2>
-    <ul>
-      <li><a href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/1080p50fps/38ae759820cd8fae9f476a247d09df3e/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">09 октября | 19:30 | Ростов — Акрон</a></li>
-<li><a href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/1080p50fps/4cc1987903a7c24a68d29f4292a06112/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">10 октября | 13:00 | Оренбург — Динамо Махачкала</a></li>
-<li><a href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/1080p50fps/6024c69baaaccd4a071e18803d5d48f4/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">10 октября | 15:15 | Факел — Локомотив</a></li>
-<li><a href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/1080p50fps/147b0a5e94dc08d2a0817abba65bb9fa/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">10 октября | 17:30 | Крылья Советов — Спартак</a></li>
-<li><a href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/1080p50fps/4ddbea8f075d1fb503deadd6761f150b/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">10 октября | 19:30 | Краснодар — Зенит</a></li>
-<li><a href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/1080p50fps/1e4b5378e0dcdd9a4b55816941f46564/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">11 октября | 14:00 | Ахмат — Балтика</a></li>
-<li><a href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/2160/29c6cf8cac097c4c03f1cc0d37053f4f/4946715002.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=50e8b45ee68d7bd477063c51d3415e3e" target="_blank">11 октября | 16:30 | ЦСКА — Родина <span class="badge-4k">4K</span></a></li>
-<li><a href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/1080p50fps/22926c0da6938fdc6714ce05e73840d0/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">11 октября | 19:30 | Рубин — Динамо Москва</a></li>
+    <div class="matches">
+      <a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/1080p50fps/0f9621f83896b11915ce7472d111f3fa/4946715901.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7e7590c7e7812e3721dd0b30b756176b" target="_blank">
+        <div class="match-date">
+          <div class="match-day">09</div>
+          <div class="match-month">окт</div>
+          <div class="match-time">19:30</div>
+        </div>
+        <div class="match-teams">
+          <div class="team"><span class="team-flag">Р</span>Ростов</div>
+          <div class="team"><span class="team-flag">А</span>Акрон</div>
+        </div>
+        <div class="match-right">
+          
+          <div class="match-play">
+            <span>Смотреть</span>
+            <span class="play-icon">▶</span>
+          </div>
+        </div>
+      </a>
+<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/1080p50fps/a6cd6a183a1ac0425f126febb78eb8b5/4946715901.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7e7590c7e7812e3721dd0b30b756176b" target="_blank">
+        <div class="match-date">
+          <div class="match-day">10</div>
+          <div class="match-month">окт</div>
+          <div class="match-time">13:00</div>
+        </div>
+        <div class="match-teams">
+          <div class="team"><span class="team-flag">О</span>Оренбург</div>
+          <div class="team"><span class="team-flag">Д</span>Динамо Махачкала</div>
+        </div>
+        <div class="match-right">
+          
+          <div class="match-play">
+            <span>Смотреть</span>
+            <span class="play-icon">▶</span>
+          </div>
+        </div>
+      </a>
+<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/1080p50fps/9fb2c09eebc737cbdf3d0c902ca8bcd1/4946715901.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7e7590c7e7812e3721dd0b30b756176b" target="_blank">
+        <div class="match-date">
+          <div class="match-day">10</div>
+          <div class="match-month">окт</div>
+          <div class="match-time">15:15</div>
+        </div>
+        <div class="match-teams">
+          <div class="team"><span class="team-flag">Ф</span>Факел</div>
+          <div class="team"><span class="team-flag">Л</span>Локомотив</div>
+        </div>
+        <div class="match-right">
+          
+          <div class="match-play">
+            <span>Смотреть</span>
+            <span class="play-icon">▶</span>
+          </div>
+        </div>
+      </a>
+<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/1080p50fps/a284e7ef6026584f2da428d8efade398/4946715901.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7e7590c7e7812e3721dd0b30b756176b" target="_blank">
+        <div class="match-date">
+          <div class="match-day">10</div>
+          <div class="match-month">окт</div>
+          <div class="match-time">17:30</div>
+        </div>
+        <div class="match-teams">
+          <div class="team"><span class="team-flag">К</span>Крылья Советов</div>
+          <div class="team"><span class="team-flag">С</span>Спартак</div>
+        </div>
+        <div class="match-right">
+          
+          <div class="match-play">
+            <span>Смотреть</span>
+            <span class="play-icon">▶</span>
+          </div>
+        </div>
+      </a>
+<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/1080p50fps/35a782df1fe8e2099b5176f2099822ae/4946715901.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7e7590c7e7812e3721dd0b30b756176b" target="_blank">
+        <div class="match-date">
+          <div class="match-day">10</div>
+          <div class="match-month">окт</div>
+          <div class="match-time">19:30</div>
+        </div>
+        <div class="match-teams">
+          <div class="team"><span class="team-flag">К</span>Краснодар</div>
+          <div class="team"><span class="team-flag">З</span>Зенит</div>
+        </div>
+        <div class="match-right">
+          
+          <div class="match-play">
+            <span>Смотреть</span>
+            <span class="play-icon">▶</span>
+          </div>
+        </div>
+      </a>
+<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/1080p50fps/08c3aafdc8dffbdc9b013254d2d0998b/4946715901.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7e7590c7e7812e3721dd0b30b756176b" target="_blank">
+        <div class="match-date">
+          <div class="match-day">11</div>
+          <div class="match-month">окт</div>
+          <div class="match-time">14:00</div>
+        </div>
+        <div class="match-teams">
+          <div class="team"><span class="team-flag">А</span>Ахмат</div>
+          <div class="team"><span class="team-flag">Б</span>Балтика</div>
+        </div>
+        <div class="match-right">
+          
+          <div class="match-play">
+            <span>Смотреть</span>
+            <span class="play-icon">▶</span>
+          </div>
+        </div>
+      </a>
+<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/2160/dc346a6e47c8688a6367025de7fc5afb/4946715902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=035593963f1fc9d90441f22034ed8940" target="_blank">
+        <div class="match-date">
+          <div class="match-day">11</div>
+          <div class="match-month">окт</div>
+          <div class="match-time">16:30</div>
+        </div>
+        <div class="match-teams">
+          <div class="team"><span class="team-flag">Ц</span>ЦСКА</div>
+          <div class="team"><span class="team-flag">Р</span>Родина</div>
+        </div>
+        <div class="match-right">
+          <span class="badge-4k">4K</span>
+          <div class="match-play">
+            <span>Смотреть</span>
+            <span class="play-icon">▶</span>
+          </div>
+        </div>
+      </a>
+<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/1080p50fps/5bc936949f40847185db22771a5ea15b/4946715901.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7e7590c7e7812e3721dd0b30b756176b" target="_blank">
+        <div class="match-date">
+          <div class="match-day">11</div>
+          <div class="match-month">окт</div>
+          <div class="match-time">19:30</div>
+        </div>
+        <div class="match-teams">
+          <div class="team"><span class="team-flag">Р</span>Рубин</div>
+          <div class="team"><span class="team-flag">Д</span>Динамо Москва</div>
+        </div>
+        <div class="match-right">
+          
+          <div class="match-play">
+            <span>Смотреть</span>
+            <span class="play-icon">▶</span>
+          </div>
+        </div>
+      </a>
 
-    </ul>
+    </div>
 
-    <h2>Все туры</h2>
-    <ul>
-      <li><a href="https://raw.githubusercontent.com/callcow/rpl-playlist/main/tours/8-%D0%BE%D0%B9%20%D1%82%D1%83%D1%80.m3u" target="_blank">📁 8-ой тур</a></li>
-<li><a href="https://raw.githubusercontent.com/callcow/rpl-playlist/main/tours/9-%D1%8B%D0%B9%20%D1%82%D1%83%D1%80.m3u" target="_blank">📁 9-ый тур</a></li>
-<li><a href="https://raw.githubusercontent.com/callcow/rpl-playlist/main/tours/10-%D1%8B%D0%B9%20%D1%82%D1%83%D1%80.m3u" target="_blank">📁 10-ый тур</a></li>
+    <div class="section-title">Архив туров</div>
+    <div class="tours-grid">
+      <a class="tour-card" href="https://raw.githubusercontent.com/callcow/rpl-playlist/main/tours/8-%D0%BE%D0%B9%20%D1%82%D1%83%D1%80.m3u" target="_blank">
+        <span>8-ой тур</span>
+        <span class="arrow">→</span>
+      </a>
+<a class="tour-card" href="https://raw.githubusercontent.com/callcow/rpl-playlist/main/tours/9-%D1%8B%D0%B9%20%D1%82%D1%83%D1%80.m3u" target="_blank">
+        <span>9-ый тур</span>
+        <span class="arrow">→</span>
+      </a>
+<a class="tour-card" href="https://raw.githubusercontent.com/callcow/rpl-playlist/main/tours/10-%D1%8B%D0%B9%20%D1%82%D1%83%D1%80.m3u" target="_blank">
+        <span>10-ый тур</span>
+        <span class="arrow">→</span>
+      </a>
 
-    </ul>
+    </div>
 
     <div class="footer">
-      Обновлено: 03.10.2026 15:35 UTC<br>
-      Автоматически через GitHub Actions
+      <strong>● </strong>Автообновление · 03.10.2026 15:45 UTC
     </div>
   </div>
 </body>
