@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>РПЛ — Плейлист</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
+    color: #e2e8f0;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    background: #1e293b;
+    border-radius: 20px;
+    padding: 32px 28px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border: 1px solid #334155;
+  }
+  h1 {
+    font-size: 26px;
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, #38bdf8, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .season {
+    color: #94a3b8;
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  .tour {
+    display: inline-block;
+    background: #334155;
+    color: #38bdf8;
+    padding: 5px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .playlist-btn {
+    display: block;
+    text-align: center;
+    background: linear-gradient(135deg, #38bdf8, #3b82f6);
+    color: white !important;
+    padding: 16px;
+    border-radius: 14px;
+    font-weight: 600;
+    margin: 0 0 28px 0;
+    font-size: 16px;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .playlist-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
+  }
+  h2 {
+    font-size: 16px;
+    margin: 28px 0 14px 0;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  ul {
+    list-style: none;
+  }
+  li {
+    margin-bottom: 8px;
+    background: #0f172a;
+    border-radius: 12px;
+    border-left: 3px solid #38bdf8;
+    transition: transform 0.15s, background 0.15s;
+    overflow: hidden;
+  }
+  li:hover {
+    transform: translateX(4px);
+    background: #1a2438;
+  }
+  li a {
+    color: #e2e8f0;
+    text-decoration: none;
+    display: block;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  li a:hover {
+    color: #38bdf8;
+  }
+  .badge-4k {
+    display: inline-block;
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .footer {
+    text-align: center;
+    color: #64748b;
+    font-size: 12px;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid #334155;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>⚽ Чемпионат России по футболу</h1>
+    <div class="season">Сезон 2026-2027</div>
+    <div class="tour">10-ый тур</div>
+
+    <a class="playlist-btn" href="playlist.m3u">📺 Открыть плейлист</a>
+
+    <h2>Матчи тура</h2>
+    <ul>
+      <li><a href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/1080p50fps/38ae759820cd8fae9f476a247d09df3e/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">09 октября | 19:30 | Ростов — Акрон</a></li>
+<li><a href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/1080p50fps/4cc1987903a7c24a68d29f4292a06112/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">10 октября | 13:00 | Оренбург — Динамо Махачкала</a></li>
+<li><a href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/1080p50fps/6024c69baaaccd4a071e18803d5d48f4/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">10 октября | 15:15 | Факел — Локомотив</a></li>
+<li><a href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/1080p50fps/147b0a5e94dc08d2a0817abba65bb9fa/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">10 октября | 17:30 | Крылья Советов — Спартак</a></li>
+<li><a href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/1080p50fps/4ddbea8f075d1fb503deadd6761f150b/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">10 октября | 19:30 | Краснодар — Зенит</a></li>
+<li><a href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/1080p50fps/1e4b5378e0dcdd9a4b55816941f46564/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">11 октября | 14:00 | Ахмат — Балтика</a></li>
+<li><a href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/2160/29c6cf8cac097c4c03f1cc0d37053f4f/4946715002.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=50e8b45ee68d7bd477063c51d3415e3e" target="_blank">11 октября | 16:30 | ЦСКА — Родина <span class="badge-4k">4K</span></a></li>
+<li><a href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/1080p50fps/22926c0da6938fdc6714ce05e73840d0/4946715001.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=75bf9f79308ac9aac9357eaea29c516f" target="_blank">11 октября | 19:30 | Рубин — Динамо Москва</a></li>
+
+    </ul>
+
+    <h2>Все туры</h2>
+    <ul>
+      <li><a href="https://raw.githubusercontent.com/callcow/rpl-playlist/main/tours/8-%D0%BE%D0%B9%20%D1%82%D1%83%D1%80.m3u" target="_blank">📁 8-ой тур</a></li>
+<li><a href="https://raw.githubusercontent.com/callcow/rpl-playlist/main/tours/9-%D1%8B%D0%B9%20%D1%82%D1%83%D1%80.m3u" target="_blank">📁 9-ый тур</a></li>
+<li><a href="https://raw.githubusercontent.com/callcow/rpl-playlist/main/tours/10-%D1%8B%D0%B9%20%D1%82%D1%83%D1%80.m3u" target="_blank">📁 10-ый тур</a></li>
+
+    </ul>
+
+    <div class="footer">
+      Обновлено: 03.10.2026 15:35 UTC<br>
+      Автоматически через GitHub Actions
+    </div>
+  </div>
+</body>
+</html>
