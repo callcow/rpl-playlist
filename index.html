@@ -412,6 +412,36 @@
     box-shadow: 0 0 15px rgba(0, 255, 213, 0.5);
   }
 
+  .quality-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .quality-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 255, 213, 0.08);
+    border: 1px solid rgba(0, 255, 213, 0.25);
+    color: var(--neon);
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  .quality-btn:hover {
+    background: var(--neon);
+    color: #05060d;
+    border-color: var(--neon);
+    box-shadow: 0 0 15px rgba(0, 255, 213, 0.5);
+    transform: translateY(-1px);
+  }
+
   .match-right {
     display: flex;
     flex-direction: column;
@@ -443,6 +473,7 @@
     color: var(--neon);
     font-size: 13px;
     transition: all 0.25s;
+    text-decoration: none;
   }
   .match:hover .play-icon {
     background: var(--neon);
@@ -577,7 +608,7 @@
       <div class="section-head-title">Расписание матчей</div>
     </div>
     <div class="matches">
-      <a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/1080p50fps/539a468e4990dae456f488463b96e19d/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">
+      <div class="match">
         <div class="match-date">
           <div class="match-day">09</div>
           <div class="match-month">окт</div>
@@ -586,13 +617,16 @@
         <div class="match-teams">
           <div class="team"><span class="team-logo"><img src="logo/rostov.svg" alt="Ростов"></span>Ростов</div>
           <div class="team"><span class="team-logo"><img src="logo/akron.svg" alt="Акрон"></span>Акрон</div>
+          <div class="quality-row">
+            
+          </div>
         </div>
         <div class="match-right">
           
-          <div class="play-icon">▶</div>
+          <a class="play-icon" href="#" target="_blank">▶</a>
         </div>
-      </a>
-<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/1080p50fps/7feafdde1dd725f6d6a9baaa7b5ced63/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">
+      </div>
+<div class="match">
         <div class="match-date">
           <div class="match-day">10</div>
           <div class="match-month">окт</div>
@@ -601,13 +635,16 @@
         <div class="match-teams">
           <div class="team"><span class="team-logo"><img src="logo/orenburg.svg" alt="Оренбург"></span>Оренбург</div>
           <div class="team"><span class="team-logo"><img src="logo/dynamomachackala.svg" alt="Динамо Махачкала"></span>Динамо Махачкала</div>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/1080p50fps/7feafdde1dd725f6d6a9baaa7b5ced63/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">1080p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/720p50fps/7feafdde1dd725f6d6a9baaa7b5ced63/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">720p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/576p50fps/7feafdde1dd725f6d6a9baaa7b5ced63/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">576p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/480p50fps/7feafdde1dd725f6d6a9baaa7b5ced63/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">480p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/360p50fps/7feafdde1dd725f6d6a9baaa7b5ced63/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">360p50fps</a>
+          </div>
         </div>
         <div class="match-right">
           
-          <div class="play-icon">▶</div>
+          <a class="play-icon" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/1080p50fps/7feafdde1dd725f6d6a9baaa7b5ced63/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">▶</a>
         </div>
-      </a>
-<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/1080p50fps/028d3378f226cb52f228004c97628aa4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">
+      </div>
+<div class="match">
         <div class="match-date">
           <div class="match-day">10</div>
           <div class="match-month">окт</div>
@@ -616,13 +653,16 @@
         <div class="match-teams">
           <div class="team"><span class="team-logo"><img src="logo/fakel.svg" alt="Факел"></span>Факел</div>
           <div class="team"><span class="team-logo"><img src="logo/lokomotiv.svg" alt="Локомотив"></span>Локомотив</div>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/1080p50fps/028d3378f226cb52f228004c97628aa4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">1080p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/720p50fps/028d3378f226cb52f228004c97628aa4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">720p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/576p50fps/028d3378f226cb52f228004c97628aa4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">576p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/480p50fps/028d3378f226cb52f228004c97628aa4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">480p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/360p50fps/028d3378f226cb52f228004c97628aa4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">360p50fps</a>
+          </div>
         </div>
         <div class="match-right">
           
-          <div class="play-icon">▶</div>
+          <a class="play-icon" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/1080p50fps/028d3378f226cb52f228004c97628aa4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">▶</a>
         </div>
-      </a>
-<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/1080p50fps/97f2b6f2ff55e9a649b9b2233ad9848e/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">
+      </div>
+<div class="match">
         <div class="match-date">
           <div class="match-day">10</div>
           <div class="match-month">окт</div>
@@ -631,13 +671,16 @@
         <div class="match-teams">
           <div class="team"><span class="team-logo"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></span>Крылья Советов</div>
           <div class="team"><span class="team-logo"><img src="logo/spartak.svg" alt="Спартак"></span>Спартак</div>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/1080p50fps/97f2b6f2ff55e9a649b9b2233ad9848e/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">1080p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/720p50fps/97f2b6f2ff55e9a649b9b2233ad9848e/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">720p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/576p50fps/97f2b6f2ff55e9a649b9b2233ad9848e/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">576p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/480p50fps/97f2b6f2ff55e9a649b9b2233ad9848e/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">480p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/360p50fps/97f2b6f2ff55e9a649b9b2233ad9848e/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">360p50fps</a>
+          </div>
         </div>
         <div class="match-right">
           
-          <div class="play-icon">▶</div>
+          <a class="play-icon" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/1080p50fps/97f2b6f2ff55e9a649b9b2233ad9848e/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">▶</a>
         </div>
-      </a>
-<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/1080p50fps/84cbfa29a13109fa391863d7cccc90c4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">
+      </div>
+<div class="match">
         <div class="match-date">
           <div class="match-day">10</div>
           <div class="match-month">окт</div>
@@ -646,13 +689,16 @@
         <div class="match-teams">
           <div class="team"><span class="team-logo"><img src="logo/krasnodar.svg" alt="Краснодар"></span>Краснодар</div>
           <div class="team"><span class="team-logo"><img src="logo/zenit.svg" alt="Зенит"></span>Зенит</div>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/1080p50fps/84cbfa29a13109fa391863d7cccc90c4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">1080p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/720p50fps/84cbfa29a13109fa391863d7cccc90c4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">720p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/576p50fps/84cbfa29a13109fa391863d7cccc90c4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">576p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/480p50fps/84cbfa29a13109fa391863d7cccc90c4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">480p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/360p50fps/84cbfa29a13109fa391863d7cccc90c4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">360p50fps</a>
+          </div>
         </div>
         <div class="match-right">
           
-          <div class="play-icon">▶</div>
+          <a class="play-icon" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/1080p50fps/84cbfa29a13109fa391863d7cccc90c4/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">▶</a>
         </div>
-      </a>
-<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/1080p50fps/a9ada29acff4a0cbc71d02c79d745254/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">
+      </div>
+<div class="match">
         <div class="match-date">
           <div class="match-day">11</div>
           <div class="match-month">окт</div>
@@ -661,13 +707,16 @@
         <div class="match-teams">
           <div class="team"><span class="team-logo"><img src="logo/akhmat.svg" alt="Ахмат"></span>Ахмат</div>
           <div class="team"><span class="team-logo"><img src="logo/baltika.svg" alt="Балтика"></span>Балтика</div>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/1080p50fps/a9ada29acff4a0cbc71d02c79d745254/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">1080p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/720p50fps/a9ada29acff4a0cbc71d02c79d745254/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">720p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/576p50fps/a9ada29acff4a0cbc71d02c79d745254/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">576p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/480p50fps/a9ada29acff4a0cbc71d02c79d745254/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">480p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/360p50fps/a9ada29acff4a0cbc71d02c79d745254/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">360p50fps</a>
+          </div>
         </div>
         <div class="match-right">
           
-          <div class="play-icon">▶</div>
+          <a class="play-icon" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/1080p50fps/a9ada29acff4a0cbc71d02c79d745254/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">▶</a>
         </div>
-      </a>
-<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/2160/93b419e2a023d83f516a905ed399a8b6/4946782502.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=fda2497a498948285a520f19c1058eaa" target="_blank">
+      </div>
+<div class="match">
         <div class="match-date">
           <div class="match-day">11</div>
           <div class="match-month">окт</div>
@@ -676,13 +725,16 @@
         <div class="match-teams">
           <div class="team"><span class="team-logo"><img src="logo/cska.svg" alt="ЦСКА"></span>ЦСКА</div>
           <div class="team"><span class="team-logo"><img src="logo/rodina.svg" alt="Родина"></span>Родина</div>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/2160/93b419e2a023d83f516a905ed399a8b6/4946782502.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=fda2497a498948285a520f19c1058eaa" target="_blank">2160</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/1080/93b419e2a023d83f516a905ed399a8b6/4946782502.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=fda2497a498948285a520f19c1058eaa" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/720/93b419e2a023d83f516a905ed399a8b6/4946782502.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=fda2497a498948285a520f19c1058eaa" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/480/93b419e2a023d83f516a905ed399a8b6/4946782502.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=fda2497a498948285a520f19c1058eaa" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/360/93b419e2a023d83f516a905ed399a8b6/4946782502.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=fda2497a498948285a520f19c1058eaa" target="_blank">360</a>
+          </div>
         </div>
         <div class="match-right">
           <div class="badge-4k">4K</div>
-          <div class="play-icon">▶</div>
+          <a class="play-icon" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/2160/93b419e2a023d83f516a905ed399a8b6/4946782502.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=fda2497a498948285a520f19c1058eaa" target="_blank">▶</a>
         </div>
-      </a>
-<a class="match" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/1080p50fps/c491334236a697c638bf37e18ed4037a/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">
+      </div>
+<div class="match">
         <div class="match-date">
           <div class="match-day">11</div>
           <div class="match-month">окт</div>
@@ -691,12 +743,15 @@
         <div class="match-teams">
           <div class="team"><span class="team-logo"><img src="logo/rubin.svg" alt="Рубин"></span>Рубин</div>
           <div class="team"><span class="team-logo"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></span>Динамо Москва</div>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/1080p50fps/c491334236a697c638bf37e18ed4037a/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">1080p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/720p50fps/c491334236a697c638bf37e18ed4037a/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">720p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/576p50fps/c491334236a697c638bf37e18ed4037a/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">576p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/480p50fps/c491334236a697c638bf37e18ed4037a/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">480p50fps</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/360p50fps/c491334236a697c638bf37e18ed4037a/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">360p50fps</a>
+          </div>
         </div>
         <div class="match-right">
           
-          <div class="play-icon">▶</div>
+          <a class="play-icon" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/1080p50fps/c491334236a697c638bf37e18ed4037a/4946782501.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=77260fbbad81a7d820ea20841a3bdce5" target="_blank">▶</a>
         </div>
-      </a>
+      </div>
 
     </div>
 
@@ -720,7 +775,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">04.10.2026 13:17 МСК</span><br>
+      Обновлено <span class="neon">04.10.2026 13:26 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
   </div>
