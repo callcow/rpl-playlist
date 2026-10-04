@@ -84,25 +84,6 @@
     border: 1px solid rgba(0, 255, 213, 0.3); border-radius: 8px;
   }
   .back-btn:hover { background: rgba(0, 255, 213, 0.1); }
-  .playlist-btn {
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    background: linear-gradient(135deg, rgba(0, 255, 213, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
-    border: 1px solid rgba(0, 255, 213, 0.4);
-    color: var(--text) !important; padding: 20px 24px; border-radius: 14px;
-    font-weight: 800; font-size: 15px; text-decoration: none;
-    margin-bottom: 32px;
-  }
-  .playlist-btn-left { display: flex; align-items: center; gap: 14px; }
-  .playlist-btn-icon {
-    width: 42px; height: 42px; border-radius: 10px;
-    background: rgba(0, 255, 213, 0.15); border: 1px solid rgba(0, 255, 213, 0.4);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px; color: var(--neon); flex-shrink: 0;
-  }
-  .playlist-btn-text { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
-  .playlist-btn-title { font-size: 15px; font-weight: 900; }
-  .playlist-btn-sub { font-size: 11px; opacity: 0.7; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
-  .playlist-btn-arrow { font-size: 20px; }
   .section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-left: 4px; }
   .section-head-title {
     font-size: 13px; font-weight: 900; text-transform: uppercase;
@@ -210,16 +191,6 @@
 
     <a class="back-btn" href="../index.html">← На главную</a>
 
-    <a class="playlist-btn" href="../playlist.m3u">
-      <div class="playlist-btn-left">
-        <div class="playlist-btn-icon">▶</div>
-        <div class="playlist-btn-text">
-          <div class="playlist-btn-title">СМОТРЕТЬ ПЛЕЙЛИСТ</div>
-          <div class="playlist-btn-sub">Открыть все матчи 8 тура</div>
-        </div>
-      </div>
-      <div class="playlist-btn-arrow">→</div>
-    </a>
 
     <div class="section-head">
       <div class="section-head-title">Расписание матчей</div>
@@ -392,7 +363,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">04.10.2026 15:00 МСК</span><br>
+      Обновлено <span class="neon">04.10.2026 15:09 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
   </div>
