@@ -371,7 +371,7 @@
     <div class="cal-month">
         <div class="cal-month-title">Октябрь</div>
         <div class="cal-tour-group">
-            <div class="cal-tour-title cal-tour-future">10-ый тур <span class="cal-tour-status">🔥 Скоро</span></div>
+            <div class="cal-tour-title cal-tour-future">10-ый тур <span class="cal-tour-status">Идёт</span></div>
             <div class="cal-match">
                 <div class="cal-date">
                   <div class="cal-day">09</div>
@@ -475,7 +475,7 @@
 <div class="cal-month">
         <div class="cal-month-title">Сентябрь</div>
         <div class="cal-tour-group">
-            <div class="cal-tour-title cal-tour-past">9-ый тур <span class="cal-tour-status">✓ Прошедший</span></div>
+            <div class="cal-tour-title cal-tour-past">9-ый тур <span class="cal-tour-status">Завершён</span></div>
             <div class="cal-match">
                 <div class="cal-date">
                   <div class="cal-day">16</div>
@@ -575,7 +575,7 @@
 
           </div>
 <div class="cal-tour-group">
-            <div class="cal-tour-title cal-tour-past">8-ой тур <span class="cal-tour-status">✓ Прошедший</span></div>
+            <div class="cal-tour-title cal-tour-past">8-ой тур <span class="cal-tour-status">Завершён</span></div>
             <div class="cal-match">
                 <div class="cal-date">
                   <div class="cal-day">11</div>
@@ -680,7 +680,7 @@
 
 
     <div class="footer">
-      Обновлено <span class="neon">04.10.2026 17:05 МСК</span><br>
+      Обновлено <span class="neon">04.10.2026 17:19 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
   </div>
@@ -709,10 +709,11 @@
       const clearBtn = document.getElementById('searchClear');
       if (!input) return;
 
-      function filter() {
+       function filter() {
         const q = input.value.trim().toLowerCase();
         clearBtn.style.display = q ? 'block' : 'none';
 
+        // Фильтруем все матчи (будущие + прошедшие)
         const allMatches = document.querySelectorAll('.match');
         allMatches.forEach(function(el) {
           const teams = el.getAttribute('data-teams') || '';
@@ -725,14 +726,25 @@
           }
         });
 
+        // Видимые матчи в каждой секции
         const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
-        const pastHeader = document.getElementById('pastHeader');
-        if (pastHeader) {
-          pastHeader.style.display = (q !== '' && visiblePast > 0) ? '' : 'none';
-        }
-        const currentHeader = document.getElementById('currentHeader');
-        if (currentHeader) {
-          currentHeader.style.display = (q === '') ? '' : 'none';
+        const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
+
+        const pastSection = document.getElementById('pastSection');
+        const currentSection = document.getElementById('currentSection');
+        const headerDefault = document.getElementById('currentHeaderDefault');
+        const headerSearch = document.getElementById('currentHeaderSearch');
+
+        if (q === '') {
+          if (pastSection) pastSection.style.display = 'none';
+          if (currentSection) currentSection.style.display = '';
+          if (headerDefault) headerDefault.style.display = '';
+          if (headerSearch) headerSearch.style.display = 'none';
+        } else {
+          if (currentSection) currentSection.style.display = visibleCurrent > 0 ? '' : 'none';
+          if (headerDefault) headerDefault.style.display = 'none';
+          if (headerSearch) headerSearch.style.display = visibleCurrent > 0 ? '' : 'none';
+          if (pastSection) pastSection.style.display = visiblePast > 0 ? '' : 'none';
         }
       }
 

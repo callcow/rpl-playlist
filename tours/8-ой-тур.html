@@ -370,11 +370,15 @@
       <button class="search-clear" id="searchClear" style="display:none">✕</button>
     </div>
 
-    <div class="section-head" id="currentHeader">
-      <div class="section-head-title">Расписание матчей</div>
-    </div>
-    <div class="matches" id="matchesContainer">
-      <div class="match" data-teams="крылья советов родина">
+       <div id="currentSection">
+      <div class="section-head" id="currentHeaderDefault">
+        <div class="section-head-title">Расписание матчей</div>
+      </div>
+      <div class="section-head" id="currentHeaderSearch" style="display:none;">
+        <div class="section-head-title">Будущие матчи</div>
+      </div>
+      <div class="matches" id="matchesContainer">
+        <div class="match" data-teams="крылья советов родина">
         <div class="match-date">
           <div class="match-day">11</div>
           <div class="match-month">сен</div>
@@ -527,6 +531,7 @@
         </div>
       </div>
 
+      </div>
     </div>
 
     <div class="section-head" id="pastHeader" style="display:none;">
@@ -557,7 +562,7 @@
 
 
     <div class="footer">
-      Обновлено <span class="neon">04.10.2026 17:05 МСК</span><br>
+      Обновлено <span class="neon">04.10.2026 17:19 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
   </div>
@@ -586,10 +591,11 @@
       const clearBtn = document.getElementById('searchClear');
       if (!input) return;
 
-      function filter() {
+       function filter() {
         const q = input.value.trim().toLowerCase();
         clearBtn.style.display = q ? 'block' : 'none';
 
+        // Фильтруем все матчи (будущие + прошедшие)
         const allMatches = document.querySelectorAll('.match');
         allMatches.forEach(function(el) {
           const teams = el.getAttribute('data-teams') || '';
@@ -602,14 +608,25 @@
           }
         });
 
+        // Видимые матчи в каждой секции
         const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
-        const pastHeader = document.getElementById('pastHeader');
-        if (pastHeader) {
-          pastHeader.style.display = (q !== '' && visiblePast > 0) ? '' : 'none';
-        }
-        const currentHeader = document.getElementById('currentHeader');
-        if (currentHeader) {
-          currentHeader.style.display = (q === '') ? '' : 'none';
+        const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
+
+        const pastSection = document.getElementById('pastSection');
+        const currentSection = document.getElementById('currentSection');
+        const headerDefault = document.getElementById('currentHeaderDefault');
+        const headerSearch = document.getElementById('currentHeaderSearch');
+
+        if (q === '') {
+          if (pastSection) pastSection.style.display = 'none';
+          if (currentSection) currentSection.style.display = '';
+          if (headerDefault) headerDefault.style.display = '';
+          if (headerSearch) headerSearch.style.display = 'none';
+        } else {
+          if (currentSection) currentSection.style.display = visibleCurrent > 0 ? '' : 'none';
+          if (headerDefault) headerDefault.style.display = 'none';
+          if (headerSearch) headerSearch.style.display = visibleCurrent > 0 ? '' : 'none';
+          if (pastSection) pastSection.style.display = visiblePast > 0 ? '' : 'none';
         }
       }
 
