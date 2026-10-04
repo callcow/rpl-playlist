@@ -125,6 +125,60 @@
     font-size: 18px; cursor: pointer; padding: 6px 10px;
   }
   .search-clear:hover { color: var(--neon); }
+    .search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--topbar-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-top: 4px;
+    max-height: 280px;
+    overflow-y: auto;
+    z-index: 100;
+    display: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+  .search-suggestions.active {
+    display: block;
+  }
+  .search-suggestion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 700;
+    transition: background 0.15s;
+    border-bottom: 1px solid var(--border);
+  }
+  .search-suggestion:last-child {
+    border-bottom: none;
+  }
+  .search-suggestion:hover,
+  .search-suggestion.active {
+    background: rgba(0, 255, 213, 0.1);
+    color: var(--neon);
+  }
+  .search-suggestion-logo {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .search-suggestion-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .search-suggestion-name {
+    flex: 1;
+  }
 
   .matches { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
   .match {
@@ -368,6 +422,7 @@
     <div class="search-box">
       <input type="text" id="searchInput" placeholder="🔍 Найти команду..." autocomplete="off">
       <button class="search-clear" id="searchClear" style="display:none">✕</button>
+      <div class="search-suggestions" id="searchSuggestions"></div>
     </div>
 
        <div id="currentSection">
@@ -534,11 +589,13 @@
       </div>
     </div>
 
-    <div class="section-head" id="pastHeader" style="display:none;">
-      <div class="section-head-title">Прошедшие матчи</div>
-    </div>
-    <div class="matches" id="pastMatchesContainer">
-      
+    <div id="pastSection" style="display:none;">
+      <div class="section-head">
+        <div class="section-head-title">Прошедшие матчи</div>
+      </div>
+      <div class="matches" id="pastMatchesContainer">
+        
+      </div>
     </div>
 
     <div class="section-head">
@@ -562,7 +619,7 @@
 
 
     <div class="footer">
-      Обновлено <span class="neon">04.10.2026 17:19 МСК</span><br>
+      Обновлено <span class="neon">04.10.2026 17:26 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
   </div>
@@ -629,7 +686,65 @@
           if (pastSection) pastSection.style.display = visiblePast > 0 ? '' : 'none';
         }
       }
+      // === Подсказки команд ===
+      const suggestBox = document.getElementById('searchSuggestions');
+      const allTeams = [{"name": "Акрон", "logo": "../logo/akron.svg"}, {"name": "Ахмат", "logo": "../logo/akhmat.svg"}, {"name": "Балтика", "logo": "../logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "../logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "../logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "../logo/zenit.svg"}, {"name": "Краснодар", "logo": "../logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "../logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "../logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "../logo/orenburg.svg"}, {"name": "Родина", "logo": "../logo/rodina.svg"}, {"name": "Ростов", "logo": "../logo/rostov.svg"}, {"name": "Рубин", "logo": "../logo/rubin.svg"}, {"name": "Спартак", "logo": "../logo/spartak.svg"}, {"name": "Факел", "logo": "../logo/fakel.svg"}, {"name": "ЦСКА", "logo": "../logo/cska.svg"}];
 
+      function showSuggestions(query) {
+        if (!query) {
+          suggestBox.classList.remove('active');
+          suggestBox.innerHTML = '';
+          return;
+        }
+
+        const q = query.toLowerCase();
+        const matches = allTeams.filter(function(t) {
+          return t.name.toLowerCase().includes(q);
+        }).slice(0, 8);
+
+        if (matches.length === 0) {
+          suggestBox.classList.remove('active');
+          suggestBox.innerHTML = '';
+          return;
+        }
+
+        suggestBox.innerHTML = matches.map(function(t) {
+          return '<div class="search-suggestion" data-team="' + t.name + '">' +
+            '<span class="search-suggestion-logo"><img src="' + t.logo + '" alt=""></span>' +
+            '<span class="search-suggestion-name">' + t.name + '</span>' +
+          '</div>';
+        }).join('');
+
+        suggestBox.classList.add('active');
+
+        // Клик по подсказке
+        suggestBox.querySelectorAll('.search-suggestion').forEach(function(el) {
+          el.addEventListener('click', function() {
+            input.value = el.getAttribute('data-team');
+            suggestBox.classList.remove('active');
+            suggestBox.innerHTML = '';
+            filter();
+          });
+        });
+      }
+
+      input.addEventListener('input', function() {
+        showSuggestions(input.value.trim());
+      });
+
+      // Скрытие подсказок при клике вне
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.search-box')) {
+          suggestBox.classList.remove('active');
+        }
+      });
+
+      // Скрытие подсказок при очистке
+      const origClearClick = clearBtn.onclick;
+      clearBtn.addEventListener('click', function() {
+        suggestBox.classList.remove('active');
+        suggestBox.innerHTML = '';
+      });
       input.addEventListener('input', filter);
       clearBtn.addEventListener('click', function() {
         input.value = ''; filter(); input.focus();
