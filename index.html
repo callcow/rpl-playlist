@@ -17,54 +17,16 @@
 
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg);
+    background:
+      radial-gradient(circle at 0% 0%, rgba(0, 255, 213, 0.08), transparent 40%),
+      radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.1), transparent 40%),
+      var(--bg);
+    background-attachment: fixed;
     color: #e6edf7;
     min-height: 100vh;
     padding: 20px 16px;
     line-height: 1.55;
-    position: relative;
     overflow-x: hidden;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0, 255, 213, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 255, 213, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-    mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    top: -200px; left: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(0, 255, 213, 0.15), transparent 60%);
-    filter: blur(60px);
-    pointer-events: none;
-    z-index: 0;
-    animation: pulseBg 8s ease-in-out infinite;
-  }
-  @keyframes pulseBg {
-    0%, 100% { opacity: 0.6; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.1); }
-  }
-
-  .bg-2 {
-    position: fixed;
-    bottom: -200px; right: -200px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.2), transparent 60%);
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 0;
-    animation: pulseBg 10s ease-in-out infinite reverse;
   }
 
   .container {
@@ -79,15 +41,11 @@
     align-items: center;
     justify-content: space-between;
     padding: 18px 22px;
-    background: rgba(13, 15, 26, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(13, 15, 26, 0.95);
     border: 1px solid rgba(0, 255, 213, 0.15);
     border-radius: 14px;
     margin-bottom: 24px;
-    box-shadow:
-      0 0 40px rgba(0, 255, 213, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(0, 255, 213, 0.06);
   }
 
   .brand { display: flex; align-items: center; gap: 14px; }
@@ -97,7 +55,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 25px rgba(0, 255, 213, 0.5);
+    box-shadow: 0 0 12px rgba(0, 255, 213, 0.4);
     flex-shrink: 0;
     overflow: hidden;
     background: rgba(13, 15, 26, 0.5);
@@ -132,7 +90,7 @@
     background: linear-gradient(135deg, rgba(0, 255, 213, 0.1), rgba(168, 85, 247, 0.1));
     border: 1px solid rgba(0, 255, 213, 0.4);
     border-radius: 12px;
-    box-shadow: 0 0 25px rgba(0, 255, 213, 0.15);
+    box-shadow: 0 0 12px rgba(0, 255, 213, 0.1);
   }
   .tour-badge-value {
     font-size: 26px;
@@ -158,28 +116,13 @@
     text-decoration: none;
     margin-bottom: 32px;
     letter-spacing: 0.5px;
-    transition: all 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-  .playlist-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--neon), var(--neon-3));
-    opacity: 0;
-    transition: opacity 0.25s;
-    z-index: 0;
+    transition: transform 0.25s, border-color 0.25s;
   }
   .playlist-btn:hover {
-    color: #05060d !important;
-    border-color: transparent;
-    box-shadow: 0 0 40px rgba(0, 255, 213, 0.5);
+    border-color: var(--neon);
     transform: translateY(-2px);
+    color: white !important;
   }
-  .playlist-btn:hover::before { opacity: 1; }
-
-  .playlist-btn > * { position: relative; z-index: 1; }
 
   .playlist-btn-left { display: flex; align-items: center; gap: 14px; }
   .playlist-btn-icon {
@@ -192,13 +135,7 @@
     justify-content: center;
     font-size: 16px;
     color: var(--neon);
-    transition: all 0.25s;
     flex-shrink: 0;
-  }
-  .playlist-btn:hover .playlist-btn-icon {
-    background: rgba(5, 6, 13, 0.3);
-    color: white;
-    border-color: rgba(5, 6, 13, 0.3);
   }
 
   .playlist-btn-text {
@@ -266,32 +203,13 @@
     grid-template-columns: 80px 1fr auto;
     align-items: center;
     gap: 20px;
-    background: rgba(13, 15, 26, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(13, 15, 26, 0.85);
     padding: 18px 22px;
     border-radius: 14px;
     border: 1px solid rgba(255, 255, 255, 0.06);
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.25s;
+    transition: transform 0.2s, border-color 0.2s;
     position: relative;
     overflow: hidden;
-    animation: slideIn 0.5s ease backwards;
-  }
-
-  .match:nth-child(1) { animation-delay: 0.05s; }
-  .match:nth-child(2) { animation-delay: 0.10s; }
-  .match:nth-child(3) { animation-delay: 0.15s; }
-  .match:nth-child(4) { animation-delay: 0.20s; }
-  .match:nth-child(5) { animation-delay: 0.25s; }
-  .match:nth-child(6) { animation-delay: 0.30s; }
-  .match:nth-child(7) { animation-delay: 0.35s; }
-  .match:nth-child(8) { animation-delay: 0.40s; }
-
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
   }
 
   .match::before {
@@ -304,25 +222,11 @@
     transition: opacity 0.25s;
   }
 
-  .match::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 0% 50%, rgba(0, 255, 213, 0.08), transparent 50%);
-    opacity: 0;
-    transition: opacity 0.25s;
-    pointer-events: none;
-  }
-
   .match:hover {
     border-color: rgba(0, 255, 213, 0.3);
     transform: translateY(-3px);
-    box-shadow:
-      0 12px 40px rgba(0, 0, 0, 0.5),
-      0 0 40px rgba(0, 255, 213, 0.1);
   }
   .match:hover::before { opacity: 1; }
-  .match:hover::after { opacity: 1; }
 
   .match-date {
     display: flex;
@@ -390,7 +294,6 @@
     font-weight: 900;
     color: #94a3b8;
     flex-shrink: 0;
-    transition: all 0.25s;
     overflow: hidden;
     padding: 3px;
   }
@@ -399,12 +302,6 @@
     height: 100%;
     object-fit: contain;
     display: block;
-  }
-  .match:hover .team-logo {
-    background: linear-gradient(135deg, var(--neon), var(--neon-3));
-    color: #05060d;
-    border-color: transparent;
-    box-shadow: 0 0 15px rgba(0, 255, 213, 0.5);
   }
 
   .quality-row {
@@ -426,15 +323,13 @@
     font-weight: 800;
     letter-spacing: 0.5px;
     text-decoration: none;
-    transition: all 0.2s;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
     text-transform: uppercase;
   }
   .quality-btn:hover {
     background: var(--neon);
     color: #05060d;
     border-color: var(--neon);
-    box-shadow: 0 0 15px rgba(0, 255, 213, 0.5);
-    transform: translateY(-1px);
   }
 
   .match-right {
@@ -453,7 +348,6 @@
     font-size: 10px;
     font-weight: 900;
     letter-spacing: 1px;
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
   }
 
   .play-icon {
@@ -467,15 +361,8 @@
     justify-content: center;
     color: var(--neon);
     font-size: 13px;
-    transition: all 0.25s;
     cursor: default;
     user-select: none;
-  }
-  .match:hover .play-icon {
-    background: var(--neon);
-    color: #05060d;
-    transform: scale(1.15);
-    box-shadow: 0 0 25px rgba(0, 255, 213, 0.7);
   }
 
   .tours-grid {
@@ -488,8 +375,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    background: rgba(13, 15, 26, 0.7);
-    backdrop-filter: blur(10px);
+    background: rgba(13, 15, 26, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.06);
     padding: 16px 18px;
     border-radius: 12px;
@@ -497,36 +383,21 @@
     color: white;
     font-size: 14px;
     font-weight: 800;
-    transition: all 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-  .tour-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--neon), var(--neon-3));
-    opacity: 0;
-    transition: opacity 0.25s;
-    z-index: 0;
+    transition: background 0.25s, border-color 0.25s, color 0.25s;
   }
   .tour-card:hover {
-    border-color: transparent;
-    transform: translateY(-2px);
-    color: #05060d;
-    box-shadow: 0 0 30px rgba(0, 255, 213, 0.4);
+    background: rgba(0, 255, 213, 0.1);
+    border-color: var(--neon);
+    color: var(--neon);
   }
-  .tour-card:hover::before { opacity: 1; }
-  .tour-card > * { position: relative; z-index: 1; }
 
   .tour-card .arrow {
     color: var(--neon);
     font-size: 14px;
-    transition: all 0.25s;
+    transition: transform 0.25s;
   }
   .tour-card:hover .arrow {
     transform: translateX(4px);
-    color: #05060d;
   }
 
   .footer {
@@ -541,10 +412,9 @@
   .footer .neon {
     color: var(--neon);
     font-weight: 800;
-    text-shadow: 0 0 10px rgba(0, 255, 213, 0.5);
   }
 
-    @media (max-width: 600px) {
+  @media (max-width: 600px) {
     body { padding: 14px 12px; }
     .topbar { padding: 14px 16px; gap: 10px; }
     .brand { gap: 10px; }
@@ -562,37 +432,17 @@
         padding: 14px 14px;
         gap: 10px;
     }
-    .match-date {
-        padding-right: 10px;
-    }
+    .match-date { padding-right: 10px; }
     .match-day { font-size: 22px; letter-spacing: -1px; }
     .match-month { font-size: 9px; letter-spacing: 1px; }
     .match-time { font-size: 12px; margin-top: 2px; }
 
-    .match-teams {
-        gap: 6px;
-        min-width: 0;
-    }
-    .team {
-        font-size: 14px;
-        gap: 8px;
-    }
-    .team-logo {
-        width: 24px;
-        height: 24px;
-        padding: 2px;
-        border-radius: 6px;
-    }
+    .match-teams { gap: 6px; min-width: 0; }
+    .team { font-size: 14px; gap: 8px; }
+    .team-logo { width: 24px; height: 24px; padding: 2px; border-radius: 6px; }
 
-    .quality-row {
-        gap: 4px;
-        margin-top: 2px;
-    }
-    .quality-btn {
-        padding: 2px 8px;
-        font-size: 9px;
-        border-radius: 5px;
-    }
+    .quality-row { gap: 4px; margin-top: 2px; }
+    .quality-btn { padding: 2px 8px; font-size: 9px; border-radius: 5px; }
 
     .match-right {
         flex-direction: column;
@@ -602,23 +452,18 @@
         margin: 0;
         padding: 0;
     }
-    .badge-4k {
-        font-size: 9px;
-        padding: 2px 7px;
-        letter-spacing: 0.5px;
-    }
-    .play-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 11px;
-    }
+    .badge-4k { font-size: 9px; padding: 2px 7px; letter-spacing: 0.5px; }
+    .play-icon { width: 32px; height: 32px; font-size: 11px; }
 
     .tours-grid { grid-template-columns: 1fr 1fr; }
+
+    /* Отключаем hover-эффекты на мобильных */
+    .match:hover { transform: none; }
+    .match:hover::before { opacity: 0; }
   }
 </style>
 </head>
 <body>
-  <div class="bg-2"></div>
   <div class="container">
 
     <div class="topbar">
@@ -816,7 +661,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">04.10.2026 13:51 МСК</span><br>
+      Обновлено <span class="neon">04.10.2026 13:56 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
   </div>
