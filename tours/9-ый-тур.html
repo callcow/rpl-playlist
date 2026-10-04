@@ -53,9 +53,9 @@
     display: flex; align-items: center; justify-content: space-between;
     padding: 18px 22px; background: var(--topbar-bg);
     border: 1px solid var(--border); border-radius: 14px;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
-  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
   .brand-logo {
     width: 48px; height: 48px; border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
@@ -63,8 +63,9 @@
     background: rgba(13, 15, 26, 0.5); padding: 6px;
   }
   .brand-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
-  .brand-name { font-size: 16px; font-weight: 900; color: var(--text); line-height: 1.2; }
+  .brand-name { font-size: 16px; font-weight: 900; color: var(--text); line-height: 1.2; transition: color 0.2s; }
   .brand-sub { font-size: 11px; color: var(--neon); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-top: 2px; }
+  .brand:hover .brand-name { color: var(--neon); }
   .theme-toggle {
     display: flex; align-items: center; justify-content: center;
     width: 42px; height: 42px; border-radius: 12px;
@@ -77,13 +78,25 @@
     border: 1px solid rgba(0, 255, 213, 0.4); border-radius: 12px;
   }
   .tour-badge-value { font-size: 26px; font-weight: 900; color: var(--text); letter-spacing: -1px; line-height: 1; }
-  .back-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    color: var(--neon); text-decoration: none; font-weight: 800;
-    font-size: 13px; margin-bottom: 16px; padding: 6px 12px;
-    border: 1px solid rgba(0, 255, 213, 0.3); border-radius: 8px;
+
+  /* ===== Навигация ===== */
+  .nav-tabs {
+    display: flex; gap: 8px; margin-bottom: 24px;
+    padding: 6px; background: var(--topbar-bg);
+    border: 1px solid var(--border); border-radius: 14px;
   }
-  .back-btn:hover { background: rgba(0, 255, 213, 0.1); }
+  .nav-tab {
+    flex: 1; text-align: center; padding: 12px 16px;
+    border-radius: 10px; text-decoration: none;
+    color: var(--text-dim); font-weight: 800; font-size: 14px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-tab:hover { background: rgba(0, 255, 213, 0.08); color: var(--neon); }
+  .nav-tab.active {
+    background: linear-gradient(135deg, rgba(0, 255, 213, 0.15), rgba(168, 85, 247, 0.15));
+    color: var(--neon); border: 1px solid rgba(0, 255, 213, 0.4);
+  }
+
   .section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-left: 4px; }
   .section-head-title {
     font-size: 13px; font-weight: 900; text-transform: uppercase;
@@ -95,6 +108,7 @@
     background: linear-gradient(180deg, var(--neon), var(--neon-3));
     border-radius: 2px;
   }
+
   .matches { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
   .match {
     display: grid; grid-template-columns: 80px 1fr auto;
@@ -139,17 +153,31 @@
     display: flex; align-items: center; justify-content: center;
     color: var(--neon); font-size: 13px; cursor: default; user-select: none;
   }
-  .tours-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+
+  /* ===== Сетка туров ===== */
+  .tours-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
   .tour-card {
     display: flex; align-items: center; justify-content: space-between; gap: 8px;
     background: var(--tour-bg); border: 1px solid var(--border);
     padding: 16px 18px; border-radius: 12px; text-decoration: none;
     color: var(--text); font-size: 14px; font-weight: 800;
+    transition: background 0.25s, border-color 0.25s, color 0.25s;
   }
   .tour-card:hover { background: rgba(0, 255, 213, 0.1); border-color: var(--neon); color: var(--neon); }
   .tour-card .arrow { color: var(--neon); font-size: 14px; }
+
+  /* ===== Большие карточки (архив) ===== */
+  .tour-card-large {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 20px 22px;
+  }
+  .tour-card-info { display: flex; flex-direction: column; gap: 4px; }
+  .tour-name-big { font-size: 17px; font-weight: 900; }
+  .tour-dates { font-size: 12px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.3px; }
+
   .footer { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
   .footer .neon { color: var(--neon); font-weight: 800; }
+
   @media (max-width: 600px) {
     body { padding: 14px 12px; }
     .topbar { padding: 14px 16px; }
@@ -158,7 +186,7 @@
     .theme-toggle { width: 36px; height: 36px; font-size: 16px; }
     .tour-badge { padding: 8px 14px; }
     .tour-badge-value { font-size: 18px; }
-    .playlist-btn { padding: 16px 18px; font-size: 13px; }
+    .nav-tab { padding: 10px 12px; font-size: 13px; }
     .match { grid-template-columns: 55px 1fr auto; padding: 14px 14px; gap: 10px; }
     .match-day { font-size: 22px; }
     .team { font-size: 14px; gap: 8px; }
@@ -167,6 +195,9 @@
     .play-icon { width: 32px; height: 32px; font-size: 11px; }
     .tours-grid { grid-template-columns: 1fr 1fr; }
     .match:hover { transform: none; }
+    .tour-card-large { padding: 16px 18px; }
+    .tour-name-big { font-size: 15px; }
+    .tour-dates { font-size: 11px; }
   }
 </style>
 </head>
@@ -174,13 +205,13 @@
   <div class="container">
 
     <div class="topbar">
-      <div class="brand">
+      <a class="brand" href="../index.html">
         <div class="brand-logo"><img src="../logo/rpl.svg" alt="РПЛ"></div>
         <div>
           <div class="brand-name">РПЛ LIVE</div>
           <div class="brand-sub">Сезон 2026-27</div>
         </div>
-      </div>
+      </a>
       <div style="display:flex;align-items:center;gap:10px;">
         <div class="tour-badge">
           <div class="tour-badge-value">9 ТУР</div>
@@ -189,9 +220,12 @@
       </div>
     </div>
 
-    <a class="back-btn" href="../index.html">← На главную</a>
+    <nav class="nav-tabs">
+      <a class="nav-tab " href="../index.html">🏠 Главная</a>
+      <a class="nav-tab " href="../tours.html">📁 Архив туров</a>
+    </nav>
 
-
+    
     <div class="section-head">
       <div class="section-head-title">Расписание матчей</div>
     </div>
@@ -362,8 +396,9 @@
 
     </div>
 
+
     <div class="footer">
-      Обновлено <span class="neon">04.10.2026 15:09 МСК</span><br>
+      Обновлено <span class="neon">04.10.2026 15:19 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
   </div>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Архив туров — РПЛ</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --neon: #00ffd5;
+    --neon-2: #ff0080;
+    --neon-3: #a855f7;
+    --bg: #05060d;
+    --text: #e6edf7;
+    --text-dim: #64748b;
+    --text-muted: #475569;
+    --border: rgba(255, 255, 255, 0.06);
+    --border-hover: rgba(0, 255, 213, 0.3);
+    --topbar-bg: rgba(13, 15, 26, 0.95);
+    --match-bg: rgba(13, 15, 26, 0.85);
+    --tour-bg: rgba(13, 15, 26, 0.85);
+    --body-grad-1: rgba(0, 255, 213, 0.08);
+    --body-grad-2: rgba(168, 85, 247, 0.1);
+  }
+  body.light {
+    --bg: #f0f4f8; --text: #0f172a; --text-dim: #64748b;
+    --text-muted: #94a3b8;
+    --border: rgba(15, 23, 42, 0.1);
+    --border-hover: rgba(0, 168, 150, 0.4);
+    --topbar-bg: rgba(255, 255, 255, 0.98);
+    --match-bg: #ffffff; --tour-bg: #ffffff;
+    --body-grad-1: rgba(0, 200, 180, 0.12);
+    --body-grad-2: rgba(140, 60, 220, 0.08);
+    --neon: #00a896;
+  }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background:
+      radial-gradient(circle at 0% 0%, var(--body-grad-1), transparent 40%),
+      radial-gradient(circle at 100% 100%, var(--body-grad-2), transparent 40%),
+      var(--bg);
+    background-attachment: fixed;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 20px 16px;
+    line-height: 1.55;
+    overflow-x: hidden;
+    transition: background 0.3s, color 0.3s;
+  }
+  .container { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 22px; background: var(--topbar-bg);
+    border: 1px solid var(--border); border-radius: 14px;
+    margin-bottom: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+  .brand-logo {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; overflow: hidden;
+    background: rgba(13, 15, 26, 0.5); padding: 6px;
+  }
+  .brand-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .brand-name { font-size: 16px; font-weight: 900; color: var(--text); line-height: 1.2; transition: color 0.2s; }
+  .brand-sub { font-size: 11px; color: var(--neon); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-top: 2px; }
+  .brand:hover .brand-name { color: var(--neon); }
+  .theme-toggle {
+    display: flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px; border-radius: 12px;
+    background: rgba(0, 255, 213, 0.1); border: 1px solid rgba(0, 255, 213, 0.3);
+    color: var(--neon); font-size: 18px; cursor: pointer; flex-shrink: 0;
+  }
+  .tour-badge {
+    display: flex; align-items: center; padding: 12px 22px;
+    background: linear-gradient(135deg, rgba(0, 255, 213, 0.1), rgba(168, 85, 247, 0.1));
+    border: 1px solid rgba(0, 255, 213, 0.4); border-radius: 12px;
+  }
+  .tour-badge-value { font-size: 26px; font-weight: 900; color: var(--text); letter-spacing: -1px; line-height: 1; }
+
+  /* ===== Навигация ===== */
+  .nav-tabs {
+    display: flex; gap: 8px; margin-bottom: 24px;
+    padding: 6px; background: var(--topbar-bg);
+    border: 1px solid var(--border); border-radius: 14px;
+  }
+  .nav-tab {
+    flex: 1; text-align: center; padding: 12px 16px;
+    border-radius: 10px; text-decoration: none;
+    color: var(--text-dim); font-weight: 800; font-size: 14px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-tab:hover { background: rgba(0, 255, 213, 0.08); color: var(--neon); }
+  .nav-tab.active {
+    background: linear-gradient(135deg, rgba(0, 255, 213, 0.15), rgba(168, 85, 247, 0.15));
+    color: var(--neon); border: 1px solid rgba(0, 255, 213, 0.4);
+  }
+
+  .section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-left: 4px; }
+  .section-head-title {
+    font-size: 13px; font-weight: 900; text-transform: uppercase;
+    letter-spacing: 2.5px; color: var(--text);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-head-title::before {
+    content: ''; width: 4px; height: 16px;
+    background: linear-gradient(180deg, var(--neon), var(--neon-3));
+    border-radius: 2px;
+  }
+
+  .matches { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+  .match {
+    display: grid; grid-template-columns: 80px 1fr auto;
+    align-items: center; gap: 20px; background: var(--match-bg);
+    padding: 18px 22px; border-radius: 14px;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, border-color 0.2s, background 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .match:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+  .match-date {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    padding-right: 16px; border-right: 1px solid var(--border);
+    position: relative; z-index: 1;
+  }
+  .match-day { font-size: 26px; font-weight: 900; color: var(--neon); line-height: 1; letter-spacing: -1.5px; }
+  .match-month { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; }
+  .match-time { font-size: 13px; font-weight: 800; color: var(--text); margin-top: 4px; }
+  .match-teams { display: flex; flex-direction: column; gap: 8px; min-width: 0; position: relative; z-index: 1; }
+  .team { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .team-logo {
+    width: 30px; height: 30px; border-radius: 7px;
+    background: rgba(128, 128, 128, 0.08); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 900; color: var(--text-dim);
+    flex-shrink: 0; overflow: hidden; padding: 3px;
+  }
+  .team-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .quality-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .quality-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(0, 255, 213, 0.08); border: 1px solid rgba(0, 255, 213, 0.25);
+    color: var(--neon); padding: 3px 10px; border-radius: 6px;
+    font-size: 10px; font-weight: 800; text-decoration: none; text-transform: uppercase;
+  }
+  .quality-btn:hover { background: var(--neon); color: #05060d; border-color: var(--neon); }
+  .match-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; position: relative; z-index: 1; }
+  .badge-4k { background: linear-gradient(135deg, var(--neon-3), var(--neon-2)); color: white; padding: 3px 10px; border-radius: 6px; font-size: 10px; font-weight: 900; letter-spacing: 1px; }
+  .play-icon {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(0, 255, 213, 0.1); border: 1.5px solid rgba(0, 255, 213, 0.4);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--neon); font-size: 13px; cursor: default; user-select: none;
+  }
+
+  /* ===== Сетка туров ===== */
+  .tours-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+  .tour-card {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    background: var(--tour-bg); border: 1px solid var(--border);
+    padding: 16px 18px; border-radius: 12px; text-decoration: none;
+    color: var(--text); font-size: 14px; font-weight: 800;
+    transition: background 0.25s, border-color 0.25s, color 0.25s;
+  }
+  .tour-card:hover { background: rgba(0, 255, 213, 0.1); border-color: var(--neon); color: var(--neon); }
+  .tour-card .arrow { color: var(--neon); font-size: 14px; }
+
+  /* ===== Большие карточки (архив) ===== */
+  .tour-card-large {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 20px 22px;
+  }
+  .tour-card-info { display: flex; flex-direction: column; gap: 4px; }
+  .tour-name-big { font-size: 17px; font-weight: 900; }
+  .tour-dates { font-size: 12px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.3px; }
+
+  .footer { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .footer .neon { color: var(--neon); font-weight: 800; }
+
+  @media (max-width: 600px) {
+    body { padding: 14px 12px; }
+    .topbar { padding: 14px 16px; }
+    .brand-logo { width: 40px; height: 40px; }
+    .brand-name { font-size: 13px; }
+    .theme-toggle { width: 36px; height: 36px; font-size: 16px; }
+    .tour-badge { padding: 8px 14px; }
+    .tour-badge-value { font-size: 18px; }
+    .nav-tab { padding: 10px 12px; font-size: 13px; }
+    .match { grid-template-columns: 55px 1fr auto; padding: 14px 14px; gap: 10px; }
+    .match-day { font-size: 22px; }
+    .team { font-size: 14px; gap: 8px; }
+    .team-logo { width: 24px; height: 24px; padding: 2px; }
+    .quality-btn { padding: 2px 8px; font-size: 9px; }
+    .play-icon { width: 32px; height: 32px; font-size: 11px; }
+    .tours-grid { grid-template-columns: 1fr 1fr; }
+    .match:hover { transform: none; }
+    .tour-card-large { padding: 16px 18px; }
+    .tour-name-big { font-size: 15px; }
+    .tour-dates { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="topbar">
+      <a class="brand" href="index.html">
+        <div class="brand-logo"><img src="logo/rpl.svg" alt="РПЛ"></div>
+        <div>
+          <div class="brand-name">РПЛ LIVE</div>
+          <div class="brand-sub">Сезон 2026-27</div>
+        </div>
+      </a>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="tour-badge">
+          <div class="tour-badge-value">10 ТУР</div>
+        </div>
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+      </div>
+    </div>
+
+    <nav class="nav-tabs">
+      <a class="nav-tab " href="index.html">🏠 Главная</a>
+      <a class="nav-tab active" href="tours.html">📁 Архив туров</a>
+    </nav>
+
+    
+    <div class="section-head">
+      <div class="section-head-title">Все туры</div>
+    </div>
+    <div class="tours-grid">
+      <a class="tour-card tour-card-large" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">
+        <div class="tour-card-info">
+          <div class="tour-name-big">8-ой тур</div>
+          
+        </div>
+        <span class="arrow">→</span>
+      </a>
+<a class="tour-card tour-card-large" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
+        <div class="tour-card-info">
+          <div class="tour-name-big">9-ый тур</div>
+          
+        </div>
+        <span class="arrow">→</span>
+      </a>
+<a class="tour-card tour-card-large" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
+        <div class="tour-card-info">
+          <div class="tour-name-big">10-ый тур</div>
+          <div class="tour-dates">с 9 по 11 окт</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+    </div>
+
+
+    <div class="footer">
+      Обновлено <span class="neon">04.10.2026 15:19 МСК</span><br>
+      Автоматически через GitHub Actions
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const toggle = document.getElementById('themeToggle');
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light');
+        toggle.textContent = '☀️';
+      } else {
+        toggle.textContent = '🌙';
+      }
+      toggle.addEventListener('click', function() {
+        document.body.classList.toggle('light');
+        const isLight = document.body.classList.contains('light');
+        toggle.textContent = isLight ? '☀️' : '🌙';
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      });
+    })();
+  </script>
+</body>
+</html>
