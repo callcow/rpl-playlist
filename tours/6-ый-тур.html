@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Команды — РПЛ — РПЛ</title>
+<title>6-ый тур — РПЛ</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -463,8 +463,8 @@
   <div class="container">
 
     <div class="topbar">
-      <a class="brand" href="index.html">
-        <div class="brand-logo"><img src="logo/rpl.svg" alt="РПЛ"></div>
+      <a class="brand" href="../index.html">
+        <div class="brand-logo"><img src="../logo/rpl.svg" alt="РПЛ"></div>
         <div>
           <div class="brand-name">РПЛ LIVE</div>
           <div class="brand-sub">Сезон 2026-27</div>
@@ -472,103 +472,251 @@
       </a>
       <div style="display:flex;align-items:center;gap:10px;">
         <div class="tour-badge">
-          <div class="tour-badge-value">10 ТУР</div>
+          <div class="tour-badge-value">6 ТУР</div>
         </div>
         <button class="theme-toggle" id="themeToggle">🌙</button>
       </div>
     </div>
 
     <nav class="nav-tabs">
-      <a class="nav-tab " href="index.html">🏠 Главная</a>
-      <a class="nav-tab " href="tours.html">📁 Туры</a>
-      <a class="nav-tab active" href="teams.html">⚽ Команды</a>
-      <a class="nav-tab " href="calendar.html">📅 Календарь</a>
+      <a class="nav-tab " href="../index.html">🏠 Главная</a>
+      <a class="nav-tab " href="../tours.html">📁 Туры</a>
+      <a class="nav-tab " href="../teams.html">⚽ Команды</a>
+      <a class="nav-tab " href="../calendar.html">📅 Календарь</a>
     </nav>
 
     
-    <div class="section-head">
-      <div class="section-head-title">Все команды</div>
+    <div class="search-box" id="searchBox">
+      <img class="search-box-logo" id="searchBoxLogo" src="" alt="" style="display:none;">
+      <input type="text" id="searchInput" placeholder="🔍 Найти команду..." autocomplete="off">
+      <button class="search-clear" id="searchClear" style="display:none">✕</button>
+      <div class="search-suggestions" id="searchSuggestions"></div>
     </div>
-    <div class="teams-grid">
-      <a class="team-card" href="index.html?team=%D0%90%D0%BA%D1%80%D0%BE%D0%BD">
-        <div class="team-card-logo"><img src="logo/akron.svg" alt="Акрон"></div>
-        <div class="team-card-name">Акрон</div>
-        <div class="team-card-stadium">Тольятти · Солидарность Самара Арена</div>
+
+    <div id="currentSection">
+      <div class="section-head" id="currentHeaderDefault">
+        <div class="section-head-title">Результаты матчей</div>
+      </div>
+      <div class="section-head" id="currentHeaderSearch" style="display:none;">
+        <div class="section-head-title">Будущие матчи</div>
+      </div>
+      <div class="matches" id="matchesContainer">
+        <div class="match" data-teams="акрон цска">
+        <div class="match-date">
+          <div class="match-day">28</div>
+          <div class="match-month">авг</div>
+          <div class="match-time">18:0 0</div>
+        </div>
+        <div class="match-teams">
+          <a class="team" href="../index.html?team=%D0%90%D0%BA%D1%80%D0%BE%D0%BD"><span class="team-logo"><img src="../logo/akron.svg" alt="Акрон"></span>Акрон</a>
+          <a class="team" href="../index.html?team=%D0%A6%D0%A1%D0%9A%D0%90"><span class="team-logo"><img src="../logo/cska.svg" alt="ЦСКА"></span>ЦСКА</a>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_f446decca2c3653fbe97620999b4ec2d/17_1028142/1080p50fps/b01ff58f56a21c5dcdc547641f0dbe60/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_f446decca2c3653fbe97620999b4ec2d/17_1028142/720/b01ff58f56a21c5dcdc547641f0dbe60/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_f446decca2c3653fbe97620999b4ec2d/17_1028142/480/b01ff58f56a21c5dcdc547641f0dbe60/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_f446decca2c3653fbe97620999b4ec2d/17_1028142/360/b01ff58f56a21c5dcdc547641f0dbe60/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">360</a>
+          </div>
+          <div class="match-venue">
+            <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Солидарность Самара Арена</div>
+            <div class="venue-line"><span class="venue-label">📍 Город:</span> Тольятти</div>
+          </div>
+        </div>
+        <div class="match-right">
+          <div class="score-big match-score-upcoming">- : -</div>
+          
+        </div>
+      </div>
+<div class="match" data-teams="факел зенит">
+        <div class="match-date">
+          <div class="match-day">29</div>
+          <div class="match-month">авг</div>
+          <div class="match-time">15:00</div>
+        </div>
+        <div class="match-teams">
+          <a class="team" href="../index.html?team=%D0%A4%D0%B0%D0%BA%D0%B5%D0%BB"><span class="team-logo"><img src="../logo/fakel.svg" alt="Факел"></span>Факел</a>
+          <a class="team" href="../index.html?team=%D0%97%D0%B5%D0%BD%D0%B8%D1%82"><span class="team-logo"><img src="../logo/zenit.svg" alt="Зенит"></span>Зенит</a>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_66bcc91772ee7a49361206bb8b9d4064/17_1028185/1080p50fps/e121fbd245c4f163f3c5aafb2263f46b/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_66bcc91772ee7a49361206bb8b9d4064/17_1028185/720/e121fbd245c4f163f3c5aafb2263f46b/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_66bcc91772ee7a49361206bb8b9d4064/17_1028185/480/e121fbd245c4f163f3c5aafb2263f46b/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_66bcc91772ee7a49361206bb8b9d4064/17_1028185/360/e121fbd245c4f163f3c5aafb2263f46b/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">360</a>
+          </div>
+          <div class="match-venue">
+            <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Факел</div>
+            <div class="venue-line"><span class="venue-label">📍 Город:</span> Воронеж</div>
+          </div>
+        </div>
+        <div class="match-right">
+          <div class="score-big match-score-final">0:1</div>
+          
+        </div>
+      </div>
+<div class="match" data-teams="краснодар ростов">
+        <div class="match-date">
+          <div class="match-day">29</div>
+          <div class="match-month">авг</div>
+          <div class="match-time">17:30</div>
+        </div>
+        <div class="match-teams">
+          <a class="team" href="../index.html?team=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80"><span class="team-logo"><img src="../logo/krasnodar.svg" alt="Краснодар"></span>Краснодар</a>
+          <a class="team" href="../index.html?team=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="../logo/rostov.svg" alt="Ростов"></span>Ростов</a>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_161daa5490271d18203ead54c7f1c233/17_1028195/1080p50fps/35e78336ec853af7d5c160f148ed784a/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_161daa5490271d18203ead54c7f1c233/17_1028195/720/35e78336ec853af7d5c160f148ed784a/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_161daa5490271d18203ead54c7f1c233/17_1028195/480/35e78336ec853af7d5c160f148ed784a/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_161daa5490271d18203ead54c7f1c233/17_1028195/360/35e78336ec853af7d5c160f148ed784a/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">360</a>
+          </div>
+          <div class="match-venue">
+            <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Ozon Арена</div>
+            <div class="venue-line"><span class="venue-label">📍 Город:</span> Краснодар</div>
+          </div>
+        </div>
+        <div class="match-right">
+          <div class="score-big match-score-final">1:0</div>
+          
+        </div>
+      </div>
+<div class="match" data-teams="локомотив динамо москва">
+        <div class="match-date">
+          <div class="match-day">29</div>
+          <div class="match-month">авг</div>
+          <div class="match-time">20:00</div>
+        </div>
+        <div class="match-teams">
+          <a class="team" href="../index.html?team=%D0%9B%D0%BE%D0%BA%D0%BE%D0%BC%D0%BE%D1%82%D0%B8%D0%B2"><span class="team-logo"><img src="../logo/lokomotiv.svg" alt="Локомотив"></span>Локомотив</a>
+          <a class="team" href="../index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"><span class="team-logo"><img src="../logo/dynamomoscov.svg" alt="Динамо Москва"></span>Динамо Москва</a>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_892a0a1cbda00789011120c82c544a9d/17_1028206/2160/b3fa484ee3b18c6353f8f566cee33717/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">2160</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_892a0a1cbda00789011120c82c544a9d/17_1028206/1080/b3fa484ee3b18c6353f8f566cee33717/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_892a0a1cbda00789011120c82c544a9d/17_1028206/720/b3fa484ee3b18c6353f8f566cee33717/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_892a0a1cbda00789011120c82c544a9d/17_1028206/480/b3fa484ee3b18c6353f8f566cee33717/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_892a0a1cbda00789011120c82c544a9d/17_1028206/360/b3fa484ee3b18c6353f8f566cee33717/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">360</a>
+          </div>
+          <div class="match-venue">
+            <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> РЖД Арена</div>
+            <div class="venue-line"><span class="venue-label">📍 Город:</span> Москва</div>
+          </div>
+        </div>
+        <div class="match-right">
+          <div class="score-big match-score-final">0:1</div>
+          <div class="badge-4k">4K UHD</div>
+        </div>
+      </div>
+<div class="match" data-teams="ахмат крылья советов">
+        <div class="match-date">
+          <div class="match-day">29</div>
+          <div class="match-month">авг</div>
+          <div class="match-time">20:00</div>
+        </div>
+        <div class="match-teams">
+          <a class="team" href="../index.html?team=%D0%90%D1%85%D0%BC%D0%B0%D1%82"><span class="team-logo"><img src="../logo/akhmat.svg" alt="Ахмат"></span>Ахмат</a>
+          <a class="team" href="../index.html?team=%D0%9A%D1%80%D1%8B%D0%BB%D1%8C%D1%8F%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="../logo/krylyasovetov.svg" alt="Крылья Советов"></span>Крылья Советов</a>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_f50da4d6edb8b0d0af7bb142c23a11b9/17_1028214/1080p50fps/c4405186221455f48789080846fe4a43/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_f50da4d6edb8b0d0af7bb142c23a11b9/17_1028214/720/c4405186221455f48789080846fe4a43/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_f50da4d6edb8b0d0af7bb142c23a11b9/17_1028214/480/c4405186221455f48789080846fe4a43/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_f50da4d6edb8b0d0af7bb142c23a11b9/17_1028214/360/c4405186221455f48789080846fe4a43/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">360</a>
+          </div>
+          <div class="match-venue">
+            <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Ахмат Арена</div>
+            <div class="venue-line"><span class="venue-label">📍 Город:</span> Грозный</div>
+          </div>
+        </div>
+        <div class="match-right">
+          <div class="score-big match-score-final">3:3</div>
+          
+        </div>
+      </div>
+<div class="match" data-teams="родина балтика">
+        <div class="match-date">
+          <div class="match-day">30</div>
+          <div class="match-month">авг</div>
+          <div class="match-time">15:00</div>
+        </div>
+        <div class="match-teams">
+          <a class="team" href="../index.html?team=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BD%D0%B0"><span class="team-logo"><img src="../logo/rodina.svg" alt="Родина"></span>Родина</a>
+          <a class="team" href="../index.html?team=%D0%91%D0%B0%D0%BB%D1%82%D0%B8%D0%BA%D0%B0"><span class="team-logo"><img src="../logo/baltika.svg" alt="Балтика"></span>Балтика</a>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_2f51507362e2fd12dee1f79be7490a8d/17_1028254/1080p50fps/94c17bba354690903e553e8e5aa0f787/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_2f51507362e2fd12dee1f79be7490a8d/17_1028254/720/94c17bba354690903e553e8e5aa0f787/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_2f51507362e2fd12dee1f79be7490a8d/17_1028254/480/94c17bba354690903e553e8e5aa0f787/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_2f51507362e2fd12dee1f79be7490a8d/17_1028254/360/94c17bba354690903e553e8e5aa0f787/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">360</a>
+          </div>
+          <div class="match-venue">
+            <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Арена Химки</div>
+            <div class="venue-line"><span class="venue-label">📍 Город:</span> Москва</div>
+          </div>
+        </div>
+        <div class="match-right">
+          <div class="score-big match-score-final">0:3</div>
+          
+        </div>
+      </div>
+<div class="match" data-teams="спартак оренбург">
+        <div class="match-date">
+          <div class="match-day">30</div>
+          <div class="match-month">авг</div>
+          <div class="match-time">17:30</div>
+        </div>
+        <div class="match-teams">
+          <a class="team" href="../index.html?team=%D0%A1%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BA"><span class="team-logo"><img src="../logo/spartak.svg" alt="Спартак"></span>Спартак</a>
+          <a class="team" href="../index.html?team=%D0%9E%D1%80%D0%B5%D0%BD%D0%B1%D1%83%D1%80%D0%B3"><span class="team-logo"><img src="../logo/orenburg.svg" alt="Оренбург"></span>Оренбург</a>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_24ae08e4a893adffa38d66aa5ea159ab/17_1028272/2160/ef7e8d3488c51faa27cc155fc2585500/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">2160</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_24ae08e4a893adffa38d66aa5ea159ab/17_1028272/1080/ef7e8d3488c51faa27cc155fc2585500/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_24ae08e4a893adffa38d66aa5ea159ab/17_1028272/720/ef7e8d3488c51faa27cc155fc2585500/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_24ae08e4a893adffa38d66aa5ea159ab/17_1028272/480/ef7e8d3488c51faa27cc155fc2585500/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_24ae08e4a893adffa38d66aa5ea159ab/17_1028272/360/ef7e8d3488c51faa27cc155fc2585500/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">360</a>
+          </div>
+          <div class="match-venue">
+            <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Лукойл Арена</div>
+            <div class="venue-line"><span class="venue-label">📍 Город:</span> Москва</div>
+          </div>
+        </div>
+        <div class="match-right">
+          <div class="score-big match-score-final">1:1</div>
+          <div class="badge-4k">4K UHD</div>
+        </div>
+      </div>
+<div class="match" data-teams="рубин динамо махачкала">
+        <div class="match-date">
+          <div class="match-day">30</div>
+          <div class="match-month">авг</div>
+          <div class="match-time">20:00</div>
+        </div>
+        <div class="match-teams">
+          <a class="team" href="../index.html?team=%D0%A0%D1%83%D0%B1%D0%B8%D0%BD"><span class="team-logo"><img src="../logo/rubin.svg" alt="Рубин"></span>Рубин</a>
+          <a class="team" href="../index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%B0%D1%85%D0%B0%D1%87%D0%BA%D0%B0%D0%BB%D0%B0"><span class="team-logo"><img src="../logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></span>Динамо Махачкала</a>
+          <div class="quality-row">
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_2d7e3ec0242db34eb622a24dffe9a96c/17_1028281/1080p50fps/f6b546f3a3f81d1cd01bf72fc9b941e0/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_2d7e3ec0242db34eb622a24dffe9a96c/17_1028281/720/f6b546f3a3f81d1cd01bf72fc9b941e0/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_2d7e3ec0242db34eb622a24dffe9a96c/17_1028281/480/f6b546f3a3f81d1cd01bf72fc9b941e0/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_2d7e3ec0242db34eb622a24dffe9a96c/17_1028281/360/f6b546f3a3f81d1cd01bf72fc9b941e0/4943314801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6b32ddfdc239e09efa46d9738bdb299f" target="_blank">360</a>
+          </div>
+          <div class="match-venue">
+            <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Ак Барс Арена</div>
+            <div class="venue-line"><span class="venue-label">📍 Город:</span> Казань</div>
+          </div>
+        </div>
+        <div class="match-right">
+          <div class="score-big match-score-final">3:1</div>
+          
+        </div>
+      </div>
+
+      </div>
+    </div>
+
+    <div id="pastSection" style="display:none;">
+      <div class="section-head">
+        <div class="section-head-title">Прошедшие матчи</div>
+      </div>
+      <div class="matches" id="pastMatchesContainer">
+        
+      </div>
+    </div>
+
+    <div class="section-head">
+      <div class="section-head-title">Архив туров</div>
+    </div>
+    <div class="tours-grid">
+      <a class="tour-card" href="../tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
+        <span>5-ый тур</span>
+        <span class="arrow">→</span>
       </a>
-<a class="team-card" href="index.html?team=%D0%90%D1%85%D0%BC%D0%B0%D1%82">
-        <div class="team-card-logo"><img src="logo/akhmat.svg" alt="Ахмат"></div>
-        <div class="team-card-name">Ахмат</div>
-        <div class="team-card-stadium">Грозный · Ахмат Арена</div>
+<a class="tour-card" href="../tours/6-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
+        <span>6-ый тур</span>
+        <span class="arrow">→</span>
       </a>
-<a class="team-card" href="index.html?team=%D0%91%D0%B0%D0%BB%D1%82%D0%B8%D0%BA%D0%B0">
-        <div class="team-card-logo"><img src="logo/baltika.svg" alt="Балтика"></div>
-        <div class="team-card-name">Балтика</div>
-        <div class="team-card-stadium">Калининград · Ростех Арена</div>
+<a class="tour-card" href="../tours/7-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
+        <span>7-ый тур</span>
+        <span class="arrow">→</span>
       </a>
-<a class="team-card" href="index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%B0%D1%85%D0%B0%D1%87%D0%BA%D0%B0%D0%BB%D0%B0">
-        <div class="team-card-logo"><img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></div>
-        <div class="team-card-name">Динамо Махачкала</div>
-        <div class="team-card-stadium">Махачкала · Анжи Арена</div>
+<a class="tour-card" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">
+        <span>8-ой тур</span>
+        <span class="arrow">→</span>
       </a>
-<a class="team-card" href="index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0">
-        <div class="team-card-logo"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></div>
-        <div class="team-card-name">Динамо Москва</div>
-        <div class="team-card-stadium">Москва · ВТБ Арена</div>
+<a class="tour-card" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
+        <span>9-ый тур</span>
+        <span class="arrow">→</span>
       </a>
-<a class="team-card" href="index.html?team=%D0%97%D0%B5%D0%BD%D0%B8%D1%82">
-        <div class="team-card-logo"><img src="logo/zenit.svg" alt="Зенит"></div>
-        <div class="team-card-name">Зенит</div>
-        <div class="team-card-stadium">Санкт-Петербург · Газпром Арена</div>
-      </a>
-<a class="team-card" href="index.html?team=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80">
-        <div class="team-card-logo"><img src="logo/krasnodar.svg" alt="Краснодар"></div>
-        <div class="team-card-name">Краснодар</div>
-        <div class="team-card-stadium">Краснодар · Ozon Арена</div>
-      </a>
-<a class="team-card" href="index.html?team=%D0%9A%D1%80%D1%8B%D0%BB%D1%8C%D1%8F%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D0%BE%D0%B2">
-        <div class="team-card-logo"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></div>
-        <div class="team-card-name">Крылья Советов</div>
-        <div class="team-card-stadium">Самара · Солидарность Самара Арена</div>
-      </a>
-<a class="team-card" href="index.html?team=%D0%9B%D0%BE%D0%BA%D0%BE%D0%BC%D0%BE%D1%82%D0%B8%D0%B2">
-        <div class="team-card-logo"><img src="logo/lokomotiv.svg" alt="Локомотив"></div>
-        <div class="team-card-name">Локомотив</div>
-        <div class="team-card-stadium">Москва · РЖД Арена</div>
-      </a>
-<a class="team-card" href="index.html?team=%D0%9E%D1%80%D0%B5%D0%BD%D0%B1%D1%83%D1%80%D0%B3">
-        <div class="team-card-logo"><img src="logo/orenburg.svg" alt="Оренбург"></div>
-        <div class="team-card-name">Оренбург</div>
-        <div class="team-card-stadium">Оренбург · Газовик</div>
-      </a>
-<a class="team-card" href="index.html?team=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BD%D0%B0">
-        <div class="team-card-logo"><img src="logo/rodina.svg" alt="Родина"></div>
-        <div class="team-card-name">Родина</div>
-        <div class="team-card-stadium">Москва · Арена Химки</div>
-      </a>
-<a class="team-card" href="index.html?team=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2">
-        <div class="team-card-logo"><img src="logo/rostov.svg" alt="Ростов"></div>
-        <div class="team-card-name">Ростов</div>
-        <div class="team-card-stadium">Ростов-на-Дону · Ростов Арена</div>
-      </a>
-<a class="team-card" href="index.html?team=%D0%A0%D1%83%D0%B1%D0%B8%D0%BD">
-        <div class="team-card-logo"><img src="logo/rubin.svg" alt="Рубин"></div>
-        <div class="team-card-name">Рубин</div>
-        <div class="team-card-stadium">Казань · Ак Барс Арена</div>
-      </a>
-<a class="team-card" href="index.html?team=%D0%A1%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BA">
-        <div class="team-card-logo"><img src="logo/spartak.svg" alt="Спартак"></div>
-        <div class="team-card-name">Спартак</div>
-        <div class="team-card-stadium">Москва · Лукойл Арена</div>
-      </a>
-<a class="team-card" href="index.html?team=%D0%A4%D0%B0%D0%BA%D0%B5%D0%BB">
-        <div class="team-card-logo"><img src="logo/fakel.svg" alt="Факел"></div>
-        <div class="team-card-name">Факел</div>
-        <div class="team-card-stadium">Воронеж · Факел</div>
-      </a>
-<a class="team-card" href="index.html?team=%D0%A6%D0%A1%D0%9A%D0%90">
-        <div class="team-card-logo"><img src="logo/cska.svg" alt="ЦСКА"></div>
-        <div class="team-card-name">ЦСКА</div>
-        <div class="team-card-stadium">Москва · ВЭБ Арена</div>
+<a class="tour-card" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
+        <span>10-ый тур</span>
+        <span class="arrow">→</span>
       </a>
 
     </div>
@@ -607,7 +755,7 @@
       const searchBoxLogo = document.getElementById('searchBoxLogo');
 
       const suggestBox = document.getElementById('searchSuggestions');
-      const allTeams = [{"name": "Акрон", "logo": "logo/akron.svg"}, {"name": "Ахмат", "logo": "logo/akhmat.svg"}, {"name": "Балтика", "logo": "logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "logo/zenit.svg"}, {"name": "Краснодар", "logo": "logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "logo/orenburg.svg"}, {"name": "Родина", "logo": "logo/rodina.svg"}, {"name": "Ростов", "logo": "logo/rostov.svg"}, {"name": "Рубин", "logo": "logo/rubin.svg"}, {"name": "Спартак", "logo": "logo/spartak.svg"}, {"name": "Факел", "logo": "logo/fakel.svg"}, {"name": "ЦСКА", "logo": "logo/cska.svg"}];
+      const allTeams = [{"name": "Акрон", "logo": "../logo/akron.svg"}, {"name": "Ахмат", "logo": "../logo/akhmat.svg"}, {"name": "Балтика", "logo": "../logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "../logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "../logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "../logo/zenit.svg"}, {"name": "Краснодар", "logo": "../logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "../logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "../logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "../logo/orenburg.svg"}, {"name": "Родина", "logo": "../logo/rodina.svg"}, {"name": "Ростов", "logo": "../logo/rostov.svg"}, {"name": "Рубин", "logo": "../logo/rubin.svg"}, {"name": "Спартак", "logo": "../logo/spartak.svg"}, {"name": "Факел", "logo": "../logo/fakel.svg"}, {"name": "ЦСКА", "logo": "../logo/cska.svg"}];
 
       function setSearchLogo(teamName) {
         if (!searchBox || !searchBoxLogo) return;
