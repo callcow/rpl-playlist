@@ -115,7 +115,21 @@
     background: var(--match-bg); border: 1px solid var(--border);
     border-radius: 12px; color: var(--text);
     font-size: 15px; font-family: inherit;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, padding-left 0.2s;
+  }
+  .search-box.has-logo input {
+    padding-left: 52px;
+  }
+  .search-box-logo {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
   }
   .search-box input:focus { outline: none; border-color: var(--neon); }
   .search-box input::placeholder { color: var(--text-dim); }
@@ -336,11 +350,15 @@
     border-radius: 10px; text-transform: capitalize;
   }
   .cal-match {
-    display: grid; grid-template-columns: 40px 60px 1fr 100px;
-    align-items: center; gap: 12px;
-    padding: 12px 16px; margin-bottom: 6px;
+    display: grid;
+    grid-template-columns: 40px 60px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    margin-bottom: 6px;
     background: var(--match-bg);
-    border: 1px solid var(--border); border-radius: 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
     font-size: 14px;
   }
   .cal-date {
@@ -359,7 +377,7 @@
   a.cal-team:hover { color: var(--neon); }
   .cal-team .team-logo { width: 22px; height: 22px; padding: 2px; }
   .cal-sep { color: var(--text-dim); }
-    .cal-score {
+  .cal-score {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -420,6 +438,15 @@
     .team-card-stadium { font-size: 9px; }
     .cal-match { grid-template-columns: 34px 1fr auto; gap: 8px; padding: 10px 12px; }
     .cal-time { display: none; }
+    .score-big {
+      font-size: 17px;
+      padding: 6px 10px;
+      min-width: 60px;
+    }
+    .score-big.match-score-upcoming {
+      font-size: 13px;
+      padding: 4px 10px;
+    }
     .cal-score {
       font-size: 13px;
       padding: 4px 8px;
@@ -429,10 +456,7 @@
       font-size: 11px;
       padding: 3px 8px;
     }
-    .score-big.match-score-upcoming {
-      font-size: 13px;
-      padding: 4px 10px;
-    }
+  }
 </style>
 </head>
 <body>
@@ -462,7 +486,8 @@
     </nav>
 
     
-    <div class="search-box">
+    <div class="search-box" id="searchBox">
+      <img class="search-box-logo" id="searchBoxLogo" src="" alt="" style="display:none;">
       <input type="text" id="searchInput" placeholder="🔍 Найти команду..." autocomplete="off">
       <button class="search-clear" id="searchClear" style="display:none">✕</button>
       <div class="search-suggestions" id="searchSuggestions"></div>
@@ -470,7 +495,7 @@
 
     <div id="currentSection">
       <div class="section-head" id="currentHeaderDefault">
-        <div class="section-head-title">Расписание матчей</div>
+        <div class="section-head-title">Результаты матчей</div>
       </div>
       <div class="section-head" id="currentHeaderSearch" style="display:none;">
         <div class="section-head-title">Будущие матчи</div>
@@ -686,7 +711,7 @@
 
 
     <div class="footer">
-      Обновлено <span class="neon">04.10.2026 19:21 МСК</span><br>
+      Обновлено <span class="neon">04.10.2026 19:54 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
   </div>
@@ -714,9 +739,35 @@
       const clearBtn = document.getElementById('searchClear');
       if (!input) return;
 
+      const searchBox = document.getElementById('searchBox');
+      const searchBoxLogo = document.getElementById('searchBoxLogo');
+
+      const suggestBox = document.getElementById('searchSuggestions');
+      const allTeams = [{"name": "Акрон", "logo": "../logo/akron.svg"}, {"name": "Ахмат", "logo": "../logo/akhmat.svg"}, {"name": "Балтика", "logo": "../logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "../logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "../logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "../logo/zenit.svg"}, {"name": "Краснодар", "logo": "../logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "../logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "../logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "../logo/orenburg.svg"}, {"name": "Родина", "logo": "../logo/rodina.svg"}, {"name": "Ростов", "logo": "../logo/rostov.svg"}, {"name": "Рубин", "logo": "../logo/rubin.svg"}, {"name": "Спартак", "logo": "../logo/spartak.svg"}, {"name": "Факел", "logo": "../logo/fakel.svg"}, {"name": "ЦСКА", "logo": "../logo/cska.svg"}];
+
+      function setSearchLogo(teamName) {
+        if (!searchBox || !searchBoxLogo) return;
+
+        const team = allTeams.find(function(t) {
+          return t.name.toLowerCase() === teamName.toLowerCase();
+        });
+
+        if (team) {
+          searchBoxLogo.src = team.logo;
+          searchBoxLogo.style.display = 'block';
+          searchBox.classList.add('has-logo');
+        } else {
+          searchBoxLogo.src = '';
+          searchBoxLogo.style.display = 'none';
+          searchBox.classList.remove('has-logo');
+        }
+      }
+
       function filter() {
         const q = input.value.trim().toLowerCase();
         clearBtn.style.display = q ? 'block' : 'none';
+
+        setSearchLogo(input.value.trim());
 
         const allMatches = document.querySelectorAll('.match');
         allMatches.forEach(function(el) {
@@ -751,9 +802,6 @@
         }
       }
 
-      const suggestBox = document.getElementById('searchSuggestions');
-      const allTeams = [{"name": "Акрон", "logo": "../logo/akron.svg"}, {"name": "Ахмат", "logo": "../logo/akhmat.svg"}, {"name": "Балтика", "logo": "../logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "../logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "../logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "../logo/zenit.svg"}, {"name": "Краснодар", "logo": "../logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "../logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "../logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "../logo/orenburg.svg"}, {"name": "Родина", "logo": "../logo/rodina.svg"}, {"name": "Ростов", "logo": "../logo/rostov.svg"}, {"name": "Рубин", "logo": "../logo/rubin.svg"}, {"name": "Спартак", "logo": "../logo/spartak.svg"}, {"name": "Факел", "logo": "../logo/fakel.svg"}, {"name": "ЦСКА", "logo": "../logo/cska.svg"}];
-
       function showSuggestions(query) {
         if (!query) {
           suggestBox.classList.remove('active');
@@ -783,9 +831,11 @@
 
         suggestBox.querySelectorAll('.search-suggestion').forEach(function(el) {
           el.addEventListener('click', function() {
-            input.value = el.getAttribute('data-team');
+            const teamName = el.getAttribute('data-team');
+            input.value = teamName;
             suggestBox.classList.remove('active');
             suggestBox.innerHTML = '';
+            setSearchLogo(teamName);
             filter();
           });
         });
@@ -806,14 +856,16 @@
         input.value = '';
         suggestBox.classList.remove('active');
         suggestBox.innerHTML = '';
+        setSearchLogo('');
         filter();
         input.focus();
       });
 
       const params = new URLSearchParams(window.location.search);
-      const team = params.get('team');
-      if (team) {
-        input.value = team;
+      const teamParam = params.get('team');
+      if (teamParam) {
+        input.value = teamParam;
+        setSearchLogo(teamParam);
         filter();
       }
     })();

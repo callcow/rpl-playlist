@@ -115,7 +115,21 @@
     background: var(--match-bg); border: 1px solid var(--border);
     border-radius: 12px; color: var(--text);
     font-size: 15px; font-family: inherit;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, padding-left 0.2s;
+  }
+  .search-box.has-logo input {
+    padding-left: 52px;
+  }
+  .search-box-logo {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
   }
   .search-box input:focus { outline: none; border-color: var(--neon); }
   .search-box input::placeholder { color: var(--text-dim); }
@@ -336,11 +350,15 @@
     border-radius: 10px; text-transform: capitalize;
   }
   .cal-match {
-    display: grid; grid-template-columns: 40px 60px 1fr 100px;
-    align-items: center; gap: 12px;
-    padding: 12px 16px; margin-bottom: 6px;
+    display: grid;
+    grid-template-columns: 40px 60px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    margin-bottom: 6px;
     background: var(--match-bg);
-    border: 1px solid var(--border); border-radius: 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
     font-size: 14px;
   }
   .cal-date {
@@ -359,7 +377,7 @@
   a.cal-team:hover { color: var(--neon); }
   .cal-team .team-logo { width: 22px; height: 22px; padding: 2px; }
   .cal-sep { color: var(--text-dim); }
-    .cal-score {
+  .cal-score {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -420,6 +438,15 @@
     .team-card-stadium { font-size: 9px; }
     .cal-match { grid-template-columns: 34px 1fr auto; gap: 8px; padding: 10px 12px; }
     .cal-time { display: none; }
+    .score-big {
+      font-size: 17px;
+      padding: 6px 10px;
+      min-width: 60px;
+    }
+    .score-big.match-score-upcoming {
+      font-size: 13px;
+      padding: 4px 10px;
+    }
     .cal-score {
       font-size: 13px;
       padding: 4px 8px;
@@ -429,10 +456,7 @@
       font-size: 11px;
       padding: 3px 8px;
     }
-    .score-big.match-score-upcoming {
-      font-size: 13px;
-      padding: 4px 10px;
-    }
+  }
 </style>
 </head>
 <body>
@@ -462,7 +486,8 @@
     </nav>
 
     
-    <div class="search-box">
+    <div class="search-box" id="searchBox">
+      <img class="search-box-logo" id="searchBoxLogo" src="" alt="" style="display:none;">
       <input type="text" id="searchInput" placeholder="🔍 Найти команду..." autocomplete="off">
       <button class="search-clear" id="searchClear" style="display:none">✕</button>
       <div class="search-suggestions" id="searchSuggestions"></div>
@@ -486,7 +511,7 @@
           <a class="team" href="index.html?team=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="logo/rostov.svg" alt="Ростов"></span>Ростов</a>
           <a class="team" href="index.html?team=%D0%90%D0%BA%D1%80%D0%BE%D0%BD"><span class="team-logo"><img src="logo/akron.svg" alt="Акрон"></span>Акрон</a>
           <div class="quality-row">
-            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/1080p50fps/3ca4a774860a88d4c93cc87bff1cda92/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/720/3ca4a774860a88d4c93cc87bff1cda92/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/480/3ca4a774860a88d4c93cc87bff1cda92/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/360/3ca4a774860a88d4c93cc87bff1cda92/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">360</a>
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/1080p50fps/4c209b17fdb45c3f42b57eab6781a8de/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/720/4c209b17fdb45c3f42b57eab6781a8de/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/480/4c209b17fdb45c3f42b57eab6781a8de/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/360/4c209b17fdb45c3f42b57eab6781a8de/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">360</a>
           </div>
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Ростов Арена</div>
@@ -508,7 +533,7 @@
           <a class="team" href="index.html?team=%D0%9E%D1%80%D0%B5%D0%BD%D0%B1%D1%83%D1%80%D0%B3"><span class="team-logo"><img src="logo/orenburg.svg" alt="Оренбург"></span>Оренбург</a>
           <a class="team" href="index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%B0%D1%85%D0%B0%D1%87%D0%BA%D0%B0%D0%BB%D0%B0"><span class="team-logo"><img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></span>Динамо Махачкала</a>
           <div class="quality-row">
-            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/1080p50fps/b48e3d0143d1c5965151416e09f333e5/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/720/b48e3d0143d1c5965151416e09f333e5/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/480/b48e3d0143d1c5965151416e09f333e5/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/360/b48e3d0143d1c5965151416e09f333e5/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">360</a>
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/1080p50fps/d249e46100277ece70d889d55f7a14de/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/720/d249e46100277ece70d889d55f7a14de/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/480/d249e46100277ece70d889d55f7a14de/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/360/d249e46100277ece70d889d55f7a14de/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">360</a>
           </div>
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Газовик</div>
@@ -530,7 +555,7 @@
           <a class="team" href="index.html?team=%D0%A4%D0%B0%D0%BA%D0%B5%D0%BB"><span class="team-logo"><img src="logo/fakel.svg" alt="Факел"></span>Факел</a>
           <a class="team" href="index.html?team=%D0%9B%D0%BE%D0%BA%D0%BE%D0%BC%D0%BE%D1%82%D0%B8%D0%B2"><span class="team-logo"><img src="logo/lokomotiv.svg" alt="Локомотив"></span>Локомотив</a>
           <div class="quality-row">
-            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/1080p50fps/cb17cb14261a3031bf2029d88edd1c11/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/720/cb17cb14261a3031bf2029d88edd1c11/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/480/cb17cb14261a3031bf2029d88edd1c11/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/360/cb17cb14261a3031bf2029d88edd1c11/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">360</a>
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/1080p50fps/53fe343c5337b69d1199d1258b9760d4/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/720/53fe343c5337b69d1199d1258b9760d4/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/480/53fe343c5337b69d1199d1258b9760d4/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/360/53fe343c5337b69d1199d1258b9760d4/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">360</a>
           </div>
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Факел</div>
@@ -552,7 +577,7 @@
           <a class="team" href="index.html?team=%D0%9A%D1%80%D1%8B%D0%BB%D1%8C%D1%8F%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></span>Крылья Советов</a>
           <a class="team" href="index.html?team=%D0%A1%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BA"><span class="team-logo"><img src="logo/spartak.svg" alt="Спартак"></span>Спартак</a>
           <div class="quality-row">
-            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/1080p50fps/e25d40ca57546960a65c683b3ce32b99/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/720/e25d40ca57546960a65c683b3ce32b99/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/480/e25d40ca57546960a65c683b3ce32b99/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/360/e25d40ca57546960a65c683b3ce32b99/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">360</a>
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/1080p50fps/55ad826b53e7372038c478c207011d1f/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/720/55ad826b53e7372038c478c207011d1f/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/480/55ad826b53e7372038c478c207011d1f/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/360/55ad826b53e7372038c478c207011d1f/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">360</a>
           </div>
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Солидарность Самара Арена</div>
@@ -574,7 +599,7 @@
           <a class="team" href="index.html?team=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80"><span class="team-logo"><img src="logo/krasnodar.svg" alt="Краснодар"></span>Краснодар</a>
           <a class="team" href="index.html?team=%D0%97%D0%B5%D0%BD%D0%B8%D1%82"><span class="team-logo"><img src="logo/zenit.svg" alt="Зенит"></span>Зенит</a>
           <div class="quality-row">
-            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/1080p50fps/76c0716f45fc9701579698139abc5092/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/720/76c0716f45fc9701579698139abc5092/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/480/76c0716f45fc9701579698139abc5092/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/360/76c0716f45fc9701579698139abc5092/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">360</a>
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/1080p50fps/d6f625fd80ffd9c6d6347163ec27d7f9/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/720/d6f625fd80ffd9c6d6347163ec27d7f9/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/480/d6f625fd80ffd9c6d6347163ec27d7f9/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/360/d6f625fd80ffd9c6d6347163ec27d7f9/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">360</a>
           </div>
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Ozon Арена</div>
@@ -596,7 +621,7 @@
           <a class="team" href="index.html?team=%D0%90%D1%85%D0%BC%D0%B0%D1%82"><span class="team-logo"><img src="logo/akhmat.svg" alt="Ахмат"></span>Ахмат</a>
           <a class="team" href="index.html?team=%D0%91%D0%B0%D0%BB%D1%82%D0%B8%D0%BA%D0%B0"><span class="team-logo"><img src="logo/baltika.svg" alt="Балтика"></span>Балтика</a>
           <div class="quality-row">
-            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/1080p50fps/7093eab86fc6769d840a77bf44c59108/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/720/7093eab86fc6769d840a77bf44c59108/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/480/7093eab86fc6769d840a77bf44c59108/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/360/7093eab86fc6769d840a77bf44c59108/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">360</a>
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/1080p50fps/098c3e729a0a1c43c7ab49e9fa557e9a/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/720/098c3e729a0a1c43c7ab49e9fa557e9a/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/480/098c3e729a0a1c43c7ab49e9fa557e9a/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/360/098c3e729a0a1c43c7ab49e9fa557e9a/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">360</a>
           </div>
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Ахмат Арена</div>
@@ -618,7 +643,7 @@
           <a class="team" href="index.html?team=%D0%A6%D0%A1%D0%9A%D0%90"><span class="team-logo"><img src="logo/cska.svg" alt="ЦСКА"></span>ЦСКА</a>
           <a class="team" href="index.html?team=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BD%D0%B0"><span class="team-logo"><img src="logo/rodina.svg" alt="Родина"></span>Родина</a>
           <div class="quality-row">
-            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/2160/d4ec0b84501e4d2fd1985dfdfdfa41a3/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">2160</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/1080/d4ec0b84501e4d2fd1985dfdfdfa41a3/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/720/d4ec0b84501e4d2fd1985dfdfdfa41a3/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/480/d4ec0b84501e4d2fd1985dfdfdfa41a3/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/360/d4ec0b84501e4d2fd1985dfdfdfa41a3/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">360</a>
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/2160/d3a4f375b935932f7777c97eef31619b/4946805903.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=5482c2ac89f0981785943e2a7d1f5c30" target="_blank">2160</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/1080/d3a4f375b935932f7777c97eef31619b/4946805903.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=5482c2ac89f0981785943e2a7d1f5c30" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/720/d3a4f375b935932f7777c97eef31619b/4946805903.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=5482c2ac89f0981785943e2a7d1f5c30" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/480/d3a4f375b935932f7777c97eef31619b/4946805903.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=5482c2ac89f0981785943e2a7d1f5c30" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/360/d3a4f375b935932f7777c97eef31619b/4946805903.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=5482c2ac89f0981785943e2a7d1f5c30" target="_blank">360</a>
           </div>
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> ВЭБ Арена</div>
@@ -640,7 +665,7 @@
           <a class="team" href="index.html?team=%D0%A0%D1%83%D0%B1%D0%B8%D0%BD"><span class="team-logo"><img src="logo/rubin.svg" alt="Рубин"></span>Рубин</a>
           <a class="team" href="index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"><span class="team-logo"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></span>Динамо Москва</a>
           <div class="quality-row">
-            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/1080p50fps/57260fbd2e8f1e22ffd39b9018239448/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/720/57260fbd2e8f1e22ffd39b9018239448/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/480/57260fbd2e8f1e22ffd39b9018239448/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/360/57260fbd2e8f1e22ffd39b9018239448/4946804102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=f0ccada0cee28c88a846bc97def3ee88" target="_blank">360</a>
+            <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/1080p50fps/fbbd8770f6ac49c13753e2678212f3af/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/720/fbbd8770f6ac49c13753e2678212f3af/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/480/fbbd8770f6ac49c13753e2678212f3af/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/360/fbbd8770f6ac49c13753e2678212f3af/4946805902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=7822463e3b47b19c708bc8fee4a701aa" target="_blank">360</a>
           </div>
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Ак Барс Арена</div>
@@ -1054,7 +1079,7 @@
 
 
     <div class="footer">
-      Обновлено <span class="neon">04.10.2026 19:21 МСК</span><br>
+      Обновлено <span class="neon">04.10.2026 19:54 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
   </div>
@@ -1082,9 +1107,35 @@
       const clearBtn = document.getElementById('searchClear');
       if (!input) return;
 
+      const searchBox = document.getElementById('searchBox');
+      const searchBoxLogo = document.getElementById('searchBoxLogo');
+
+      const suggestBox = document.getElementById('searchSuggestions');
+      const allTeams = [{"name": "Акрон", "logo": "logo/akron.svg"}, {"name": "Ахмат", "logo": "logo/akhmat.svg"}, {"name": "Балтика", "logo": "logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "logo/zenit.svg"}, {"name": "Краснодар", "logo": "logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "logo/orenburg.svg"}, {"name": "Родина", "logo": "logo/rodina.svg"}, {"name": "Ростов", "logo": "logo/rostov.svg"}, {"name": "Рубин", "logo": "logo/rubin.svg"}, {"name": "Спартак", "logo": "logo/spartak.svg"}, {"name": "Факел", "logo": "logo/fakel.svg"}, {"name": "ЦСКА", "logo": "logo/cska.svg"}];
+
+      function setSearchLogo(teamName) {
+        if (!searchBox || !searchBoxLogo) return;
+
+        const team = allTeams.find(function(t) {
+          return t.name.toLowerCase() === teamName.toLowerCase();
+        });
+
+        if (team) {
+          searchBoxLogo.src = team.logo;
+          searchBoxLogo.style.display = 'block';
+          searchBox.classList.add('has-logo');
+        } else {
+          searchBoxLogo.src = '';
+          searchBoxLogo.style.display = 'none';
+          searchBox.classList.remove('has-logo');
+        }
+      }
+
       function filter() {
         const q = input.value.trim().toLowerCase();
         clearBtn.style.display = q ? 'block' : 'none';
+
+        setSearchLogo(input.value.trim());
 
         const allMatches = document.querySelectorAll('.match');
         allMatches.forEach(function(el) {
@@ -1119,9 +1170,6 @@
         }
       }
 
-      const suggestBox = document.getElementById('searchSuggestions');
-      const allTeams = [{"name": "Акрон", "logo": "logo/akron.svg"}, {"name": "Ахмат", "logo": "logo/akhmat.svg"}, {"name": "Балтика", "logo": "logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "logo/zenit.svg"}, {"name": "Краснодар", "logo": "logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "logo/orenburg.svg"}, {"name": "Родина", "logo": "logo/rodina.svg"}, {"name": "Ростов", "logo": "logo/rostov.svg"}, {"name": "Рубин", "logo": "logo/rubin.svg"}, {"name": "Спартак", "logo": "logo/spartak.svg"}, {"name": "Факел", "logo": "logo/fakel.svg"}, {"name": "ЦСКА", "logo": "logo/cska.svg"}];
-
       function showSuggestions(query) {
         if (!query) {
           suggestBox.classList.remove('active');
@@ -1151,9 +1199,11 @@
 
         suggestBox.querySelectorAll('.search-suggestion').forEach(function(el) {
           el.addEventListener('click', function() {
-            input.value = el.getAttribute('data-team');
+            const teamName = el.getAttribute('data-team');
+            input.value = teamName;
             suggestBox.classList.remove('active');
             suggestBox.innerHTML = '';
+            setSearchLogo(teamName);
             filter();
           });
         });
@@ -1174,14 +1224,16 @@
         input.value = '';
         suggestBox.classList.remove('active');
         suggestBox.innerHTML = '';
+        setSearchLogo('');
         filter();
         input.focus();
       });
 
       const params = new URLSearchParams(window.location.search);
-      const team = params.get('team');
-      if (team) {
-        input.value = team;
+      const teamParam = params.get('team');
+      if (teamParam) {
+        input.value = teamParam;
+        setSearchLogo(teamParam);
         filter();
       }
     })();
