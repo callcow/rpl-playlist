@@ -237,7 +237,7 @@
   .cal-tour-group {
     margin-bottom: 18px;
   }
-  .cal-tour-title {
+    .cal-tour-title {
     font-size: 12px;
     font-weight: 900;
     color: var(--neon-3);
@@ -245,10 +245,31 @@
     letter-spacing: 1.5px;
     padding: 6px 12px;
     margin-bottom: 10px;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     background: rgba(168, 85, 247, 0.08);
     border: 1px solid rgba(168, 85, 247, 0.3);
     border-radius: 8px;
+  }
+  .cal-tour-title.cal-tour-future {
+    background: rgba(0, 255, 213, 0.1);
+    border-color: rgba(0, 255, 213, 0.4);
+    color: var(--neon);
+  }
+  .cal-tour-title.cal-tour-past {
+    background: rgba(100, 116, 139, 0.08);
+    border-color: rgba(100, 116, 139, 0.3);
+    color: var(--text-dim);
+  }
+  .cal-tour-status {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    text-transform: none;
   }
   .cal-month { margin-bottom: 24px; }
   .cal-month-title {
@@ -350,7 +371,7 @@
     <div class="cal-month">
         <div class="cal-month-title">Октябрь</div>
         <div class="cal-tour-group">
-            <div class="cal-tour-title">10-ый тур</div>
+            <div class="cal-tour-title cal-tour-future">10-ый тур <span class="cal-tour-status">🔥 Скоро</span></div>
             <div class="cal-match">
                 <div class="cal-date">
                   <div class="cal-day">09</div>
@@ -454,7 +475,7 @@
 <div class="cal-month">
         <div class="cal-month-title">Сентябрь</div>
         <div class="cal-tour-group">
-            <div class="cal-tour-title">9-ый тур</div>
+            <div class="cal-tour-title cal-tour-past">9-ый тур <span class="cal-tour-status">✓ Прошедший</span></div>
             <div class="cal-match">
                 <div class="cal-date">
                   <div class="cal-day">16</div>
@@ -554,7 +575,7 @@
 
           </div>
 <div class="cal-tour-group">
-            <div class="cal-tour-title">8-ой тур</div>
+            <div class="cal-tour-title cal-tour-past">8-ой тур <span class="cal-tour-status">✓ Прошедший</span></div>
             <div class="cal-match">
                 <div class="cal-date">
                   <div class="cal-day">11</div>
@@ -659,7 +680,7 @@
 
 
     <div class="footer">
-      Обновлено <span class="neon">04.10.2026 16:44 МСК</span><br>
+      Обновлено <span class="neon">04.10.2026 17:05 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
   </div>
