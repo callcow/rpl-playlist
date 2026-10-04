@@ -199,7 +199,26 @@
   .match-month { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; }
   .match-time { font-size: 13px; font-weight: 800; color: var(--text); margin-top: 4px; }
   .match-teams { display: flex; flex-direction: column; gap: 4px; min-width: 0; position: relative; z-index: 1; }
-  .team { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .team {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  a.team:hover {
+    color: var(--neon);
+  }
+  a.team:hover .team-logo {
+    border-color: var(--neon);
+    background: rgba(0, 255, 213, 0.08);
+  }
   .team-logo {
     width: 30px; height: 30px; border-radius: 7px;
     background: rgba(128, 128, 128, 0.08); border: 1px solid var(--border);
@@ -373,7 +392,20 @@
   .cal-month-short { font-size: 9px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
   .cal-time { font-size: 13px; font-weight: 800; color: var(--text); text-align: center; }
   .cal-teams { display: flex; align-items: center; gap: 8px; font-weight: 700; min-width: 0; }
-  .cal-team { display: flex; align-items: center; gap: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cal-team {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.15s;
+  }
+  a.cal-team:hover {
+    color: var(--neon);
+  }
   .cal-team .team-logo { width: 22px; height: 22px; padding: 2px; }
   .cal-sep { color: var(--text-dim); }
 
@@ -461,8 +493,8 @@
           <div class="match-time">19:30</div>
         </div>
         <div class="match-teams">
-          <div class="team"><span class="team-logo"><img src="../logo/rostov.svg" alt="Ростов"></span>Ростов</div>
-          <div class="team"><span class="team-logo"><img src="../logo/akron.svg" alt="Акрон"></span>Акрон</div>
+          <a class="team" href="../index.html?team=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="../logo/rostov.svg" alt="Ростов"></span>Ростов</a>
+          <a class="team" href="../index.html?team=%D0%90%D0%BA%D1%80%D0%BE%D0%BD"><span class="team-logo"><img src="../logo/akron.svg" alt="Акрон"></span>Акрон</a>
           <div class="quality-row">
             <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/1080p50fps/c494c901b19a32b06c7467cc4095f23a/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/720/c494c901b19a32b06c7467cc4095f23a/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/480/c494c901b19a32b06c7467cc4095f23a/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/360/c494c901b19a32b06c7467cc4095f23a/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">360</a>
           </div>
@@ -483,8 +515,8 @@
           <div class="match-time">13:00</div>
         </div>
         <div class="match-teams">
-          <div class="team"><span class="team-logo"><img src="../logo/orenburg.svg" alt="Оренбург"></span>Оренбург</div>
-          <div class="team"><span class="team-logo"><img src="../logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></span>Динамо Махачкала</div>
+          <a class="team" href="../index.html?team=%D0%9E%D1%80%D0%B5%D0%BD%D0%B1%D1%83%D1%80%D0%B3"><span class="team-logo"><img src="../logo/orenburg.svg" alt="Оренбург"></span>Оренбург</a>
+          <a class="team" href="../index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%B0%D1%85%D0%B0%D1%87%D0%BA%D0%B0%D0%BB%D0%B0"><span class="team-logo"><img src="../logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></span>Динамо Махачкала</a>
           <div class="quality-row">
             <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/1080p50fps/93606a4a45b99b4bc0f3c437c444e295/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/720/93606a4a45b99b4bc0f3c437c444e295/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/480/93606a4a45b99b4bc0f3c437c444e295/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/360/93606a4a45b99b4bc0f3c437c444e295/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">360</a>
           </div>
@@ -505,8 +537,8 @@
           <div class="match-time">15:15</div>
         </div>
         <div class="match-teams">
-          <div class="team"><span class="team-logo"><img src="../logo/fakel.svg" alt="Факел"></span>Факел</div>
-          <div class="team"><span class="team-logo"><img src="../logo/lokomotiv.svg" alt="Локомотив"></span>Локомотив</div>
+          <a class="team" href="../index.html?team=%D0%A4%D0%B0%D0%BA%D0%B5%D0%BB"><span class="team-logo"><img src="../logo/fakel.svg" alt="Факел"></span>Факел</a>
+          <a class="team" href="../index.html?team=%D0%9B%D0%BE%D0%BA%D0%BE%D0%BC%D0%BE%D1%82%D0%B8%D0%B2"><span class="team-logo"><img src="../logo/lokomotiv.svg" alt="Локомотив"></span>Локомотив</a>
           <div class="quality-row">
             <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/1080p50fps/845ee3ffbbe1bb66f9b6282f22d2ca8d/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/720/845ee3ffbbe1bb66f9b6282f22d2ca8d/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/480/845ee3ffbbe1bb66f9b6282f22d2ca8d/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/360/845ee3ffbbe1bb66f9b6282f22d2ca8d/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">360</a>
           </div>
@@ -527,8 +559,8 @@
           <div class="match-time">17:30</div>
         </div>
         <div class="match-teams">
-          <div class="team"><span class="team-logo"><img src="../logo/krylyasovetov.svg" alt="Крылья Советов"></span>Крылья Советов</div>
-          <div class="team"><span class="team-logo"><img src="../logo/spartak.svg" alt="Спартак"></span>Спартак</div>
+          <a class="team" href="../index.html?team=%D0%9A%D1%80%D1%8B%D0%BB%D1%8C%D1%8F%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="../logo/krylyasovetov.svg" alt="Крылья Советов"></span>Крылья Советов</a>
+          <a class="team" href="../index.html?team=%D0%A1%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BA"><span class="team-logo"><img src="../logo/spartak.svg" alt="Спартак"></span>Спартак</a>
           <div class="quality-row">
             <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/1080p50fps/916fa41e8109003c37631e665294a5ed/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/720/916fa41e8109003c37631e665294a5ed/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/480/916fa41e8109003c37631e665294a5ed/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/360/916fa41e8109003c37631e665294a5ed/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">360</a>
           </div>
@@ -549,8 +581,8 @@
           <div class="match-time">19:30</div>
         </div>
         <div class="match-teams">
-          <div class="team"><span class="team-logo"><img src="../logo/krasnodar.svg" alt="Краснодар"></span>Краснодар</div>
-          <div class="team"><span class="team-logo"><img src="../logo/zenit.svg" alt="Зенит"></span>Зенит</div>
+          <a class="team" href="../index.html?team=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80"><span class="team-logo"><img src="../logo/krasnodar.svg" alt="Краснодар"></span>Краснодар</a>
+          <a class="team" href="../index.html?team=%D0%97%D0%B5%D0%BD%D0%B8%D1%82"><span class="team-logo"><img src="../logo/zenit.svg" alt="Зенит"></span>Зенит</a>
           <div class="quality-row">
             <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/1080p50fps/c0bbd9ba104f5cc894a6023e00267c77/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/720/c0bbd9ba104f5cc894a6023e00267c77/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/480/c0bbd9ba104f5cc894a6023e00267c77/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/360/c0bbd9ba104f5cc894a6023e00267c77/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">360</a>
           </div>
@@ -571,8 +603,8 @@
           <div class="match-time">14:00</div>
         </div>
         <div class="match-teams">
-          <div class="team"><span class="team-logo"><img src="../logo/akhmat.svg" alt="Ахмат"></span>Ахмат</div>
-          <div class="team"><span class="team-logo"><img src="../logo/baltika.svg" alt="Балтика"></span>Балтика</div>
+          <a class="team" href="../index.html?team=%D0%90%D1%85%D0%BC%D0%B0%D1%82"><span class="team-logo"><img src="../logo/akhmat.svg" alt="Ахмат"></span>Ахмат</a>
+          <a class="team" href="../index.html?team=%D0%91%D0%B0%D0%BB%D1%82%D0%B8%D0%BA%D0%B0"><span class="team-logo"><img src="../logo/baltika.svg" alt="Балтика"></span>Балтика</a>
           <div class="quality-row">
             <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/1080p50fps/b806820b26cbc37539d4826b945b0456/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/720/b806820b26cbc37539d4826b945b0456/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/480/b806820b26cbc37539d4826b945b0456/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/360/b806820b26cbc37539d4826b945b0456/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">360</a>
           </div>
@@ -593,8 +625,8 @@
           <div class="match-time">16:30</div>
         </div>
         <div class="match-teams">
-          <div class="team"><span class="team-logo"><img src="../logo/cska.svg" alt="ЦСКА"></span>ЦСКА</div>
-          <div class="team"><span class="team-logo"><img src="../logo/rodina.svg" alt="Родина"></span>Родина</div>
+          <a class="team" href="../index.html?team=%D0%A6%D0%A1%D0%9A%D0%90"><span class="team-logo"><img src="../logo/cska.svg" alt="ЦСКА"></span>ЦСКА</a>
+          <a class="team" href="../index.html?team=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BD%D0%B0"><span class="team-logo"><img src="../logo/rodina.svg" alt="Родина"></span>Родина</a>
           <div class="quality-row">
             <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/2160/96b08df7ea0aa10f2c0f083199065954/4946797802.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=9f4697c7afb3a30fb6a68d4595080646" target="_blank">2160</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/1080/96b08df7ea0aa10f2c0f083199065954/4946797802.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=9f4697c7afb3a30fb6a68d4595080646" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/720/96b08df7ea0aa10f2c0f083199065954/4946797802.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=9f4697c7afb3a30fb6a68d4595080646" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/480/96b08df7ea0aa10f2c0f083199065954/4946797802.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=9f4697c7afb3a30fb6a68d4595080646" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/360/96b08df7ea0aa10f2c0f083199065954/4946797802.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=9f4697c7afb3a30fb6a68d4595080646" target="_blank">360</a>
           </div>
@@ -615,8 +647,8 @@
           <div class="match-time">19:30</div>
         </div>
         <div class="match-teams">
-          <div class="team"><span class="team-logo"><img src="../logo/rubin.svg" alt="Рубин"></span>Рубин</div>
-          <div class="team"><span class="team-logo"><img src="../logo/dynamomoscov.svg" alt="Динамо Москва"></span>Динамо Москва</div>
+          <a class="team" href="../index.html?team=%D0%A0%D1%83%D0%B1%D0%B8%D0%BD"><span class="team-logo"><img src="../logo/rubin.svg" alt="Рубин"></span>Рубин</a>
+          <a class="team" href="../index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"><span class="team-logo"><img src="../logo/dynamomoscov.svg" alt="Динамо Москва"></span>Динамо Москва</a>
           <div class="quality-row">
             <a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/1080p50fps/902df68ad5fdaba76b45ef8a60c177ec/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/720/902df68ad5fdaba76b45ef8a60c177ec/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/480/902df68ad5fdaba76b45ef8a60c177ec/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/360/902df68ad5fdaba76b45ef8a60c177ec/4946797801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=14ec6861d0170072f44b137da307cbe6" target="_blank">360</a>
           </div>
@@ -659,12 +691,16 @@
         <span>10-ый тур</span>
         <span class="arrow">→</span>
       </a>
+<a class="tour-card" href="../tours/%D0%9F%D0%BB%D0%B5%D0%B9%D0%BB%D0%B8%D1%81%D1%82.html">
+        <span>Плейлист</span>
+        <span class="arrow">→</span>
+      </a>
 
     </div>
 
 
     <div class="footer">
-      Обновлено <span class="neon">04.10.2026 17:40 МСК</span><br>
+      Обновлено <span class="neon">04.10.2026 17:57 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
   </div>

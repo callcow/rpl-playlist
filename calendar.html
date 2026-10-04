@@ -199,7 +199,26 @@
   .match-month { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; }
   .match-time { font-size: 13px; font-weight: 800; color: var(--text); margin-top: 4px; }
   .match-teams { display: flex; flex-direction: column; gap: 4px; min-width: 0; position: relative; z-index: 1; }
-  .team { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .team {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  a.team:hover {
+    color: var(--neon);
+  }
+  a.team:hover .team-logo {
+    border-color: var(--neon);
+    background: rgba(0, 255, 213, 0.08);
+  }
   .team-logo {
     width: 30px; height: 30px; border-radius: 7px;
     background: rgba(128, 128, 128, 0.08); border: 1px solid var(--border);
@@ -373,7 +392,20 @@
   .cal-month-short { font-size: 9px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
   .cal-time { font-size: 13px; font-weight: 800; color: var(--text); text-align: center; }
   .cal-teams { display: flex; align-items: center; gap: 8px; font-weight: 700; min-width: 0; }
-  .cal-team { display: flex; align-items: center; gap: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cal-team {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.15s;
+  }
+  a.cal-team:hover {
+    color: var(--neon);
+  }
   .cal-team .team-logo { width: 22px; height: 22px; padding: 2px; }
   .cal-sep { color: var(--text-dim); }
 
@@ -426,7 +458,7 @@
       </a>
       <div style="display:flex;align-items:center;gap:10px;">
         <div class="tour-badge">
-          <div class="tour-badge-value">10 ТУР</div>
+          <div class="tour-badge-value">— ТУР</div>
         </div>
         <button class="theme-toggle" id="themeToggle">🌙</button>
       </div>
@@ -446,7 +478,7 @@
     <div class="cal-month">
         <div class="cal-month-title">Октябрь</div>
         <div class="cal-tour-group">
-            <div class="cal-tour-title cal-tour-future">10-ый тур <span class="cal-tour-status">Идёт</span></div>
+            <div class="cal-tour-title cal-tour-past">10-ый тур <span class="cal-tour-status">Завершён</span></div>
             <div class="cal-match">
                 <div class="cal-date">
                   <div class="cal-day">09</div>
@@ -454,9 +486,9 @@
                 </div>
                 <div class="cal-time">19:30</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/rostov.svg" alt="Ростов"></span>Ростов</span>
+                  <a class="cal-team" href="index.html?team=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="logo/rostov.svg" alt="Ростов"></span>Ростов</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/akron.svg" alt="Акрон"></span>Акрон</span>
+                  <a class="cal-team" href="index.html?team=%D0%90%D0%BA%D1%80%D0%BE%D0%BD"><span class="team-logo"><img src="logo/akron.svg" alt="Акрон"></span>Акрон</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -466,9 +498,9 @@
                 </div>
                 <div class="cal-time">13:00</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/orenburg.svg" alt="Оренбург"></span>Оренбург</span>
+                  <a class="cal-team" href="index.html?team=%D0%9E%D1%80%D0%B5%D0%BD%D0%B1%D1%83%D1%80%D0%B3"><span class="team-logo"><img src="logo/orenburg.svg" alt="Оренбург"></span>Оренбург</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></span>Динамо Махачкала</span>
+                  <a class="cal-team" href="index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%B0%D1%85%D0%B0%D1%87%D0%BA%D0%B0%D0%BB%D0%B0"><span class="team-logo"><img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></span>Динамо Махачкала</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -478,9 +510,9 @@
                 </div>
                 <div class="cal-time">15:15</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/fakel.svg" alt="Факел"></span>Факел</span>
+                  <a class="cal-team" href="index.html?team=%D0%A4%D0%B0%D0%BA%D0%B5%D0%BB"><span class="team-logo"><img src="logo/fakel.svg" alt="Факел"></span>Факел</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/lokomotiv.svg" alt="Локомотив"></span>Локомотив</span>
+                  <a class="cal-team" href="index.html?team=%D0%9B%D0%BE%D0%BA%D0%BE%D0%BC%D0%BE%D1%82%D0%B8%D0%B2"><span class="team-logo"><img src="logo/lokomotiv.svg" alt="Локомотив"></span>Локомотив</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -490,9 +522,9 @@
                 </div>
                 <div class="cal-time">17:30</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></span>Крылья Советов</span>
+                  <a class="cal-team" href="index.html?team=%D0%9A%D1%80%D1%8B%D0%BB%D1%8C%D1%8F%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></span>Крылья Советов</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/spartak.svg" alt="Спартак"></span>Спартак</span>
+                  <a class="cal-team" href="index.html?team=%D0%A1%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BA"><span class="team-logo"><img src="logo/spartak.svg" alt="Спартак"></span>Спартак</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -502,9 +534,9 @@
                 </div>
                 <div class="cal-time">19:30</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/krasnodar.svg" alt="Краснодар"></span>Краснодар</span>
+                  <a class="cal-team" href="index.html?team=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80"><span class="team-logo"><img src="logo/krasnodar.svg" alt="Краснодар"></span>Краснодар</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/zenit.svg" alt="Зенит"></span>Зенит</span>
+                  <a class="cal-team" href="index.html?team=%D0%97%D0%B5%D0%BD%D0%B8%D1%82"><span class="team-logo"><img src="logo/zenit.svg" alt="Зенит"></span>Зенит</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -514,9 +546,9 @@
                 </div>
                 <div class="cal-time">14:00</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/akhmat.svg" alt="Ахмат"></span>Ахмат</span>
+                  <a class="cal-team" href="index.html?team=%D0%90%D1%85%D0%BC%D0%B0%D1%82"><span class="team-logo"><img src="logo/akhmat.svg" alt="Ахмат"></span>Ахмат</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/baltika.svg" alt="Балтика"></span>Балтика</span>
+                  <a class="cal-team" href="index.html?team=%D0%91%D0%B0%D0%BB%D1%82%D0%B8%D0%BA%D0%B0"><span class="team-logo"><img src="logo/baltika.svg" alt="Балтика"></span>Балтика</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -526,9 +558,9 @@
                 </div>
                 <div class="cal-time">16:30</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/cska.svg" alt="ЦСКА"></span>ЦСКА</span>
+                  <a class="cal-team" href="index.html?team=%D0%A6%D0%A1%D0%9A%D0%90"><span class="team-logo"><img src="logo/cska.svg" alt="ЦСКА"></span>ЦСКА</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/rodina.svg" alt="Родина"></span>Родина</span>
+                  <a class="cal-team" href="index.html?team=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BD%D0%B0"><span class="team-logo"><img src="logo/rodina.svg" alt="Родина"></span>Родина</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -538,9 +570,109 @@
                 </div>
                 <div class="cal-time">19:30</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/rubin.svg" alt="Рубин"></span>Рубин</span>
+                  <a class="cal-team" href="index.html?team=%D0%A0%D1%83%D0%B1%D0%B8%D0%BD"><span class="team-logo"><img src="logo/rubin.svg" alt="Рубин"></span>Рубин</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></span>Динамо Москва</span>
+                  <a class="cal-team" href="index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"><span class="team-logo"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></span>Динамо Москва</a>
+                </div>
+              </div>
+
+          </div>
+<div class="cal-tour-group">
+            <div class="cal-tour-title cal-tour-past">Плейлист <span class="cal-tour-status">Завершён</span></div>
+            <div class="cal-match">
+                <div class="cal-date">
+                  <div class="cal-day">09</div>
+                  <div class="cal-month-short">окт</div>
+                </div>
+                <div class="cal-time">19:30</div>
+                <div class="cal-teams">
+                  <a class="cal-team" href="index.html?team=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="logo/rostov.svg" alt="Ростов"></span>Ростов</a>
+                  <span class="cal-sep">—</span>
+                  <a class="cal-team" href="index.html?team=%D0%90%D0%BA%D1%80%D0%BE%D0%BD"><span class="team-logo"><img src="logo/akron.svg" alt="Акрон"></span>Акрон</a>
+                </div>
+              </div>
+<div class="cal-match">
+                <div class="cal-date">
+                  <div class="cal-day">10</div>
+                  <div class="cal-month-short">окт</div>
+                </div>
+                <div class="cal-time">13:00</div>
+                <div class="cal-teams">
+                  <a class="cal-team" href="index.html?team=%D0%9E%D1%80%D0%B5%D0%BD%D0%B1%D1%83%D1%80%D0%B3"><span class="team-logo"><img src="logo/orenburg.svg" alt="Оренбург"></span>Оренбург</a>
+                  <span class="cal-sep">—</span>
+                  <a class="cal-team" href="index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%B0%D1%85%D0%B0%D1%87%D0%BA%D0%B0%D0%BB%D0%B0"><span class="team-logo"><img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></span>Динамо Махачкала</a>
+                </div>
+              </div>
+<div class="cal-match">
+                <div class="cal-date">
+                  <div class="cal-day">10</div>
+                  <div class="cal-month-short">окт</div>
+                </div>
+                <div class="cal-time">15:15</div>
+                <div class="cal-teams">
+                  <a class="cal-team" href="index.html?team=%D0%A4%D0%B0%D0%BA%D0%B5%D0%BB"><span class="team-logo"><img src="logo/fakel.svg" alt="Факел"></span>Факел</a>
+                  <span class="cal-sep">—</span>
+                  <a class="cal-team" href="index.html?team=%D0%9B%D0%BE%D0%BA%D0%BE%D0%BC%D0%BE%D1%82%D0%B8%D0%B2"><span class="team-logo"><img src="logo/lokomotiv.svg" alt="Локомотив"></span>Локомотив</a>
+                </div>
+              </div>
+<div class="cal-match">
+                <div class="cal-date">
+                  <div class="cal-day">10</div>
+                  <div class="cal-month-short">окт</div>
+                </div>
+                <div class="cal-time">17:30</div>
+                <div class="cal-teams">
+                  <a class="cal-team" href="index.html?team=%D0%9A%D1%80%D1%8B%D0%BB%D1%8C%D1%8F%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></span>Крылья Советов</a>
+                  <span class="cal-sep">—</span>
+                  <a class="cal-team" href="index.html?team=%D0%A1%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BA"><span class="team-logo"><img src="logo/spartak.svg" alt="Спартак"></span>Спартак</a>
+                </div>
+              </div>
+<div class="cal-match">
+                <div class="cal-date">
+                  <div class="cal-day">10</div>
+                  <div class="cal-month-short">окт</div>
+                </div>
+                <div class="cal-time">19:30</div>
+                <div class="cal-teams">
+                  <a class="cal-team" href="index.html?team=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80"><span class="team-logo"><img src="logo/krasnodar.svg" alt="Краснодар"></span>Краснодар</a>
+                  <span class="cal-sep">—</span>
+                  <a class="cal-team" href="index.html?team=%D0%97%D0%B5%D0%BD%D0%B8%D1%82"><span class="team-logo"><img src="logo/zenit.svg" alt="Зенит"></span>Зенит</a>
+                </div>
+              </div>
+<div class="cal-match">
+                <div class="cal-date">
+                  <div class="cal-day">11</div>
+                  <div class="cal-month-short">окт</div>
+                </div>
+                <div class="cal-time">14:00</div>
+                <div class="cal-teams">
+                  <a class="cal-team" href="index.html?team=%D0%90%D1%85%D0%BC%D0%B0%D1%82"><span class="team-logo"><img src="logo/akhmat.svg" alt="Ахмат"></span>Ахмат</a>
+                  <span class="cal-sep">—</span>
+                  <a class="cal-team" href="index.html?team=%D0%91%D0%B0%D0%BB%D1%82%D0%B8%D0%BA%D0%B0"><span class="team-logo"><img src="logo/baltika.svg" alt="Балтика"></span>Балтика</a>
+                </div>
+              </div>
+<div class="cal-match">
+                <div class="cal-date">
+                  <div class="cal-day">11</div>
+                  <div class="cal-month-short">окт</div>
+                </div>
+                <div class="cal-time">16:30</div>
+                <div class="cal-teams">
+                  <a class="cal-team" href="index.html?team=%D0%A6%D0%A1%D0%9A%D0%90"><span class="team-logo"><img src="logo/cska.svg" alt="ЦСКА"></span>ЦСКА</a>
+                  <span class="cal-sep">—</span>
+                  <a class="cal-team" href="index.html?team=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BD%D0%B0"><span class="team-logo"><img src="logo/rodina.svg" alt="Родина"></span>Родина</a>
+                </div>
+              </div>
+<div class="cal-match">
+                <div class="cal-date">
+                  <div class="cal-day">11</div>
+                  <div class="cal-month-short">окт</div>
+                </div>
+                <div class="cal-time">19:30</div>
+                <div class="cal-teams">
+                  <a class="cal-team" href="index.html?team=%D0%A0%D1%83%D0%B1%D0%B8%D0%BD"><span class="team-logo"><img src="logo/rubin.svg" alt="Рубин"></span>Рубин</a>
+                  <span class="cal-sep">—</span>
+                  <a class="cal-team" href="index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"><span class="team-logo"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></span>Динамо Москва</a>
                 </div>
               </div>
 
@@ -558,9 +690,9 @@
                 </div>
                 <div class="cal-time">18:30</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/spartak.svg" alt="Спартак"></span>Спартак</span>
+                  <a class="cal-team" href="index.html?team=%D0%A1%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BA"><span class="team-logo"><img src="logo/spartak.svg" alt="Спартак"></span>Спартак</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/fakel.svg" alt="Факел"></span>Факел</span>
+                  <a class="cal-team" href="index.html?team=%D0%A4%D0%B0%D0%BA%D0%B5%D0%BB"><span class="team-logo"><img src="logo/fakel.svg" alt="Факел"></span>Факел</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -570,9 +702,9 @@
                 </div>
                 <div class="cal-time">18:30</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/rodina.svg" alt="Родина"></span>Родина</span>
+                  <a class="cal-team" href="index.html?team=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BD%D0%B0"><span class="team-logo"><img src="logo/rodina.svg" alt="Родина"></span>Родина</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/rubin.svg" alt="Рубин"></span>Рубин</span>
+                  <a class="cal-team" href="index.html?team=%D0%A0%D1%83%D0%B1%D0%B8%D0%BD"><span class="team-logo"><img src="logo/rubin.svg" alt="Рубин"></span>Рубин</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -582,9 +714,9 @@
                 </div>
                 <div class="cal-time">20:45</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/baltika.svg" alt="Балтика"></span>Балтика</span>
+                  <a class="cal-team" href="index.html?team=%D0%91%D0%B0%D0%BB%D1%82%D0%B8%D0%BA%D0%B0"><span class="team-logo"><img src="logo/baltika.svg" alt="Балтика"></span>Балтика</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/zenit.svg" alt="Зенит"></span>Зенит</span>
+                  <a class="cal-team" href="index.html?team=%D0%97%D0%B5%D0%BD%D0%B8%D1%82"><span class="team-logo"><img src="logo/zenit.svg" alt="Зенит"></span>Зенит</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -594,9 +726,9 @@
                 </div>
                 <div class="cal-time">20:45</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/lokomotiv.svg" alt="Локомотив"></span>Локомотив</span>
+                  <a class="cal-team" href="index.html?team=%D0%9B%D0%BE%D0%BA%D0%BE%D0%BC%D0%BE%D1%82%D0%B8%D0%B2"><span class="team-logo"><img src="logo/lokomotiv.svg" alt="Локомотив"></span>Локомотив</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></span>Крылья Советов</span>
+                  <a class="cal-team" href="index.html?team=%D0%9A%D1%80%D1%8B%D0%BB%D1%8C%D1%8F%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></span>Крылья Советов</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -606,9 +738,9 @@
                 </div>
                 <div class="cal-time">16:15</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/orenburg.svg" alt="Оренбург"></span>Оренбург</span>
+                  <a class="cal-team" href="index.html?team=%D0%9E%D1%80%D0%B5%D0%BD%D0%B1%D1%83%D1%80%D0%B3"><span class="team-logo"><img src="logo/orenburg.svg" alt="Оренбург"></span>Оренбург</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/krasnodar.svg" alt="Краснодар"></span>Краснодар</span>
+                  <a class="cal-team" href="index.html?team=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80"><span class="team-logo"><img src="logo/krasnodar.svg" alt="Краснодар"></span>Краснодар</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -618,9 +750,9 @@
                 </div>
                 <div class="cal-time">18:30</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/rostov.svg" alt="Ростов"></span>Ростов</span>
+                  <a class="cal-team" href="index.html?team=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="logo/rostov.svg" alt="Ростов"></span>Ростов</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></span>Динамо Москва</span>
+                  <a class="cal-team" href="index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"><span class="team-logo"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></span>Динамо Москва</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -630,9 +762,9 @@
                 </div>
                 <div class="cal-time">18:30</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/akron.svg" alt="Акрон"></span>Акрон</span>
+                  <a class="cal-team" href="index.html?team=%D0%90%D0%BA%D1%80%D0%BE%D0%BD"><span class="team-logo"><img src="logo/akron.svg" alt="Акрон"></span>Акрон</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/akhmat.svg" alt="Ахмат"></span>Ахмат</span>
+                  <a class="cal-team" href="index.html?team=%D0%90%D1%85%D0%BC%D0%B0%D1%82"><span class="team-logo"><img src="logo/akhmat.svg" alt="Ахмат"></span>Ахмат</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -642,9 +774,9 @@
                 </div>
                 <div class="cal-time">20:45</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></span>Динамо Махачкала</span>
+                  <a class="cal-team" href="index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%B0%D1%85%D0%B0%D1%87%D0%BA%D0%B0%D0%BB%D0%B0"><span class="team-logo"><img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></span>Динамо Махачкала</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/cska.svg" alt="ЦСКА"></span>ЦСКА</span>
+                  <a class="cal-team" href="index.html?team=%D0%A6%D0%A1%D0%9A%D0%90"><span class="team-logo"><img src="logo/cska.svg" alt="ЦСКА"></span>ЦСКА</a>
                 </div>
               </div>
 
@@ -658,9 +790,9 @@
                 </div>
                 <div class="cal-time">18:00</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></span>Крылья Советов</span>
+                  <a class="cal-team" href="index.html?team=%D0%9A%D1%80%D1%8B%D0%BB%D1%8C%D1%8F%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></span>Крылья Советов</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/rodina.svg" alt="Родина"></span>Родина</span>
+                  <a class="cal-team" href="index.html?team=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BD%D0%B0"><span class="team-logo"><img src="logo/rodina.svg" alt="Родина"></span>Родина</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -670,9 +802,9 @@
                 </div>
                 <div class="cal-time">14:00</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/fakel.svg" alt="Факел"></span>Факел</span>
+                  <a class="cal-team" href="index.html?team=%D0%A4%D0%B0%D0%BA%D0%B5%D0%BB"><span class="team-logo"><img src="logo/fakel.svg" alt="Факел"></span>Факел</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/baltika.svg" alt="Балтика"></span>Балтика</span>
+                  <a class="cal-team" href="index.html?team=%D0%91%D0%B0%D0%BB%D1%82%D0%B8%D0%BA%D0%B0"><span class="team-logo"><img src="logo/baltika.svg" alt="Балтика"></span>Балтика</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -682,9 +814,9 @@
                 </div>
                 <div class="cal-time">16:15</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/zenit.svg" alt="Зенит"></span>Зенит</span>
+                  <a class="cal-team" href="index.html?team=%D0%97%D0%B5%D0%BD%D0%B8%D1%82"><span class="team-logo"><img src="logo/zenit.svg" alt="Зенит"></span>Зенит</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/lokomotiv.svg" alt="Локомотив"></span>Локомотив</span>
+                  <a class="cal-team" href="index.html?team=%D0%9B%D0%BE%D0%BA%D0%BE%D0%BC%D0%BE%D1%82%D0%B8%D0%B2"><span class="team-logo"><img src="logo/lokomotiv.svg" alt="Локомотив"></span>Локомотив</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -694,9 +826,9 @@
                 </div>
                 <div class="cal-time">18:30</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></span>Динамо Москва</span>
+                  <a class="cal-team" href="index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"><span class="team-logo"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></span>Динамо Москва</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/orenburg.svg" alt="Оренбург"></span>Оренбург</span>
+                  <a class="cal-team" href="index.html?team=%D0%9E%D1%80%D0%B5%D0%BD%D0%B1%D1%83%D1%80%D0%B3"><span class="team-logo"><img src="logo/orenburg.svg" alt="Оренбург"></span>Оренбург</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -706,9 +838,9 @@
                 </div>
                 <div class="cal-time">20:45</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/cska.svg" alt="ЦСКА"></span>ЦСКА</span>
+                  <a class="cal-team" href="index.html?team=%D0%A6%D0%A1%D0%9A%D0%90"><span class="team-logo"><img src="logo/cska.svg" alt="ЦСКА"></span>ЦСКА</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/rubin.svg" alt="Рубин"></span>Рубин</span>
+                  <a class="cal-team" href="index.html?team=%D0%A0%D1%83%D0%B1%D0%B8%D0%BD"><span class="team-logo"><img src="logo/rubin.svg" alt="Рубин"></span>Рубин</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -718,9 +850,9 @@
                 </div>
                 <div class="cal-time">14:30</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/akhmat.svg" alt="Ахмат"></span>Ахмат</span>
+                  <a class="cal-team" href="index.html?team=%D0%90%D1%85%D0%BC%D0%B0%D1%82"><span class="team-logo"><img src="logo/akhmat.svg" alt="Ахмат"></span>Ахмат</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></span>Динамо Махачкала</span>
+                  <a class="cal-team" href="index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%B0%D1%85%D0%B0%D1%87%D0%BA%D0%B0%D0%BB%D0%B0"><span class="team-logo"><img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></span>Динамо Махачкала</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -730,9 +862,9 @@
                 </div>
                 <div class="cal-time">17:00</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/spartak.svg" alt="Спартак"></span>Спартак</span>
+                  <a class="cal-team" href="index.html?team=%D0%A1%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BA"><span class="team-logo"><img src="logo/spartak.svg" alt="Спартак"></span>Спартак</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/rostov.svg" alt="Ростов"></span>Ростов</span>
+                  <a class="cal-team" href="index.html?team=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2"><span class="team-logo"><img src="logo/rostov.svg" alt="Ростов"></span>Ростов</a>
                 </div>
               </div>
 <div class="cal-match">
@@ -742,9 +874,9 @@
                 </div>
                 <div class="cal-time">19:30</div>
                 <div class="cal-teams">
-                  <span class="cal-team"><span class="team-logo"><img src="logo/krasnodar.svg" alt="Краснодар"></span>Краснодар</span>
+                  <a class="cal-team" href="index.html?team=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80"><span class="team-logo"><img src="logo/krasnodar.svg" alt="Краснодар"></span>Краснодар</a>
                   <span class="cal-sep">—</span>
-                  <span class="cal-team"><span class="team-logo"><img src="logo/akron.svg" alt="Акрон"></span>Акрон</span>
+                  <a class="cal-team" href="index.html?team=%D0%90%D0%BA%D1%80%D0%BE%D0%BD"><span class="team-logo"><img src="logo/akron.svg" alt="Акрон"></span>Акрон</a>
                 </div>
               </div>
 
@@ -755,7 +887,7 @@
 
 
     <div class="footer">
-      Обновлено <span class="neon">04.10.2026 17:40 МСК</span><br>
+      Обновлено <span class="neon">04.10.2026 17:57 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
   </div>
