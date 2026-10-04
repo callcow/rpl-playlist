@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>6-ой тур — РПЛ</title>
 <style>
+  @font-face {
+    font-family: 'RPL';
+    src: url('../fonts/rpl-regular.woff2') format('woff2'),
+         url('../fonts/rpl-regular.woff') format('woff'),
+         url('../fonts/rpl-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -35,7 +45,7 @@
     --neon: #00a896;
   }
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'RPL', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background:
       radial-gradient(circle at 0% 0%, var(--body-grad-1), transparent 40%),
       radial-gradient(circle at 100% 100%, var(--body-grad-2), transparent 40%),
@@ -740,7 +750,7 @@
 
 
     <div class="footer">
-      Обновлено <span class="neon">04.10.2026 20:33 МСК</span><br>
+      Обновлено <span class="neon">04.10.2026 20:57 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
   </div>
