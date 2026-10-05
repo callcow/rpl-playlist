@@ -328,10 +328,9 @@ body {
 .match-team:hover .team-logo { border-color: var(--neon); background: rgba(0, 255, 213, 0.08); }
 
 .team-name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   min-width: 0;
+  line-height: 1.15;
+  word-break: break-word;
 }
 
 .match-team.away .team-name { text-align: right; }
