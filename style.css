@@ -430,7 +430,7 @@ body {
 .tour-card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 8px;
   height: 56px;
   padding: 0 18px;
@@ -442,6 +442,17 @@ body {
   font-size: 14px;
   font-weight: 800;
   transition: background 0.25s, border-color 0.25s, color 0.25s;
+  position: relative;
+  text-align: center;
+}
+
+.tour-card .arrow {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--neon);
+  font-size: 14px;
 }
 
 .tour-card:hover { background: rgba(0, 255, 213, 0.1); border-color: var(--neon); color: var(--neon); }
