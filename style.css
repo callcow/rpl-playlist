@@ -812,13 +812,6 @@ a.cal-team:hover { color: var(--neon); }
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
-    padding: 6px;
-    overflow-x: visible;
-  }
-  .nav-tabs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
     padding: 4px;
     height: auto;
     overflow-x: visible;
