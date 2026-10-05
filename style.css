@@ -373,6 +373,7 @@ a.team:hover .team-logo { border-color: var(--neon); background: rgba(0, 255, 21
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
   gap: 12px;
   margin-top: 4px;
   padding-top: 8px;
@@ -397,15 +398,19 @@ a.team:hover .team-logo { border-color: var(--neon); background: rgba(0, 255, 21
 }
 
 .badge-4k {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(135deg, var(--neon-3), var(--neon-2));
   color: white;
-  padding: 3px 8px;
+  padding: 3px 10px;
   border-radius: 6px;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.5px;
   white-space: nowrap;
-  margin-top: 6px;
+  align-self: center;
+  margin-left: auto;
 }
 
 .play-icon {
@@ -416,13 +421,17 @@ a.team:hover .team-logo { border-color: var(--neon); background: rgba(0, 255, 21
 }
 
 .past-tour-badge {
-  font-size: 9px; font-weight: 900; letter-spacing: 0.5px;
-  padding: 3px 8px; background: rgba(168, 85, 247, 0.15);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px; font-weight: 900; letter-spacing: 0.5px;
+  padding: 3px 10px; background: rgba(168, 85, 247, 0.15);
   color: var(--neon-3); border: 1px solid rgba(168, 85, 247, 0.4);
   border-radius: 6px; text-transform: uppercase;
-  margin-top: 4px;
+  align-self: center;
   white-space: nowrap;
 }
+
 
 .past-match { opacity: 0.85; }
 
@@ -743,8 +752,8 @@ a.cal-team:hover { color: var(--neon); }
   .match-day { font-size: 26px; }
   .match-month { font-size: 9px; }
   .match-time { font-size: 11px; margin-top: 4px; }
-  .badge-4k { font-size: 8px; padding: 2px 6px; letter-spacing: 0.3px; margin-top: 5px; }
-  .past-tour-badge { font-size: 8px; padding: 2px 6px; letter-spacing: 0.3px; margin-top: 4px; }
+  .badge-4k { font-size: 9px; padding: 2px 8px; letter-spacing: 0.3px; }
+  .past-tour-badge { font-size: 9px; padding: 2px 8px; letter-spacing: 0.3px; }
   .team { font-size: 14px; gap: 8px; }
   .team-logo { width: 26px; height: 26px; padding: 2px; }
   .team-score { font-size: 16px; min-width: 24px; padding: 2px 6px; }
