@@ -83,13 +83,36 @@
     background: rgba(0, 255, 213, 0.1); border: 1px solid rgba(0, 255, 213, 0.3);
     color: var(--neon); font-size: 18px; cursor: pointer; flex-shrink: 0;
   }
+  .how-link {
+    color: var(--neon);
+    font-weight: 800;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .how-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
   .tour-badge {
-    display: flex; align-items: center; padding: 12px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 18px;
     background: linear-gradient(135deg, rgba(0, 255, 213, 0.1), rgba(168, 85, 247, 0.1));
-    border: 1px solid rgba(0, 255, 213, 0.4); border-radius: 12px;
+    border: 1px solid rgba(0, 255, 213, 0.4);
+    border-radius: 12px;
+    text-align: center;
   }
   .tour-badge-value { font-size: 26px; font-weight: 900; color: var(--text); letter-spacing: -1px; line-height: 1; }
-
+  .tour-badge-dates {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--neon);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 3px;
+    white-space: nowrap;
+  }
   .nav-tabs {
     display: flex; gap: 6px; margin-bottom: 24px;
     padding: 6px; background: var(--topbar-bg);
@@ -543,6 +566,7 @@
     .theme-toggle { width: 36px; height: 36px; font-size: 16px; }
     .tour-badge { padding: 8px 14px; }
     .tour-badge-value { font-size: 18px; }
+    .tour-badge-dates { font-size: 9px; letter-spacing: 0.5px; }
     .nav-tab { padding: 10px 8px; font-size: 12px; }
     .match { grid-template-columns: 55px 1fr auto; padding: 14px 14px; gap: 10px; }
     .match-day { font-size: 22px; }
@@ -611,6 +635,7 @@
       <div style="display:flex;align-items:center;gap:10px;">
         <div class="tour-badge">
           <div class="tour-badge-value">6 ТУР</div>
+          
         </div>
         <button class="theme-toggle" id="themeToggle">🌙</button>
       </div>
@@ -635,9 +660,9 @@
         <li>Откроется встроенный плеер браузера. Для комфортного просмотра включите функцию автоповорота экрана на своем устройстве</li>
         <li>Также вы можете смотреть записи прошедших матчей: Перейдите в <a href="../tours.html" class="how-link">Архив туров</a> — там собраны все прошедшие матчи. Выберите нужный тур, нажмите на качество и наслаждайтесь просмотром.</li>
         <li>Некоторые матчи доступны в <span class="badge-4k">4K UHD</span> — ищите фиолетовый флаг рядом со счётом в карточке матча.</li>
-        <li>Если не открывается — скопируй ссылку и вставь в <b>VLC</b>, <b>TiviMate</b> или другой IPTV-плеер</li>
+        <li>Если не открывается — скопируйте ссылку и вставьте в <b>VLC</b>, <b>TiviMate</b> или другой IPTV-плеер.</li>
       </ol>
-      <div class="how-hint">🔍 Найди свою команду через поиск ниже</div>
+      <div class="how-hint">🔍 Найди свою команду через поиск ниже и смотрите прямые трансляции и записи матчей любимой команды.</div>
     </div>
 
     <div class="search-box" id="searchBox">
@@ -649,7 +674,7 @@
 
     <div id="currentSection">
       <div class="section-head" id="currentHeaderDefault">
-        <div class="section-head-title">Результаты матчей</div>
+        <div class="section-head-title">Расписание матчей</div>
       </div>
       <div class="section-head" id="currentHeaderSearch" style="display:none;">
         <div class="section-head-title">Будущие матчи</div>
@@ -670,7 +695,7 @@
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Солидарность Самара Арена</div>
             <div class="venue-line"><span class="venue-label">📍 Город:</span> Тольятти</div>
-            <div class="venue-line"><span class="venue-label">👥 Посещаемость:</span> 4144</div>
+            
           </div>
         </div>
         <div class="match-right">
@@ -693,7 +718,7 @@
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Факел</div>
             <div class="venue-line"><span class="venue-label">📍 Город:</span> Воронеж</div>
-            <div class="venue-line"><span class="venue-label">👥 Посещаемость:</span> 10069</div>
+            
           </div>
         </div>
         <div class="match-right">
@@ -716,7 +741,7 @@
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Ozon Арена</div>
             <div class="venue-line"><span class="venue-label">📍 Город:</span> Краснодар</div>
-            <div class="venue-line"><span class="venue-label">👥 Посещаемость:</span> 33083</div>
+            
           </div>
         </div>
         <div class="match-right">
@@ -739,7 +764,7 @@
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> РЖД Арена</div>
             <div class="venue-line"><span class="venue-label">📍 Город:</span> Москва</div>
-            <div class="venue-line"><span class="venue-label">👥 Посещаемость:</span> 16154</div>
+            
           </div>
         </div>
         <div class="match-right">
@@ -762,7 +787,7 @@
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Ахмат Арена</div>
             <div class="venue-line"><span class="venue-label">📍 Город:</span> Грозный</div>
-            <div class="venue-line"><span class="venue-label">👥 Посещаемость:</span> 4124</div>
+            
           </div>
         </div>
         <div class="match-right">
@@ -785,7 +810,7 @@
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Арена Химки</div>
             <div class="venue-line"><span class="venue-label">📍 Город:</span> Москва</div>
-            <div class="venue-line"><span class="venue-label">👥 Посещаемость:</span> 4412</div>
+            
           </div>
         </div>
         <div class="match-right">
@@ -808,7 +833,7 @@
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Лукойл Арена</div>
             <div class="venue-line"><span class="venue-label">📍 Город:</span> Москва</div>
-            <div class="venue-line"><span class="venue-label">👥 Посещаемость:</span> 27651</div>
+            
           </div>
         </div>
         <div class="match-right">
@@ -831,7 +856,7 @@
           <div class="match-venue">
             <div class="venue-line"><span class="venue-label">🏟 Стадион:</span> Ак Барс Арена</div>
             <div class="venue-line"><span class="venue-label">📍 Город:</span> Казань</div>
-            <div class="venue-line"><span class="venue-label">👥 Посещаемость:</span> 10474</div>
+            
           </div>
         </div>
         <div class="match-right">
@@ -892,7 +917,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">05.10.2026 07:50 МСК</span><br>
+      Обновлено <span class="neon">05.10.2026 08:14 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
