@@ -809,7 +809,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">05.10.2026 20:56 МСК</span><br>
+      Обновлено <span class="neon">05.10.2026 21:05 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -965,6 +965,32 @@
         setSearchLogo(teamParam);
         filter();
       }
+    })();
+
+    // ===== Прокрутка якорного матча в центр экрана =====
+    (function() {
+      function scrollToAnchor() {
+        const hash = window.location.hash;
+        if (!hash) return;
+
+        const id = decodeURIComponent(hash.slice(1));
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        // Отключаем нативный скролл
+        const y = el.getBoundingClientRect().top + window.pageYOffset - (window.innerHeight / 2) + (el.offsetHeight / 2);
+        window.scrollTo({ top: y, behavior: 'auto' });
+      }
+
+      // Скроллим после загрузки DOM
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scrollToAnchor);
+      } else {
+        scrollToAnchor();
+      }
+
+      // Если перешли по якорю уже после загрузки (клик внутри страницы)
+      window.addEventListener('hashchange', scrollToAnchor);
     })();
   </script>
 </body>
