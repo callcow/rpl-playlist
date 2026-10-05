@@ -9,249 +9,248 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="wrap">
+  <div class="container">
 
-  <header class="hdr">
-    <a class="hdr-brand" href="index.html">
-      <span class="hdr-logo"><img src="logo/rpl.svg" alt="РПЛ"></span>
-      <span class="hdr-brand-text">
-        <span class="hdr-brand-name">РПЛ LIVE</span>
-        <span class="hdr-brand-sub">Сезон 2026-27</span>
-      </span>
-    </a>
-
-    <div class="hdr-right">
-      <div class="hdr-tour">
-        <span class="hdr-tour-num">10</span>
-        <span class="hdr-tour-lbl">тур</span>
+    <div class="topbar">
+      <a class="brand" href="index.html">
+        <div class="brand-logo"><img src="logo/rpl.svg" alt="РПЛ"></div>
+        <div>
+          <div class="brand-name">РПЛ LIVE</div>
+          <div class="brand-sub">Сезон 2026-27</div>
+        </div>
+      </a>
+       <div style="display:flex;align-items:center;gap:10px;">
+        <div class="tour-badge">
+          <div class="tour-badge-value">10 ТУР</div>
+        </div>
+        <button class="theme-toggle" id="themeToggle">🌙</button>
       </div>
-      <button class="hdr-theme" id="themeToggle" aria-label="Тема">🌙</button>
     </div>
-  </header>
 
-  <nav class="tabs">
-    <a class="tab " href="index.html">Главная</a>
-    <a class="tab active" href="tours.html">Туры</a>
-    <a class="tab " href="teams.html">Команды</a>
-    <a class="tab " href="calendar.html">Календарь</a>
-    <a class="tab " href="help.html">Как смотреть</a>
-  </nav>
+    <nav class="nav-tabs">
+      <a class="nav-tab " href="index.html">Главная</a>
+      <a class="nav-tab active" href="tours.html">Туры</a>
+      <a class="nav-tab " href="teams.html">Команды</a>
+      <a class="nav-tab " href="calendar.html">Календарь</a>
+      <a class="nav-tab " href="help.html">Как смотреть</a>
+    </nav>
 
-  <main class="content">
     
-<div class="page-head">
-  <div class="page-head-eyebrow">Архив</div>
-  <h1 class="page-head-title">Все туры</h1>
-  <p class="page-head-sub">Прошедшие и текущие туры сезона</p>
-</div>
-<div class="tr-list"><a class="tr" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
-  <div class="tr-num">5</div>
-  <div class="tr-body">
-    <div class="tr-name">5-ый тур</div>
-    <div class="tr-dates">с 22 по 24 авг</div>
-  </div>
-  <div class="tr-arrow">→</div>
-</a>
-<a class="tr" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">
-  <div class="tr-num">6</div>
-  <div class="tr-body">
-    <div class="tr-name">6-ой тур</div>
-    <div class="tr-dates">с 28 по 30 авг</div>
-  </div>
-  <div class="tr-arrow">→</div>
-</a>
-<a class="tr" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">
-  <div class="tr-num">7</div>
-  <div class="tr-body">
-    <div class="tr-name">7-ой тур</div>
-    <div class="tr-dates">с 5 по 7 сен</div>
-  </div>
-  <div class="tr-arrow">→</div>
-</a>
-<a class="tr" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">
-  <div class="tr-num">8</div>
-  <div class="tr-body">
-    <div class="tr-name">8-ой тур</div>
-    <div class="tr-dates">с 11 по 13 сен</div>
-  </div>
-  <div class="tr-arrow">→</div>
-</a>
-<a class="tr" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
-  <div class="tr-num">9</div>
-  <div class="tr-body">
-    <div class="tr-name">9-ый тур</div>
-    <div class="tr-dates">с 16 по 17 сен</div>
-  </div>
-  <div class="tr-arrow">→</div>
-</a>
-<a class="tr" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
-  <div class="tr-num">10</div>
-  <div class="tr-body">
-    <div class="tr-name">10-ый тур</div>
-    <div class="tr-dates">с 9 по 11 окт</div>
-  </div>
-  <div class="tr-arrow">→</div>
-</a>
-</div>
+    <div class="section-head">
+      <div class="section-head-title">Все туры</div>
+    </div>
+    <div class="tours-grid">
+      <a class="tour-card tour-card-large" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
+        <div class="tour-card-info">
+          <div class="tour-name-big">5-ый тур</div>
+          <div class="tour-dates">с 22 по 24 авг</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+<a class="tour-card tour-card-large" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">
+        <div class="tour-card-info">
+          <div class="tour-name-big">6-ой тур</div>
+          <div class="tour-dates">с 28 по 30 авг</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+<a class="tour-card tour-card-large" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">
+        <div class="tour-card-info">
+          <div class="tour-name-big">7-ой тур</div>
+          <div class="tour-dates">с 5 по 7 сен</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+<a class="tour-card tour-card-large" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">
+        <div class="tour-card-info">
+          <div class="tour-name-big">8-ой тур</div>
+          <div class="tour-dates">с 11 по 13 сен</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+<a class="tour-card tour-card-large" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
+        <div class="tour-card-info">
+          <div class="tour-name-big">9-ый тур</div>
+          <div class="tour-dates">с 16 по 17 сен</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+<a class="tour-card tour-card-large" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
+        <div class="tour-card-info">
+          <div class="tour-name-big">10-ый тур</div>
+          <div class="tour-dates">с 9 по 11 окт</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
 
-  </main>
+    </div>
 
-  <aside class="disclaimer">
-    <span class="disclaimer-icon">⚠️</span>
-    <span class="disclaimer-text">
-      Все ссылки на трансляции и данные результатов матчей берутся из <b>открытых источников</b>.
-      Администрация сайта не несёт ответственности за их содержание, доступность и законность использования.
-    </span>
-  </aside>
 
-  <footer class="ftr">
-    Обновлено <span class="ftr-neon">05.10.2026 18:31 МСК</span><br>
-    Автоматически через GitHub Actions
-  </footer>
+    <div class="disclaimer">
+      <div class="disclaimer-icon">⚠️</div>
+      <div class="disclaimer-text">
+        Все ссылки на трансляции и данные результатов матчей берутся из <b>открытых источников</b>. Администрация сайта не несёт ответственности за их содержание, доступность и законность использования.
+      </div>
+    </div>
 
-</div>
+    <div class="footer">
+      Обновлено <span class="neon">05.10.2026 18:34 МСК</span><br>
+      Автоматически через GitHub Actions
+    </div>
 
-<script>
-(function() {
-  const toggle = document.getElementById('themeToggle');
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'light') {
-    document.body.classList.add('light');
-    toggle.textContent = '☀️';
-  }
-  toggle.addEventListener('click', function() {
-    document.body.classList.toggle('light');
-    const isLight = document.body.classList.contains('light');
-    toggle.textContent = isLight ? '☀️' : '🌙';
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-  });
-})();
-
-(function() {
-  const input = document.getElementById('searchInput');
-  const clearBtn = document.getElementById('searchClear');
-  if (!input) return;
-
-  const searchBox = document.getElementById('searchBox');
-  const searchLogo = document.getElementById('searchBoxLogo');
-  const suggestBox = document.getElementById('searchSuggestions');
-  const allTeams = [{"name": "Акрон", "logo": "logo/akron.svg"}, {"name": "Ахмат", "logo": "logo/akhmat.svg"}, {"name": "Балтика", "logo": "logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "logo/zenit.svg"}, {"name": "Краснодар", "logo": "logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "logo/orenburg.svg"}, {"name": "Родина", "logo": "logo/rodina.svg"}, {"name": "Ростов", "logo": "logo/rostov.svg"}, {"name": "Рубин", "logo": "logo/rubin.svg"}, {"name": "Спартак", "logo": "logo/spartak.svg"}, {"name": "Факел", "logo": "logo/fakel.svg"}, {"name": "ЦСКА", "logo": "logo/cska.svg"}];
-
-  function setLogo(name) {
-    const team = allTeams.find(function(t) {
-      return t.name.toLowerCase() === name.toLowerCase();
-    });
-    if (team) {
-      searchLogo.src = team.logo;
-      searchLogo.style.display = 'block';
-      searchBox.classList.add('has-logo');
-    } else {
-      searchLogo.src = '';
-      searchLogo.style.display = 'none';
-      searchBox.classList.remove('has-logo');
-    }
-  }
-
-  function filter() {
-    const q = input.value.trim().toLowerCase();
-    clearBtn.style.display = q ? 'block' : 'none';
-    setLogo(input.value.trim());
-
-    document.querySelectorAll('.mc').forEach(function(el) {
-      const teams = el.getAttribute('data-teams') || '';
-      const isPast = el.classList.contains('mc-past');
-      if (q === '') {
-        el.style.display = isPast ? 'none' : '';
+  <script>
+    (function() {
+      const toggle = document.getElementById('themeToggle');
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light');
+        toggle.textContent = '☀️';
       } else {
-        el.style.display = teams.includes(q) ? '' : 'none';
+        toggle.textContent = '🌙';
       }
-    });
+      toggle.addEventListener('click', function() {
+        document.body.classList.toggle('light');
+        const isLight = document.body.classList.contains('light');
+        toggle.textContent = isLight ? '☀️' : '🌙';
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      });
+    })();
 
-    const visiblePast = document.querySelectorAll('.mc-past:not([style*="display: none"])').length;
-    const visibleCurrent = document.querySelectorAll('#matchesContainer .mc:not([style*="display: none"])').length;
+    (function() {
+      const input = document.getElementById('searchInput');
+      const clearBtn = document.getElementById('searchClear');
+      if (!input) return;
 
-    const pastSection = document.getElementById('pastSection');
-    const currentSection = document.getElementById('currentSection');
-    const headerDefault = document.getElementById('currentHeaderDefault');
-    const headerSearch = document.getElementById('currentHeaderSearch');
+      const searchBox = document.getElementById('searchBox');
+      const searchBoxLogo = document.getElementById('searchBoxLogo');
 
-    if (q === '') {
-      if (pastSection) pastSection.style.display = 'none';
-      if (currentSection) currentSection.style.display = '';
-      if (headerDefault) headerDefault.style.display = '';
-      if (headerSearch) headerSearch.style.display = 'none';
-    } else {
-      if (currentSection) currentSection.style.display = visibleCurrent > 0 ? '' : 'none';
-      if (headerDefault) headerDefault.style.display = 'none';
-      if (headerSearch) headerSearch.style.display = visibleCurrent > 0 ? '' : 'none';
-      if (pastSection) pastSection.style.display = visiblePast > 0 ? '' : 'none';
-    }
-  }
+      const suggestBox = document.getElementById('searchSuggestions');
+      const allTeams = [{"name": "Акрон", "logo": "logo/akron.svg"}, {"name": "Ахмат", "logo": "logo/akhmat.svg"}, {"name": "Балтика", "logo": "logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "logo/zenit.svg"}, {"name": "Краснодар", "logo": "logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "logo/orenburg.svg"}, {"name": "Родина", "logo": "logo/rodina.svg"}, {"name": "Ростов", "logo": "logo/rostov.svg"}, {"name": "Рубин", "logo": "logo/rubin.svg"}, {"name": "Спартак", "logo": "logo/spartak.svg"}, {"name": "Факел", "logo": "logo/fakel.svg"}, {"name": "ЦСКА", "logo": "logo/cska.svg"}];
 
-  function showSuggestions(query) {
-    if (!query) {
-      suggestBox.classList.remove('active');
-      suggestBox.innerHTML = '';
-      return;
-    }
-    const q = query.toLowerCase();
-    const matches = allTeams.filter(function(t) {
-      return t.name.toLowerCase().includes(q);
-    }).slice(0, 8);
+      function setSearchLogo(teamName) {
+        if (!searchBox || !searchBoxLogo) return;
 
-    if (!matches.length) {
-      suggestBox.classList.remove('active');
-      suggestBox.innerHTML = '';
-      return;
-    }
+        const team = allTeams.find(function(t) {
+          return t.name.toLowerCase() === teamName.toLowerCase();
+        });
 
-    suggestBox.innerHTML = matches.map(function(t) {
-      return '<div class="search-item" data-team="' + t.name + '">' +
-        '<span class="search-item-logo"><img src="' + t.logo + '" alt=""></span>' +
-        '<span class="search-item-name">' + t.name + '</span>' +
-      '</div>';
-    }).join('');
+        if (team) {
+          searchBoxLogo.src = team.logo;
+          searchBoxLogo.style.display = 'block';
+          searchBox.classList.add('has-logo');
+        } else {
+          searchBoxLogo.src = '';
+          searchBoxLogo.style.display = 'none';
+          searchBox.classList.remove('has-logo');
+        }
+      }
 
-    suggestBox.classList.add('active');
+      function filter() {
+        const q = input.value.trim().toLowerCase();
+        clearBtn.style.display = q ? 'block' : 'none';
 
-    suggestBox.querySelectorAll('.search-item').forEach(function(el) {
-      el.addEventListener('click', function() {
-        const teamName = el.getAttribute('data-team');
-        input.value = teamName;
-        suggestBox.classList.remove('active');
-        suggestBox.innerHTML = '';
-        setLogo(teamName);
+        setSearchLogo(input.value.trim());
+
+        const allMatches = document.querySelectorAll('.match');
+        allMatches.forEach(function(el) {
+          const teams = el.getAttribute('data-teams') || '';
+          const isPast = el.classList.contains('past-match');
+
+          if (q === '') {
+            el.style.display = isPast ? 'none' : '';
+          } else {
+            el.style.display = teams.includes(q) ? '' : 'none';
+          }
+        });
+
+        const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
+        const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
+
+        const pastSection = document.getElementById('pastSection');
+        const currentSection = document.getElementById('currentSection');
+        const headerDefault = document.getElementById('currentHeaderDefault');
+        const headerSearch = document.getElementById('currentHeaderSearch');
+
+        if (q === '') {
+          if (pastSection) pastSection.style.display = 'none';
+          if (currentSection) currentSection.style.display = '';
+          if (headerDefault) headerDefault.style.display = '';
+          if (headerSearch) headerSearch.style.display = 'none';
+        } else {
+          if (currentSection) currentSection.style.display = visibleCurrent > 0 ? '' : 'none';
+          if (headerDefault) headerDefault.style.display = 'none';
+          if (headerSearch) headerSearch.style.display = visibleCurrent > 0 ? '' : 'none';
+          if (pastSection) pastSection.style.display = visiblePast > 0 ? '' : 'none';
+        }
+      }
+
+      function showSuggestions(query) {
+        if (!query) {
+          suggestBox.classList.remove('active');
+          suggestBox.innerHTML = '';
+          return;
+        }
+
+        const q = query.toLowerCase();
+        const matches = allTeams.filter(function(t) {
+          return t.name.toLowerCase().includes(q);
+        }).slice(0, 8);
+
+        if (matches.length === 0) {
+          suggestBox.classList.remove('active');
+          suggestBox.innerHTML = '';
+          return;
+        }
+
+        suggestBox.innerHTML = matches.map(function(t) {
+          return '<div class="search-suggestion" data-team="' + t.name + '">' +
+            '<span class="search-suggestion-logo"><img src="' + t.logo + '" alt=""></span>' +
+            '<span class="search-suggestion-name">' + t.name + '</span>' +
+          '</div>';
+        }).join('');
+
+        suggestBox.classList.add('active');
+
+        suggestBox.querySelectorAll('.search-suggestion').forEach(function(el) {
+          el.addEventListener('click', function() {
+            const teamName = el.getAttribute('data-team');
+            input.value = teamName;
+            suggestBox.classList.remove('active');
+            suggestBox.innerHTML = '';
+            setSearchLogo(teamName);
+            filter();
+          });
+        });
+      }
+
+      input.addEventListener('input', function() {
+        showSuggestions(input.value.trim());
         filter();
       });
-    });
-  }
 
-  input.addEventListener('input', function() {
-    showSuggestions(input.value.trim());
-    filter();
-  });
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.search-box')) {
+          suggestBox.classList.remove('active');
+        }
+      });
 
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.search')) suggestBox.classList.remove('active');
-  });
+      clearBtn.addEventListener('click', function() {
+        input.value = '';
+        suggestBox.classList.remove('active');
+        suggestBox.innerHTML = '';
+        setSearchLogo('');
+        filter();
+        input.focus();
+      });
 
-  clearBtn.addEventListener('click', function() {
-    input.value = '';
-    suggestBox.classList.remove('active');
-    suggestBox.innerHTML = '';
-    setLogo('');
-    filter();
-    input.focus();
-  });
-
-  const params = new URLSearchParams(window.location.search);
-  const teamParam = params.get('team');
-  if (teamParam) {
-    input.value = teamParam;
-    setLogo(teamParam);
-    filter();
-  }
-})();
-</script>
+      const params = new URLSearchParams(window.location.search);
+      const teamParam = params.get('team');
+      if (teamParam) {
+        input.value = teamParam;
+        setSearchLogo(teamParam);
+        filter();
+      }
+    })();
+  </script>
 </body>
 </html>
