@@ -450,11 +450,17 @@ body {
 
 .tour-card-large { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 22px; }
 
-.tour-card-info { display: flex; flex-direction: column; gap: 4px; }
+.tour-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  flex: 1;
+}
 
-.tour-name-big { font-size: 17px; font-weight: 900; }
+.tour-name-big { font-size: 17px; font-weight: 900; text-align: center; }
 
-.tour-dates { font-size: 12px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.3px; }
+.tour-dates { font-size: 12px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.3px; text-align: center; }
 
 .teams-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -738,12 +744,17 @@ a.cal-team:hover { color: var(--neon); }
   .tour-badge { height: 36px; padding: 0 14px; }
   .tour-badge-value { font-size: 16px; }
   .nav-tabs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 6px;
     padding: 4px;
     height: auto;
     overflow-x: visible;
+  }
+  .nav-tab {
+    flex: 0 0 calc(33.333% - 4px);
+    max-width: calc(33.333% - 4px);
   }
   .match { padding: 14px; gap: 12px; }
   .match-day { font-size: 13px; }
