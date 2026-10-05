@@ -735,7 +735,8 @@ a.cal-team:hover { color: var(--neon); }
   .match { padding: 14px; gap: 12px; }
   .match-day { font-size: 13px; }
   .match-main { gap: 8px; }
-  .match-team { font-size: 14px; gap: 8px; }
+  .match-team { font-size: 13px; gap: 6px; line-height: 1.15; }
+  .match-main { gap: 10px; }
   .team-logo { width: 26px; height: 26px; padding: 2px; }
   .match-score { min-width: 62px; font-size: 18px; padding: 6px 10px; }
   .match-score.match-score-upcoming { font-size: 13px; padding: 5px 10px; }
