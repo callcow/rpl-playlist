@@ -94,7 +94,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">05.10.2026 21:05 МСК</span><br>
+      Обновлено <span class="neon">05.10.2026 21:13 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -252,8 +252,13 @@
       }
     })();
 
-    // ===== Прокрутка якорного матча в центр экрана =====
+        // ===== Прокрутка якорного матча в центр экрана =====
     (function() {
+      // Отключаем авто-восстановление скролла браузером
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+
       function scrollToAnchor() {
         const hash = window.location.hash;
         if (!hash) return;
@@ -262,19 +267,27 @@
         const el = document.getElementById(id);
         if (!el) return;
 
-        // Отключаем нативный скролл
         const y = el.getBoundingClientRect().top + window.pageYOffset - (window.innerHeight / 2) + (el.offsetHeight / 2);
         window.scrollTo({ top: y, behavior: 'auto' });
       }
 
-      // Скроллим после загрузки DOM
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', scrollToAnchor);
-      } else {
+      // Скроллим несколько раз с задержкой — перебиваем нативный скролл браузера
+      function scheduleScroll() {
         scrollToAnchor();
+        setTimeout(scrollToAnchor, 50);
+        setTimeout(scrollToAnchor, 150);
+        setTimeout(scrollToAnchor, 400);
       }
 
-      // Если перешли по якорю уже после загрузки (клик внутри страницы)
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scheduleScroll);
+      } else {
+        scheduleScroll();
+      }
+
+      // Дополнительный триггер после полной загрузки (когда картинки догрузились, layout не сдвигается)
+      window.addEventListener('load', scheduleScroll);
+
       window.addEventListener('hashchange', scrollToAnchor);
     })();
   </script>
