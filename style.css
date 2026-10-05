@@ -201,7 +201,18 @@ body {
 }
 
 .search-suggestion:last-child { border-bottom: none; }
+/* ===== Подсветка матча, к которому перешли по якорю ===== */
+.match:target {
+  border-color: var(--neon);
+  box-shadow: 0 0 30px rgba(0, 255, 213, 0.5);
+  animation: targetPulse 2s ease-in-out;
+}
 
+@keyframes targetPulse {
+  0% { box-shadow: 0 0 0 rgba(0, 255, 213, 0); }
+  30% { box-shadow: 0 0 40px rgba(0, 255, 213, 0.8); }
+  100% { box-shadow: 0 0 30px rgba(0, 255, 213, 0.5); }
+}
 .search-suggestion:hover { background: rgba(0, 255, 213, 0.1); color: var(--neon); }
 
 .search-suggestion-logo {
@@ -459,6 +470,14 @@ a.team:hover .team-logo { border-color: var(--neon); background: rgba(0, 255, 21
   border: 1px solid var(--border);
   border-radius: 10px;
   font-size: 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.cal-match:hover {
+  border-color: var(--neon);
+  transform: translateX(4px);
 }
 
 .cal-date {
