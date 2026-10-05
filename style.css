@@ -54,7 +54,21 @@ body {
   overflow-x: hidden;
   transition: background 0.3s, color 0.3s;
 }
+.cal-month-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
 
+.cal-month-row .cal-month-title {
+  margin-bottom: 0;
+}
+
+.cal-month-row .cal-tour-title {
+  margin-bottom: 0;
+}
 .container { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
 .topbar {
   display: flex;
