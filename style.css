@@ -67,7 +67,8 @@ body {
 
 .topbar-search {
   position: relative;
-  width: 240px;
+  flex: 1;
+  max-width: 260px;
   margin-bottom: 0;
 }
 
@@ -77,21 +78,47 @@ body {
   padding: 0 36px 0 38px;
   font-size: 13px;
   border-radius: 12px;
+  background: var(--match-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  transition: border-color 0.2s;
 }
+
+.topbar-search input:focus {
+  outline: none;
+  border-color: var(--neon);
+}
+
+.topbar-search input::placeholder { color: var(--text-dim); }
 
 .topbar-search.has-logo input {
   padding-left: 44px;
 }
 
 .topbar-search .search-box-logo {
+  position: absolute;
   left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 22px;
   height: 22px;
+  object-fit: contain;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .topbar-search .search-clear {
-  padding: 4px 8px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
   font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
 }
 
 .topbar-search .search-suggestions {
@@ -746,28 +773,29 @@ a.cal-team:hover { color: var(--neon); }
 @media (max-width: 600px) {
   body { padding: 14px 12px; }
   .topbar { height: 48px; padding: 0 14px; }
-    .topbar-actions {
+  .topbar-actions {
     gap: 6px;
   }
   .topbar-search {
-    width: 42px;              /* схлопывается в иконку на мобилке */
-    min-width: 42px;
+    flex: 1;
+    max-width: none;
   }
   .topbar-search input {
-    padding: 0;
-    text-indent: -9999px;     /* прячем placeholder */
-    cursor: pointer;
+    height: 36px;
+    font-size: 12px;
+    padding: 0 30px 0 32px;
   }
-  .topbar-search input::placeholder {
-    color: transparent;
+  .topbar-search .search-box-logo {
+    left: 10px;
+    width: 18px;
+    height: 18px;
   }
-  .topbar-search input::before {
-    content: '🔍';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 16px;
+  .topbar-search.has-logo input {
+    padding-left: 34px;
+  }
+  .topbar-search .search-clear {
+    font-size: 12px;
+    padding: 2px 6px;
   }
   .how-it-works { padding: 16px 18px; }
   .how-title { font-size: 14px; }
