@@ -581,16 +581,22 @@ a.cal-team:hover { color: var(--neon); }
 
 .cal-score {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 56px;
-  padding: 5px 10px;
+  gap: 2px;
+  min-width: 44px;
+  padding: 6px 10px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 900;
   letter-spacing: 0.5px;
   text-align: center;
   font-variant-numeric: tabular-nums;
+}
+
+.cal-score-num {
+  line-height: 1.1;
 }
 
 .cal-score.cal-score-final {
@@ -765,9 +771,10 @@ a.cal-team:hover { color: var(--neon); }
   .cal-day { font-size: 20px; }
   .cal-team-name { font-size: 13px; }
   .cal-score {
-    font-size: 13px;
-    padding: 5px 10px;
-    min-width: 52px;
+    font-size: 12px;
+    padding: 4px 8px;
+    min-width: 40px;
+    gap: 1px;
   }
   .cal-score.cal-score-upcoming {
     font-size: 12px;
