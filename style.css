@@ -60,23 +60,19 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  flex: 1;
-  justify-content: flex-end;
-  min-width: 0;
-  overflow: hidden;
+  margin-left: auto;
 }
 
 .topbar-search {
   position: relative;
-  flex: 1;
-  max-width: 220px;
-  min-width: 0;
+  width: 200px;
   margin-bottom: 0;
 }
+
 .topbar-search input {
   width: 100%;
   height: 42px;
-  padding: 0 36px 0 38px;
+  padding: 0 32px 0 36px;
   font-size: 13px;
   border-radius: 12px;
   background: var(--match-bg);
@@ -94,16 +90,16 @@ body {
 .topbar-search input::placeholder { color: var(--text-dim); }
 
 .topbar-search.has-logo input {
-  padding-left: 44px;
+  padding-left: 42px;
 }
 
 .topbar-search .search-box-logo {
   position: absolute;
-  left: 12px;
+  left: 11px;
   top: 50%;
   transform: translateY(-50%);
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   object-fit: contain;
   z-index: 2;
   pointer-events: none;
@@ -111,7 +107,7 @@ body {
 
 .topbar-search .search-clear {
   position: absolute;
-  right: 10px;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
   background: transparent;
@@ -128,14 +124,13 @@ body {
 .topbar {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
   height: 56px;
   padding: 0 18px;
   background: var(--topbar-bg);
   border: 1px solid var(--border);
   border-radius: 14px;
   margin-bottom: 16px;
-  overflow: hidden;
 }
 
 .brand {
@@ -771,9 +766,21 @@ a.cal-team:hover { color: var(--neon); }
   .topbar-actions {
     gap: 6px;
   }
-  .topbar-search {
-    flex: 1;
-    max-width: none;
+    .topbar-search {
+    width: 160px;
+  }
+  .topbar-search input {
+    height: 36px;
+    font-size: 12px;
+    padding: 0 28px 0 32px;
+  }
+  .topbar-search .search-box-logo {
+    left: 9px;
+    width: 18px;
+    height: 18px;
+  }
+  .topbar-search.has-logo input {
+    padding-left: 32px;
   }
   .topbar-search input {
     height: 36px;
