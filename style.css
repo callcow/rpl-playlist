@@ -941,6 +941,7 @@ body,
    .topbar {
     flex-wrap: wrap;
     align-items: center;
+    align-content: center;
     padding: 8px 10px;
     min-height: 48px;
   }
