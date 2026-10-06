@@ -79,7 +79,7 @@ body {
   background: var(--topbar-bg);
   border: 1px solid var(--border);
   border-radius: 14px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
@@ -130,7 +130,7 @@ body {
 .nav-tabs {
   display: flex;
   gap: 6px;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   padding: 4px;
   height: 44px;
   background: var(--topbar-bg);
@@ -175,7 +175,7 @@ body {
   border-radius: 2px;
 }
 
-.search-box { position: relative; margin-bottom: 20px; }
+.search-box { position: relative; margin-bottom: 12px; }
 
 .search-box input {
   width: 100%; padding: 14px 44px 14px 18px;
