@@ -666,8 +666,6 @@ a.cal-team:hover { color: var(--neon); }
   font-weight: 800;
 }
 
-.cal-sep { display: none; }
-
 .cal-score {
   display: flex;
   flex-direction: column;
