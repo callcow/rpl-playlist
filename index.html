@@ -1581,10 +1581,13 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 16:02 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 16:08 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
+    <button class="scroll-top" id="scrollTop" aria-label="Наверх">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+    </button>
   <script>
     (function() {
       const toggle = document.getElementById('themeToggle');
@@ -1898,16 +1901,16 @@
         });
       }
 
-      // Скролл панели команд кнопками-стрелками
+      // Скролл панели команд кнопками-стрелками (до конца)
       const prevBtn = document.getElementById('calTeamsPrev');
       const nextBtn = document.getElementById('calTeamsNext');
 
       if (prevBtn && nextBtn) {
         prevBtn.addEventListener('click', function() {
-          filterBar.scrollBy({ left: -200, behavior: 'smooth' });
+          filterBar.scrollTo({ left: 0, behavior: 'smooth' });
         });
         nextBtn.addEventListener('click', function() {
-          filterBar.scrollBy({ left: 200, behavior: 'smooth' });
+          filterBar.scrollTo({ left: filterBar.scrollWidth, behavior: 'smooth' });
         });
       }
     })();
@@ -1947,6 +1950,28 @@
       // На случай перехода по внутренней ссылке уже на открытой странице
       window.addEventListener('hashchange', scrollToAnchor);
       })();
+
+    // ===== Кнопка "Наверх" =====
+    (function() {
+      const btn = document.getElementById('scrollTop');
+      if (!btn) return;
+
+      function toggleBtn() {
+        if (window.scrollY > 300) {
+          btn.classList.add('visible');
+        } else {
+          btn.classList.remove('visible');
+        }
+      }
+
+      window.addEventListener('scroll', toggleBtn, { passive: true });
+      toggleBtn();
+
+      btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+
 
     // ===== Печатающийся placeholder в поиске =====
     (function() {
