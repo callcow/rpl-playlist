@@ -370,6 +370,11 @@ body.light .topbar-search .search-suggestions {
   display: flex; align-items: center; gap: 8px;
 }
 
+.section-head-title span {
+  color: var(--neon);
+  font-weight: 900;
+  margin-left: 6px;
+}
 .section-head-title::before {
   content: ''; width: 4px; height: 16px;
   background: linear-gradient(180deg, var(--neon), var(--neon-3));
