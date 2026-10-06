@@ -923,6 +923,7 @@ body,
   .nav-tab {
     padding: 0 10px;
     font-size: 11px;
+    height: 30px;
   }
 
   .search-toggle {
