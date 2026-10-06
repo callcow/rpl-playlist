@@ -341,7 +341,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 17:55 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 18:03 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -600,7 +600,6 @@
     (function() {
       const toggle = document.getElementById('calTourToggle');
       const dropdown = document.getElementById('calTourDropdown');
-      const valueEl = document.getElementById('calTourToggleValue');
       if (!toggle || !dropdown) return;
 
       let activeTour = null;
@@ -628,12 +627,7 @@
           month.style.display = visible > 0 ? '' : 'none';
         });
 
-        // Обновляем текст на кнопке
-        if (valueEl) {
-          valueEl.textContent = activeTour ? activeTour : 'Все';
-        }
-        toggle.classList.toggle('active', !!activeTour);
-      }
+      toggle.classList.toggle('active', !!activeTour);
 
       toggle.addEventListener('click', function(e) {
         e.stopPropagation();

@@ -37,12 +37,11 @@
     <div class="cal-month">
         <div class="cal-month-row">
           <div class="cal-month-title">Октябрь</div>
-          <a class="cal-tour-title cal-tour-future" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">10-ый тур <span class="cal-tour-status">Идёт</span></a>
+          <a class="cal-tour-title cal-tour-future" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">10-ый тур<span class="cal-tour-status">Идёт</span></a>
           <div class="cal-teams-wrapper">
       <div class="cal-tour-wrapper">
       <button class="cal-tour-toggle" id="calTourToggle" aria-label="Фильтр по туру">
         <span class="cal-tour-toggle-label">Тур</span>
-        <span class="cal-tour-toggle-value" id="calTourToggleValue">Все</span>
         <svg class="cal-tour-toggle-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="m6 9 6 6 6-6"/></svg>
       </button>
       <div class="cal-tour-dropdown" id="calTourDropdown">
@@ -185,7 +184,7 @@
 <div class="cal-month">
         <div class="cal-month-row">
           <div class="cal-month-title">Сентябрь</div>
-          <a class="cal-tour-title cal-tour-past" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">9-ый тур <span class="cal-tour-status">Завершён</span></a>
+          <a class="cal-tour-title cal-tour-past" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">9-ый тур<span class="cal-tour-status">Завершён</span></a>
           
         </div>
         <div class="cal-tour-group">
@@ -312,7 +311,7 @@
 
         </div>
 <div class="cal-tour-group">
-          <a class="cal-tour-title cal-tour-past" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">8-ой тур <span class="cal-tour-status">Завершён</span></a>
+          <a class="cal-tour-title cal-tour-past" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">8-ой тур<span class="cal-tour-status">Завершён</span></a>
           <a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-11-сен-крылья-советов-родина" data-tour="8-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">11</div>
@@ -436,7 +435,7 @@
 
         </div>
 <div class="cal-tour-group">
-          <a class="cal-tour-title cal-tour-past" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">7-ой тур <span class="cal-tour-status">Завершён</span></a>
+          <a class="cal-tour-title cal-tour-past" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">7-ой тур<span class="cal-tour-status">Завершён</span></a>
           <a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-крылья-советов-краснодар" data-tour="7-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">05</div>
@@ -563,7 +562,7 @@
 <div class="cal-month">
         <div class="cal-month-row">
           <div class="cal-month-title">Август</div>
-          <a class="cal-tour-title cal-tour-past" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">6-ой тур <span class="cal-tour-status">Завершён</span></a>
+          <a class="cal-tour-title cal-tour-past" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">6-ой тур<span class="cal-tour-status">Завершён</span></a>
           
         </div>
         <div class="cal-tour-group">
@@ -690,7 +689,7 @@
 
         </div>
 <div class="cal-tour-group">
-          <a class="cal-tour-title cal-tour-past" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">5-ый тур <span class="cal-tour-status">Завершён</span></a>
+          <a class="cal-tour-title cal-tour-past" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">5-ый тур<span class="cal-tour-status">Завершён</span></a>
           <a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-22-авг-факел-оренбург" data-tour="5-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">22</div>
@@ -825,7 +824,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 17:55 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 18:03 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1084,7 +1083,6 @@
     (function() {
       const toggle = document.getElementById('calTourToggle');
       const dropdown = document.getElementById('calTourDropdown');
-      const valueEl = document.getElementById('calTourToggleValue');
       if (!toggle || !dropdown) return;
 
       let activeTour = null;
@@ -1112,12 +1110,7 @@
           month.style.display = visible > 0 ? '' : 'none';
         });
 
-        // Обновляем текст на кнопке
-        if (valueEl) {
-          valueEl.textContent = activeTour ? activeTour : 'Все';
-        }
-        toggle.classList.toggle('active', !!activeTour);
-      }
+      toggle.classList.toggle('active', !!activeTour);
 
       toggle.addEventListener('click', function(e) {
         e.stopPropagation();
