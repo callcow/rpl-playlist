@@ -259,6 +259,8 @@ body {
 
 .topbar-search .search-suggestions {
   top: calc(100% + 4px);
+  left: 0;
+  right: 0;
   padding: 4px;
   border-radius: 6px;
   margin-top: 6px;
