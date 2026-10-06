@@ -127,7 +127,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 13:06 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 13:11 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -159,16 +159,27 @@
       if (searchToggle && searchBox && searchInput) {
         searchToggle.addEventListener('click', function(e) {
           e.stopPropagation();
+          // Если поле открыто и в нём есть текст — закрываем всё и очищаем
+          if (searchBox.classList.contains('expanded') && searchInput.value.trim() !== '') {
+            searchInput.value = '';
+            searchBox.classList.remove('has-logo');
+            searchBox.classList.remove('expanded');
+            // Триггерим фильтр через input event
+            searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+            return;
+          }
           searchBox.classList.toggle('expanded');
           if (searchBox.classList.contains('expanded')) {
             setTimeout(function() { searchInput.focus(); }, 100);
           }
         });
 
-        // Закрываем при клике вне поиска
+        // Закрываем при клике вне поиска, только если он пустой
         document.addEventListener('click', function(e) {
           if (!e.target.closest('.topbar-search') && !e.target.closest('.search-toggle')) {
-            searchBox.classList.remove('expanded');
+            if (searchInput.value.trim() === '') {
+              searchBox.classList.remove('expanded');
+            }
           }
         });
       }
