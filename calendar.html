@@ -804,7 +804,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 14:41 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 14:50 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -916,13 +916,20 @@
           }
         });
 
-        const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
+                const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
         const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
 
         const pastSection = document.getElementById('pastSection');
         const currentSection = document.getElementById('currentSection');
         const headerDefault = document.getElementById('currentHeaderDefault');
         const headerSearch = document.getElementById('currentHeaderSearch');
+
+        // Показываем в заголовках название команды, по которой идёт поиск
+        const currentHeaderTeam = document.getElementById('currentHeaderTeam');
+        const pastHeaderTeam = document.getElementById('pastHeaderTeam');
+        const teamLabel = q === '' ? '' : ' · ' + input.value.trim();
+        if (currentHeaderTeam) currentHeaderTeam.textContent = teamLabel;
+        if (pastHeaderTeam) pastHeaderTeam.textContent = teamLabel;
 
         if (q === '') {
           if (pastSection) pastSection.style.display = 'none';
