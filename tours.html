@@ -11,29 +11,7 @@
 <body>
   <div class="container">
 
-    <div class="topbar">
-      <a class="brand" href="index.html">
-        <div class="brand-logo"><img src="logo/rpl.svg" alt="РПЛ"></div>
-        <div>
-          <div class="brand-name">РПЛ LIVE</div>
-          <div class="brand-sub">Сезон 2026-27</div>
-        </div>
-      </a>
-       <div style="display:flex;align-items:center;gap:10px;">
-        <div class="tour-badge">
-          <div class="tour-badge-value">10 ТУР</div>
-        </div>
-        <button class="theme-toggle" id="themeToggle">🌙</button>
-      </div>
-    </div>
-
-    <nav class="nav-tabs">
-      <a class="nav-tab " href="index.html">Главная</a>
-      <a class="nav-tab active" href="tours.html">Туры</a>
-      <a class="nav-tab " href="teams.html">Команды</a>
-      <a class="nav-tab " href="calendar.html">Календарь</a>
-      <a class="nav-tab " href="help.html">Как смотреть</a>
-    </nav>
+  <div class="topbar"></div>
 
     
     <div class="section-head">
@@ -94,13 +72,14 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 10:08 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 10:19 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
   <script>
     (function() {
       const toggle = document.getElementById('themeToggle');
+      if (!toggle) return;
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme === 'light') {
         document.body.classList.add('light');
