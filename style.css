@@ -1093,7 +1093,7 @@ body,
     animation: searchSlideOut 0.3s ease-in forwards;
   }
 
-  @keyframes searchSlideIn {
+    @keyframes searchSlideIn {
     from { opacity: 0; transform: translateY(-8px); max-height: 0; }
     to   { opacity: 1; transform: translateY(0);   max-height: 60px; }
   }
@@ -1101,19 +1101,6 @@ body,
   @keyframes searchSlideOut {
     from { opacity: 1; transform: translateY(0);   max-height: 60px; }
     to   { opacity: 0; transform: translateY(-8px); max-height: 0; }
-  }
-
-  @keyframes searchSlideIn {
-    from {
-      opacity: 0;
-      transform: translateY(-8px);
-      max-height: 0;
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-      max-height: 60px;
-    }
   }
 
     .topbar-search.expanded {
