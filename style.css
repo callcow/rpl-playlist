@@ -882,19 +882,27 @@ a.cal-team:hover { color: var(--neon); }
     border-radius: 6px;
   }
 
-  /* Поиск скрыт по умолчанию */
-  .topbar-search {
-    display: none;
-    width: 100%;
-    min-width: 0;
-    margin-bottom: 12px;
+    /* Топбар — flex с переносом на мобилке */
+  .topbar {
+    flex-wrap: wrap;
+    align-items: center;
   }
 
-  /* Поиск раскрыт — становится отдельным блоком под топбаром */
+  /* Поиск скрыт по умолчанию — занимает всю ширину на 2-й строке */
+  .topbar-search {
+    display: none;
+    order: 10;
+    flex-basis: 100%;
+    width: 100%;
+    min-width: 0;
+    margin-top: 6px;
+    margin-bottom: 0;
+  }
+
+  /* Поиск раскрыт — встаёт отдельной строкой внутри топбара */
   .topbar-search.expanded {
     display: flex;
-    position: relative;
-    margin-top: 4px;
+    position: static;
   }
 
   .topbar-search input {
