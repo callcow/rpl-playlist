@@ -36,7 +36,7 @@
     <div class="cal-month">
         <div class="cal-month-row">
           <div class="cal-month-title">Октябрь</div>
-          <a class="cal-tour-title cal-tour-future" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">10-ый тур <span class="cal-tour-status">Идёт</span></a>
+          <a class="cal-tour-title cal-tour-past" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">10-ый тур <span class="cal-tour-status">Завершён</span></a>
           <div class="cal-teams-wrapper">
       <button class="cal-teams-arrow cal-teams-arrow-left" id="calTeamsPrev" aria-label="Назад">‹</button>
       <div class="cal-teams-filter" id="calTeamsFilter">
@@ -813,7 +813,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 19:11 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 19:47 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -983,7 +983,6 @@
         input.focus();
       });
 
-      // параметры URL: ?team=...  ?filter=4k
       const params = new URLSearchParams(window.location.search);
       const teamParam = params.get('team');
       const filterParam = params.get('filter');
@@ -1170,6 +1169,66 @@
 
       setTimeout(type, 1500);
     })();
+
+    // ===== Обратный отсчёт до появления ссылок =====
+    (function() {
+      const REVEAL_BEFORE_MS = 15 * 60 * 1000;
+
+      function formatRemain(ms) {
+        if (ms <= 0) return null;
+        const totalSec = Math.floor(ms / 1000);
+        const days  = Math.floor(totalSec / 86400);
+        const hours = Math.floor((totalSec % 86400) / 3600);
+        const mins  = Math.floor((totalSec % 3600) / 60);
+        const secs  = totalSec % 60;
+
+        const parts = [];
+        if (days > 0)  parts.push(days + 'д');
+        if (days > 0 || hours > 0) parts.push(hours + 'ч');
+        parts.push(mins + 'м');
+        parts.push(secs + 'с');
+        return parts.join(' ');
+      }
+
+      function reveal(lock) {
+        const parent = lock.parentElement;
+        if (!parent) return;
+        const btns = parent.querySelector('.quality-buttons');
+        lock.style.display = 'none';
+        if (btns) {
+          btns.hidden = false;
+          btns.style.display = 'flex';
+        }
+      }
+
+      const locks = document.querySelectorAll('.quality-locked[data-kickoff]');
+      if (!locks.length) return;
+
+      function tick() {
+        const now = Date.now();
+        locks.forEach(function(lock) {
+          if (lock.dataset.done === '1') return;
+          const kickoff = Date.parse(lock.dataset.kickoff);
+          if (isNaN(kickoff)) { reveal(lock); lock.dataset.done = '1'; return; }
+
+          const remain = kickoff - now;
+          if (remain <= REVEAL_BEFORE_MS) {
+            reveal(lock);
+            lock.dataset.done = '1';
+            return;
+          }
+
+          const timerEl = lock.querySelector('[data-timer]');
+          if (timerEl) {
+            timerEl.textContent = formatRemain(remain) || '--';
+          }
+        });
+      }
+
+      tick();
+      setInterval(tick, 1000);
+    })();
+
   </script>
 </body>
 </html>
