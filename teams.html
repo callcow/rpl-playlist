@@ -127,7 +127,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 13:11 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 13:49 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -220,15 +220,22 @@
 
         setSearchLogo(input.value.trim());
 
+        // Разбиваем запрос на слова — каждое должно найтись в data-teams
+        const words = q === '' ? [] : q.split(/\s+/).filter(Boolean);
+
         const allMatches = document.querySelectorAll('.match');
         allMatches.forEach(function(el) {
           const teams = el.getAttribute('data-teams') || '';
           const isPast = el.classList.contains('past-match');
 
-          if (q === '') {
+          if (words.length === 0) {
             el.style.display = isPast ? 'none' : '';
           } else {
-            el.style.display = teams.includes(q) ? '' : 'none';
+            // Показываем, если ВСЕ слова из запроса есть в data-teams
+            const match = words.every(function(w) {
+              return teams.includes(w);
+            });
+            el.style.display = match ? '' : 'none';
           }
         });
 
