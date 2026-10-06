@@ -899,10 +899,28 @@ a.cal-team:hover { color: var(--neon); }
     margin-bottom: 0;
   }
 
-  /* Поиск раскрыт — встаёт отдельной строкой внутри топбара */
+   /* Поиск раскрыт — встаёт отдельной строкой внутри топбара */
   .topbar-search.expanded {
     display: flex;
-    position: static;
+    position: relative;
+    align-items: center;
+  }
+
+  .topbar-search.expanded input {
+    height: 40px;
+    display: block;
+  }
+
+  .topbar-search.expanded .search-box-logo {
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: auto;
+  }
+
+  .topbar-search.expanded .search-clear {
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: auto;
   }
 
   .topbar-search input {
