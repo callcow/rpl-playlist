@@ -169,12 +169,18 @@ body {
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid var(--border);
   color: var(--text-dim);
-  font-size: 16px;
   cursor: pointer;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   transition: background 0.2s, color 0.2s;
+}
+
+.search-toggle svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  display: block;
 }
 
 .search-toggle:hover {
@@ -874,12 +880,16 @@ a.cal-team:hover { color: var(--neon); }
   }
 
   /* Кнопка-иконка поиска — видна на мобилке */
-  .search-toggle {
+   .search-toggle {
     display: flex;
     width: 30px;
     height: 30px;
-    font-size: 14px;
     border-radius: 6px;
+  }
+
+  .search-toggle svg {
+    width: 15px;
+    height: 15px;
   }
 
     /* Топбар — flex с переносом на мобилке */
