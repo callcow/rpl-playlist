@@ -536,6 +536,14 @@ a.tag-tour:hover {
 .tag-4k {
   background: linear-gradient(135deg, var(--neon-3), var(--neon-2));
   color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+a.tag-4k:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
 }
 
 .match-main {
