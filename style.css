@@ -73,17 +73,23 @@ body {
 .topbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 44px;
-  padding: 0 18px;
+  gap: 16px;
+  min-height: 56px;
+  padding: 8px 14px;
   background: var(--topbar-bg);
   border: 1px solid var(--border);
   border-radius: 14px;
   margin-bottom: 12px;
 }
 
-.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
-
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+}
 .brand-logo {
   width: 36px; height: 36px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
@@ -100,9 +106,13 @@ body {
 
 .theme-toggle {
   display: flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px; border-radius: 10px;
-  background: rgba(0, 255, 213, 0.1); border: 1px solid rgba(0, 255, 213, 0.3);
-  color: var(--neon); font-size: 16px; cursor: pointer; flex-shrink: 0;
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(0, 255, 213, 0.1);
+  border: 1px solid rgba(0, 255, 213, 0.3);
+  color: var(--neon);
+  font-size: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .how-link {
@@ -129,27 +139,30 @@ body {
 
 .nav-tabs {
   display: flex;
-  gap: 6px;
-  margin-bottom: 12px;
-  padding: 4px;
-  height: 44px;
-  background: var(--topbar-bg);
-  border: 1px solid var(--border);
-  border-radius: 14px;
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
+  padding: 0;
+  height: auto;
+  background: transparent;
+  border: none;
+  border-radius: 0;
   overflow-x: auto;
+  scrollbar-width: none;
 }
 
+.nav-tabs::-webkit-scrollbar { display: none; }
 .nav-tab {
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  border-radius: 8px;
+  padding: 8px 14px;
+  border-radius: 10px;
   text-decoration: none;
   color: var(--text-dim);
   font-weight: 800;
-  font-size: 12px;
+  font-size: 13px;
   transition: background 0.2s, color 0.2s;
   white-space: nowrap;
 }
@@ -724,7 +737,12 @@ a.cal-team:hover { color: var(--neon); }
 
 @media (max-width: 600px) {
   body { padding: 14px 12px; }
-  .topbar { height: 48px; padding: 0 14px; }
+  .topbar {
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 12px;
+    min-height: 44px;
+  }
   .how-it-works { padding: 16px 18px; }
   .how-title { font-size: 14px; }
   .how-text, .how-steps, .how-hint, .how-subtitle { font-size: 12px; }
@@ -736,18 +754,19 @@ a.cal-team:hover { color: var(--neon); }
   .theme-toggle { width: 36px; height: 36px; font-size: 16px; }
   .tour-badge { height: 36px; padding: 0 14px; }
   .tour-badge-value { font-size: 16px; }
+  .topbar > .brand { order: 1; }
+  .topbar > .theme-toggle { order: 2; margin-left: auto; }
   .nav-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-    padding: 4px;
-    height: auto;
-    overflow-x: visible;
+    order: 3;
+    flex-basis: 100%;
+    justify-content: flex-start;
+    gap: 4px;
+    overflow-x: auto;
+    padding-bottom: 2px;
   }
   .nav-tab {
-    flex: 0 0 calc(33.333% - 4px);
-    max-width: calc(33.333% - 4px);
+    padding: 6px 10px;
+    font-size: 12px;
   }
   .match { padding: 14px; gap: 12px; }
   .match-day { font-size: 13px; }
