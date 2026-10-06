@@ -25,6 +25,7 @@
   --tour-bg: rgba(13, 15, 26, 0.85);
   --body-grad-1: rgba(0, 255, 213, 0.08);
   --body-grad-2: rgba(168, 85, 247, 0.1);
+  --search-bg: rgba(0, 0, 0, 0.35);
 }
 
 body.light {
@@ -37,6 +38,7 @@ body.light {
   --body-grad-1: rgba(0, 200, 180, 0.12);
   --body-grad-2: rgba(140, 60, 220, 0.08);
   --neon: #00a896;
+  --search-bg: rgba(15, 23, 42, 0.05);
 }
 
 body {
@@ -172,14 +174,24 @@ body {
 .topbar-search input {
   width: 100%;
   height: 32px;
-  padding: 0 30px 0 12px;
-  background: var(--match-bg);
+  padding: 0 30px 0 32px;
+  background-color: var(--search-bg);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.35-4.35'/></svg>");
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 16px 16px;
   border: 1px solid var(--border);
   border-radius: 6px;
   color: var(--text);
   font-size: 12px;
+  font-weight: 700;
   font-family: inherit;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.topbar-search.has-logo input {
+  background-image: none;
+  padding-left: 32px;
 }
 
 .topbar-search input:focus {
@@ -187,7 +199,10 @@ body {
   border-color: var(--neon);
 }
 
-.topbar-search input::placeholder { color: var(--text-dim); }
+.topbar-search input::placeholder {
+  color: var(--text-dim);
+  font-weight: 700;
+}
 
 .topbar-search .search-box-logo {
   position: absolute;
@@ -200,8 +215,6 @@ body {
   z-index: 2;
   pointer-events: none;
 }
-
-.topbar-search.has-logo input { padding-left: 32px; }
 
 .topbar-search .search-clear {
   position: absolute;
@@ -822,9 +835,7 @@ a.cal-team:hover { color: var(--neon); }
     padding: 0;
     text-indent: -9999px;
     cursor: pointer;
-    background:
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.35-4.35'/></svg>") no-repeat center;
-    background-size: 16px 16px;
+    background-position: center;
   }
 
   .topbar-search input::placeholder { color: transparent; }
@@ -840,9 +851,9 @@ a.cal-team:hover { color: var(--neon); }
   }
 
   .topbar-search.expanded input {
-    padding: 0 30px 0 12px;
+    padding: 0 30px 0 32px;
     text-indent: 0;
-    background: var(--match-bg);
+    background-position: 10px center;
     cursor: text;
   }
 
