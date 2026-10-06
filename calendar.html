@@ -804,7 +804,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 15:15 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 15:24 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1014,10 +1014,45 @@
 
       const params = new URLSearchParams(window.location.search);
       const teamParam = params.get('team');
+      const filterParam = params.get('filter');
+
       if (teamParam) {
         input.value = teamParam;
         setSearchLogo(teamParam);
         filter();
+      }
+
+      if (filterParam === '4k') {
+        // Показываем только матчи с 4K-бейджем
+        const allMatches = document.querySelectorAll('.match');
+        allMatches.forEach(function(el) {
+          const isPast = el.classList.contains('past-match');
+          const badge = el.querySelector('.tag-4k');
+          const has4k = !!badge;
+          el.style.display = has4k ? '' : 'none';
+        });
+
+        // Пересчитываем видимые
+        const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
+        const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
+
+        const pastSection = document.getElementById('pastSection');
+        const currentSection = document.getElementById('currentSection');
+        const headerDefault = document.getElementById('currentHeaderDefault');
+        const headerSearch = document.getElementById('currentHeaderSearch');
+
+        if (currentSection) currentSection.style.display = visibleCurrent > 0 ? '' : 'none';
+        if (headerDefault) headerDefault.style.display = 'none';
+        if (headerSearch) {
+          headerSearch.style.display = visibleCurrent > 0 ? '' : 'none';
+          const currentHeaderTeam = document.getElementById('currentHeaderTeam');
+          if (currentHeaderTeam) currentHeaderTeam.textContent = ' · 4K UHD';
+        }
+        if (pastSection) {
+          pastSection.style.display = visiblePast > 0 ? '' : 'none';
+          const pastHeaderTeam = document.getElementById('pastHeaderTeam');
+          if (pastHeaderTeam) pastHeaderTeam.textContent = ' · 4K UHD';
+        }
       }
     })();
 
