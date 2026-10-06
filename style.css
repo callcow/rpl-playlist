@@ -56,6 +56,54 @@ body {
   overflow-x: hidden;
   transition: background 0.3s, color 0.3s;
 }
+
+/* ===== Кнопка «Наверх» ===== */
+.scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0, 255, 213, 0.15), rgba(168, 85, 247, 0.15));
+  border: 1px solid rgba(0, 255, 213, 0.4);
+  color: var(--neon);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease, background 0.2s, border-color 0.2s;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.scroll-top svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  display: block;
+}
+
+.scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top:hover {
+  background: var(--neon);
+  border-color: var(--neon);
+  color: #05060d;
+  box-shadow: 0 4px 20px rgba(0, 255, 213, 0.5);
+}
+
+.scroll-top:active {
+  transform: translateY(0) scale(0.95);
+}
 /* ===== Фильтр команд в календаре ===== */
 .cal-teams-filter {
   display: flex;
