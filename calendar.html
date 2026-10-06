@@ -18,12 +18,15 @@
       <a class="nav-tab " href="teams.html">Команды</a>
       <a class="nav-tab active" href="calendar.html">Календарь</a>
     </nav>
-    <div class="topbar-search" id="searchBox">
-      <img class="search-box-logo" id="searchBoxLogo" src="" alt="" style="display:none;">
-      <input type="text" id="searchInput" placeholder="" autocomplete="off">
-      <button class="search-clear" id="searchClear" style="display:none">✕</button>
-      <div class="search-suggestions" id="searchSuggestions"></div>
-    </div>
+    <button class="search-toggle" id="searchToggle" aria-label="Поиск">🔍</button>
+  </div>
+
+  <div class="topbar-search" id="searchBox">
+    <img class="search-box-logo" id="searchBoxLogo" src="" alt="" style="display:none;">
+    <input type="text" id="searchInput" placeholder="" autocomplete="off">
+    <button class="search-clear" id="searchClear" style="display:none">✕</button>
+    <div class="search-suggestions" id="searchSuggestions"></div>
+  </div>
   </div>
 
     
@@ -800,7 +803,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 11:42 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 12:00 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -824,19 +827,25 @@
     })();
 
     (function() {
-      // Мобильный toggle для раскрытия поиска
+      // Мобильный toggle поиска
       const searchBox = document.getElementById('searchBox');
+      const searchToggle = document.getElementById('searchToggle');
       const searchInput = document.getElementById('searchInput');
-      if (searchBox && searchInput) {
-        searchInput.addEventListener('focus', function() {
-          searchBox.classList.add('expanded');
+
+      if (searchToggle && searchBox && searchInput) {
+        searchToggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          searchBox.classList.toggle('expanded');
+          if (searchBox.classList.contains('expanded')) {
+            setTimeout(function() { searchInput.focus(); }, 100);
+          }
         });
-        searchInput.addEventListener('blur', function() {
-          setTimeout(function() {
-            if (!searchInput.value.trim()) {
-              searchBox.classList.remove('expanded');
-            }
-          }, 200);
+
+        // Закрываем при клике вне поиска
+        document.addEventListener('click', function(e) {
+          if (!e.target.closest('.topbar-search') && !e.target.closest('.search-toggle')) {
+            searchBox.classList.remove('expanded');
+          }
         });
       }
     })();
@@ -1040,7 +1049,7 @@
         if (isPaused) {
           isPaused = false;
           isDeleting = true;
-          setTimeout(type, 300);
+          setTimeout(type, 50);
           return;
         }
 
