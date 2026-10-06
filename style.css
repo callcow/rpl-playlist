@@ -971,16 +971,22 @@ body,
     display: block;
   }
 
-  .topbar-search.expanded .search-box-logo {
+    .topbar-search.expanded .search-box-logo {
     top: 50%;
     transform: translateY(-50%);
     bottom: auto;
+    left: 12px;
+    width: 20px;
+    height: 20px;
   }
 
   .topbar-search.expanded .search-clear {
     top: 50%;
     transform: translateY(-50%);
     bottom: auto;
+    right: 10px;
+    font-size: 14px;
+    padding: 4px 8px;
   }
 
   .topbar-search input {
