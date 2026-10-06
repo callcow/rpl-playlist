@@ -368,12 +368,16 @@ body.light .topbar-search .search-suggestions {
   font-size: 13px; font-weight: 900; text-transform: uppercase;
   letter-spacing: 2.5px; color: var(--text);
   display: flex; align-items: center; gap: 8px;
+  flex-wrap: wrap;
 }
 
 .section-head-title span {
   color: var(--neon);
   font-weight: 900;
   margin-left: 6px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: none;
 }
 .section-head-title::before {
   content: ''; width: 4px; height: 16px;
@@ -942,7 +946,15 @@ body,
   .theme-toggle { width: 30px; height: 30px; font-size: 14px; border-radius: 6px; }
   .tour-badge { height: 30px; padding: 0 12px; border-radius: 6px; }
   .tour-badge-value { font-size: 14px; }
+  .section-head-title {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+  }
 
+  .section-head-title span {
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
   .nav-tab {
     padding: 0 10px;
     font-size: 11px;
