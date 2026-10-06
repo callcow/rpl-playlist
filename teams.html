@@ -127,7 +127,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 16:22 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 16:35 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -381,58 +381,6 @@
         }
       }
     })();
-
-    // ===== Фильтр по месяцу и туру =====
-    (function() {
-      const monthSelect = document.getElementById('calMonthSelect');
-      const tourSelect = document.getElementById('calTourSelect');
-      const monthValue = document.getElementById('calMonthValue');
-      const tourValue = document.getElementById('calTourValue');
-
-      if (!monthSelect || !tourSelect) return;
-
-      const monthDropdown = monthSelect.closest('.cal-dropdown');
-      const tourDropdown = tourSelect.closest('.cal-dropdown');
-
-      if (monthDropdown) {
-        monthDropdown.querySelector('.cal-dropdown-btn').addEventListener('click', function(e) {
-          e.stopPropagation();
-          monthSelect.click();
-        });
-      }
-      if (tourDropdown) {
-        tourDropdown.querySelector('.cal-dropdown-btn').addEventListener('click', function(e) {
-          e.stopPropagation();
-          tourSelect.click();
-        });
-      }
-
-      function applyMonthTourFilter() {
-        const m = monthSelect.value;
-        const t = tourSelect.value;
-
-        document.querySelectorAll('.cal-month').forEach(function(monthEl) {
-          const monthName = monthEl.getAttribute('data-month');
-          monthEl.style.display = (m === '' || monthName === m) ? '' : 'none';
-        });
-
-        document.querySelectorAll('.cal-tour-group').forEach(function(tourEl) {
-          const tourName = tourEl.getAttribute('data-tour');
-          tourEl.style.display = (t === '' || tourName === t) ? '' : 'none';
-        });
-      }
-
-      monthSelect.addEventListener('change', function() {
-        monthValue.textContent = monthSelect.value || 'Все месяцы';
-        applyMonthTourFilter();
-      });
-
-      tourSelect.addEventListener('change', function() {
-        tourValue.textContent = tourSelect.value || 'Все туры';
-        applyMonthTourFilter();
-      });
-    })();
-
 
     // ===== Фильтр команд в календаре =====
     (function() {
