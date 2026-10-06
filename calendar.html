@@ -34,11 +34,28 @@
     <div class="section-head">
       <div class="section-head-title">Календарь матчей</div>
     </div>
-    <div class="cal-month">
-        <div class="cal-month-row">
-          <div class="cal-month-title">Октябрь</div>
-          <a class="cal-tour-title cal-tour-future" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">10-ый тур <span class="cal-tour-status">Идёт</span></a>
-          <div class="cal-teams-wrapper">
+    <div class="cal-month" data-month="Октябрь">
+        <div class="cal-filters-bar">
+          <div class="cal-dropdown">
+            <button class="cal-dropdown-btn" type="button">
+              <span class="cal-dropdown-value" id="calMonthValue">Все месяцы</span>
+              <svg class="cal-dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <select class="cal-dropdown-select" id="calMonthSelect">
+              <option value="">Все месяцы</option><option value="Октябрь">Октябрь</option><option value="Сентябрь">Сентябрь</option><option value="Август">Август</option>
+            </select>
+          </div>
+          <div class="cal-dropdown">
+            <button class="cal-dropdown-btn" type="button">
+              <span class="cal-dropdown-value" id="calTourValue">Все туры</span>
+              <svg class="cal-dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <select class="cal-dropdown-select" id="calTourSelect">
+              <option value="">Все туры</option><option value="5-ый тур">5-ый тур</option><option value="6-ой тур">6-ой тур</option><option value="7-ой тур">7-ой тур</option><option value="8-ой тур">8-ой тур</option><option value="9-ый тур">9-ый тур</option><option value="10-ый тур">10-ый тур</option>
+            </select>
+          </div>
+          <div class="cal-teams-filter-wrapper">
+            <div class="cal-teams-wrapper">
       <button class="cal-teams-arrow cal-teams-arrow-left" id="calTeamsPrev" aria-label="Назад">‹</button>
       <div class="cal-teams-filter" id="calTeamsFilter">
         <button class="cal-team-filter" data-team="акрон" title="Акрон"><img src="logo/akron.svg" alt="Акрон"></button><button class="cal-team-filter" data-team="ахмат" title="Ахмат"><img src="logo/akhmat.svg" alt="Ахмат"></button><button class="cal-team-filter" data-team="балтика" title="Балтика"><img src="logo/baltika.svg" alt="Балтика"></button><button class="cal-team-filter" data-team="динамо махачкала" title="Динамо Махачкала"><img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></button><button class="cal-team-filter" data-team="динамо москва" title="Динамо Москва"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></button><button class="cal-team-filter" data-team="зенит" title="Зенит"><img src="logo/zenit.svg" alt="Зенит"></button><button class="cal-team-filter" data-team="краснодар" title="Краснодар"><img src="logo/krasnodar.svg" alt="Краснодар"></button><button class="cal-team-filter" data-team="крылья советов" title="Крылья Советов"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></button><button class="cal-team-filter" data-team="локомотив" title="Локомотив"><img src="logo/lokomotiv.svg" alt="Локомотив"></button><button class="cal-team-filter" data-team="оренбург" title="Оренбург"><img src="logo/orenburg.svg" alt="Оренбург"></button><button class="cal-team-filter" data-team="родина" title="Родина"><img src="logo/rodina.svg" alt="Родина"></button><button class="cal-team-filter" data-team="ростов" title="Ростов"><img src="logo/rostov.svg" alt="Ростов"></button><button class="cal-team-filter" data-team="рубин" title="Рубин"><img src="logo/rubin.svg" alt="Рубин"></button><button class="cal-team-filter" data-team="спартак" title="Спартак"><img src="logo/spartak.svg" alt="Спартак"></button><button class="cal-team-filter" data-team="факел" title="Факел"><img src="logo/fakel.svg" alt="Факел"></button><button class="cal-team-filter" data-team="цска" title="ЦСКА"><img src="logo/cska.svg" alt="ЦСКА"></button>
@@ -46,8 +63,9 @@
       </div>
       <button class="cal-teams-arrow cal-teams-arrow-right" id="calTeamsNext" aria-label="Вперёд">›</button>
     </div>
+          </div>
         </div>
-        <div class="cal-tour-group">
+        <div class="cal-tour-group" data-tour="10-ый тур">
           <a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-09-окт-ростов-акрон">
                 <div class="cal-date">
                   <div class="cal-day">09</div>
@@ -171,13 +189,9 @@
 
         </div>
 </div>
-<div class="cal-month">
-        <div class="cal-month-row">
-          <div class="cal-month-title">Сентябрь</div>
-          <a class="cal-tour-title cal-tour-past" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">9-ый тур <span class="cal-tour-status">Завершён</span></a>
-          
-        </div>
-        <div class="cal-tour-group">
+<div class="cal-month" data-month="Сентябрь">
+        
+        <div class="cal-tour-group" data-tour="9-ый тур">
           <a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-спартак-факел">
                 <div class="cal-date">
                   <div class="cal-day">16</div>
@@ -300,8 +314,7 @@
               </a>
 
         </div>
-<div class="cal-tour-group">
-          <a class="cal-tour-title cal-tour-past" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">8-ой тур <span class="cal-tour-status">Завершён</span></a>
+<div class="cal-tour-group" data-tour="8-ой тур">
           <a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-11-сен-крылья-советов-родина">
                 <div class="cal-date">
                   <div class="cal-day">11</div>
@@ -424,8 +437,7 @@
               </a>
 
         </div>
-<div class="cal-tour-group">
-          <a class="cal-tour-title cal-tour-past" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">7-ой тур <span class="cal-tour-status">Завершён</span></a>
+<div class="cal-tour-group" data-tour="7-ой тур">
           <a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-крылья-советов-краснодар">
                 <div class="cal-date">
                   <div class="cal-day">05</div>
@@ -549,13 +561,9 @@
 
         </div>
 </div>
-<div class="cal-month">
-        <div class="cal-month-row">
-          <div class="cal-month-title">Август</div>
-          <a class="cal-tour-title cal-tour-past" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">6-ой тур <span class="cal-tour-status">Завершён</span></a>
-          
-        </div>
-        <div class="cal-tour-group">
+<div class="cal-month" data-month="Август">
+        
+        <div class="cal-tour-group" data-tour="6-ой тур">
           <a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-28-авг-акрон-цска">
                 <div class="cal-date">
                   <div class="cal-day">28</div>
@@ -678,8 +686,7 @@
               </a>
 
         </div>
-<div class="cal-tour-group">
-          <a class="cal-tour-title cal-tour-past" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">5-ый тур <span class="cal-tour-status">Завершён</span></a>
+<div class="cal-tour-group" data-tour="5-ый тур">
           <a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-22-авг-факел-оренбург">
                 <div class="cal-date">
                   <div class="cal-day">22</div>
@@ -814,7 +821,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 16:08 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 16:22 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1068,6 +1075,58 @@
         }
       }
     })();
+
+    // ===== Фильтр по месяцу и туру =====
+    (function() {
+      const monthSelect = document.getElementById('calMonthSelect');
+      const tourSelect = document.getElementById('calTourSelect');
+      const monthValue = document.getElementById('calMonthValue');
+      const tourValue = document.getElementById('calTourValue');
+
+      if (!monthSelect || !tourSelect) return;
+
+      const monthDropdown = monthSelect.closest('.cal-dropdown');
+      const tourDropdown = tourSelect.closest('.cal-dropdown');
+
+      if (monthDropdown) {
+        monthDropdown.querySelector('.cal-dropdown-btn').addEventListener('click', function(e) {
+          e.stopPropagation();
+          monthSelect.click();
+        });
+      }
+      if (tourDropdown) {
+        tourDropdown.querySelector('.cal-dropdown-btn').addEventListener('click', function(e) {
+          e.stopPropagation();
+          tourSelect.click();
+        });
+      }
+
+      function applyMonthTourFilter() {
+        const m = monthSelect.value;
+        const t = tourSelect.value;
+
+        document.querySelectorAll('.cal-month').forEach(function(monthEl) {
+          const monthName = monthEl.getAttribute('data-month');
+          monthEl.style.display = (m === '' || monthName === m) ? '' : 'none';
+        });
+
+        document.querySelectorAll('.cal-tour-group').forEach(function(tourEl) {
+          const tourName = tourEl.getAttribute('data-tour');
+          tourEl.style.display = (t === '' || tourName === t) ? '' : 'none';
+        });
+      }
+
+      monthSelect.addEventListener('change', function() {
+        monthValue.textContent = monthSelect.value || 'Все месяцы';
+        applyMonthTourFilter();
+      });
+
+      tourSelect.addEventListener('change', function() {
+        tourValue.textContent = tourSelect.value || 'Все туры';
+        applyMonthTourFilter();
+      });
+    })();
+
 
     // ===== Фильтр команд в календаре =====
     (function() {
