@@ -262,6 +262,15 @@ body {
   padding: 4px;
   border-radius: 6px;
   margin-top: 6px;
+  background: rgba(20, 25, 40, 0.98);
+  border: 1px solid rgba(0, 255, 213, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 255, 213, 0.1);
+}
+
+body.light .topbar-search .search-suggestions {
+  background: #ffffff;
+  border-color: rgba(0, 168, 150, 0.3);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
 }
 
 .topbar-search .search-suggestion {
