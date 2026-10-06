@@ -585,6 +585,14 @@ a.tag-tour:hover {
   letter-spacing: 1px;
   text-align: center;
   font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+a.match-score:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 213, 0.4);
 }
 
 .match-score.match-score-final {
