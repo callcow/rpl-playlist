@@ -1097,76 +1097,7 @@ body,
 .footer {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
-/* ===== Панель фильтров календаря (месяц, тур, команды) ===== */
-.cal-filters-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-}
 
-.cal-dropdown {
-  position: relative;
-  flex-shrink: 0;
-}
-
-.cal-dropdown-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 32px;
-  padding: 0 12px;
-  border-radius: 6px;
-  background: rgba(0, 255, 213, 0.08);
-  border: 1px solid rgba(0, 255, 213, 0.3);
-  color: var(--neon);
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  cursor: pointer;
-  transition: background 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
-  white-space: nowrap;
-}
-
-.cal-dropdown-btn:hover {
-  background: rgba(0, 255, 213, 0.15);
-  border-color: var(--neon);
-}
-
-.cal-dropdown-btn:active {
-  transform: scale(0.97);
-}
-
-.cal-dropdown-arrow {
-  stroke: currentColor;
-  opacity: 0.7;
-  transition: transform 0.2s ease;
-}
-
-.cal-dropdown:focus-within .cal-dropdown-arrow {
-  transform: rotate(180deg);
-}
-
-.cal-dropdown-select {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-  border: none;
-  background: transparent;
-  font-size: 16px;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.cal-teams-filter-wrapper {
-  margin-left: auto;
-}
 /* ===== Мобилка ===== */
 @media (max-width: 600px) {
   body { padding: 14px 12px; }
@@ -1177,26 +1108,7 @@ body,
     width: 40px;
     height: 40px;
   }
-  .cal-filters-bar {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 6px;
-  }
 
-  .cal-dropdown {
-    width: 100%;
-  }
-
-  .cal-dropdown-btn {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .cal-teams-filter-wrapper {
-    margin-left: 0;
-    margin-top: 4px;
-    width: 100%;
-  }
   .scroll-top svg {
     width: 20px;
     height: 20px;
