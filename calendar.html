@@ -11,7 +11,20 @@
 <body>
   <div class="container">
 
-  <div class="topbar"></div>
+    <div class="topbar">
+    <nav class="nav-tabs">
+      <a class="nav-tab " href="index.html">Главная</a>
+      <a class="nav-tab " href="tours.html">Туры</a>
+      <a class="nav-tab " href="teams.html">Команды</a>
+      <a class="nav-tab active" href="calendar.html">Календарь</a>
+    </nav>
+    <div class="search-box topbar-search" id="searchBox">
+      <img class="search-box-logo" id="searchBoxLogo" src="" alt="" style="display:none;">
+      <input type="text" id="searchInput" placeholder="🔍 Поиск команды..." autocomplete="off">
+      <button class="search-clear" id="searchClear" style="display:none">✕</button>
+      <div class="search-suggestions" id="searchSuggestions"></div>
+    </div>
+  </div>
 
     
     <div class="section-head">
@@ -787,7 +800,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 10:19 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 11:10 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -808,6 +821,24 @@
         toggle.textContent = isLight ? '☀️' : '🌙';
         localStorage.setItem('theme', isLight ? 'light' : 'dark');
       });
+    })();
+
+    (function() {
+      // Мобильный toggle для раскрытия поиска
+      const searchBox = document.getElementById('searchBox');
+      const searchInput = document.getElementById('searchInput');
+      if (searchBox && searchInput) {
+        searchInput.addEventListener('focus', function() {
+          searchBox.classList.add('expanded');
+        });
+        searchInput.addEventListener('blur', function() {
+          setTimeout(function() {
+            if (!searchInput.value.trim()) {
+              searchBox.classList.remove('expanded');
+            }
+          }, 200);
+        });
+      }
     })();
 
     (function() {
