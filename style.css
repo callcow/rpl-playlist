@@ -958,10 +958,12 @@ body,
     transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.3s ease;
   }
 
-  .topbar-search.expanded {
+    .topbar-search.expanded {
     max-height: 60px;
     opacity: 1;
     margin-top: 6px;
+    height: 40px;
+    align-items: center;
   }
 
   .topbar-search.expanded input {
