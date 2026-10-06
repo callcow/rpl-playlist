@@ -20,7 +20,7 @@
     </nav>
     <div class="topbar-search" id="searchBox">
       <img class="search-box-logo" id="searchBoxLogo" src="" alt="" style="display:none;">
-      <input type="text" id="searchInput" placeholder="🔍 Поиск команды..." autocomplete="off">
+      <input type="text" id="searchInput" placeholder="" autocomplete="off">
       <button class="search-clear" id="searchClear" style="display:none">✕</button>
       <div class="search-suggestions" id="searchSuggestions"></div>
     </div>
@@ -42,7 +42,7 @@
         <li>Если не открывается — скопируйте ссылку и вставьте в <b>VLC</b>, <b>TiviMate</b> или другой IPTV-плеер</li>
       </ol>
 
-      <div class="how-hint">🔍 Найди свою команду через поиск на <a href="index.html" class="how-link">главной</a> и смотрите прямые трансляции и записи матчей любимой команды</div>
+      <div class="how-hint">Найди свою команду через поиск на <a href="index.html" class="how-link">главной</a> и смотрите прямые трансляции и записи матчей любимой команды</div>
     </div>
     
 
@@ -54,7 +54,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 11:33 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 11:42 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -294,7 +294,7 @@
         if (isPaused) {
           isPaused = false;
           isDeleting = true;
-          setTimeout(type, 1500);
+          setTimeout(type, 300);
           return;
         }
 
