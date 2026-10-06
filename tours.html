@@ -12,23 +12,22 @@
   <div class="container">
 
     <div class="topbar">
-    <nav class="nav-tabs">
-      <a class="nav-tab " href="index.html">Главная</a>
-      <a class="nav-tab active" href="tours.html">Туры</a>
-      <a class="nav-tab " href="teams.html">Команды</a>
-      <a class="nav-tab " href="calendar.html">Календарь</a>
-    </nav>
-    <div class="topbar-search" id="searchBox">
-      <img class="search-box-logo" id="searchBoxLogo" src="" alt="" style="display:none;">
-      <input type="text" id="searchInput" placeholder="" autocomplete="off">
-      <button class="search-clear" id="searchClear" style="display:none">✕</button>
-      <div class="search-suggestions" id="searchSuggestions"></div>
+      <nav class="nav-tabs">
+        <a class="nav-tab " href="index.html">Главная</a>
+        <a class="nav-tab active" href="tours.html">Туры</a>
+        <a class="nav-tab " href="teams.html">Команды</a>
+        <a class="nav-tab " href="calendar.html">Календарь</a>
+      </nav>
+      <div class="topbar-search" id="searchBox">
+        <img class="search-box-logo" id="searchBoxLogo" src="" alt="" style="display:none;">
+        <input type="text" id="searchInput" placeholder="" autocomplete="off">
+        <button class="search-clear" id="searchClear" style="display:none">✕</button>
+        <div class="search-suggestions" id="searchSuggestions"></div>
+      </div>
+      <button class="search-toggle" id="searchToggle" aria-label="Поиск">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
     </div>
-    <button class="search-toggle" id="searchToggle" aria-label="Поиск">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
-    </button>
-  </div>
-  
 
     
     <div class="section-head">
@@ -89,34 +88,17 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 18:43 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 18:54 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
     <button class="scroll-top" id="scrollTop" aria-label="Наверх">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
     </button>
-  <script>
-    (function() {
-      const toggle = document.getElementById('themeToggle');
-      if (!toggle) return;
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'light') {
-        document.body.classList.add('light');
-        toggle.textContent = '☀️';
-      } else {
-        toggle.textContent = '🌙';
-      }
-      toggle.addEventListener('click', function() {
-        document.body.classList.toggle('light');
-        const isLight = document.body.classList.contains('light');
-        toggle.textContent = isLight ? '☀️' : '🌙';
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-      });
-    })();
 
+  <script>
+    // ===== Мобильный toggle поиска =====
     (function() {
-      // Мобильный toggle поиска
       const searchBox = document.getElementById('searchBox');
       const searchToggle = document.getElementById('searchToggle');
       const searchInput = document.getElementById('searchInput');
@@ -124,14 +106,9 @@
       function closeSearch() {
         if (!searchBox.classList.contains('expanded')) return;
         if (searchBox.classList.contains('closing')) return;
-
         searchBox.classList.add('closing');
         searchBox.classList.remove('expanded');
-
-        // Ждём завершения анимации и только потом убираем из DOM
-        setTimeout(function() {
-          searchBox.classList.remove('closing');
-        }, 300);
+        setTimeout(function() { searchBox.classList.remove('closing'); }, 300);
       }
 
       function openSearch() {
@@ -143,7 +120,6 @@
       if (searchToggle && searchBox && searchInput) {
         searchToggle.addEventListener('click', function(e) {
           e.stopPropagation();
-          // Если поле открыто и в нём есть текст — закрываем всё и очищаем
           if (searchBox.classList.contains('expanded') && searchInput.value.trim() !== '') {
             searchInput.value = '';
             searchBox.classList.remove('has-logo');
@@ -151,23 +127,18 @@
             closeSearch();
             return;
           }
-          if (searchBox.classList.contains('expanded')) {
-            closeSearch();
-          } else {
-            openSearch();
-          }
+          searchBox.classList.contains('expanded') ? closeSearch() : openSearch();
         });
 
-        // Закрываем при клике вне поиска, только если он пустой
         document.addEventListener('click', function(e) {
           if (!e.target.closest('.topbar-search') && !e.target.closest('.search-toggle')) {
-            if (searchInput.value.trim() === '') {
-              closeSearch();
-            }
+            if (searchInput.value.trim() === '') closeSearch();
           }
         });
       }
     })();
+
+    // ===== Поиск, фильтр матчей, подсказки, 4K-фильтр =====
     (function() {
       const input = document.getElementById('searchInput');
       const clearBtn = document.getElementById('searchClear');
@@ -175,17 +146,14 @@
 
       const searchBox = document.getElementById('searchBox');
       const searchBoxLogo = document.getElementById('searchBoxLogo');
-
       const suggestBox = document.getElementById('searchSuggestions');
       const allTeams = [{"name": "Акрон", "logo": "logo/akron.svg"}, {"name": "Ахмат", "logo": "logo/akhmat.svg"}, {"name": "Балтика", "logo": "logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "logo/zenit.svg"}, {"name": "Краснодар", "logo": "logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "logo/orenburg.svg"}, {"name": "Родина", "logo": "logo/rodina.svg"}, {"name": "Ростов", "logo": "logo/rostov.svg"}, {"name": "Рубин", "logo": "logo/rubin.svg"}, {"name": "Спартак", "logo": "logo/spartak.svg"}, {"name": "Факел", "logo": "logo/fakel.svg"}, {"name": "ЦСКА", "logo": "logo/cska.svg"}];
 
       function setSearchLogo(teamName) {
         if (!searchBox || !searchBoxLogo) return;
-
         const team = allTeams.find(function(t) {
           return t.name.toLowerCase() === teamName.toLowerCase();
         });
-
         if (team) {
           searchBoxLogo.src = team.logo;
           searchBoxLogo.style.display = 'block';
@@ -200,39 +168,32 @@
       function filter() {
         const q = input.value.trim().toLowerCase();
         clearBtn.style.display = q ? 'block' : 'none';
-
         setSearchLogo(input.value.trim());
 
-        // Разбиваем запрос на слова — каждое должно найтись в data-teams
         const words = q === '' ? [] : q.split(/\s+/).filter(Boolean);
 
-        const allMatches = document.querySelectorAll('.match');
-        allMatches.forEach(function(el) {
+        document.querySelectorAll('.match').forEach(function(el) {
           const teams = el.getAttribute('data-teams') || '';
           const isPast = el.classList.contains('past-match');
 
           if (words.length === 0) {
             el.style.display = isPast ? 'none' : '';
           } else {
-            // Показываем, если ВСЕ слова из запроса есть в data-teams
-            const match = words.every(function(w) {
-              return teams.includes(w);
-            });
+            const match = words.every(function(w) { return teams.includes(w); });
             el.style.display = match ? '' : 'none';
           }
         });
 
-                const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
+        const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
         const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
 
         const pastSection = document.getElementById('pastSection');
         const currentSection = document.getElementById('currentSection');
         const headerDefault = document.getElementById('currentHeaderDefault');
         const headerSearch = document.getElementById('currentHeaderSearch');
-
-        // Показываем в заголовках название команды, по которой идёт поиск
         const currentHeaderTeam = document.getElementById('currentHeaderTeam');
         const pastHeaderTeam = document.getElementById('pastHeaderTeam');
+
         const teamLabel = q === '' ? '' : ' · ' + input.value.trim();
         if (currentHeaderTeam) currentHeaderTeam.textContent = teamLabel;
         if (pastHeaderTeam) pastHeaderTeam.textContent = teamLabel;
@@ -276,8 +237,6 @@
         }).join('');
 
         suggestBox.classList.add('active');
-
-    // Ссылки работают через href, никаких обработчиков не нужно
       }
 
       input.addEventListener('input', function() {
@@ -286,9 +245,7 @@
       });
 
       document.addEventListener('click', function(e) {
-        if (!e.target.closest('.search-box')) {
-          suggestBox.classList.remove('active');
-        }
+        if (!e.target.closest('.search-box')) suggestBox.classList.remove('active');
       });
 
       clearBtn.addEventListener('click', function() {
@@ -300,6 +257,7 @@
         input.focus();
       });
 
+      // параметры URL: ?team=...  ?filter=4k
       const params = new URLSearchParams(window.location.search);
       const teamParam = params.get('team');
       const filterParam = params.get('filter');
@@ -311,16 +269,11 @@
       }
 
       if (filterParam === '4k') {
-        // Показываем только матчи с 4K-бейджем
-        const allMatches = document.querySelectorAll('.match');
-        allMatches.forEach(function(el) {
-          const isPast = el.classList.contains('past-match');
-          const badge = el.querySelector('.tag-4k');
-          const has4k = !!badge;
+        document.querySelectorAll('.match').forEach(function(el) {
+          const has4k = !!el.querySelector('.tag-4k');
           el.style.display = has4k ? '' : 'none';
         });
 
-        // Пересчитываем видимые
         const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
         const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
 
@@ -333,13 +286,13 @@
         if (headerDefault) headerDefault.style.display = 'none';
         if (headerSearch) {
           headerSearch.style.display = visibleCurrent > 0 ? '' : 'none';
-          const currentHeaderTeam = document.getElementById('currentHeaderTeam');
-          if (currentHeaderTeam) currentHeaderTeam.textContent = ' · 4K UHD';
+          const h = document.getElementById('currentHeaderTeam');
+          if (h) h.textContent = ' · 4K UHD';
         }
         if (pastSection) {
           pastSection.style.display = visiblePast > 0 ? '' : 'none';
-          const pastHeaderTeam = document.getElementById('pastHeaderTeam');
-          if (pastHeaderTeam) pastHeaderTeam.textContent = ' · 4K UHD';
+          const h = document.getElementById('pastHeaderTeam');
+          if (h) h.textContent = ' · 4K UHD';
         }
       }
     })();
@@ -353,8 +306,7 @@
       let activeTeam = null;
 
       function applyFilter() {
-        const allCal = document.querySelectorAll('.cal-tour-group .cal-match');
-        allCal.forEach(function(el) {
+        document.querySelectorAll('.cal-tour-group .cal-match').forEach(function(el) {
           if (!activeTeam) {
             el.style.display = '';
           } else {
@@ -375,44 +327,30 @@
           month.style.display = visible > 0 ? '' : 'none';
         });
 
-        if (resetBtn) {
-          resetBtn.style.display = activeTeam ? 'flex' : 'none';
-        }
+        if (resetBtn) resetBtn.style.display = activeTeam ? 'flex' : 'none';
       }
 
       filterBar.querySelectorAll('.cal-team-filter:not(.cal-team-filter-reset)').forEach(function(btn) {
         btn.addEventListener('click', function() {
           const team = btn.getAttribute('data-team');
-          if (activeTeam === team) {
-            activeTeam = null;
-          } else {
-            activeTeam = team;
-          }
+          activeTeam = (activeTeam === team) ? null : team;
 
-          filterBar.querySelectorAll('.cal-team-filter').forEach(function(b) {
-            b.classList.remove('active');
-          });
-          if (activeTeam) {
-            btn.classList.add('active');
-          }
+          filterBar.querySelectorAll('.cal-team-filter').forEach(function(b) { b.classList.remove('active'); });
+          if (activeTeam) btn.classList.add('active');
           applyFilter();
         });
       });
 
-            if (resetBtn) {
-     resetBtn.addEventListener('click', function() {
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
           activeTeam = null;
-          filterBar.querySelectorAll('.cal-team-filter').forEach(function(b) {
-            b.classList.remove('active');
-          });
+          filterBar.querySelectorAll('.cal-team-filter').forEach(function(b) { b.classList.remove('active'); });
           applyFilter();
         });
       }
 
-      // Скролл панели команд кнопками-стрелками (до конца)
       const prevBtn = document.getElementById('calTeamsPrev');
       const nextBtn = document.getElementById('calTeamsNext');
-
       if (prevBtn && nextBtn) {
         prevBtn.addEventListener('click', function() {
           filterBar.scrollTo({ left: 0, behavior: 'smooth' });
@@ -423,41 +361,27 @@
       }
     })();
 
-        // ===== Прокрутка якорного матча в центр экрана =====
+    // ===== Прокрутка якорного матча в центр экрана =====
     (function() {
-      // Отключаем авто-восстановление скролла браузером
-      if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-      }
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
-        function scrollToAnchor() {
+      function scrollToAnchor() {
         const hash = window.location.hash;
         if (!hash) return;
-
         const id = decodeURIComponent(hash.slice(1));
         const el = document.getElementById(id);
         if (!el) return;
-
         const y = el.getBoundingClientRect().top + window.pageYOffset - (window.innerHeight / 2) + (el.offsetHeight / 2);
         window.scrollTo({ top: y, behavior: 'auto' });
       }
 
-      // Нативный скролл к якорю отключаем — браузер не должен прыгать сам
-      if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-      }
-
-      // Скроллим один раз, после того как все ресурсы загружены
-      // (чтобы логотипы не сдвинули layout после скролла)
       if (document.readyState === 'complete') {
         scrollToAnchor();
       } else {
         window.addEventListener('load', scrollToAnchor, { once: true });
       }
-
-      // На случай перехода по внутренней ссылке уже на открытой странице
       window.addEventListener('hashchange', scrollToAnchor);
-      })();
+    })();
 
     // ===== Кнопка "Наверх" =====
     (function() {
@@ -465,21 +389,12 @@
       if (!btn) return;
 
       function toggleBtn() {
-        if (window.scrollY > 300) {
-          btn.classList.add('visible');
-        } else {
-          btn.classList.remove('visible');
-        }
+        btn.classList.toggle('visible', window.scrollY > 300);
       }
-
       window.addEventListener('scroll', toggleBtn, { passive: true });
       toggleBtn();
-
-      btn.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+      btn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
     })();
-
 
     // ===== Печатающийся placeholder в поиске =====
     (function() {
@@ -487,13 +402,9 @@
       if (!input) return;
 
       const texts = ['Поиск команды...', 'Поиск матча...', 'ЦСКА, Спартак, Зенит...'];
-      let textIndex = 0;
-      let charIndex = 0;
-      let isDeleting = false;
-      let isPaused = false;
+      let textIndex = 0, charIndex = 0, isDeleting = false, isPaused = false;
 
       function type() {
-        // Если пользователь ввёл что-то — не трогаем placeholder
         if (input.value.trim() !== '') {
           input.placeholder = 'Поиск команды...';
           setTimeout(type, 1000);
