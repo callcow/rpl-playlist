@@ -884,28 +884,39 @@ a.match-score:hover {
 .cal-month-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
   margin-bottom: 10px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
-.cal-month-row .cal-month-title { margin-bottom: 0; }
+.cal-month-row::-webkit-scrollbar { display: none; }
 
-.cal-month-row .cal-tour-title { margin-bottom: 0; }
+.cal-month-row .cal-month-title { margin-bottom: 0; flex-shrink: 0; }
 
+.cal-month-row .cal-tour-title { margin-bottom: 0; flex-shrink: 0; }
+
+.cal-month-row .cal-teams-wrapper { flex-shrink: 0; }
 .cal-tour-group { margin-bottom: 18px; }
 
 .cal-tour-title {
-  font-size: 12px; font-weight: 900; color: var(--neon-3);
-  text-transform: uppercase; letter-spacing: 1.5px;
-  padding: 6px 12px; margin-bottom: 10px;
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--neon-3);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
   background: rgba(168, 85, 247, 0.08);
   border: 1px solid rgba(168, 85, 247, 0.3);
-  border-radius: 5px;
+  border-radius: 6px;
   text-decoration: none;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+  white-space: nowrap;
 }
 
 a.cal-tour-title:hover {
@@ -928,20 +939,31 @@ a.cal-tour-title:hover {
 }
 
 .cal-tour-status {
-  font-size: 9px; font-weight: 800; letter-spacing: 0.5px;
-  padding: 2px 6px; background: rgba(255, 255, 255, 0.08);
-  border-radius: 3px; text-transform: none;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  margin-left: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  text-transform: none;
 }
 
 .cal-month { margin-bottom: 24px; }
 
 .cal-month-title {
-  font-size: 12px; font-weight: 900; color: var(--neon);
-  margin-bottom: 12px; padding: 6px 12px; display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--neon);
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.3);
-  border-radius: 5px; text-transform: uppercase;
-  letter-spacing: 1.5px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
 }
 
 .cal-match {
@@ -1063,11 +1085,12 @@ a.cal-team:hover { color: var(--neon); }
   font-family: inherit;
   font-size: 11px;
   font-weight: 900;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .cal-tour-toggle:hover {
@@ -1087,10 +1110,6 @@ a.cal-team:hover { color: var(--neon); }
   opacity: 0.7;
 }
 
-.cal-tour-toggle-value {
-  color: inherit;
-  font-weight: 900;
-}
 
 .cal-tour-toggle-arrow {
   transition: transform 0.2s;
@@ -1255,11 +1274,13 @@ body,
   .tour-badge-value { font-size: 14px; }
    /* Панель команд на мобилке — на 2-й строке, скроллится вбок */
  .cal-teams-wrapper {
-    margin-left: 0;
-    margin-top: 6px;
-    flex-basis: 100%;
-    width: 100%;
-  }
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  max-width: 100%;
+  flex-shrink: 0;
+}
 
   .cal-teams-filter {
     flex-wrap: nowrap;
