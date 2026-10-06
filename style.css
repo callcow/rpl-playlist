@@ -261,12 +261,33 @@ body {
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  padding: 4px;
+  padding: 0;
   border-radius: 6px;
   margin-top: 6px;
   background: rgba(20, 25, 40, 0.98);
   border: 1px solid rgba(0, 255, 213, 0.25);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 255, 213, 0.1);
+  overflow: hidden;
+}
+
+.topbar-search .search-suggestion {
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 0;
+  border-bottom: none;
+  gap: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.topbar-search .search-suggestion:first-child {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.topbar-search .search-suggestion:last-child {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 body.light .topbar-search .search-suggestions {
