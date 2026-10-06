@@ -818,6 +818,16 @@ a.match-score:hover {
   background: rgba(168, 85, 247, 0.08);
   border: 1px solid rgba(168, 85, 247, 0.3);
   border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+}
+
+a.cal-tour-title:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: var(--neon-3);
+  color: #fff;
+  transform: translateY(-1px);
 }
 
 .cal-tour-title.cal-tour-future {
