@@ -37,10 +37,14 @@
     <div class="cal-month">
         <div class="cal-month-row">
           <div class="cal-month-title">Октябрь</div>
-          <div class="cal-tour-title cal-tour-future">10-ый тур <span class="cal-tour-status">Идёт</span></div>
-          <div class="cal-teams-filter" id="calTeamsFilter">
-      <button class="cal-team-filter" data-team="акрон" title="Акрон"><img src="logo/akron.svg" alt="Акрон"></button><button class="cal-team-filter" data-team="ахмат" title="Ахмат"><img src="logo/akhmat.svg" alt="Ахмат"></button><button class="cal-team-filter" data-team="балтика" title="Балтика"><img src="logo/baltika.svg" alt="Балтика"></button><button class="cal-team-filter" data-team="динамо махачкала" title="Динамо Махачкала"><img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></button><button class="cal-team-filter" data-team="динамо москва" title="Динамо Москва"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></button><button class="cal-team-filter" data-team="зенит" title="Зенит"><img src="logo/zenit.svg" alt="Зенит"></button><button class="cal-team-filter" data-team="краснодар" title="Краснодар"><img src="logo/krasnodar.svg" alt="Краснодар"></button><button class="cal-team-filter" data-team="крылья советов" title="Крылья Советов"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></button><button class="cal-team-filter" data-team="локомотив" title="Локомотив"><img src="logo/lokomotiv.svg" alt="Локомотив"></button><button class="cal-team-filter" data-team="оренбург" title="Оренбург"><img src="logo/orenburg.svg" alt="Оренбург"></button><button class="cal-team-filter" data-team="родина" title="Родина"><img src="logo/rodina.svg" alt="Родина"></button><button class="cal-team-filter" data-team="ростов" title="Ростов"><img src="logo/rostov.svg" alt="Ростов"></button><button class="cal-team-filter" data-team="рубин" title="Рубин"><img src="logo/rubin.svg" alt="Рубин"></button><button class="cal-team-filter" data-team="спартак" title="Спартак"><img src="logo/spartak.svg" alt="Спартак"></button><button class="cal-team-filter" data-team="факел" title="Факел"><img src="logo/fakel.svg" alt="Факел"></button><button class="cal-team-filter" data-team="цска" title="ЦСКА"><img src="logo/cska.svg" alt="ЦСКА"></button>
-      <button class="cal-team-filter cal-team-filter-reset" id="calTeamReset" title="Показать все">✕</button>
+          <a class="cal-tour-title cal-tour-future" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">10-ый тур <span class="cal-tour-status">Идёт</span></a>
+          <div class="cal-teams-wrapper">
+      <button class="cal-teams-arrow cal-teams-arrow-left" id="calTeamsPrev" aria-label="Назад">‹</button>
+      <div class="cal-teams-filter" id="calTeamsFilter">
+        <button class="cal-team-filter" data-team="акрон" title="Акрон"><img src="logo/akron.svg" alt="Акрон"></button><button class="cal-team-filter" data-team="ахмат" title="Ахмат"><img src="logo/akhmat.svg" alt="Ахмат"></button><button class="cal-team-filter" data-team="балтика" title="Балтика"><img src="logo/baltika.svg" alt="Балтика"></button><button class="cal-team-filter" data-team="динамо махачкала" title="Динамо Махачкала"><img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></button><button class="cal-team-filter" data-team="динамо москва" title="Динамо Москва"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></button><button class="cal-team-filter" data-team="зенит" title="Зенит"><img src="logo/zenit.svg" alt="Зенит"></button><button class="cal-team-filter" data-team="краснодар" title="Краснодар"><img src="logo/krasnodar.svg" alt="Краснодар"></button><button class="cal-team-filter" data-team="крылья советов" title="Крылья Советов"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></button><button class="cal-team-filter" data-team="локомотив" title="Локомотив"><img src="logo/lokomotiv.svg" alt="Локомотив"></button><button class="cal-team-filter" data-team="оренбург" title="Оренбург"><img src="logo/orenburg.svg" alt="Оренбург"></button><button class="cal-team-filter" data-team="родина" title="Родина"><img src="logo/rodina.svg" alt="Родина"></button><button class="cal-team-filter" data-team="ростов" title="Ростов"><img src="logo/rostov.svg" alt="Ростов"></button><button class="cal-team-filter" data-team="рубин" title="Рубин"><img src="logo/rubin.svg" alt="Рубин"></button><button class="cal-team-filter" data-team="спартак" title="Спартак"><img src="logo/spartak.svg" alt="Спартак"></button><button class="cal-team-filter" data-team="факел" title="Факел"><img src="logo/fakel.svg" alt="Факел"></button><button class="cal-team-filter" data-team="цска" title="ЦСКА"><img src="logo/cska.svg" alt="ЦСКА"></button>
+        <button class="cal-team-filter cal-team-filter-reset" id="calTeamReset" title="Показать все">✕</button>
+      </div>
+      <button class="cal-teams-arrow cal-teams-arrow-right" id="calTeamsNext" aria-label="Вперёд">›</button>
     </div>
         </div>
         <div class="cal-tour-group">
@@ -170,7 +174,7 @@
 <div class="cal-month">
         <div class="cal-month-row">
           <div class="cal-month-title">Сентябрь</div>
-          <div class="cal-tour-title cal-tour-past">9-ый тур <span class="cal-tour-status">Завершён</span></div>
+          <a class="cal-tour-title cal-tour-past" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">9-ый тур <span class="cal-tour-status">Завершён</span></a>
           
         </div>
         <div class="cal-tour-group">
@@ -297,7 +301,7 @@
 
         </div>
 <div class="cal-tour-group">
-          <div class="cal-tour-title cal-tour-past">8-ой тур <span class="cal-tour-status">Завершён</span></div>
+          <a class="cal-tour-title cal-tour-past" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">8-ой тур <span class="cal-tour-status">Завершён</span></a>
           <a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-11-сен-крылья-советов-родина">
                 <div class="cal-date">
                   <div class="cal-day">11</div>
@@ -421,7 +425,7 @@
 
         </div>
 <div class="cal-tour-group">
-          <div class="cal-tour-title cal-tour-past">7-ой тур <span class="cal-tour-status">Завершён</span></div>
+          <a class="cal-tour-title cal-tour-past" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">7-ой тур <span class="cal-tour-status">Завершён</span></a>
           <a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-крылья-советов-краснодар">
                 <div class="cal-date">
                   <div class="cal-day">05</div>
@@ -548,7 +552,7 @@
 <div class="cal-month">
         <div class="cal-month-row">
           <div class="cal-month-title">Август</div>
-          <div class="cal-tour-title cal-tour-past">6-ой тур <span class="cal-tour-status">Завершён</span></div>
+          <a class="cal-tour-title cal-tour-past" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">6-ой тур <span class="cal-tour-status">Завершён</span></a>
           
         </div>
         <div class="cal-tour-group">
@@ -675,7 +679,7 @@
 
         </div>
 <div class="cal-tour-group">
-          <div class="cal-tour-title cal-tour-past">5-ый тур <span class="cal-tour-status">Завершён</span></div>
+          <a class="cal-tour-title cal-tour-past" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">5-ый тур <span class="cal-tour-status">Завершён</span></a>
           <a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-22-авг-факел-оренбург">
                 <div class="cal-date">
                   <div class="cal-day">22</div>
@@ -810,7 +814,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 15:44 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 15:53 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1127,6 +1131,19 @@
         });
       }
     })();
+
+      // Скролл панели команд кнопками-стрелками
+      const prevBtn = document.getElementById('calTeamsPrev');
+      const nextBtn = document.getElementById('calTeamsNext');
+
+      if (prevBtn && nextBtn && filterBar) {
+        prevBtn.addEventListener('click', function() {
+          filterBar.scrollBy({ left: -200, behavior: 'smooth' });
+        });
+        nextBtn.addEventListener('click', function() {
+          filterBar.scrollBy({ left: 200, behavior: 'smooth' });
+        });
+      }
 
         // ===== Прокрутка якорного матча в центр экрана =====
     (function() {
