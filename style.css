@@ -110,7 +110,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 4px;
-  height: 38px;
+  height: 32px;
   padding: 0 4px;
   background: var(--match-bg);
   border: 1px solid var(--border);
@@ -119,10 +119,10 @@ body {
 }
 
 .cal-team-filter {
-  width: 28px;
-  height: 28px;
-  padding: 3px;
-  border-radius: 6px;
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+  border-radius: 5px;
   background: transparent;
   border: 1px solid transparent;
   cursor: pointer;
@@ -130,6 +130,7 @@ body {
   align-items: center;
   justify-content: center;
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  flex-shrink: 0;
 }
 .cal-team-filter img {
   width: 100%;
@@ -892,13 +893,13 @@ a.match-score:hover {
 }
 
 .cal-month-row > * {
-  height: 38px;
+  height: 32px;
   display: inline-flex;
   align-items: center;
 }
 
 .cal-month-row .cal-teams-wrapper {
-  height: 38px;
+  height: 32px;
   display: flex;
   align-items: center;
 }
@@ -913,8 +914,8 @@ a.match-score:hover {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  height: 38px;
-  padding: 0 14px;
+  height: 32px;
+  padding: 0 12px;
   margin-bottom: 10px;
   font-size: 12px;
   font-weight: 900;
@@ -928,7 +929,6 @@ a.match-score:hover {
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
 }
-
 a.cal-tour-title:hover {
   background: rgba(168, 85, 247, 0.2);
   border-color: var(--neon-3);
@@ -949,18 +949,22 @@ a.cal-tour-title:hover {
 }
 
 .cal-tour-status {
-  font-size: 9px; font-weight: 800; letter-spacing: 0.5px;
-  padding: 2px 6px; background: rgba(255, 255, 255, 0.08);
-  border-radius: 3px; text-transform: none;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  text-transform: none;
+  line-height: 1;
 }
-
 .cal-month { margin-bottom: 24px; }
 
 .cal-month-title {
   display: inline-flex;
   align-items: center;
-  height: 38px;
-  padding: 0 14px;
+  height: 32px;
+  padding: 0 12px;
   font-size: 12px;
   font-weight: 900;
   color: var(--neon);
@@ -1185,10 +1189,10 @@ body,
 
   .cal-teams-filter::-webkit-scrollbar { display: none; }
 
-  .cal-team-filter {
-    width: 26px;
-    height: 26px;
-    padding: 3px;
+    .cal-team-filter {
+    width: 22px;
+    height: 22px;
+    padding: 2px;
     flex-shrink: 0;
   }
 
