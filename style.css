@@ -233,6 +233,32 @@ body {
   top: calc(100% + 4px);
 }
 
+/* Компактные подсказки для топбарного поиска */
+.topbar-search .search-suggestions {
+  padding: 4px;
+  border-radius: 6px;
+  margin-top: 6px;
+}
+
+.topbar-search .search-suggestion {
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 4px;
+  border-bottom: none;
+  gap: 8px;
+}
+
+.topbar-search .search-suggestion-logo {
+  width: 18px;
+  height: 18px;
+}
+
+.topbar-search .search-suggestion-name {
+  font-size: 12px;
+  font-weight: 700;
+}
+
 /* ===== Заголовок секции ===== */
 .section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; padding-left: 4px; }
 
