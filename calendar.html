@@ -18,7 +18,7 @@
       <a class="nav-tab " href="teams.html">Команды</a>
       <a class="nav-tab active" href="calendar.html">Календарь</a>
     </nav>
-    <div class="search-box topbar-search" id="searchBox">
+    <div class="topbar-search" id="searchBox">
       <img class="search-box-logo" id="searchBoxLogo" src="" alt="" style="display:none;">
       <input type="text" id="searchInput" placeholder="🔍 Поиск команды..." autocomplete="off">
       <button class="search-clear" id="searchClear" style="display:none">✕</button>
@@ -800,7 +800,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 11:10 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 11:33 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1014,6 +1014,59 @@
       window.addEventListener('load', scheduleScroll);
 
       window.addEventListener('hashchange', scrollToAnchor);
+    })();
+
+    // ===== Печатающийся placeholder в поиске =====
+    (function() {
+      const input = document.getElementById('searchInput');
+      if (!input) return;
+
+      const texts = ['Поиск команды...', 'Найти команду...', 'Спартак, Зенит, ЦСКА...'];
+      let textIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      let isPaused = false;
+
+      function type() {
+        // Если пользователь ввёл что-то — не трогаем placeholder
+        if (input.value.trim() !== '') {
+          input.placeholder = 'Поиск команды...';
+          setTimeout(type, 1000);
+          return;
+        }
+
+        const currentText = texts[textIndex];
+
+        if (isPaused) {
+          isPaused = false;
+          isDeleting = true;
+          setTimeout(type, 1500);
+          return;
+        }
+
+        if (isDeleting) {
+          charIndex--;
+          input.placeholder = currentText.substring(0, charIndex);
+          if (charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+            setTimeout(type, 500);
+            return;
+          }
+          setTimeout(type, 50);
+        } else {
+          charIndex++;
+          input.placeholder = currentText.substring(0, charIndex);
+          if (charIndex === currentText.length) {
+            isPaused = true;
+            setTimeout(type, 2000);
+            return;
+          }
+          setTimeout(type, 100);
+        }
+      }
+
+      setTimeout(type, 1500);
     })();
   </script>
 </body>
