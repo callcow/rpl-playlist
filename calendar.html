@@ -39,6 +39,17 @@
           <div class="cal-month-title">Октябрь</div>
           <a class="cal-tour-title cal-tour-future" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">10-ый тур <span class="cal-tour-status">Идёт</span></a>
           <div class="cal-teams-wrapper">
+      <div class="cal-tour-wrapper">
+      <button class="cal-tour-toggle" id="calTourToggle" aria-label="Фильтр по туру">
+        <span class="cal-tour-toggle-label">Тур</span>
+        <span class="cal-tour-toggle-value" id="calTourToggleValue">Все</span>
+        <svg class="cal-tour-toggle-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="cal-tour-dropdown" id="calTourDropdown">
+        <button class="cal-tour-option cal-tour-option-reset" data-tour="">Все туры</button>
+        <button class="cal-tour-option" data-tour="10-ый тур">10-ый тур</button><button class="cal-tour-option" data-tour="9-ый тур">9-ый тур</button><button class="cal-tour-option" data-tour="8-ой тур">8-ой тур</button><button class="cal-tour-option" data-tour="7-ой тур">7-ой тур</button><button class="cal-tour-option" data-tour="6-ой тур">6-ой тур</button><button class="cal-tour-option" data-tour="5-ый тур">5-ый тур</button>
+      </div>
+    </div>
       <button class="cal-teams-arrow cal-teams-arrow-left" id="calTeamsPrev" aria-label="Назад">‹</button>
       <div class="cal-teams-filter" id="calTeamsFilter">
         <button class="cal-team-filter" data-team="акрон" title="Акрон"><img src="logo/akron.svg" alt="Акрон"></button><button class="cal-team-filter" data-team="ахмат" title="Ахмат"><img src="logo/akhmat.svg" alt="Ахмат"></button><button class="cal-team-filter" data-team="балтика" title="Балтика"><img src="logo/baltika.svg" alt="Балтика"></button><button class="cal-team-filter" data-team="динамо махачкала" title="Динамо Махачкала"><img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></button><button class="cal-team-filter" data-team="динамо москва" title="Динамо Москва"><img src="logo/dynamomoscov.svg" alt="Динамо Москва"></button><button class="cal-team-filter" data-team="зенит" title="Зенит"><img src="logo/zenit.svg" alt="Зенит"></button><button class="cal-team-filter" data-team="краснодар" title="Краснодар"><img src="logo/krasnodar.svg" alt="Краснодар"></button><button class="cal-team-filter" data-team="крылья советов" title="Крылья Советов"><img src="logo/krylyasovetov.svg" alt="Крылья Советов"></button><button class="cal-team-filter" data-team="локомотив" title="Локомотив"><img src="logo/lokomotiv.svg" alt="Локомотив"></button><button class="cal-team-filter" data-team="оренбург" title="Оренбург"><img src="logo/orenburg.svg" alt="Оренбург"></button><button class="cal-team-filter" data-team="родина" title="Родина"><img src="logo/rodina.svg" alt="Родина"></button><button class="cal-team-filter" data-team="ростов" title="Ростов"><img src="logo/rostov.svg" alt="Ростов"></button><button class="cal-team-filter" data-team="рубин" title="Рубин"><img src="logo/rubin.svg" alt="Рубин"></button><button class="cal-team-filter" data-team="спартак" title="Спартак"><img src="logo/spartak.svg" alt="Спартак"></button><button class="cal-team-filter" data-team="факел" title="Факел"><img src="logo/fakel.svg" alt="Факел"></button><button class="cal-team-filter" data-team="цска" title="ЦСКА"><img src="logo/cska.svg" alt="ЦСКА"></button>
@@ -48,7 +59,7 @@
     </div>
         </div>
         <div class="cal-tour-group">
-          <a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-09-окт-ростов-акрон">
+          <a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-09-окт-ростов-акрон" data-tour="10-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">09</div>
                   <div class="cal-month-short">окт</div>
@@ -63,7 +74,7 @@
                   <div class="cal-score-num">-</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-оренбург-динамо-махачкала">
+<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-оренбург-динамо-махачкала" data-tour="10-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">10</div>
                   <div class="cal-month-short">окт</div>
@@ -78,7 +89,7 @@
                   <div class="cal-score-num">-</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-факел-локомотив">
+<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-факел-локомотив" data-tour="10-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">10</div>
                   <div class="cal-month-short">окт</div>
@@ -93,7 +104,7 @@
                   <div class="cal-score-num">-</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-крылья-советов-спартак">
+<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-крылья-советов-спартак" data-tour="10-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">10</div>
                   <div class="cal-month-short">окт</div>
@@ -108,7 +119,7 @@
                   <div class="cal-score-num">-</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-краснодар-зенит">
+<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-краснодар-зенит" data-tour="10-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">10</div>
                   <div class="cal-month-short">окт</div>
@@ -123,7 +134,7 @@
                   <div class="cal-score-num">-</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-11-окт-ахмат-балтика">
+<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-11-окт-ахмат-балтика" data-tour="10-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">11</div>
                   <div class="cal-month-short">окт</div>
@@ -138,7 +149,7 @@
                   <div class="cal-score-num">-</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-11-окт-цска-родина">
+<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-11-окт-цска-родина" data-tour="10-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">11</div>
                   <div class="cal-month-short">окт</div>
@@ -153,7 +164,7 @@
                   <div class="cal-score-num">-</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-11-окт-рубин-динамо-москва">
+<a class="cal-match" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-11-окт-рубин-динамо-москва" data-tour="10-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">11</div>
                   <div class="cal-month-short">окт</div>
@@ -178,7 +189,7 @@
           
         </div>
         <div class="cal-tour-group">
-          <a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-спартак-факел">
+          <a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-спартак-факел" data-tour="9-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">16</div>
                   <div class="cal-month-short">сен</div>
@@ -193,7 +204,7 @@
                   <div class="cal-score-num">0</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-родина-рубин">
+<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-родина-рубин" data-tour="9-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">16</div>
                   <div class="cal-month-short">сен</div>
@@ -208,7 +219,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-балтика-зенит">
+<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-балтика-зенит" data-tour="9-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">16</div>
                   <div class="cal-month-short">сен</div>
@@ -223,7 +234,7 @@
                   <div class="cal-score-num">3</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-локомотив-крылья-советов">
+<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-локомотив-крылья-советов" data-tour="9-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">16</div>
                   <div class="cal-month-short">сен</div>
@@ -238,7 +249,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-оренбург-краснодар">
+<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-оренбург-краснодар" data-tour="9-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">17</div>
                   <div class="cal-month-short">сен</div>
@@ -253,7 +264,7 @@
                   <div class="cal-score-num">0</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-ростов-динамо-москва">
+<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-ростов-динамо-москва" data-tour="9-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">17</div>
                   <div class="cal-month-short">сен</div>
@@ -268,7 +279,7 @@
                   <div class="cal-score-num">3</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-акрон-ахмат">
+<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-акрон-ахмат" data-tour="9-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">17</div>
                   <div class="cal-month-short">сен</div>
@@ -283,7 +294,7 @@
                   <div class="cal-score-num">0</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-динамо-махачкала-цска">
+<a class="cal-match" href="tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-динамо-махачкала-цска" data-tour="9-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">17</div>
                   <div class="cal-month-short">сен</div>
@@ -302,7 +313,7 @@
         </div>
 <div class="cal-tour-group">
           <a class="cal-tour-title cal-tour-past" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">8-ой тур <span class="cal-tour-status">Завершён</span></a>
-          <a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-11-сен-крылья-советов-родина">
+          <a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-11-сен-крылья-советов-родина" data-tour="8-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">11</div>
                   <div class="cal-month-short">сен</div>
@@ -317,7 +328,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-факел-балтика">
+<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-факел-балтика" data-tour="8-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">12</div>
                   <div class="cal-month-short">сен</div>
@@ -332,7 +343,7 @@
                   <div class="cal-score-num">2</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-зенит-локомотив">
+<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-зенит-локомотив" data-tour="8-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">12</div>
                   <div class="cal-month-short">сен</div>
@@ -347,7 +358,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-динамо-москва-оренбург">
+<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-динамо-москва-оренбург" data-tour="8-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">12</div>
                   <div class="cal-month-short">сен</div>
@@ -362,7 +373,7 @@
                   <div class="cal-score-num">0</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-цска-рубин">
+<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-цска-рубин" data-tour="8-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">12</div>
                   <div class="cal-month-short">сен</div>
@@ -377,7 +388,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-13-сен-ахмат-динамо-махачкала">
+<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-13-сен-ахмат-динамо-махачкала" data-tour="8-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">13</div>
                   <div class="cal-month-short">сен</div>
@@ -392,7 +403,7 @@
                   <div class="cal-score-num">2</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-13-сен-спартак-ростов">
+<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-13-сен-спартак-ростов" data-tour="8-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">13</div>
                   <div class="cal-month-short">сен</div>
@@ -407,7 +418,7 @@
                   <div class="cal-score-num">0</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-13-сен-краснодар-акрон">
+<a class="cal-match" href="tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-13-сен-краснодар-акрон" data-tour="8-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">13</div>
                   <div class="cal-month-short">сен</div>
@@ -426,7 +437,7 @@
         </div>
 <div class="cal-tour-group">
           <a class="cal-tour-title cal-tour-past" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html">7-ой тур <span class="cal-tour-status">Завершён</span></a>
-          <a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-крылья-советов-краснодар">
+          <a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-крылья-советов-краснодар" data-tour="7-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">05</div>
                   <div class="cal-month-short">сен</div>
@@ -441,7 +452,7 @@
                   <div class="cal-score-num">2</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-зенит-цска">
+<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-зенит-цска" data-tour="7-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">05</div>
                   <div class="cal-month-short">сен</div>
@@ -456,7 +467,7 @@
                   <div class="cal-score-num">2</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-ростов-факел">
+<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-ростов-факел" data-tour="7-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">05</div>
                   <div class="cal-month-short">сен</div>
@@ -471,7 +482,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-оренбург-акрон">
+<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-оренбург-акрон" data-tour="7-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">06</div>
                   <div class="cal-month-short">сен</div>
@@ -486,7 +497,7 @@
                   <div class="cal-score-num">2</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-динамо-махачкала-родина">
+<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-динамо-махачкала-родина" data-tour="7-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">06</div>
                   <div class="cal-month-short">сен</div>
@@ -501,7 +512,7 @@
                   <div class="cal-score-num">0</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-динамо-москва-спартак">
+<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-динамо-москва-спартак" data-tour="7-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">06</div>
                   <div class="cal-month-short">сен</div>
@@ -516,7 +527,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-балтика-локомотив">
+<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-балтика-локомотив" data-tour="7-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">06</div>
                   <div class="cal-month-short">сен</div>
@@ -531,7 +542,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-07-сен-рубин-ахмат">
+<a class="cal-match" href="tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-07-сен-рубин-ахмат" data-tour="7-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">07</div>
                   <div class="cal-month-short">сен</div>
@@ -556,7 +567,7 @@
           
         </div>
         <div class="cal-tour-group">
-          <a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-28-авг-акрон-цска">
+          <a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-28-авг-акрон-цска" data-tour="6-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">28</div>
                   <div class="cal-month-short">авг</div>
@@ -571,7 +582,7 @@
                   <div class="cal-score-num">2</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-факел-зенит">
+<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-факел-зенит" data-tour="6-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">29</div>
                   <div class="cal-month-short">авг</div>
@@ -586,7 +597,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-краснодар-ростов">
+<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-краснодар-ростов" data-tour="6-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">29</div>
                   <div class="cal-month-short">авг</div>
@@ -601,7 +612,7 @@
                   <div class="cal-score-num">0</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-локомотив-динамо-москва">
+<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-локомотив-динамо-москва" data-tour="6-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">29</div>
                   <div class="cal-month-short">авг</div>
@@ -616,7 +627,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-ахмат-крылья-советов">
+<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-ахмат-крылья-советов" data-tour="6-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">29</div>
                   <div class="cal-month-short">авг</div>
@@ -631,7 +642,7 @@
                   <div class="cal-score-num">3</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-30-авг-родина-балтика">
+<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-30-авг-родина-балтика" data-tour="6-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">30</div>
                   <div class="cal-month-short">авг</div>
@@ -646,7 +657,7 @@
                   <div class="cal-score-num">3</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-30-авг-спартак-оренбург">
+<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-30-авг-спартак-оренбург" data-tour="6-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">30</div>
                   <div class="cal-month-short">авг</div>
@@ -661,7 +672,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-30-авг-рубин-динамо-махачкала">
+<a class="cal-match" href="tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-30-авг-рубин-динамо-махачкала" data-tour="6-ой тур">
                 <div class="cal-date">
                   <div class="cal-day">30</div>
                   <div class="cal-month-short">авг</div>
@@ -680,7 +691,7 @@
         </div>
 <div class="cal-tour-group">
           <a class="cal-tour-title cal-tour-past" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">5-ый тур <span class="cal-tour-status">Завершён</span></a>
-          <a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-22-авг-факел-оренбург">
+          <a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-22-авг-факел-оренбург" data-tour="5-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">22</div>
                   <div class="cal-month-short">авг</div>
@@ -695,7 +706,7 @@
                   <div class="cal-score-num">0</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-22-авг-ахмат-ростов">
+<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-22-авг-ахмат-ростов" data-tour="5-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">22</div>
                   <div class="cal-month-short">авг</div>
@@ -710,7 +721,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-22-авг-цска-локомотив">
+<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-22-авг-цска-локомотив" data-tour="5-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">22</div>
                   <div class="cal-month-short">авг</div>
@@ -725,7 +736,7 @@
                   <div class="cal-score-num">2</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-23-авг-акрон-крылья-советов">
+<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-23-авг-акрон-крылья-советов" data-tour="5-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">23</div>
                   <div class="cal-month-short">авг</div>
@@ -740,7 +751,7 @@
                   <div class="cal-score-num">3</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-23-авг-динамо-москва-родина">
+<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-23-авг-динамо-москва-родина" data-tour="5-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">23</div>
                   <div class="cal-month-short">авг</div>
@@ -755,7 +766,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-23-авг-динамо-махачкала-краснодар">
+<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-23-авг-динамо-махачкала-краснодар" data-tour="5-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">23</div>
                   <div class="cal-month-short">авг</div>
@@ -770,7 +781,7 @@
                   <div class="cal-score-num">1</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-23-авг-спартак-зенит">
+<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-23-авг-спартак-зенит" data-tour="5-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">23</div>
                   <div class="cal-month-short">авг</div>
@@ -785,7 +796,7 @@
                   <div class="cal-score-num">0</div>
                 </div>
               </a>
-<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-24-авг-балтика-рубин">
+<a class="cal-match" href="tours/5-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-24-авг-балтика-рубин" data-tour="5-ый тур">
                 <div class="cal-date">
                   <div class="cal-day">24</div>
                   <div class="cal-month-short">авг</div>
@@ -814,7 +825,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 17:45 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 17:55 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1067,6 +1078,78 @@
           if (pastHeaderTeam) pastHeaderTeam.textContent = ' · 4K UHD';
         }
       }
+    })();
+
+      // ===== Фильтр по туру в календаре =====
+    (function() {
+      const toggle = document.getElementById('calTourToggle');
+      const dropdown = document.getElementById('calTourDropdown');
+      const valueEl = document.getElementById('calTourToggleValue');
+      if (!toggle || !dropdown) return;
+
+      let activeTour = null;
+
+      function applyTourFilter() {
+        const allMatches = document.querySelectorAll('.cal-tour-group .cal-match');
+        allMatches.forEach(function(el) {
+          if (!activeTour) {
+            el.style.display = '';
+          } else {
+            const t = el.getAttribute('data-tour') || '';
+            el.style.display = (t === activeTour) ? '' : 'none';
+          }
+        });
+
+        // Скрываем пустые туры
+        document.querySelectorAll('.cal-tour-group').forEach(function(group) {
+          const visible = group.querySelectorAll('.cal-match:not([style*="display: none"])').length;
+          group.style.display = visible > 0 ? '' : 'none';
+        });
+
+        // Скрываем пустые месяцы
+        document.querySelectorAll('.cal-month').forEach(function(month) {
+          const visible = month.querySelectorAll('.cal-match:not([style*="display: none"])').length;
+          month.style.display = visible > 0 ? '' : 'none';
+        });
+
+        // Обновляем текст на кнопке
+        if (valueEl) {
+          valueEl.textContent = activeTour ? activeTour : 'Все';
+        }
+        toggle.classList.toggle('active', !!activeTour);
+      }
+
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+        toggle.classList.toggle('open');
+      });
+
+      dropdown.querySelectorAll('.cal-tour-option').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const t = btn.getAttribute('data-tour');
+          activeTour = t || null;
+          applyTourFilter();
+          dropdown.classList.remove('open');
+          toggle.classList.remove('open');
+
+          dropdown.querySelectorAll('.cal-tour-option').forEach(function(b) {
+            b.classList.remove('active');
+          });
+          if (activeTour) {
+            btn.classList.add('active');
+          }
+        });
+      });
+
+      // Закрытие при клике вне
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.cal-tour-wrapper')) {
+          dropdown.classList.remove('open');
+          toggle.classList.remove('open');
+        }
+      });
     })();
 
     // ===== Фильтр команд в календаре =====

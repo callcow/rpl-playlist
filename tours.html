@@ -89,7 +89,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 17:45 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 17:55 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -342,6 +342,78 @@
           if (pastHeaderTeam) pastHeaderTeam.textContent = ' · 4K UHD';
         }
       }
+    })();
+
+      // ===== Фильтр по туру в календаре =====
+    (function() {
+      const toggle = document.getElementById('calTourToggle');
+      const dropdown = document.getElementById('calTourDropdown');
+      const valueEl = document.getElementById('calTourToggleValue');
+      if (!toggle || !dropdown) return;
+
+      let activeTour = null;
+
+      function applyTourFilter() {
+        const allMatches = document.querySelectorAll('.cal-tour-group .cal-match');
+        allMatches.forEach(function(el) {
+          if (!activeTour) {
+            el.style.display = '';
+          } else {
+            const t = el.getAttribute('data-tour') || '';
+            el.style.display = (t === activeTour) ? '' : 'none';
+          }
+        });
+
+        // Скрываем пустые туры
+        document.querySelectorAll('.cal-tour-group').forEach(function(group) {
+          const visible = group.querySelectorAll('.cal-match:not([style*="display: none"])').length;
+          group.style.display = visible > 0 ? '' : 'none';
+        });
+
+        // Скрываем пустые месяцы
+        document.querySelectorAll('.cal-month').forEach(function(month) {
+          const visible = month.querySelectorAll('.cal-match:not([style*="display: none"])').length;
+          month.style.display = visible > 0 ? '' : 'none';
+        });
+
+        // Обновляем текст на кнопке
+        if (valueEl) {
+          valueEl.textContent = activeTour ? activeTour : 'Все';
+        }
+        toggle.classList.toggle('active', !!activeTour);
+      }
+
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+        toggle.classList.toggle('open');
+      });
+
+      dropdown.querySelectorAll('.cal-tour-option').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const t = btn.getAttribute('data-tour');
+          activeTour = t || null;
+          applyTourFilter();
+          dropdown.classList.remove('open');
+          toggle.classList.remove('open');
+
+          dropdown.querySelectorAll('.cal-tour-option').forEach(function(b) {
+            b.classList.remove('active');
+          });
+          if (activeTour) {
+            btn.classList.add('active');
+          }
+        });
+      });
+
+      // Закрытие при клике вне
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.cal-tour-wrapper')) {
+          dropdown.classList.remove('open');
+          toggle.classList.remove('open');
+        }
+      });
     })();
 
     // ===== Фильтр команд в календаре =====
