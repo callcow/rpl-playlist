@@ -127,7 +127,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 15:53 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 16:02 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -434,8 +434,8 @@
         });
       });
 
-      if (resetBtn) {
-        resetBtn.addEventListener('click', function() {
+            if (resetBtn) {
+     resetBtn.addEventListener('click', function() {
           activeTeam = null;
           filterBar.querySelectorAll('.cal-team-filter').forEach(function(b) {
             b.classList.remove('active');
@@ -443,13 +443,12 @@
           applyFilter();
         });
       }
-    })();
 
       // Скролл панели команд кнопками-стрелками
       const prevBtn = document.getElementById('calTeamsPrev');
       const nextBtn = document.getElementById('calTeamsNext');
 
-      if (prevBtn && nextBtn && filterBar) {
+      if (prevBtn && nextBtn) {
         prevBtn.addEventListener('click', function() {
           filterBar.scrollBy({ left: -200, behavior: 'smooth' });
         });
@@ -457,6 +456,7 @@
           filterBar.scrollBy({ left: 200, behavior: 'smooth' });
         });
       }
+    })();
 
         // ===== Прокрутка якорного матча в центр экрана =====
     (function() {
