@@ -88,7 +88,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 18:54 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 19:11 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -148,6 +148,7 @@
       const searchBoxLogo = document.getElementById('searchBoxLogo');
       const suggestBox = document.getElementById('searchSuggestions');
       const allTeams = [{"name": "Акрон", "logo": "logo/akron.svg"}, {"name": "Ахмат", "logo": "logo/akhmat.svg"}, {"name": "Балтика", "logo": "logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "logo/zenit.svg"}, {"name": "Краснодар", "logo": "logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "logo/orenburg.svg"}, {"name": "Родина", "logo": "logo/rodina.svg"}, {"name": "Ростов", "logo": "logo/rostov.svg"}, {"name": "Рубин", "logo": "logo/rubin.svg"}, {"name": "Спартак", "logo": "logo/spartak.svg"}, {"name": "Факел", "logo": "logo/fakel.svg"}, {"name": "ЦСКА", "logo": "logo/cska.svg"}];
+      const pagePrefix = "";
 
       function setSearchLogo(teamName) {
         if (!searchBox || !searchBoxLogo) return;
@@ -230,7 +231,7 @@
         }
 
         suggestBox.innerHTML = matches.map(function(t) {
-          return '<a class="search-suggestion" href="index.html?team=' + encodeURIComponent(t.name) + '" data-team="' + t.name + '">' +
+          return '<a class="search-suggestion" href="' + pagePrefix + 'index.html?team=' + encodeURIComponent(t.name) + '" data-team="' + t.name + '">' +
             '<span class="search-suggestion-logo"><img src="' + t.logo + '" alt=""></span>' +
             '<span class="search-suggestion-name">' + t.name + '</span>' +
           '</a>';
