@@ -512,6 +512,15 @@ body.light .topbar-search .search-suggestions {
   background: rgba(168, 85, 247, 0.12);
   border: 1px solid rgba(168, 85, 247, 0.35);
   color: var(--neon-3);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+a.tag-tour:hover {
+  background: rgba(168, 85, 247, 0.25);
+  border-color: var(--neon-3);
+  color: #fff;
 }
 
 .tag-4k {
