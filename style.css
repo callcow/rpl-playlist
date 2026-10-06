@@ -945,7 +945,7 @@ body,
     padding: 8px 10px;
   }
 
-  .topbar-search {
+   .topbar-search {
     display: flex;
     order: 10;
     flex-basis: 100%;
@@ -954,11 +954,15 @@ body,
     position: relative;
     align-items: center;
     max-height: 0;
-    overflow: hidden;
     opacity: 0;
     margin-top: 0;
     margin-bottom: 0;
     transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.3s ease;
+    overflow: visible;
+  }
+
+  .topbar-search:not(.expanded) {
+    pointer-events: none;
   }
 
     .topbar-search.expanded {
