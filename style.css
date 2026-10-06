@@ -54,7 +54,21 @@ body {
   overflow-x: hidden;
   transition: background 0.3s, color 0.3s;
 }
+.cal-month-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
 
+.cal-month-row .cal-month-title {
+  margin-bottom: 0;
+}
+
+.cal-month-row .cal-tour-title {
+  margin-bottom: 0;
+}
 .container { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
 .topbar {
   display: flex;
@@ -504,11 +518,12 @@ body {
 .cal-month { margin-bottom: 24px; }
 
 .cal-month-title {
-  font-size: 16px; font-weight: 900; color: var(--neon);
-  margin-bottom: 12px; padding: 8px 14px; display: inline-block;
+  font-size: 12px; font-weight: 900; color: var(--neon);
+  margin-bottom: 12px; padding: 6px 12px; display: inline-block;
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.3);
-  border-radius: 10px; text-transform: capitalize;
+  border-radius: 8px; text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
 .cal-match {
@@ -581,16 +596,22 @@ a.cal-team:hover { color: var(--neon); }
 
 .cal-score {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 56px;
-  padding: 5px 10px;
+  gap: 2px;
+  min-width: 44px;
+  padding: 6px 10px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 900;
   letter-spacing: 0.5px;
   text-align: center;
   font-variant-numeric: tabular-nums;
+}
+
+.cal-score-num {
+  line-height: 1.1;
 }
 
 .cal-score.cal-score-final {
@@ -717,12 +738,17 @@ a.cal-team:hover { color: var(--neon); }
   .tour-badge { height: 36px; padding: 0 14px; }
   .tour-badge-value { font-size: 16px; }
   .nav-tabs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 6px;
     padding: 4px;
     height: auto;
     overflow-x: visible;
+  }
+  .nav-tab {
+    flex: 0 0 calc(33.333% - 4px);
+    max-width: calc(33.333% - 4px);
   }
   .match { padding: 14px; gap: 12px; }
   .match-day { font-size: 13px; }
@@ -765,9 +791,10 @@ a.cal-team:hover { color: var(--neon); }
   .cal-day { font-size: 20px; }
   .cal-team-name { font-size: 13px; }
   .cal-score {
-    font-size: 13px;
-    padding: 5px 10px;
-    min-width: 52px;
+    font-size: 12px;
+    padding: 4px 8px;
+    min-width: 40px;
+    gap: 1px;
   }
   .cal-score.cal-score-upcoming {
     font-size: 12px;
