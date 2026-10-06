@@ -250,16 +250,6 @@ body {
 
 .brand:hover .brand-name { color: var(--neon); }
 
-.theme-toggle {
-  display: flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px; border-radius: 6px;
-  background: rgba(0, 255, 213, 0.1);
-  border: 1px solid rgba(0, 255, 213, 0.3);
-  color: var(--neon);
-  font-size: 16px;
-  cursor: pointer;
-  flex-shrink: 0;
-}
 
 .how-link {
   color: var(--neon);
@@ -533,76 +523,6 @@ body.light .topbar-search .search-suggestions {
   background: linear-gradient(180deg, var(--neon), var(--neon-3));
   border-radius: 2px;
 }
-
-/* ===== Поиск (базовый, вне топбара) ===== */
-.search-box { position: relative; margin-bottom: 12px; }
-
-.search-box input {
-  width: 100%; padding: 14px 44px 14px 18px;
-  background: var(--match-bg); border: 1px solid var(--border);
-  border-radius: 8px; color: var(--text);
-  font-size: 15px; font-family: inherit;
-  transition: border-color 0.2s, padding-left 0.2s;
-}
-
-.search-box.has-logo input { padding-left: 52px; }
-
-.search-box-logo {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.search-box input:focus { outline: none; border-color: var(--neon); }
-
-.search-box input::placeholder { color: var(--text-dim); }
-
-.search-clear {
-  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-  background: transparent; border: none; color: var(--text-dim);
-  font-size: 18px; cursor: pointer; padding: 6px 10px;
-}
-
-.search-clear:hover { color: var(--neon); }
-
-.search-suggestions {
-  position: absolute; top: 100%; left: 0; right: 0;
-  background: var(--topbar-bg); border: 1px solid var(--border);
-  border-radius: 8px; margin-top: 4px;
-  max-height: 280px; overflow-y: auto;
-  z-index: 100; display: none;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-.search-suggestions.active { display: block; }
-
-.search-suggestion {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 16px; cursor: pointer;
-  color: var(--text); font-size: 14px; font-weight: 700;
-  transition: background 0.15s;
-  border-bottom: 1px solid var(--border);
-}
-
-.search-suggestion:last-child { border-bottom: none; }
-
-.search-suggestion:hover { background: rgba(0, 255, 213, 0.1); color: var(--neon); }
-
-.search-suggestion-logo {
-  width: 22px; height: 22px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-
-.search-suggestion-logo img { width: 100%; height: 100%; object-fit: contain; }
-
-.search-suggestion-name { flex: 1; }
 
 /* ===== Подсветка якорного матча ===== */
 .match:target {
@@ -1112,23 +1032,6 @@ a.cal-team:hover { color: var(--neon); }
   font-weight: 700;
 }
 
-/* ===== Плавное переключение темы ===== */
-body,
-.topbar,
-.nav-tabs,
-.nav-tab,
-.match,
-.tour-card,
-.team-card,
-.cal-match,
-.search-box,
-.topbar-search input,
-.theme-toggle,
-.disclaimer,
-.footer {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
 /* ===== Мобилка ===== */
 @media (max-width: 600px) {
   body { padding: 14px 12px; }
@@ -1150,7 +1053,6 @@ body,
   .brand-logo { width: 34px; height: 34px; border-radius: 6px; }
   .brand-name { font-size: 12px; }
   .brand-sub { font-size: 9px; letter-spacing: 1.2px; }
-  .theme-toggle { width: 30px; height: 30px; font-size: 14px; border-radius: 6px; }
   .tour-badge { height: 30px; padding: 0 12px; border-radius: 6px; }
   .tour-badge-value { font-size: 14px; }
    /* Панель команд на мобилке — на 2-й строке, скроллится вбок */
