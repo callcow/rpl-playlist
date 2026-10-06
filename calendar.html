@@ -34,6 +34,60 @@
     <div class="section-head">
       <div class="section-head-title">Календарь матчей</div>
     </div>
+
+    <div class="cal-teams-filter" id="calTeamsFilter">
+      <button class="cal-team-filter" data-team="акрон" title="Акрон">
+          <img src="logo/akron.svg" alt="Акрон">
+        </button>
+<button class="cal-team-filter" data-team="ахмат" title="Ахмат">
+          <img src="logo/akhmat.svg" alt="Ахмат">
+        </button>
+<button class="cal-team-filter" data-team="балтика" title="Балтика">
+          <img src="logo/baltika.svg" alt="Балтика">
+        </button>
+<button class="cal-team-filter" data-team="динамо махачкала" title="Динамо Махачкала">
+          <img src="logo/dynamomaxachkala.svg" alt="Динамо Махачкала">
+        </button>
+<button class="cal-team-filter" data-team="динамо москва" title="Динамо Москва">
+          <img src="logo/dynamomoscov.svg" alt="Динамо Москва">
+        </button>
+<button class="cal-team-filter" data-team="зенит" title="Зенит">
+          <img src="logo/zenit.svg" alt="Зенит">
+        </button>
+<button class="cal-team-filter" data-team="краснодар" title="Краснодар">
+          <img src="logo/krasnodar.svg" alt="Краснодар">
+        </button>
+<button class="cal-team-filter" data-team="крылья советов" title="Крылья Советов">
+          <img src="logo/krylyasovetov.svg" alt="Крылья Советов">
+        </button>
+<button class="cal-team-filter" data-team="локомотив" title="Локомотив">
+          <img src="logo/lokomotiv.svg" alt="Локомотив">
+        </button>
+<button class="cal-team-filter" data-team="оренбург" title="Оренбург">
+          <img src="logo/orenburg.svg" alt="Оренбург">
+        </button>
+<button class="cal-team-filter" data-team="родина" title="Родина">
+          <img src="logo/rodina.svg" alt="Родина">
+        </button>
+<button class="cal-team-filter" data-team="ростов" title="Ростов">
+          <img src="logo/rostov.svg" alt="Ростов">
+        </button>
+<button class="cal-team-filter" data-team="рубин" title="Рубин">
+          <img src="logo/rubin.svg" alt="Рубин">
+        </button>
+<button class="cal-team-filter" data-team="спартак" title="Спартак">
+          <img src="logo/spartak.svg" alt="Спартак">
+        </button>
+<button class="cal-team-filter" data-team="факел" title="Факел">
+          <img src="logo/fakel.svg" alt="Факел">
+        </button>
+<button class="cal-team-filter" data-team="цска" title="ЦСКА">
+          <img src="logo/cska.svg" alt="ЦСКА">
+        </button>
+
+      <button class="cal-team-filter cal-team-filter-reset" id="calTeamReset" title="Показать все">✕</button>
+    </div>
+
     <div class="cal-month">
         <div class="cal-month-row">
           <div class="cal-month-title">Октябрь</div>
@@ -804,7 +858,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 15:24 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 15:33 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1056,6 +1110,72 @@
       }
     })();
 
+    // ===== Фильтр команд в календаре =====
+    (function() {
+      const filterBar = document.getElementById('calTeamsFilter');
+      if (!filterBar) return;
+
+      const resetBtn = document.getElementById('calTeamReset');
+      let activeTeam = null;
+
+      function applyFilter() {
+        const allCal = document.querySelectorAll('.cal-tour-group .cal-match');
+        allCal.forEach(function(el) {
+          if (!activeTeam) {
+            el.style.display = '';
+          } else {
+            const names = Array.from(el.querySelectorAll('.cal-team-name')).map(function(n) {
+              return n.textContent.trim().toLowerCase();
+            });
+            el.style.display = names.includes(activeTeam) ? '' : 'none';
+          }
+        });
+
+        document.querySelectorAll('.cal-tour-group').forEach(function(group) {
+          const visible = group.querySelectorAll('.cal-match:not([style*="display: none"])').length;
+          group.style.display = visible > 0 ? '' : 'none';
+        });
+
+        document.querySelectorAll('.cal-month').forEach(function(month) {
+          const visible = month.querySelectorAll('.cal-match:not([style*="display: none"])').length;
+          month.style.display = visible > 0 ? '' : 'none';
+        });
+
+        if (resetBtn) {
+          resetBtn.style.display = activeTeam ? 'flex' : 'none';
+        }
+      }
+
+      filterBar.querySelectorAll('.cal-team-filter:not(.cal-team-filter-reset)').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const team = btn.getAttribute('data-team');
+          if (activeTeam === team) {
+            activeTeam = null;
+          } else {
+            activeTeam = team;
+          }
+
+          filterBar.querySelectorAll('.cal-team-filter').forEach(function(b) {
+            b.classList.remove('active');
+          });
+          if (activeTeam) {
+            btn.classList.add('active');
+          }
+          applyFilter();
+        });
+      });
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
+          activeTeam = null;
+          filterBar.querySelectorAll('.cal-team-filter').forEach(function(b) {
+            b.classList.remove('active');
+          });
+          applyFilter();
+        });
+      }
+    })();
+
         // ===== Прокрутка якорного матча в центр экрана =====
     (function() {
       // Отключаем авто-восстановление скролла браузером
@@ -1063,20 +1183,7 @@
         history.scrollRestoration = 'manual';
       }
 
-      function scrollToAnchor() {
-        const hash = window.location.hash;
-        if (!hash) return;
-
-        const id = decodeURIComponent(hash.slice(1));
-        const el = document.getElementById(id);
-        if (!el) return;
-
-        const y = el.getBoundingClientRect().top + window.pageYOffset - (window.innerHeight / 2) + (el.offsetHeight / 2);
-        window.scrollTo({ top: y, behavior: 'auto' });
-      }
-
-            // Скроллим один раз — после полной загрузки страницы
-      function scrollToAnchor() {
+        function scrollToAnchor() {
         const hash = window.location.hash;
         if (!hash) return;
 
