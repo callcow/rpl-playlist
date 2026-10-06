@@ -127,7 +127,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 18:09 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 18:39 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -496,6 +496,79 @@
       // На случай перехода по внутренней ссылке уже на открытой странице
       window.addEventListener('hashchange', scrollToAnchor);
       })();
+
+    // ===== Отсчёт до матча =====
+    (function() {
+      const QUALITY_REVEAL_MIN = 15; // за сколько минут до матча показывать кнопки
+      const matches = document.querySelectorAll('.match[data-kickoff]');
+      if (!matches.length) return;
+
+      const timers = [];
+
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+      function formatRemaining(ms) {
+        if (ms <= 0) return '0м';
+        const totalSec = Math.floor(ms / 1000);
+        const days = Math.floor(totalSec / 86400);
+        const hours = Math.floor((totalSec % 86400) / 3600);
+        const minutes = Math.floor((totalSec % 3600) / 60);
+        const seconds = totalSec % 60;
+
+        const parts = [];
+        if (days > 0) parts.push(days + 'д');
+        if (hours > 0 || days > 0) parts.push(hours + 'ч');
+        if (minutes > 0 || hours > 0 || days > 0) parts.push(minutes + 'м');
+        parts.push(pad(seconds) + 'с');
+        return parts.join(' ');
+      }
+
+      function updateMatch(el) {
+        const iso = el.getAttribute('data-kickoff');
+        if (!iso) return;
+
+        const kickoff = new Date(iso).getTime();
+        const now = Date.now();
+        const diff = kickoff - now;
+
+        const qualityRow = el.querySelector('[data-quality-row]');
+        const countdown = el.querySelector('.quality-countdown');
+        if (!qualityRow || !countdown) return;
+
+        // Если матч уже прошёл (diff < 0) — показываем кнопки сразу
+        if (diff <= 0) {
+          qualityRow.style.display = '';
+          countdown.style.display = 'none';
+          return;
+        }
+
+        // Если до матча меньше QUALITY_REVEAL_MIN минут — показываем кнопки
+        if (diff <= QUALITY_REVEAL_MIN * 60 * 1000) {
+          qualityRow.style.display = '';
+          countdown.style.display = 'none';
+          return;
+        }
+
+        // Иначе — плашка с отсчётом
+        qualityRow.style.display = 'none';
+        countdown.style.display = '';
+
+        const valueEl = countdown.querySelector('.countdown-value');
+        if (valueEl) valueEl.textContent = formatRemaining(diff);
+      }
+
+      matches.forEach(function(el) {
+        updateMatch(el);
+        // Обновляем каждую секунду
+        const t = setInterval(function() { updateMatch(el); }, 1000);
+        timers.push(t);
+      });
+    })();
+
+    // ===== Кнопка "Наверх" =====
+    (function() {
+      const btn = document.getElementById('scrollTop');
+      if (!btn) return;
 
     // ===== Кнопка "Наверх" =====
     (function() {
