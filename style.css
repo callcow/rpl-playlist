@@ -170,6 +170,7 @@ body {
 .cal-tour-selector {
   position: relative;
   display: inline-flex;
+  flex-shrink: 0;
 }
 
 .cal-tour-selector-btn {
@@ -178,10 +179,12 @@ body {
   color: var(--neon-3);
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  padding: 6px 12px;
+  padding: 6px 10px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  height: auto;
+  line-height: 1;
   background: rgba(168, 85, 247, 0.08);
   border: 1px solid rgba(168, 85, 247, 0.3);
   border-radius: 5px;
@@ -189,6 +192,14 @@ body {
   font-family: inherit;
   transition: background 0.2s, border-color 0.2s, color 0.2s;
   white-space: nowrap;
+  box-sizing: border-box;
+  max-width: 90px;
+  overflow: hidden;
+}
+
+.cal-tour-selector-btn #calTourSelectorLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cal-tour-selector-btn:hover {
