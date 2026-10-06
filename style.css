@@ -166,7 +166,148 @@ body {
   color: #fff;
   border-color: var(--neon-2);
 }
+/* ===== Выпадающий селектор тура в календаре ===== */
+.cal-tour-selector {
+  position: relative;
+  display: inline-flex;
+}
 
+.cal-tour-selector-btn {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--neon-3);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.cal-tour-selector-btn:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: var(--neon-3);
+  color: #fff;
+}
+
+.cal-tour-selector.open .cal-tour-selector-btn {
+  background: rgba(168, 85, 247, 0.25);
+  border-color: var(--neon-3);
+  color: #fff;
+}
+
+.cal-tour-selector-btn .caret {
+  font-size: 9px;
+  opacity: 0.8;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+
+.cal-tour-selector.open .cal-tour-selector-btn .caret {
+  transform: rotate(180deg);
+}
+
+.cal-tour-selector-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 180px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 6px;
+  background: rgba(20, 25, 40, 0.98);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: 8px;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(168, 85, 247, 0.2),
+    0 0 20px rgba(168, 85, 247, 0.15);
+  z-index: 150;
+  display: none;
+  animation: tourListIn 0.18s ease-out;
+  scrollbar-width: thin;
+}
+
+.cal-tour-selector.open .cal-tour-selector-list {
+  display: block;
+}
+
+.cal-tour-selector-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cal-tour-selector-list::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.4);
+  border-radius: 3px;
+}
+
+@keyframes tourListIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.cal-tour-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-dim);
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  letter-spacing: 0.5px;
+}
+
+.cal-tour-option:hover {
+  background: rgba(168, 85, 247, 0.15);
+  color: #fff;
+}
+
+.cal-tour-option.active {
+  background: linear-gradient(135deg, rgba(0, 255, 213, 0.15), rgba(168, 85, 247, 0.15));
+  color: var(--neon);
+  border: 1px solid rgba(0, 255, 213, 0.4);
+}
+
+.cal-tour-option .tour-option-status {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+  text-transform: none;
+  letter-spacing: 0.3px;
+}
+
+.cal-tour-option.active .tour-option-status {
+  background: rgba(0, 255, 213, 0.15);
+  color: var(--neon);
+}
+
+body.light .cal-tour-selector-list {
+  background: #ffffff;
+  border-color: rgba(140, 60, 220, 0.35);
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.15),
+    0 0 0 1px rgba(140, 60, 220, 0.1);
+}
 /* ===== Стрелки для панели команд ===== */
 .cal-teams-wrapper {
   display: flex;
