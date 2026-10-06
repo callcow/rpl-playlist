@@ -54,44 +54,24 @@ body {
   overflow-x: hidden;
   transition: background 0.3s, color 0.3s;
 }
-.cal-month-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
-}
 
-.cal-month-row .cal-month-title {
-  margin-bottom: 0;
-}
-
-.cal-month-row .cal-tour-title {
-  margin-bottom: 0;
-}
 .container { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
 .topbar {
   display: flex;
   align-items: center;
-  gap: 16px;
-  min-height: 56px;
-  padding: 8px 14px;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 18px;
   background: var(--topbar-bg);
   border: 1px solid var(--border);
   border-radius: 14px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: inherit;
-  flex-shrink: 0;
-}
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+
 .brand-logo {
-  width: 36px; height: 36px; border-radius: 12px;
+  width: 48px; height: 48px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; overflow: hidden;
   padding: 2px;
@@ -99,20 +79,17 @@ body {
 
 .brand-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
-.brand-name { font-size: 14px; font-weight: 900; color: var(--text); line-height: 1.2; transition: color 0.2s; }
+.brand-name { font-size: 16px; font-weight: 900; color: var(--text); line-height: 1.2; transition: color 0.2s; }
 
-.brand-sub { font-size: 10px; color: var(--neon); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-top: 1px; }
+.brand-sub { font-size: 11px; color: var(--neon); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-top: 2px; }
+
 .brand:hover .brand-name { color: var(--neon); }
 
 .theme-toggle {
   display: flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px; border-radius: 10px;
-  background: rgba(0, 255, 213, 0.1);
-  border: 1px solid rgba(0, 255, 213, 0.3);
-  color: var(--neon);
-  font-size: 16px;
-  cursor: pointer;
-  flex-shrink: 0;
+  width: 42px; height: 42px; border-radius: 12px;
+  background: rgba(0, 255, 213, 0.1); border: 1px solid rgba(0, 255, 213, 0.3);
+  color: var(--neon); font-size: 18px; cursor: pointer; flex-shrink: 0;
 }
 
 .how-link {
@@ -128,36 +105,33 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 32px;
-  padding: 0 16px;
+  height: 42px;
+  padding: 0 22px;
   background: linear-gradient(135deg, rgba(0, 255, 213, 0.1), rgba(168, 85, 247, 0.1));
   border: 1px solid rgba(0, 255, 213, 0.4);
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
-.tour-badge-value { font-size: 18px; font-weight: 900; color: var(--text); letter-spacing: -0.5px; line-height: 1; }
+.tour-badge-value { font-size: 26px; font-weight: 900; color: var(--text); letter-spacing: -1px; line-height: 1; }
 
 .nav-tabs {
   display: flex;
-  gap: 4px;
-  flex: 1;
-  justify-content: center;
-  padding: 0;
-  height: auto;
-  background: transparent;
-  border: none;
-  border-radius: 0;
+  gap: 6px;
+  margin-bottom: 24px;
+  padding: 4px;
+  height: 56px;
+  background: var(--topbar-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
   overflow-x: auto;
-  scrollbar-width: none;
 }
 
-.nav-tabs::-webkit-scrollbar { display: none; }
 .nav-tab {
-  flex: 0 0 auto;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 14px;
+  height: 100%;
   border-radius: 10px;
   text-decoration: none;
   color: var(--text-dim);
@@ -188,7 +162,7 @@ body {
   border-radius: 2px;
 }
 
-.search-box { position: relative; margin-bottom: 12px; }
+.search-box { position: relative; margin-bottom: 20px; }
 
 .search-box input {
   width: 100%; padding: 14px 44px 14px 18px;
@@ -530,12 +504,11 @@ body {
 .cal-month { margin-bottom: 24px; }
 
 .cal-month-title {
-  font-size: 12px; font-weight: 900; color: var(--neon);
-  margin-bottom: 12px; padding: 6px 12px; display: inline-block;
+  font-size: 16px; font-weight: 900; color: var(--neon);
+  margin-bottom: 12px; padding: 8px 14px; display: inline-block;
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.3);
-  border-radius: 8px; text-transform: uppercase;
-  letter-spacing: 1.5px;
+  border-radius: 10px; text-transform: capitalize;
 }
 
 .cal-match {
@@ -608,22 +581,16 @@ a.cal-team:hover { color: var(--neon); }
 
 .cal-score {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  min-width: 44px;
-  padding: 6px 10px;
+  min-width: 56px;
+  padding: 5px 10px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 900;
   letter-spacing: 0.5px;
   text-align: center;
   font-variant-numeric: tabular-nums;
-}
-
-.cal-score-num {
-  line-height: 1.1;
 }
 
 .cal-score.cal-score-final {
@@ -737,12 +704,7 @@ a.cal-team:hover { color: var(--neon); }
 
 @media (max-width: 600px) {
   body { padding: 14px 12px; }
-  .topbar {
-    flex-wrap: wrap;
-    gap: 6px;
-    padding: 8px 12px;
-    min-height: 44px;
-  }
+  .topbar { height: 48px; padding: 0 14px; }
   .how-it-works { padding: 16px 18px; }
   .how-title { font-size: 14px; }
   .how-text, .how-steps, .how-hint, .how-subtitle { font-size: 12px; }
@@ -754,19 +716,13 @@ a.cal-team:hover { color: var(--neon); }
   .theme-toggle { width: 36px; height: 36px; font-size: 16px; }
   .tour-badge { height: 36px; padding: 0 14px; }
   .tour-badge-value { font-size: 16px; }
-  .topbar > .brand { order: 1; }
-  .topbar > .theme-toggle { order: 2; margin-left: auto; }
-  .topbar > .nav-tabs {
-    order: 3;
-    flex-basis: 100%;
-    justify-content: flex-start;
-    gap: 4px;
-    overflow-x: auto;
-    padding-bottom: 2px;
-  }
-  .nav-tab {
-    padding: 6px 10px;
-    font-size: 12px;
+  .nav-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    padding: 4px;
+    height: auto;
+    overflow-x: visible;
   }
   .match { padding: 14px; gap: 12px; }
   .match-day { font-size: 13px; }
@@ -809,10 +765,9 @@ a.cal-team:hover { color: var(--neon); }
   .cal-day { font-size: 20px; }
   .cal-team-name { font-size: 13px; }
   .cal-score {
-    font-size: 12px;
-    padding: 4px 8px;
-    min-width: 40px;
-    gap: 1px;
+    font-size: 13px;
+    padding: 5px 10px;
+    min-width: 52px;
   }
   .cal-score.cal-score-upcoming {
     font-size: 12px;
