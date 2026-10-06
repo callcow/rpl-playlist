@@ -937,9 +937,11 @@ body,
     height: 15px;
   }
 
-  .topbar {
+   .topbar {
     flex-wrap: wrap;
     align-items: center;
+    padding: 8px 10px;
+    min-height: 48px;
   }
 
   .topbar-search {
