@@ -89,7 +89,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 14:50 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 15:04 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -118,6 +118,25 @@
       const searchToggle = document.getElementById('searchToggle');
       const searchInput = document.getElementById('searchInput');
 
+      function closeSearch() {
+        if (!searchBox.classList.contains('expanded')) return;
+        if (searchBox.classList.contains('closing')) return;
+
+        searchBox.classList.add('closing');
+        searchBox.classList.remove('expanded');
+
+        // Ждём завершения анимации и только потом убираем из DOM
+        setTimeout(function() {
+          searchBox.classList.remove('closing');
+        }, 300);
+      }
+
+      function openSearch() {
+        searchBox.classList.remove('closing');
+        searchBox.classList.add('expanded');
+        setTimeout(function() { searchInput.focus(); }, 100);
+      }
+
       if (searchToggle && searchBox && searchInput) {
         searchToggle.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -125,14 +144,14 @@
           if (searchBox.classList.contains('expanded') && searchInput.value.trim() !== '') {
             searchInput.value = '';
             searchBox.classList.remove('has-logo');
-            searchBox.classList.remove('expanded');
-            // Триггерим фильтр через input event
             searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+            closeSearch();
             return;
           }
-          searchBox.classList.toggle('expanded');
           if (searchBox.classList.contains('expanded')) {
-            setTimeout(function() { searchInput.focus(); }, 100);
+            closeSearch();
+          } else {
+            openSearch();
           }
         });
 
@@ -140,13 +159,12 @@
         document.addEventListener('click', function(e) {
           if (!e.target.closest('.topbar-search') && !e.target.closest('.search-toggle')) {
             if (searchInput.value.trim() === '') {
-              searchBox.classList.remove('expanded');
+              closeSearch();
             }
           }
         });
       }
     })();
-
     (function() {
       const input = document.getElementById('searchInput');
       const clearBtn = document.getElementById('searchClear');
