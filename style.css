@@ -587,7 +587,8 @@ a.tag-tour:hover {
   align-items: center;
   justify-content: center;
   min-width: 76px;
-  padding: 8px 14px;
+  height: 40px;
+  padding: 0 14px;
   border-radius: 6px;
   font-size: 22px;
   font-weight: 900;
@@ -617,7 +618,7 @@ a.match-score:hover {
   color: var(--text-dim);
   font-size: 15px;
   font-weight: 800;
-  padding: 6px 14px;
+  padding: 0 14px;
 }
 
 .match-bottom {
@@ -1103,8 +1104,8 @@ body,
   .match-main { gap: 10px; }
   .match-team { font-size: 13px; gap: 6px; line-height: 1.15; }
   .team-logo { width: 26px; height: 26px; padding: 2px; }
-  .match-score { min-width: 62px; font-size: 18px; padding: 6px 10px; }
-  .match-score.match-score-upcoming { font-size: 13px; padding: 5px 10px; }
+   .match-score { min-width: 62px; height: 36px; font-size: 18px; padding: 0 10px; }
+  .match-score.match-score-upcoming { font-size: 13px; padding: 0 10px; height: 36px; }
   .match-bottom {
     flex-direction: column;
     align-items: center;
