@@ -1581,7 +1581,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">06.10.2026 17:37 МСК</span><br>
+      Обновлено <span class="neon">06.10.2026 17:43 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1836,66 +1836,50 @@
       }
     })();
 
-        // ===== Фильтр по месяцу и туру в календаре =====
+    // ===== Фильтр по турам в календаре =====
     (function() {
-      const monthSelect = document.getElementById('calMonthSelect');
       const tourSelect = document.getElementById('calTourSelect');
-      const monthValue = document.getElementById('calMonthValue');
-      const tourValue = document.getElementById('calTourValue');
+      const tourValue = document.getElementById('calTourDropdownValue');
+      const tourDropdownBtn = document.getElementById('calTourDropdownBtn');
 
-      if (monthSelect && tourSelect) {
-        const monthDropdown = monthSelect.closest('.cal-dropdown');
-        const tourDropdown = tourSelect.closest('.cal-dropdown');
+      if (!tourSelect) return;
 
-        if (monthDropdown) {
-          monthDropdown.querySelector('.cal-dropdown-btn').addEventListener('click', function(e) {
-            e.stopPropagation();
-            monthSelect.click();
-          });
-        }
-        if (tourDropdown) {
-          tourDropdown.querySelector('.cal-dropdown-btn').addEventListener('click', function(e) {
-            e.stopPropagation();
-            tourSelect.click();
-          });
-        }
-
-        function applyMonthTourFilter() {
-          const m = monthSelect.value;
-          const t = tourSelect.value;
-
-          document.querySelectorAll('.cal-month').forEach(function(monthEl) {
-            const monthName = monthEl.getAttribute('data-month');
-            monthEl.style.display = (m === '' || monthName === m) ? '' : 'none';
-          });
-
-          document.querySelectorAll('.cal-tour-group').forEach(function(tourEl) {
-            const tourName = tourEl.getAttribute('data-tour');
-            tourEl.style.display = (t === '' || tourName === t) ? '' : 'none';
-          });
-        }
-
-        monthSelect.addEventListener('change', function() {
-          monthValue.textContent = monthSelect.value || 'Месяц';
-          applyMonthTourFilter();
-        });
-
-        tourSelect.addEventListener('change', function() {
-          const opt = tourSelect.options[tourSelect.selectedIndex];
-          const num = opt.getAttribute('data-num') || 'Тур';
-          tourValue.textContent = num;
-          applyMonthTourFilter();
+      if (tourDropdownBtn) {
+        tourDropdownBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          tourSelect.click();
         });
       }
 
-      // ===== Фильтр команд в календаре =====
+      tourSelect.addEventListener('change', function() {
+        const opt = tourSelect.options[tourSelect.selectedIndex];
+        const num = opt.getAttribute('data-num') || 'Тур';
+        const value = tourSelect.value;
+
+        if (tourValue) tourValue.textContent = value === '' ? 'Тур' : num;
+
+        document.querySelectorAll('.cal-tour-group').forEach(function(tourEl) {
+          const tourName = tourEl.getAttribute('data-tour');
+          tourEl.style.display = (value === '' || tourName === value) ? '' : 'none';
+        });
+
+        document.querySelectorAll('.cal-month').forEach(function(monthEl) {
+          const visible = monthEl.querySelectorAll('.cal-tour-group:not([style*="display: none"])').length;
+          monthEl.style.display = visible > 0 ? '' : 'none';
+        });
+      });
+    })();
+
+
+    // ===== Фильтр команд в календаре =====
+    (function() {
       const filterBar = document.getElementById('calTeamsFilter');
       if (!filterBar) return;
 
       const resetBtn = document.getElementById('calTeamReset');
       let activeTeam = null;
 
-      function applyTeamFilter() {
+      function applyFilter() {
         const allCal = document.querySelectorAll('.cal-tour-group .cal-match');
         allCal.forEach(function(el) {
           if (!activeTeam) {
@@ -1938,20 +1922,21 @@
           if (activeTeam) {
             btn.classList.add('active');
           }
-          applyTeamFilter();
+          applyFilter();
         });
       });
 
-      if (resetBtn) {
-        resetBtn.addEventListener('click', function() {
+            if (resetBtn) {
+     resetBtn.addEventListener('click', function() {
           activeTeam = null;
           filterBar.querySelectorAll('.cal-team-filter').forEach(function(b) {
             b.classList.remove('active');
           });
-          applyTeamFilter();
+          applyFilter();
         });
       }
 
+      // Скролл панели команд кнопками-стрелками (до конца)
       const prevBtn = document.getElementById('calTeamsPrev');
       const nextBtn = document.getElementById('calTeamsNext');
 
