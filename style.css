@@ -1036,9 +1036,10 @@ a.match-score:hover {
 .cal-month-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   margin-bottom: 10px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  min-width: 0;
 }
 
 .cal-month-row .cal-month-title { margin-bottom: 0; }
@@ -1274,12 +1275,22 @@ body,
   .theme-toggle { width: 30px; height: 30px; font-size: 14px; border-radius: 6px; }
   .tour-badge { height: 30px; padding: 0 12px; border-radius: 6px; }
   .tour-badge-value { font-size: 14px; }
-   /* Панель команд на мобилке — на 2-й строке, скроллится вбок */
- .cal-teams-wrapper {
+ .cal-month-row {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .cal-tour-selector {
+    margin-left: auto;
+  }
+
+  .cal-teams-wrapper {
     margin-left: 0;
     margin-top: 6px;
     flex-basis: 100%;
     width: 100%;
+    flex: 1 1 100%;
+    justify-content: flex-start;
   }
 
   .cal-teams-filter {
