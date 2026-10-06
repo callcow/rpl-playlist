@@ -884,39 +884,28 @@ a.match-score:hover {
 .cal-month-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   margin-bottom: 10px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  scrollbar-width: none;
+  flex-wrap: wrap;
 }
 
-.cal-month-row::-webkit-scrollbar { display: none; }
+.cal-month-row .cal-month-title { margin-bottom: 0; }
 
-.cal-month-row .cal-month-title { margin-bottom: 0; flex-shrink: 0; }
+.cal-month-row .cal-tour-title { margin-bottom: 0; }
 
-.cal-month-row .cal-tour-title { margin-bottom: 0; flex-shrink: 0; }
-
-.cal-month-row .cal-teams-wrapper { flex-shrink: 0; }
 .cal-tour-group { margin-bottom: 18px; }
 
 .cal-tour-title {
-  display: inline-flex;
-  align-items: center;
-  height: 28px;
-  padding: 0 10px;
-  font-size: 11px;
-  font-weight: 900;
-  color: var(--neon-3);
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
+  font-size: 12px; font-weight: 900; color: var(--neon-3);
+  text-transform: uppercase; letter-spacing: 1.5px;
+  padding: 6px 12px; margin-bottom: 10px;
+  display: inline-flex; align-items: center; gap: 8px;
   background: rgba(168, 85, 247, 0.08);
   border: 1px solid rgba(168, 85, 247, 0.3);
-  border-radius: 6px;
+  border-radius: 5px;
   text-decoration: none;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
-  white-space: nowrap;
 }
 
 a.cal-tour-title:hover {
@@ -939,31 +928,20 @@ a.cal-tour-title:hover {
 }
 
 .cal-tour-status {
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  padding: 2px 6px;
-  margin-left: 6px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 3px;
-  text-transform: none;
+  font-size: 9px; font-weight: 800; letter-spacing: 0.5px;
+  padding: 2px 6px; background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px; text-transform: none;
 }
 
 .cal-month { margin-bottom: 24px; }
 
 .cal-month-title {
-  display: inline-flex;
-  align-items: center;
-  height: 28px;
-  padding: 0 10px;
-  font-size: 11px;
-  font-weight: 900;
-  color: var(--neon);
+  font-size: 12px; font-weight: 900; color: var(--neon);
+  margin-bottom: 12px; padding: 6px 12px; display: inline-block;
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.3);
-  border-radius: 6px;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
+  border-radius: 5px; text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
 .cal-match {
@@ -1066,134 +1044,6 @@ a.cal-team:hover { color: var(--neon); }
   padding: 4px 10px;
 }
 
-/* ===== Фильтр по туру ===== */
-.cal-tour-wrapper {
-  position: relative;
-  flex-shrink: 0;
-}
-
-.cal-tour-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  height: 28px;
-  padding: 0 10px;
-  border-radius: 6px;
-  background: rgba(168, 85, 247, 0.08);
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  color: var(--neon-3);
-  font-family: inherit;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.cal-tour-toggle:hover {
-  background: rgba(168, 85, 247, 0.18);
-  border-color: var(--neon-3);
-  color: #fff;
-}
-
-.cal-tour-toggle.active {
-  background: linear-gradient(135deg, rgba(0, 255, 213, 0.15), rgba(168, 85, 247, 0.2));
-  border-color: var(--neon);
-  color: var(--neon);
-  box-shadow: 0 0 12px rgba(0, 255, 213, 0.25);
-}
-
-.cal-tour-toggle-label {
-  opacity: 0.7;
-}
-
-
-.cal-tour-toggle-arrow {
-  transition: transform 0.2s;
-  opacity: 0.7;
-}
-
-.cal-tour-toggle.open .cal-tour-toggle-arrow {
-  transform: rotate(180deg);
-}
-
-.cal-tour-dropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  right: 0;
-  min-width: 160px;
-  max-height: 280px;
-  overflow-y: auto;
-  padding: 6px;
-  background: rgba(20, 25, 40, 0.98);
-  border: 1px solid rgba(0, 255, 213, 0.25);
-  border-radius: 8px;
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(0, 255, 213, 0.1),
-    0 0 20px rgba(0, 255, 213, 0.08);
-  z-index: 150;
-  display: none;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.cal-tour-dropdown.open {
-  display: flex;
-  animation: suggestIn 0.18s ease-out;
-}
-
-body.light .cal-tour-dropdown {
-  background: #ffffff;
-  border-color: rgba(0, 168, 150, 0.3);
-  box-shadow:
-    0 8px 24px rgba(15, 23, 42, 0.15),
-    0 0 0 1px rgba(0, 168, 150, 0.1);
-}
-
-.cal-tour-option {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 8px 12px;
-  border-radius: 5px;
-  background: transparent;
-  border: none;
-  color: var(--text);
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-  white-space: nowrap;
-}
-
-.cal-tour-option:hover {
-  background: rgba(0, 255, 213, 0.12);
-  color: var(--neon);
-}
-
-.cal-tour-option.active {
-  background: linear-gradient(135deg, rgba(0, 255, 213, 0.18), rgba(168, 85, 247, 0.18));
-  color: var(--neon);
-  box-shadow: inset 0 0 0 1px rgba(0, 255, 213, 0.4);
-}
-
-.cal-tour-option-reset {
-  color: var(--text-dim);
-  border-bottom: 1px solid var(--border);
-  border-radius: 5px 5px 0 0;
-  margin-bottom: 2px;
-}
-
-.cal-tour-option-reset:hover {
-  background: rgba(255, 0, 128, 0.12);
-  color: var(--neon-2);
-}
-
 /* ===== Футер ===== */
 .footer { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
 
@@ -1274,13 +1124,11 @@ body,
   .tour-badge-value { font-size: 14px; }
    /* Панель команд на мобилке — на 2-й строке, скроллится вбок */
  .cal-teams-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-left: auto;
-  max-width: 100%;
-  flex-shrink: 0;
-}
+    margin-left: 0;
+    margin-top: 6px;
+    flex-basis: 100%;
+    width: 100%;
+  }
 
   .cal-teams-filter {
     flex-wrap: nowrap;
@@ -1487,19 +1335,8 @@ body,
     min-width: 40px;
     gap: 1px;
   }
-    .cal-score.cal-score-upcoming {
+  .cal-score.cal-score-upcoming {
     font-size: 12px;
     padding: 4px 10px;
-  }
-
-  .cal-tour-toggle {
-    height: 26px;
-    padding: 0 8px;
-    font-size: 10px;
-  }
-
-  .cal-tour-dropdown {
-    min-width: 140px;
-    max-height: 220px;
   }
 }
