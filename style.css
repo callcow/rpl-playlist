@@ -60,19 +60,19 @@ body {
 .cal-teams-filter {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 16px;
-  padding: 8px;
+  gap: 4px;
+  padding: 4px;
+  margin-left: auto;
   background: var(--match-bg);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .cal-team-filter {
-  width: 36px;
-  height: 36px;
-  padding: 4px;
-  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  padding: 3px;
+  border-radius: 6px;
   background: transparent;
   border: 1px solid transparent;
   cursor: pointer;
@@ -81,7 +81,6 @@ body {
   justify-content: center;
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
-
 .cal-team-filter img {
   width: 100%;
   height: 100%;
@@ -1017,6 +1016,24 @@ body,
   .theme-toggle { width: 30px; height: 30px; font-size: 14px; border-radius: 6px; }
   .tour-badge { height: 30px; padding: 0 12px; border-radius: 6px; }
   .tour-badge-value { font-size: 14px; }
+   /* Панель команд на мобилке — на 2-й строке, скроллится вбок */
+  .cal-teams-filter {
+    margin-left: 0;
+    margin-top: 6px;
+    flex-basis: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+  }
+
+  .cal-teams-filter::-webkit-scrollbar { display: none; }
+
+  .cal-team-filter {
+    width: 26px;
+    height: 26px;
+    padding: 3px;
+    flex-shrink: 0;
+  }
   .section-head-title {
     font-size: 11px;
     letter-spacing: 1.5px;
