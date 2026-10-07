@@ -217,8 +217,43 @@ body {
 .cal-teams-arrow:active {
   transform: scale(0.95);
 }
-.container { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; animation: pageFadeIn 0.3s ease-out; }
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  animation: pageFadeIn 0.3s ease-out;
+  view-transition-name: page-content;
+}
 
+/* ===== View Transitions API ===== */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(page-content) {
+  animation: pageFadeOut 0.22s ease-in both;
+}
+
+::view-transition-new(page-content) {
+  animation: pageFadeIn 0.28s ease-out both;
+}
+
+@keyframes pageFadeOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(-6px) scale(0.99); }
+}
+
+/* Топбар не должен «прыгать» — исключаем из анимации */
+.topbar {
+  view-transition-name: topbar;
+}
+
+::view-transition-old(topbar),
+::view-transition-new(topbar) {
+  animation: none;
+  mix-blend-mode: normal;
+}
 @keyframes pageFadeIn {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
