@@ -455,14 +455,6 @@ body {
   padding: 0;
   border-color: rgba(0, 255, 213, 0);
   pointer-events: none;
-
-  transition:
-    opacity 0.25s ease,
-    transform 0.28s ease,
-    max-height 0.3s ease,
-    padding 0.3s ease,
-    border-color 0.25s ease,
-    visibility 0s linear 0.3s;
 }
 /* WebKit — тонкий неоновый скроллбар */
 .topbar-search .search-suggestions::-webkit-scrollbar {
@@ -506,13 +498,6 @@ body.light .topbar-search .search-suggestions {
   border-color: rgba(0, 255, 213, 0.25);
   pointer-events: auto;
 
-  transition:
-    opacity 0.25s ease,
-    transform 0.28s ease,
-    max-height 0.3s ease,
-    padding 0.3s ease,
-    border-color 0.25s ease,
-    visibility 0s linear 0s;
 }
 
 body.light .topbar-search .search-suggestions {
