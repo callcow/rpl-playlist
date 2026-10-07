@@ -127,7 +127,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">07.10.2026 09:09 МСК</span><br>
+      Обновлено <span class="neon">07.10.2026 09:22 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -496,6 +496,90 @@
       // На случай перехода по внутренней ссылке уже на открытой странице
       window.addEventListener('hashchange', scrollToAnchor);
       })();
+
+    // ===== Таймер до появления ссылок на трансляцию =====
+    (function() {
+      const STREAM_OPEN_BEFORE_MS = 15 * 60 * 1000; // 15 минут
+
+      function pad(n) {
+        return n < 10 ? '0' + n : '' + n;
+      }
+
+      function formatRemain(ms) {
+        const total = Math.max(0, Math.floor(ms / 1000));
+        const h = Math.floor(total / 3600);
+        const m = Math.floor((total % 3600) / 60);
+        const s = total % 60;
+        if (h > 0) return h + ':' + pad(m) + ':' + pad(s);
+        return pad(m) + ':' + pad(s);
+      }
+
+      function updateTimer(el, startMs) {
+        const now = Date.now();
+        const diff = startMs - now;
+
+        if (diff <= STREAM_OPEN_BEFORE_MS) {
+          // Время пришло — показываем ссылки
+          el.timer.style.display = 'none';
+          el.row.style.display = '';
+          return true; // готово, отписываемся
+        }
+
+        // Показываем таймер
+        el.timer.style.display = '';
+        el.row.style.display = 'none';
+
+        const remain = diff - STREAM_OPEN_BEFORE_MS;
+        const remainMs = remain;
+
+        // Меняем текст: если < 1 мин до открытия — мигаем "вот-вот"
+        if (remainMs <= 60 * 1000) {
+          el.timer.classList.add('expiring');
+          el.timer.innerHTML = '<span class="timer-icon">🔓</span><span>Вот-вот начнётся</span>';
+        } else {
+          el.timer.classList.remove('expiring');
+          el.timer.innerHTML =
+            '<span class="timer-icon">🔒</span>' +
+            '<span>Трансляция через</span>' +
+            '<span class="timer-count">' + formatRemain(remainMs) + '</span>';
+        }
+        return false;
+      }
+
+      const timers = [];
+      document.querySelectorAll('.quality-timer').forEach(function(timerEl) {
+        const iso = timerEl.getAttribute('data-match-start');
+        if (!iso) return;
+        const startMs = Date.parse(iso);
+        if (isNaN(startMs)) return;
+
+        const row = timerEl.parentElement.querySelector('.quality-row');
+        if (!row) return;
+
+        const el = { timer: timerEl, row: row, startMs: startMs };
+
+        if (!updateTimer(el, startMs)) {
+          timers.push(el);
+        }
+      });
+
+      if (timers.length === 0) return;
+
+      const interval = setInterval(function() {
+        for (let i = timers.length - 1; i >= 0; i--) {
+          if (updateTimer(timers[i], timers[i].startMs)) {
+            timers.splice(i, 1);
+          }
+        }
+        if (timers.length === 0) {
+          clearInterval(interval);
+        }
+      }, 1000);
+
+      // Первый тик — сразу
+      timers.forEach(function(el) { updateTimer(el, el.startMs); });
+    })();
+
 
     // ===== Кнопка "Наверх" =====
     (function() {
