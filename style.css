@@ -446,15 +446,15 @@ body {
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 255, 213, 0.4) transparent;
 
-  /* Закрытое состояние */
+  /* Закрытое состояние — visibility убрана, ей управляет JS */
   overflow: hidden;
   opacity: 0;
-  visibility: hidden;
   transform: translateY(-8px);
   max-height: 0;
   padding: 0;
   border-color: rgba(0, 255, 213, 0);
   pointer-events: none;
+  display: none;
 }
 /* WebKit — тонкий неоновый скроллбар */
 .topbar-search .search-suggestions::-webkit-scrollbar {
@@ -489,15 +489,14 @@ body.light .topbar-search .search-suggestions {
 }
 
 .topbar-search .search-suggestions.active {
+  display: block;
   overflow-y: auto;
   opacity: 1;
-  visibility: visible;
   transform: translateY(0);
   max-height: 280px;
   padding: 4px 0;
   border-color: rgba(0, 255, 213, 0.25);
   pointer-events: auto;
-
 }
 
 body.light .topbar-search .search-suggestions {
