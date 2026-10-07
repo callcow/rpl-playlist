@@ -444,15 +444,28 @@ body {
     0 8px 24px rgba(0, 0, 0, 0.6),
     0 0 0 1px rgba(0, 255, 213, 0.15),
     0 0 20px rgba(0, 255, 213, 0.1);
-  max-height: 280px;
   overflow-y: auto;
   z-index: 9999;
-  display: none;
-  transition: max-height 0.2s ease;
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 255, 213, 0.4) transparent;
-}
 
+  /* Плавное появление/исчезновение */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(0.98);
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-color: rgba(0, 255, 213, 0);
+  pointer-events: none;
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.22s ease-out,
+    max-height 0.28s ease-out,
+    padding 0.28s ease-out,
+    visibility 0s linear 0.28s,
+    border-color 0.18s ease-out;
+}
 /* WebKit — тонкий неоновый скроллбар */
 .topbar-search .search-suggestions::-webkit-scrollbar {
   width: 6px;
@@ -485,7 +498,23 @@ body.light .topbar-search .search-suggestions {
   scrollbar-width: none;
 }
 
-.topbar-search .search-suggestions.active { display: block; animation: suggestIn 0.18s ease-out; }
+.topbar-search .search-suggestions.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  max-height: 280px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-color: rgba(0, 255, 213, 0.25);
+  pointer-events: auto;
+  transition:
+    opacity 0.2s ease-out,
+    transform 0.24s cubic-bezier(0.2, 0.9, 0.3, 1.05),
+    max-height 0.3s ease-out,
+    padding 0.3s ease-out,
+    visibility 0s linear 0s,
+    border-color 0.2s ease-out;
+}
 
 body.light .topbar-search .search-suggestions {
   background: #ffffff;
@@ -1430,14 +1459,9 @@ body,
     padding: 4px 8px;
   }
 
-      .topbar-search .search-suggestions {
+       .topbar-search .search-suggestions.active {
     max-height: 220px;
-    overflow-y: auto;
-    z-index: 9999;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 255, 213, 0.4) transparent;
   }
-
   .topbar-search .search-suggestions::-webkit-scrollbar {
     width: 5px;
   }
