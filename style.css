@@ -1256,7 +1256,7 @@ body,
 
 /* ===== Мобилка ===== */
 @media (max-width: 600px) {
-  body { padding: 14px 12px; }
+   body { padding: 0 12px 14px; }
   .topbar { min-height: 44px; padding: 6px 8px; gap: 8px; }
     .scroll-top {
     bottom: 16px;
@@ -1353,6 +1353,7 @@ body,
 
       .topbar {
     position: -webkit-sticky;
+        margin-top: 0;
     position: sticky;
     top: 0;
     flex-wrap: wrap;
