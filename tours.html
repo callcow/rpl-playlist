@@ -89,7 +89,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">07.10.2026 10:59 МСК</span><br>
+      Обновлено <span class="neon">07.10.2026 11:07 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -287,6 +287,33 @@
 
       input.addEventListener('input', function() {
         showSuggestions(input.value.trim());
+        filter();
+      });
+
+      // Enter — применить фильтр и закрыть подсказки
+      input.addEventListener('keydown', function(e) {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+
+        const typed = input.value.trim();
+        if (!typed) return;
+
+        // Ищем точное или частичное совпадение с командой
+        const team = allTeams.find(function(t) {
+          return t.name.toLowerCase() === typed.toLowerCase();
+        }) || allTeams.find(function(t) {
+          return t.name.toLowerCase().includes(typed.toLowerCase());
+        });
+
+        if (team) {
+          input.value = team.name;
+        }
+
+        // Прячем выпадашку
+        suggestBox.classList.remove('active');
+        suggestBox.innerHTML = '';
+
+        // Прогоняем фильтр ещё раз (если значение поменялось)
         filter();
       });
 
