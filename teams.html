@@ -127,7 +127,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">07.10.2026 12:33 МСК</span><br>
+      Обновлено <span class="neon">07.10.2026 12:57 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -295,8 +295,7 @@
 
       function showSuggestions(query) {
         if (!query) {
-          suggestBox.classList.remove('active');
-          suggestBox.innerHTML = '';
+          hideSuggestions();
           return;
         }
 
@@ -306,8 +305,7 @@
         }).slice(0, 8);
 
         if (matches.length === 0) {
-          suggestBox.classList.remove('active');
-          suggestBox.innerHTML = '';
+          hideSuggestions();
           return;
         }
 
@@ -318,12 +316,91 @@
           '</a>';
         }).join('');
 
-               // Форсируем reflow, чтобы transition сработал гарантированно
-        suggestBox.classList.remove('active');
-        void suggestBox.offsetWidth;
-        suggestBox.classList.add('active');
+        showSuggestionsPanel();
+      }
 
-    // Ссылки работают через href, никаких обработчиков не нужно
+      // ===== Показ подсказок через Web Animations API (гарантированно работает) =====
+      function showSuggestionsPanel() {
+        // Отменяем предыдущую анимацию закрытия, если была
+        if (suggestBox._hideAnim) {
+          suggestBox._hideAnim.cancel();
+          suggestBox._hideAnim = null;
+        }
+
+        // Отменяем предыдущую анимацию показа
+        if (suggestBox._showAnim) {
+          suggestBox._showAnim.cancel();
+          suggestBox._showAnim = null;
+        }
+
+        // Ставим финальное состояние
+        suggestBox.classList.add('active');
+        suggestBox.style.opacity = '1';
+        suggestBox.style.transform = 'translateY(0)';
+        suggestBox.style.maxHeight = '280px';
+        suggestBox.style.paddingTop = '4px';
+        suggestBox.style.paddingBottom = '4px';
+        suggestBox.style.visibility = 'visible';
+
+        const finalHeight = suggestBox.scrollHeight;
+
+        // Сбрасываем в начальное состояние и запускаем анимацию
+        suggestBox._showAnim = suggestBox.animate(
+          [
+            { opacity: 0, transform: 'translateY(-8px)', maxHeight: '0px', paddingTop: '0px', paddingBottom: '0px' },
+            { opacity: 1, transform: 'translateY(0)',    maxHeight: finalHeight + 'px', paddingTop: '4px', paddingBottom: '4px' }
+          ],
+          {
+            duration: 260,
+            easing: 'cubic-bezier(0.2, 0.9, 0.3, 1.05)',
+            fill: 'forwards'
+          }
+        );
+
+        suggestBox._showAnim.onfinish = function() {
+          suggestBox._showAnim = null;
+        };
+      }
+
+      // ===== Скрытие подсказок =====
+      function hideSuggestions() {
+        // Отменяем предыдущую анимацию показа
+        if (suggestBox._showAnim) {
+          suggestBox._showAnim.cancel();
+          suggestBox._showAnim = null;
+        }
+
+        if (!suggestBox.classList.contains('active')) {
+          suggestBox.innerHTML = '';
+          return;
+        }
+
+        suggestBox.classList.remove('active');
+
+        const startHeight = suggestBox.scrollHeight;
+
+        suggestBox._hideAnim = suggestBox.animate(
+          [
+            { opacity: 1, transform: 'translateY(0)',    maxHeight: startHeight + 'px', paddingTop: '4px', paddingBottom: '4px' },
+            { opacity: 0, transform: 'translateY(-8px)', maxHeight: '0px', paddingTop: '0px', paddingBottom: '0px' }
+          ],
+          {
+            duration: 220,
+            easing: 'ease-in',
+            fill: 'forwards'
+          }
+        );
+
+        suggestBox._hideAnim.onfinish = function() {
+          suggestBox._hideAnim = null;
+          suggestBox.innerHTML = '';
+          suggestBox.style.opacity = '';
+          suggestBox.style.transform = '';
+          suggestBox.style.maxHeight = '';
+          suggestBox.style.paddingTop = '';
+          suggestBox.style.paddingBottom = '';
+          suggestBox.style.visibility = '';
+        };
       }
 
       input.addEventListener('input', function() {
@@ -350,9 +427,8 @@
           input.value = team.name;
         }
 
-        // Прячем выпадашку
-        suggestBox.classList.remove('active');
-        suggestBox.innerHTML = '';
+                // Прячем выпадашку
+        hideSuggestions();
 
         // Прогоняем фильтр ещё раз (если значение поменялось)
         filter();
@@ -360,19 +436,16 @@
 
       document.addEventListener('click', function(e) {
         if (!e.target.closest('.topbar-search')) {
-          suggestBox.classList.remove('active');
+          hideSuggestions();
         }
       });
-
       clearBtn.addEventListener('click', function() {
         input.value = '';
-        suggestBox.classList.remove('active');
-        suggestBox.innerHTML = '';
+        hideSuggestions();
         setSearchLogo('');
         filter();
         input.focus();
       });
-
             // ===== SPA-навигация: клик по ссылке с ?team= не перезагружает страницу =====
       // (для ?filter=4k оставляем обычную перезагрузку — так надёжнее)
       document.addEventListener('click', function(e) {
@@ -399,11 +472,8 @@
           input.dispatchEvent(new Event('input', { bubbles: true }));
         }
 
-        // Скрываем выпадашку подсказок после выбора
-        if (suggestBox) {
-          suggestBox.classList.remove('active');
-          suggestBox.innerHTML = '';
-        }
+                // Скрываем выпадашку подсказок после выбора
+        hideSuggestions();
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
