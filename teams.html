@@ -127,7 +127,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">07.10.2026 19:06 МСК</span><br>
+      Обновлено <span class="neon">07.10.2026 19:42 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -705,7 +705,31 @@
     })();
 
 
-    // ===== Кнопка "Наверх" =====
+            // ===== Топбар: плоский при прокрутке =====
+    (function() {
+      const topbar = document.querySelector('.topbar');
+      if (!topbar) return;
+
+      let ticking = false;
+
+      function update() {
+        const scrolled = window.scrollY > 0;
+        topbar.classList.toggle('scrolled', scrolled);
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      // Первичная проверка (если страница уже прокручена при загрузке)
+      update();
+    })();
+
+        // ===== Кнопка "Наверх" =====
     (function() {
       const btn = document.getElementById('scrollTop');
       if (!btn) return;
