@@ -440,7 +440,7 @@ body {
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  padding: 0;
+  padding: 4px 0;
   border-radius: 6px;
   margin-top: 6px;
   background: rgba(20, 25, 40, 0.98);
@@ -454,14 +454,36 @@ body {
   z-index: 9999;
   display: none;
   transition: max-height 0.2s ease;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 255, 213, 0.4) transparent;
 }
 
+/* WebKit — тонкий неоновый скроллбар */
 .topbar-search .search-suggestions::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
+  width: 6px;
+}
+
+.topbar-search .search-suggestions::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 4px 0;
+}
+
+.topbar-search .search-suggestions::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(0, 255, 213, 0.5), rgba(168, 85, 247, 0.5));
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
+.topbar-search .search-suggestions::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--neon), var(--neon-3));
+}
+
+body.light .topbar-search .search-suggestions {
+  scrollbar-color: rgba(0, 168, 150, 0.5) transparent;
+}
+
+body.light .topbar-search .search-suggestions::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(0, 168, 150, 0.6), rgba(140, 60, 220, 0.6));
 }
 
 body.light .topbar-search .search-suggestions {
@@ -481,7 +503,7 @@ body.light .topbar-search .search-suggestions {
 .topbar-search .search-suggestion {
   display: flex;
   align-items: center;
-  padding: 6px 10px;
+  padding: 8px 12px;
   cursor: pointer;
   color: var(--text);
   font-size: 12px;
@@ -491,16 +513,24 @@ body.light .topbar-search .search-suggestions {
   gap: 8px;
   transition: background 0.15s, color 0.15s;
   text-decoration: none;
+  position: relative;
 }
 
-.topbar-search .search-suggestion:first-child {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-}
-
-.topbar-search .search-suggestion:last-child {
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+/* Тонкая неоновая полоска-разделитель между подсказками */
+.topbar-search .search-suggestion:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 255, 213, 0.25) 20%,
+    rgba(168, 85, 247, 0.25) 80%,
+    transparent 100%
+  );
 }
 
 .topbar-search .search-suggestion:hover {
@@ -1351,18 +1381,21 @@ body,
     padding: 4px 8px;
   }
 
-    .topbar-search .search-suggestions {
+      .topbar-search .search-suggestions {
     max-height: 220px;
     overflow-y: auto;
     z-index: 9999;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 255, 213, 0.4) transparent;
   }
 
   .topbar-search .search-suggestions::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
+    width: 5px;
+  }
+
+  .topbar-search .search-suggestions::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(0, 255, 213, 0.5), rgba(168, 85, 247, 0.5));
+    border-radius: 3px;
   }
   .topbar-search .search-suggestion {
     padding: 10px 12px;
