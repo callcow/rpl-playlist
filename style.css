@@ -966,6 +966,12 @@ a.cal-tour-title:hover {
   color: var(--neon);
 }
 
+.cal-tour-title.cal-tour-upcoming {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.4);
+  color: var(--neon-3);
+}
+
 .cal-tour-title.cal-tour-past {
   background: rgba(100, 116, 139, 0.08);
   border-color: rgba(100, 116, 139, 0.3);
