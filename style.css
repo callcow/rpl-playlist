@@ -847,7 +847,22 @@ a.match-score:hover {
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
-.quality-btn:hover { background: var(--neon); color: #05060d; border-color: var(--neon); }
+@media (hover: hover) and (pointer: fine) {
+  .quality-btn:hover {
+    background: var(--neon);
+    color: #05060d;
+    border-color: var(--neon);
+  }
+}
+
+.quality-btn:focus {
+  outline: none;
+}
+
+.quality-btn:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 2px;
+}
 
 /* Кнопка-таймер до начала трансляции — стиль как у .quality-btn */
 .quality-timer {
