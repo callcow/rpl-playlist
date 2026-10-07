@@ -94,15 +94,26 @@ body {
   transform: translateY(0);
 }
 
-.scroll-top:hover {
-  background: var(--neon);
-  border-color: var(--neon);
-  color: #05060d;
-  box-shadow: 0 4px 20px rgba(0, 255, 213, 0.5);
+@media (hover: hover) and (pointer: fine) {
+  .scroll-top:hover {
+    background: var(--neon);
+    border-color: var(--neon);
+    color: #05060d;
+    box-shadow: 0 4px 20px rgba(0, 255, 213, 0.5);
+  }
 }
 
 .scroll-top:active {
   transform: translateY(0) scale(0.95);
+}
+
+.scroll-top:focus {
+  outline: none;
+}
+
+.scroll-top:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 2px;
 }
 /* ===== Фильтр команд в календаре ===== */
 .cal-teams-filter {
