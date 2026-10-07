@@ -862,9 +862,9 @@ a.match-score:hover {
   gap: 6px;
   padding: 3px 10px;
   border-radius: 4px;
-  background: rgba(168, 85, 247, 0.08);
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  color: var(--neon-3);
+  background: rgba(0, 255, 213, 0.08);
+  border: 1px solid rgba(0, 255, 213, 0.25);
+  color: var(--neon);
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.5px;
@@ -881,19 +881,15 @@ a.match-score:hover {
 
 .quality-timer .timer-count {
   font-variant-numeric: tabular-nums;
-  color: var(--text);
+  color: var(--neon);
   font-weight: 900;
   letter-spacing: 0.5px;
 }
 
-.quality-timer .timer-days {
-  color: var(--neon-3);
-  font-weight: 900;
-}
-
 .quality-timer.expiring {
-  background: rgba(0, 255, 213, 0.1);
-  border-color: rgba(0, 255, 213, 0.4);
+  background: rgba(0, 255, 213, 0.15);
+  border-color: var(--neon);
+  box-shadow: 0 0 12px rgba(0, 255, 213, 0.35);
   color: var(--neon);
 }
 
