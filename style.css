@@ -231,37 +231,21 @@ body {
 }
 
 /* ===== Топбар ===== */
-  .topbar {
-    position: sticky;
-    top: 0;
-    flex-wrap: wrap;
-    align-items: center;
-    align-content: center;
-    padding: 8px 10px;
-    z-index: 1000;
-    isolation: isolate;
-    background: var(--topbar-bg);
-    border-radius: 10px;
-    margin: 0 0 12px 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    transition:
-      border-radius 0.2s ease,
-      margin 0.2s ease,
-      padding 0.2s ease,
-      backdrop-filter 0.2s ease;
-  }
-
-  /* Топбар в состоянии "прилип" */
-  .topbar.scrolled {
-    border-radius: 0 0 10px 10px;
-    margin-left: -12px;
-    margin-right: -12px;
-    padding-left: 22px;
-    padding-right: 22px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 5px 10px;
+  background: var(--topbar-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1000;
+  isolation: isolate;
+}
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
 
 .brand-logo {
