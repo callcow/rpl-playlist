@@ -127,7 +127,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">07.10.2026 10:46 МСК</span><br>
+      Обновлено <span class="neon">07.10.2026 10:59 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -343,51 +343,43 @@
         input.focus();
       });
 
-      // ===== SPA-навигация: клики по ссылкам фильтров не перезагружают страницу =====
+            // ===== SPA-навигация: клик по ссылке с ?team= не перезагружает страницу =====
+      // (для ?filter=4k оставляем обычную перезагрузку — так надёжнее)
       document.addEventListener('click', function(e) {
-        const link = e.target.closest('a[href*="index.html?"]');
+        const link = e.target.closest('a[href*="index.html?team="]');
         if (!link) return;
 
-        // Только если мы уже на index.html (главной)
-        const isIndexPage = !window.location.pathname.match(/\/tours\//) &&
-                            !window.location.pathname.match(/\/(tours|teams|calendar)\.html$/);
+        // Только на главной (index.html / "/")
+        const path = window.location.pathname;
+        const isIndexPage = path === '/' || path.endsWith('/index.html') || path.endsWith('/rpl-playlist/');
         if (!isIndexPage) return;
-
-        const href = link.getAttribute('href');
-        // отсекаем переходы на страницы туров/архива и т.п.
-        if (!href.includes('index.html?')) return;
-
-        e.preventDefault();
 
         const url = new URL(link.href, window.location.origin);
         const team = url.searchParams.get('team');
-        const filter = url.searchParams.get('filter');
+        if (!team) return;
+
+        e.preventDefault();
 
         const input = document.getElementById('searchInput');
+        const suggestBox = document.getElementById('searchSuggestions');
         const clearBtn = document.getElementById('searchClear');
 
-        if (team && input) {
+        if (input) {
           input.value = team;
           input.dispatchEvent(new Event('input', { bubbles: true }));
-          // подкручиваем вверх
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (filter === '4k' && input) {
-          input.value = '';
-          input.dispatchEvent(new Event('input', { bubbles: true }));
-          // применяем 4K-фильтр
-          document.querySelectorAll('.match').forEach(function(el) {
-            const has4k = !!el.querySelector('.tag-4k');
-            el.style.display = has4k ? '' : 'none';
-          });
-          window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // обновляем URL без перезагрузки
+        // Скрываем выпадашку подсказок после выбора
+        if (suggestBox) {
+          suggestBox.classList.remove('active');
+          suggestBox.innerHTML = '';
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
         try {
           window.history.pushState(null, '', url.pathname + url.search);
-        } catch (err) {
-          // если pushState недоступен (file://) — просто игнорируем
-        }
+        } catch (err) { /* ignore */ }
       });
 
       const params = new URLSearchParams(window.location.search);
