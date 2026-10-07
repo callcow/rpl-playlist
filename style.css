@@ -881,7 +881,7 @@ a.match-score:hover {
 
 .quality-timer .timer-count {
   font-variant-numeric: tabular-nums;
-  color: var(--neon);
+  color: #ffffff;
   font-weight: 900;
   letter-spacing: 0.5px;
 }
