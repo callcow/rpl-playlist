@@ -1589,7 +1589,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">07.10.2026 12:01 МСК</span><br>
+      Обновлено <span class="neon">07.10.2026 12:14 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1831,37 +1831,6 @@
         filter();
         input.focus();
       });
-
-      // ===== Плавные переходы между вкладками (View Transitions API) =====
-      (function() {
-        // Если API не поддерживается — просто ничего не делаем
-        if (!document.startViewTransition) return;
-
-        const navLinks = document.querySelectorAll('.nav-tab');
-        if (!navLinks.length) return;
-
-        navLinks.forEach(function(link) {
-          link.addEventListener('click', function(e) {
-            // Левый клик без модификаторов
-            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-
-            const href = link.getAttribute('href');
-            if (!href) return;
-
-            // Не перехватываем активную вкладку
-            if (link.classList.contains('active')) {
-              e.preventDefault();
-              return;
-            }
-
-            e.preventDefault();
-
-            document.startViewTransition(function() {
-              window.location.href = href;
-            });
-          });
-        });
-      })();
 
             // ===== SPA-навигация: клик по ссылке с ?team= не перезагружает страницу =====
       // (для ?filter=4k оставляем обычную перезагрузку — так надёжнее)
