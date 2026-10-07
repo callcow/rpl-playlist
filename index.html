@@ -1,67 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<video id="player" controls width="100%"></video>
-
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-<script>
-  // ============================================================
-  //  STREAM PROXY HELPER + ПЛЕЕР
-  //  Замените PROXY_WORKER на URL вашего Cloudflare Worker
-  //  Замените STREAM_URL и STREAM_REFERER на свои значения
-  // ============================================================
-  (function () {
-    const PROXY_WORKER  = "https://stream-proxy-worker.kltsve.workers.dev";
-    const STREAM_URL    = "https://bl.video.matchtv.ru/media/playlist/free_0be499309f49470e57acc0b4489c1c03/17_1029575/360/5168c90a0feb5477b2c6af0d93310ef5/4943919601.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=5f04f413c9e22396f2aa85a03f8c221d";
-    const STREAM_REFERER = "https://matchtv.ru";
-
-    // Кодирование в Base64URL
-    function toBase64Url(str) {
-      return btoa(unescape(encodeURIComponent(str)))
-        .replace(/\+/g, "-")
-        .replace(/\//g, "_")
-        .replace(/=/g, "");
-    }
-
-    // Функция-обёртка (доступна глобально)
-    window.getProxiedStreamUrl = function (directUrl, referer) {
-      if (!directUrl) return directUrl;
-      const config = {
-        directUrl: directUrl,
-        referer: referer || "",
-        origin: referer || ""
-      };
-      return PROXY_WORKER + "/stream/" + toBase64Url(JSON.stringify(config));
-    };
-
-    // Запускаем плеер
-    const proxiedUrl = window.getProxiedStreamUrl(STREAM_URL, STREAM_REFERER);
-    const video = document.getElementById("player");
-
-    if (window.Hls && Hls.isSupported()) {
-      const hls = new Hls({
-        // Некоторые потоки требуют этих параметров
-        xhrSetup: function (xhr) {
-          xhr.withCredentials = false;
-        }
-      });
-      hls.loadSource(proxiedUrl);
-      hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        video.play().catch(function () {});
-      });
-      hls.on(Hls.Events.ERROR, function (e, data) {
-        console.error("HLS error:", data);
-      });
-    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      // Safari — нативный HLS
-      video.src = proxiedUrl;
-    } else {
-      console.error("HLS не поддерживается этим браузером");
-    }
-  })();
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Прямые трансляции — РПЛ</title>
@@ -97,13 +36,6 @@
       <div class="section-head" id="currentHeaderDefault">
         <div class="section-head-title">Расписание матчей</div>
       </div>
-      <video id="player"></video>
-<script>
-  document.getElementById("player").src = getProxiedStreamUrl(
-    "https://bl.video.matchtv.ru/media/playlist/free_0be499309f49470e57acc0b4489c1c03/17_1029575/360/5168c90a0feb5477b2c6af0d93310ef5/4943919601.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=5f04f413c9e22396f2aa85a03f8c221d",
-    "https://matchtv.ru"
-  );
-</script>
       <div class="section-head" id="currentHeaderSearch" style="display:none;">
         <div class="section-head-title">Будущие матчи<span id="currentHeaderTeam"></span></div>
       </div>
@@ -135,7 +67,7 @@
         </div>
 
         <div class="match-bottom">
-          <div class="quality-row" data-match-start="2026-10-09T19:30:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/1080p50fps/1dfc14eb474f57e1455b518242ca577d/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/720/1dfc14eb474f57e1455b518242ca577d/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/480/1dfc14eb474f57e1455b518242ca577d/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/360/1dfc14eb474f57e1455b518242ca577d/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">360</a></div>
+          <div class="quality-row" data-match-start="2026-10-09T19:30:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/1080p50fps/e2f7d524abe7036d3cdf6ee620815b52/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/720/e2f7d524abe7036d3cdf6ee620815b52/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/480/e2f7d524abe7036d3cdf6ee620815b52/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/360/e2f7d524abe7036d3cdf6ee620815b52/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">360</a></div>
           <div class="quality-timer" data-match-start="2026-10-09T19:30:00+03:00" ></div>
           <div class="match-meta"><span class="meta-item">🏟 Ростов Арена</span><span class="meta-sep">·</span><span class="meta-item">📍 Ростов-на-Дону</span></div>
         </div>
@@ -167,7 +99,7 @@
         </div>
 
         <div class="match-bottom">
-          <div class="quality-row" data-match-start="2026-10-10T13:00:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/1080p50fps/6d3cc5b873f2af3f226d9609d1dc8e99/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/720/6d3cc5b873f2af3f226d9609d1dc8e99/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/480/6d3cc5b873f2af3f226d9609d1dc8e99/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/360/6d3cc5b873f2af3f226d9609d1dc8e99/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">360</a></div>
+          <div class="quality-row" data-match-start="2026-10-10T13:00:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/1080p50fps/aa335bd212ecc2ff41fcc97cb6edd5ce/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/720/aa335bd212ecc2ff41fcc97cb6edd5ce/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/480/aa335bd212ecc2ff41fcc97cb6edd5ce/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_243343fec38ce594bdda882b17896626/17_1035217/360/aa335bd212ecc2ff41fcc97cb6edd5ce/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">360</a></div>
           <div class="quality-timer" data-match-start="2026-10-10T13:00:00+03:00" ></div>
           <div class="match-meta"><span class="meta-item">🏟 Газовик</span><span class="meta-sep">·</span><span class="meta-item">📍 Оренбург</span></div>
         </div>
@@ -199,7 +131,7 @@
         </div>
 
         <div class="match-bottom">
-          <div class="quality-row" data-match-start="2026-10-10T15:15:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/1080p50fps/be8d459dcff1ae54730b6ad58494fa4c/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/720/be8d459dcff1ae54730b6ad58494fa4c/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/480/be8d459dcff1ae54730b6ad58494fa4c/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/360/be8d459dcff1ae54730b6ad58494fa4c/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">360</a></div>
+          <div class="quality-row" data-match-start="2026-10-10T15:15:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/1080p50fps/c6ad7a63d40c7ff79177e47c92dc0501/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/720/c6ad7a63d40c7ff79177e47c92dc0501/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/480/c6ad7a63d40c7ff79177e47c92dc0501/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705/17_1035225/360/c6ad7a63d40c7ff79177e47c92dc0501/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">360</a></div>
           <div class="quality-timer" data-match-start="2026-10-10T15:15:00+03:00" ></div>
           <div class="match-meta"><span class="meta-item">🏟 Факел</span><span class="meta-sep">·</span><span class="meta-item">📍 Воронеж</span></div>
         </div>
@@ -231,7 +163,7 @@
         </div>
 
         <div class="match-bottom">
-          <div class="quality-row" data-match-start="2026-10-10T17:30:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/1080p50fps/5e15237f37a2b8600ff1214124be7629/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/720/5e15237f37a2b8600ff1214124be7629/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/480/5e15237f37a2b8600ff1214124be7629/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/360/5e15237f37a2b8600ff1214124be7629/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">360</a></div>
+          <div class="quality-row" data-match-start="2026-10-10T17:30:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/1080p50fps/c27e1060dd2d693eb6f940f11f44c16a/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/720/c27e1060dd2d693eb6f940f11f44c16a/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/480/c27e1060dd2d693eb6f940f11f44c16a/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/360/c27e1060dd2d693eb6f940f11f44c16a/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">360</a></div>
           <div class="quality-timer" data-match-start="2026-10-10T17:30:00+03:00" ></div>
           <div class="match-meta"><span class="meta-item">🏟 Солидарность Самара Арена</span><span class="meta-sep">·</span><span class="meta-item">📍 Самара</span></div>
         </div>
@@ -263,7 +195,7 @@
         </div>
 
         <div class="match-bottom">
-          <div class="quality-row" data-match-start="2026-10-10T19:30:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/1080p50fps/b529cf57cf28944ea41cd044c87f3b4d/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/720/b529cf57cf28944ea41cd044c87f3b4d/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/480/b529cf57cf28944ea41cd044c87f3b4d/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/360/b529cf57cf28944ea41cd044c87f3b4d/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">360</a></div>
+          <div class="quality-row" data-match-start="2026-10-10T19:30:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/1080p50fps/b1affe32ad490a691baf899053809c73/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/720/b1affe32ad490a691baf899053809c73/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/480/b1affe32ad490a691baf899053809c73/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/360/b1affe32ad490a691baf899053809c73/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">360</a></div>
           <div class="quality-timer" data-match-start="2026-10-10T19:30:00+03:00" ></div>
           <div class="match-meta"><span class="meta-item">🏟 Ozon Арена</span><span class="meta-sep">·</span><span class="meta-item">📍 Краснодар</span></div>
         </div>
@@ -295,7 +227,7 @@
         </div>
 
         <div class="match-bottom">
-          <div class="quality-row" data-match-start="2026-10-11T14:00:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/1080p50fps/15493cac95dd3884b742833baf541624/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/720/15493cac95dd3884b742833baf541624/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/480/15493cac95dd3884b742833baf541624/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/360/15493cac95dd3884b742833baf541624/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">360</a></div>
+          <div class="quality-row" data-match-start="2026-10-11T14:00:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/1080p50fps/9a6f123fb2f1b7d541092f85645f1e60/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/720/9a6f123fb2f1b7d541092f85645f1e60/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/480/9a6f123fb2f1b7d541092f85645f1e60/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/360/9a6f123fb2f1b7d541092f85645f1e60/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">360</a></div>
           <div class="quality-timer" data-match-start="2026-10-11T14:00:00+03:00" ></div>
           <div class="match-meta"><span class="meta-item">🏟 Ахмат Арена</span><span class="meta-sep">·</span><span class="meta-item">📍 Грозный</span></div>
         </div>
@@ -327,7 +259,7 @@
         </div>
 
         <div class="match-bottom">
-          <div class="quality-row" data-match-start="2026-10-11T16:30:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/2160/d4cee7bb06470868953ef9fb0de134a5/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">2160</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/1080/d4cee7bb06470868953ef9fb0de134a5/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/720/d4cee7bb06470868953ef9fb0de134a5/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/480/d4cee7bb06470868953ef9fb0de134a5/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/360/d4cee7bb06470868953ef9fb0de134a5/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">360</a></div>
+          <div class="quality-row" data-match-start="2026-10-11T16:30:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/2160/5d62f879d498ee2ac2e0639858218d72/4947031802.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=ad9df7c78b07142d9ef111bdcaac55bb" target="_blank" referrerpolicy="no-referrer">2160</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/1080/5d62f879d498ee2ac2e0639858218d72/4947031802.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=ad9df7c78b07142d9ef111bdcaac55bb" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/720/5d62f879d498ee2ac2e0639858218d72/4947031802.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=ad9df7c78b07142d9ef111bdcaac55bb" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/480/5d62f879d498ee2ac2e0639858218d72/4947031802.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=ad9df7c78b07142d9ef111bdcaac55bb" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/360/5d62f879d498ee2ac2e0639858218d72/4947031802.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=ad9df7c78b07142d9ef111bdcaac55bb" target="_blank" referrerpolicy="no-referrer">360</a></div>
           <div class="quality-timer" data-match-start="2026-10-11T16:30:00+03:00" ></div>
           <div class="match-meta"><span class="meta-item">🏟 ВЭБ Арена</span><span class="meta-sep">·</span><span class="meta-item">📍 Москва</span></div>
         </div>
@@ -359,7 +291,7 @@
         </div>
 
         <div class="match-bottom">
-          <div class="quality-row" data-match-start="2026-10-11T19:30:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/1080p50fps/82d76948d67bdd136ea52bb867952bf1/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/720/82d76948d67bdd136ea52bb867952bf1/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/480/82d76948d67bdd136ea52bb867952bf1/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/360/82d76948d67bdd136ea52bb867952bf1/4947029102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1975b8054a9bf3a53e5a9f299723bedf" target="_blank" referrerpolicy="no-referrer">360</a></div>
+          <div class="quality-row" data-match-start="2026-10-11T19:30:00+03:00" style="display:none;"><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/1080p50fps/4f1ff31a687205984cee7b74eda4f16c/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">1080</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/720/4f1ff31a687205984cee7b74eda4f16c/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">720</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/480/4f1ff31a687205984cee7b74eda4f16c/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">480</a><a class="quality-btn" href="https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/360/4f1ff31a687205984cee7b74eda4f16c/4947031801.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=a7f0c2d90d13fcb9436f6e90854a9c33" target="_blank" referrerpolicy="no-referrer">360</a></div>
           <div class="quality-timer" data-match-start="2026-10-11T19:30:00+03:00" ></div>
           <div class="match-meta"><span class="meta-item">🏟 Ак Барс Арена</span><span class="meta-sep">·</span><span class="meta-item">📍 Казань</span></div>
         </div>
@@ -1657,7 +1589,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">07.10.2026 09:59 МСК</span><br>
+      Обновлено <span class="neon">07.10.2026 10:32 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -2081,7 +2013,7 @@
           el.timer.classList.remove('expiring');
           el.timer.innerHTML =
             '<span class="timer-icon">🔒</span>' +
-            '<span>Трансляция через</span>' +
+            '<span>Трансляция начнется через</span>' +
             '<span class="timer-count">' + formatRemain(remainMs) + '</span>';
         }
         return false;
