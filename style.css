@@ -435,36 +435,36 @@ body {
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  padding: 4px 0;
   border-radius: 6px;
-  margin-top: 6px;
   background: rgba(20, 25, 40, 0.98);
   border: 1px solid rgba(0, 255, 213, 0.25);
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.6),
     0 0 0 1px rgba(0, 255, 213, 0.15),
     0 0 20px rgba(0, 255, 213, 0.1);
-  overflow-y: auto;
   z-index: 9999;
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 255, 213, 0.4) transparent;
 
-  /* Плавное появление/исчезновение */
+  /* Закрытое состояние */
+  overflow: hidden;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px) scale(0.98);
   max-height: 0;
-  padding-top: 0;
-  padding-bottom: 0;
+  margin-top: 0;
+  padding: 0;
   border-color: rgba(0, 255, 213, 0);
   pointer-events: none;
+
   transition:
-    opacity 0.18s ease-out,
-    transform 0.22s ease-out,
-    max-height 0.28s ease-out,
-    padding 0.28s ease-out,
+    opacity 0.22s ease,
+    transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.05),
+    max-height 0.28s ease,
+    padding 0.28s ease,
+    margin 0.28s ease,
     visibility 0s linear 0.28s,
-    border-color 0.18s ease-out;
+    border-color 0.22s ease;
 }
 /* WebKit — тонкий неоновый скроллбар */
 .topbar-search .search-suggestions::-webkit-scrollbar {
@@ -499,21 +499,24 @@ body.light .topbar-search .search-suggestions {
 }
 
 .topbar-search .search-suggestions.active {
+  overflow-y: auto;
   opacity: 1;
   visibility: visible;
   transform: translateY(0) scale(1);
   max-height: 280px;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  margin-top: 6px;
+  padding: 4px 0;
   border-color: rgba(0, 255, 213, 0.25);
   pointer-events: auto;
+
   transition:
-    opacity 0.2s ease-out,
-    transform 0.24s cubic-bezier(0.2, 0.9, 0.3, 1.05),
-    max-height 0.3s ease-out,
-    padding 0.3s ease-out,
+    opacity 0.22s ease,
+    transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.05),
+    max-height 0.28s ease,
+    padding 0.28s ease,
+    margin 0.28s ease,
     visibility 0s linear 0s,
-    border-color 0.2s ease-out;
+    border-color 0.22s ease;
 }
 
 body.light .topbar-search .search-suggestions {
@@ -1459,9 +1462,10 @@ body,
     padding: 4px 8px;
   }
 
-       .topbar-search .search-suggestions.active {
+  .topbar-search .search-suggestions.active {
     max-height: 220px;
   }
+  .topbar-search .search-suggestions::-webkit-scrollbar {
   .topbar-search .search-suggestions::-webkit-scrollbar {
     width: 5px;
   }
