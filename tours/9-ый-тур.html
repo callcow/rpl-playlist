@@ -341,7 +341,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">07.10.2026 08:42 МСК</span><br>
+      Обновлено <span class="neon">07.10.2026 08:48 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -521,7 +521,7 @@
         }
 
         suggestBox.innerHTML = matches.map(function(t) {
-          return '<a class="search-suggestion" href="index.html?team=' + encodeURIComponent(t.name) + '" data-team="' + t.name + '">' +
+          return '<a class="search-suggestion" href="../index.html?team=' + encodeURIComponent(t.name) + '" data-team="' + t.name + '">' +
             '<span class="search-suggestion-logo"><img src="' + t.logo + '" alt=""></span>' +
             '<span class="search-suggestion-name">' + t.name + '</span>' +
           '</a>';
@@ -538,7 +538,7 @@
       });
 
       document.addEventListener('click', function(e) {
-        if (!e.target.closest('.search-box')) {
+        if (!e.target.closest('.topbar-search')) {
           suggestBox.classList.remove('active');
         }
       });
