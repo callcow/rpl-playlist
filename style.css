@@ -242,6 +242,8 @@ body {
   border-radius: 10px;
   margin-bottom: 12px;
   position: relative;
+  z-index: 1000;
+  isolation: isolate;
 }
 
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
@@ -447,12 +449,23 @@ body {
     0 8px 24px rgba(0, 0, 0, 0.6),
     0 0 0 1px rgba(0, 255, 213, 0.15),
     0 0 20px rgba(0, 255, 213, 0.1);
-  overflow: hidden;
   max-height: 280px;
   overflow-y: auto;
-  z-index: 100;
+  z-index: 9999;
   display: none;
   transition: max-height 0.2s ease;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.topbar-search .search-suggestions::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+body.light .topbar-search .search-suggestions {
+  scrollbar-width: none;
 }
 
 .topbar-search .search-suggestions.active { display: block; animation: suggestIn 0.18s ease-out; }
@@ -1237,11 +1250,13 @@ body,
     height: 15px;
   }
 
-   .topbar {
+    .topbar {
     flex-wrap: wrap;
     align-items: center;
     align-content: center;
     padding: 8px 10px;
+    z-index: 1000;
+    isolation: isolate;
   }
 
       .topbar-search {
@@ -1330,11 +1345,19 @@ body,
     padding: 4px 8px;
   }
 
-  .topbar-search .search-suggestions {
-    max-height: 180px;
+    .topbar-search .search-suggestions {
+    max-height: 220px;
     overflow-y: auto;
+    z-index: 9999;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
+  .topbar-search .search-suggestions::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
   .topbar-search .search-suggestion {
     padding: 10px 12px;
     font-size: 14px;
