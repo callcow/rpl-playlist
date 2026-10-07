@@ -89,7 +89,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">07.10.2026 12:14 МСК</span><br>
+      Обновлено <span class="neon">07.10.2026 12:33 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -280,6 +280,9 @@
           '</a>';
         }).join('');
 
+               // Форсируем reflow, чтобы transition сработал гарантированно
+        suggestBox.classList.remove('active');
+        void suggestBox.offsetWidth;
         suggestBox.classList.add('active');
 
     // Ссылки работают через href, никаких обработчиков не нужно
