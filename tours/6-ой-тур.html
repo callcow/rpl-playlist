@@ -349,7 +349,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">07.10.2026 09:44 МСК</span><br>
+      Обновлено <span class="neon">07.10.2026 09:59 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -490,10 +490,15 @@
         const headerDefault = document.getElementById('currentHeaderDefault');
         const headerSearch = document.getElementById('currentHeaderSearch');
 
-        // Показываем в заголовках название команды, по которой идёт поиск
+        // Показываем в заголовках название команды только если ввод совпал с командой
         const currentHeaderTeam = document.getElementById('currentHeaderTeam');
         const pastHeaderTeam = document.getElementById('pastHeaderTeam');
-        const teamLabel = q === '' ? '' : ' · ' + input.value.trim();
+
+        const typed = input.value.trim();
+        const matchedTeam = allTeams.find(function(t) {
+          return t.name.toLowerCase() === typed.toLowerCase();
+        });
+        const teamLabel = (q === '' || !matchedTeam) ? '' : ' · ' + matchedTeam.name;
         if (currentHeaderTeam) currentHeaderTeam.textContent = teamLabel;
         if (pastHeaderTeam) pastHeaderTeam.textContent = teamLabel;
 
@@ -739,7 +744,7 @@
         if (days > 0 || h > 0) parts.push(pad(h) + 'ч');
         parts.push(pad(m) + 'м');
         parts.push(pad(s) + 'с');
-        return parts.join(':');
+        return parts.join(' ');
       }
 
       function updateTimer(el, startMs) {
