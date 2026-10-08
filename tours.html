@@ -89,7 +89,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">07.10.2026 20:15 МСК</span><br>
+      Обновлено <span class="neon">08.10.2026 13:03 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -206,15 +206,31 @@
         // Разбиваем запрос на слова — каждое должно найтись в data-teams
         const words = q === '' ? [] : q.split(/\s+/).filter(Boolean);
 
+        // Первый проход: определяем, кто подходит, и есть ли хоть один найденный
         const allMatches = document.querySelectorAll('.match');
+        let anyFound = false;
+
+        if (words.length > 0) {
+          allMatches.forEach(function(el) {
+            const teams = el.getAttribute('data-teams') || '';
+            const match = words.every(function(w) {
+              return teams.includes(w);
+            });
+            if (match) anyFound = true;
+          });
+        }
+
+        // Второй проход: применяем видимость.
+        // Если запрос непустой, но ничего не найдено — показываем всё как при пустом запросе
+        const effectivelyEmpty = (words.length === 0) || !anyFound;
+
         allMatches.forEach(function(el) {
-          const teams = el.getAttribute('data-teams') || '';
           const isPast = el.classList.contains('past-match');
 
-          if (words.length === 0) {
+          if (effectivelyEmpty) {
             el.style.display = isPast ? 'none' : '';
           } else {
-            // Показываем, если ВСЕ слова из запроса есть в data-teams
+            const teams = el.getAttribute('data-teams') || '';
             const match = words.every(function(w) {
               return teams.includes(w);
             });
@@ -222,7 +238,7 @@
           }
         });
 
-                const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
+        const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
         const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
 
         const pastSection = document.getElementById('pastSection');
@@ -242,7 +258,8 @@
         if (currentHeaderTeam) currentHeaderTeam.textContent = teamLabel;
         if (pastHeaderTeam) pastHeaderTeam.textContent = teamLabel;
 
-        if (q === '') {
+        if (q === '' || !anyFound) {
+          // Пустой запрос ИЛИ ничего не найдено — показываем как обычно
           if (pastSection) pastSection.style.display = 'none';
           if (currentSection) currentSection.style.display = '';
           if (headerDefault) headerDefault.style.display = '';
