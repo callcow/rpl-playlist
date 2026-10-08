@@ -1506,10 +1506,19 @@ body,
   }
 
   /* Отступы между заголовками и блоками на мобилке */
-  .section-head { margin-bottom: 12px; }
+    .section-head { margin-bottom: 12px; }
   .main-layout-col { margin-bottom: 0; }
-  .main-layout .matches { margin-bottom: 0; }
+  .main-layout .matches { margin-bottom: 20px; }
   .table-card { margin-bottom: 0; }
+
+  /* Отступ между блоками "Будущие матчи" и "Прошедшие матчи" на мобилке */
+  #currentSection,
+  #pastSection {
+    margin-bottom: 24px;
+  }
+  #pastSection {
+    margin-bottom: 0;
+  }
 
   .main-layout .match { padding: 14px; gap: 12px; }
   .main-layout .match-team { font-size: 13px; gap: 6px; }
