@@ -127,7 +127,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">08.10.2026 18:43 МСК</span><br>
+      Обновлено <span class="neon">08.10.2026 19:55 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -444,6 +444,11 @@
         if (!link) return;
 
         // Только на главной (index.html / "/")
+              document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="index.html?team="]');
+        if (!link) return;
+
+        // Только на главной (index.html / "/")
         const path = window.location.pathname;
         const isIndexPage = path === '/' || path.endsWith('/index.html') || path.endsWith('/rpl-playlist/');
         if (!isIndexPage) return;
@@ -455,16 +460,20 @@
         e.preventDefault();
 
         const input = document.getElementById('searchInput');
-        const suggestBox = document.getElementById('searchSuggestions');
         const clearBtn = document.getElementById('searchClear');
 
-        if (input) {
-          input.value = team;
-          input.dispatchEvent(new Event('input', { bubbles: true }));
-        }
-
-                // Скрываем выпадашку подсказок после выбора
+        // Скрываем подсказки ДО того, как поменяем input.value,
+        // чтобы они не успели мигнуть от события input
         hideSuggestions();
+
+        if (input) {
+          // Отписываем обработчик input на время установки значения,
+          // чтобы не триггерить showSuggestions()
+          const oldHandler = input.oninput;
+          input.value = team;
+          setSearchLogo(team);
+          filter();
+        }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
