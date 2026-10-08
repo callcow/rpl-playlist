@@ -1321,7 +1321,12 @@ body,
 
 .table-header-club { padding-left: 4px; }
 .table-header-pos { text-align: center; }
-.table-header-pts { text-align: center; color: var(--neon); }
+.table-header-pts { text-align: center; color: var(--text-dim); }
+
+/* Цвет букв в шапке: В — зелёный, Н — жёлтый, П — красный */
+.table-header .table-stat:nth-child(3) { color: #4ade80; }  /* В */
+.table-header .table-stat:nth-child(4) { color: #facc15; }  /* Н */
+.table-header .table-stat:nth-child(5) { color: #ff2d55; }  /* П */
 
 .table-body { display: flex; flex-direction: column; }
 
@@ -1356,6 +1361,18 @@ body,
   background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 180, 0, 0.15));
   color: #ffd700;
   box-shadow: 0 0 8px rgba(255, 215, 0, 0.35);
+}
+
+.table-pos-silver {
+  background: linear-gradient(135deg, rgba(200, 210, 220, 0.25), rgba(160, 175, 190, 0.15));
+  color: #c8d2dc;
+  box-shadow: 0 0 8px rgba(200, 210, 220, 0.3);
+}
+
+.table-pos-bronze {
+  background: linear-gradient(135deg, rgba(205, 127, 50, 0.25), rgba(180, 100, 40, 0.15));
+  color: #cd7f32;
+  box-shadow: 0 0 8px rgba(205, 127, 50, 0.3);
 }
 
 .table-pos-playoff {
