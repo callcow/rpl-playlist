@@ -89,7 +89,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">08.10.2026 18:33 МСК</span><br>
+      Обновлено <span class="neon">08.10.2026 18:43 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -610,10 +610,10 @@
         const s = total % 60;
 
         const parts = [];
-        if (days > 0) parts.push(days + 'д');
-        if (days > 0 || h > 0) parts.push(pad(h) + 'ч');
-        parts.push(pad(m) + 'м');
-        parts.push(pad(s) + 'с');
+        if (days > 0) parts.push(days + '<span class="timer-unit">д</span>');
+        if (days > 0 || h > 0) parts.push(pad(h) + '<span class="timer-unit">ч</span>');
+        parts.push(pad(m) + '<span class="timer-unit">м</span>');
+        parts.push(pad(s) + '<span class="timer-unit">с</span>');
         return parts.join(' ');
       }
 
