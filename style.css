@@ -959,6 +959,71 @@ a.match-score:hover {
 
 .meta-sep { color: var(--text-muted); opacity: 0.5; }
 
+/* ===== Форма команд (5 последних матчей) ===== */
+.match-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: -4px;
+}
+
+.match-form-side {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.match-form-home { justify-content: flex-start; }
+.match-form-away { justify-content: flex-end; }
+
+.form-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.form-sq {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0;
+  color: #fff;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.form-w {
+  background: #16a34a;
+  box-shadow: 0 0 6px rgba(22, 163, 74, 0.35);
+}
+
+.form-d {
+  background: #eab308;
+  color: #1a1a1a;
+  box-shadow: 0 0 6px rgba(234, 179, 8, 0.3);
+}
+
+.form-l {
+  background: #dc2626;
+  box-shadow: 0 0 6px rgba(220, 38, 38, 0.35);
+}
+
+body.light .form-w { background: #15803d; box-shadow: none; }
+body.light .form-d { background: #ca8a04; box-shadow: none; }
+body.light .form-l { background: #b91c1c; box-shadow: none; }
+
+/* На мобилке — уменьшаем квадратики */
+@media (max-width: 600px) {
+  .form-sq { width: 14px; height: 14px; font-size: 8px; }
+  .match-form { gap: 8px; }
+}
+
 .past-match { opacity: 0.9; }
 
 /* ===== Туры ===== */
