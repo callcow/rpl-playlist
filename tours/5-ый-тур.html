@@ -31,16 +31,18 @@
   
 
     
+    <div class="main-layout">
+      <div class="main-layout-col">
 
-    <div id="currentSection">
-      <div class="section-head" id="currentHeaderDefault">
-        <div class="section-head-title">Результаты матчей</div>
-      </div>
-      <div class="section-head" id="currentHeaderSearch" style="display:none;">
-        <div class="section-head-title">Будущие матчи<span id="currentHeaderTeam"></span></div>
-      </div>
-      <div class="matches" id="matchesContainer">
-        <div class="match" id="match-22-авг-факел-оренбург" data-teams="факел оренбург">
+        <div id="currentSection">
+          <div class="section-head" id="currentHeaderDefault">
+            <div class="section-head-title">Результаты матчей</div>
+          </div>
+          <div class="section-head" id="currentHeaderSearch" style="display:none;">
+            <div class="section-head-title">Будущие матчи<span id="currentHeaderTeam"></span></div>
+          </div>
+          <div class="matches" id="matchesContainer">
+            <div class="match" id="match-22-авг-факел-оренбург" data-teams="факел оренбург">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">22</span>
@@ -297,16 +299,23 @@
         </div>
       </div>
 
-      </div>
-    </div>
+          </div>
+        </div>
 
-    <div id="pastSection" style="display:none;">
-      <div class="section-head">
-        <div class="section-head-title">Прошедшие матчи<span id="pastHeaderTeam"></span></div>
+        <div id="pastSection" style="display:none;">
+          <div class="section-head">
+            <div class="section-head-title">Прошедшие матчи<span id="pastHeaderTeam"></span></div>
+          </div>
+          <div class="matches" id="pastMatchesContainer">
+            
+          </div>
+        </div>
+
       </div>
-      <div class="matches" id="pastMatchesContainer">
+
+      <aside class="main-layout-side">
         
-      </div>
+      </aside>
     </div>
 
     <div class="section-head">
@@ -349,7 +358,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">08.10.2026 13:03 МСК</span><br>
+      Обновлено <span class="neon">08.10.2026 17:09 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
