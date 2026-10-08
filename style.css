@@ -1347,6 +1347,9 @@ body,
   border-bottom: 1px solid var(--border);
   transition: background 0.15s;
   font-size: 12px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .table-row:last-child { border-bottom: none; }
