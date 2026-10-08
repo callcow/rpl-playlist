@@ -1354,6 +1354,7 @@ body,
 
 .table-row:last-child { border-bottom: none; }
 .table-row:hover { background: rgba(0, 255, 213, 0.04); }
+.table-row:hover .table-club-name { color: var(--neon); }
 
 .table-pos {
   display: flex;
