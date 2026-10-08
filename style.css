@@ -911,7 +911,14 @@ a.match-score:hover {
   font-weight: 900;
   letter-spacing: 0.5px;
 }
-
+.quality-timer .timer-unit {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0;
+  margin-left: 1px;
+  color: #ffffff;
+  opacity: 0.85;
+}
 .quality-timer.expiring {
   background: rgba(0, 255, 213, 0.15);
   border-color: var(--neon);
