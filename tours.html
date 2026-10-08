@@ -89,7 +89,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">08.10.2026 20:01 МСК</span><br>
+      Обновлено <span class="neon">08.10.2026 20:05 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -405,7 +405,7 @@
         const link = e.target.closest('a[href*="index.html?team="]');
         if (!link) return;
 
-              document.addEventListener('click', function(e) {
+                    document.addEventListener('click', function(e) {
         const link = e.target.closest('a[href*="index.html?team="]');
         if (!link) return;
 
@@ -421,12 +421,16 @@
         e.preventDefault();
 
         const input = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('searchClear');
 
         // Скрываем подсказки ДО того, как поменяем input.value,
         // чтобы они не успели мигнуть от события input
         hideSuggestions();
 
         if (input) {
+          // Отписываем обработчик input на время установки значения,
+          // чтобы не триггерить showSuggestions()
+          const oldHandler = input.oninput;
           input.value = team;
           setSearchLogo(team);
           filter();
