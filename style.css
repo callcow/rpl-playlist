@@ -73,12 +73,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 200;
+  z-index: 99999;
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
   transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease, background 0.2s, border-color 0.2s, color 0.2s;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.scroll-top.visible {
+  pointer-events: auto;
 }
 
 .scroll-top svg {
