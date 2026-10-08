@@ -1329,10 +1329,11 @@ body,
 .table-header-pos { text-align: center; }
 .table-header-pts { text-align: center; color: var(--text-dim); }
 
-/* Цвет букв в шапке: В — зелёный, Н — жёлтый, П — красный */
-.table-header .table-stat:nth-child(4) { color: #4ade80; }  /* В */
-.table-header .table-stat:nth-child(5) { color: #facc15; }  /* Н */
-.table-header .table-stat:nth-child(6) { color: #ff2d55; }  /* П */
+/* Цвет букв в шапке: И — серый, В — зелёный, Н — жёлтый, П — красный, О — серый */
+.table-header .table-stat-i { color: var(--text-dim); }
+.table-header .table-stat-w { color: #4ade80; }
+.table-header .table-stat-d { color: #facc15; }
+.table-header .table-stat-l { color: #ff2d55; }
 
 .table-body { display: flex; flex-direction: column; }
 
@@ -1433,7 +1434,7 @@ body,
   font-variant-numeric: tabular-nums;
 }
 
-.table-row:nth-child(1) .table-pts { color: #ffd700; }
+.table-row:nth-child(1) .table-pts { color: #ffae00; }
 
 .table-legend {
   display: flex;
