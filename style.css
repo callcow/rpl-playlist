@@ -1352,9 +1352,21 @@ body,
   background: rgba(255, 255, 255, 0.04);
 }
 
-.table-pos-cl { background: rgba(0, 255, 213, 0.15); color: var(--neon); }
-.table-pos-el { background: rgba(96, 239, 255, 0.15); color: #60efff; }
-.table-pos-rl { background: rgba(255, 45, 85, 0.15); color: #ff2d55; }
+.table-pos-gold {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 180, 0, 0.15));
+  color: #ffd700;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.35);
+}
+
+.table-pos-playoff {
+  background: rgba(255, 120, 120, 0.15);
+  color: #ff8a8a;
+}
+
+.table-pos-relegation {
+  background: rgba(255, 45, 85, 0.15);
+  color: #ff2d55;
+}
 
 .table-club {
   display: flex;
@@ -1398,10 +1410,7 @@ body,
   font-variant-numeric: tabular-nums;
 }
 
-.table-row:nth-child(-n+3) .table-pts { color: var(--neon); }
-.table-row:nth-child(4) .table-pts,
-.table-row:nth-child(5) .table-pts,
-.table-row:nth-child(6) .table-pts { color: #60efff; }
+.table-row:nth-child(1) .table-pts { color: #ffd700; }
 
 .table-legend {
   display: flex;
@@ -1422,10 +1431,8 @@ body,
   display: inline-block;
 }
 
-.table-legend-cl { background: var(--neon); }
-.table-legend-el { background: #60efff; }
-.table-legend-rl { background: #ff2d55; }
-
+.table-legend-playoff { background: #ff8a8a; }
+.table-legend-relegation { background: #ff2d55; }
 /* ===== Планшет ===== */
 @media (max-width: 900px) {
   .main-layout {
