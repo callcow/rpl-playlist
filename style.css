@@ -1306,7 +1306,7 @@ body,
 
 .table-header {
   display: grid;
-  grid-template-columns: 26px 1fr 24px 24px 24px 24px 26px 26px 30px;
+  grid-template-columns: 26px 1fr 24px 24px 24px 24px 30px;
   align-items: center;
   gap: 4px;
   padding: 10px 12px;
@@ -1327,7 +1327,7 @@ body,
 
 .table-row {
   display: grid;
-  grid-template-columns: 26px 1fr 24px 24px 24px 24px 26px 26px 30px;
+  grid-template-columns: 26px 1fr 24px 24px 24px 24px 30px;
   align-items: center;
   gap: 4px;
   padding: 7px 12px;
