@@ -1464,7 +1464,10 @@ body,
     gap: 16px;
     margin-bottom: 24px;
   }
-
+  .topbar .nav-tabs {
+    order: 0;
+    justify-content: flex-start;
+  }
   .main-layout-side {
     position: static;
     max-height: none;
