@@ -110,6 +110,10 @@ body {
 
 .scroll-top:active {
   transform: translateY(0) scale(0.95);
+  background: var(--neon);
+  border-color: var(--neon);
+  color: #05060d;
+  box-shadow: 0 0 24px rgba(0, 255, 213, 0.7);
 }
 
 .scroll-top:focus {
@@ -119,6 +123,17 @@ body {
 .scroll-top:focus-visible {
   outline: 2px solid var(--neon);
   outline-offset: 2px;
+}
+
+/* Явная подсветка при тапе на тач-устройствах (iOS/Android) */
+@media (hover: none) and (pointer: coarse) {
+  .scroll-top:active {
+    background: var(--neon);
+    border-color: var(--neon);
+    color: #05060d;
+    box-shadow: 0 0 24px rgba(0, 255, 213, 0.7);
+    transition: background 0.05s, border-color 0.05s, color 0.05s, box-shadow 0.05s;
+  }
 }
 /* ===== Фильтр команд в календаре ===== */
 .cal-teams-filter {
