@@ -370,7 +370,6 @@ body {
   display: flex;
   align-items: center;
   align-self: center;
-  order: -1;              /* ← поиск идёт первым (слева) */
 }
 
 /* Навбар сдвигается вправо, поиск прижат к левому краю */
@@ -1464,10 +1463,6 @@ body,
     gap: 16px;
     margin-bottom: 24px;
   }
-  .topbar .nav-tabs {
-    order: 0;
-    justify-content: flex-start;
-  }
   .main-layout-side {
     position: static;
     max-height: none;
@@ -1586,10 +1581,7 @@ body,
     font-size: 10px;
     letter-spacing: 0.5px;
   }
-    .topbar .nav-tabs {
-    order: 0;
-    justify-content: flex-start;
-  }
+
   .nav-tab {
     padding: 0 10px;
     font-size: 11px;
