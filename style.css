@@ -372,12 +372,6 @@ body {
   align-self: center;
 }
 
-/* Навбар сдвигается вправо, поиск прижат к левому краю */
-.topbar .nav-tabs {
-  order: 1;
-  justify-content: flex-end;   /* табы — вправо */
-}
-
 .topbar-search input {
   width: 100%;
   height: 32px;
