@@ -1253,6 +1253,193 @@ body,
 .footer {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+/* ===== Двухколоночный layout на главной ===== */
+.main-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 20px;
+  align-items: start;
+}
+
+.main-layout-col {
+  min-width: 0;
+}
+
+.main-layout-side {
+  position: sticky;
+  top: 12px;
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 2px;
+}
+
+.main-layout-side::-webkit-scrollbar { width: 4px; }
+.main-layout-side::-webkit-scrollbar-track { background: transparent; }
+.main-layout-side::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 213, 0.2);
+  border-radius: 2px;
+}
+
+.main-layout .match {
+  padding: 14px 16px;
+  gap: 12px;
+}
+
+.main-layout .match-team { font-size: 14px; gap: 8px; }
+.main-layout .team-logo { width: 28px; height: 28px; padding: 3px; }
+.main-layout .match-score {
+  min-width: 62px; height: 36px; font-size: 18px; padding: 0 10px;
+}
+.main-layout .match-score.match-score-upcoming { font-size: 13px; padding: 0 10px; }
+.main-layout .match-meta { font-size: 10px; }
+.main-layout .quality-btn { padding: 2px 8px; font-size: 9px; }
+
+/* ===== Турнирная таблица ===== */
+.table-card {
+  background: var(--match-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 26px 1fr 24px 24px 24px 24px 26px 26px 30px;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 12px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  background: rgba(0, 255, 213, 0.03);
+}
+
+.table-header-club { padding-left: 4px; }
+.table-header-pos { text-align: center; }
+.table-header-pts { text-align: center; color: var(--neon); }
+
+.table-body { display: flex; flex-direction: column; }
+
+.table-row {
+  display: grid;
+  grid-template-columns: 26px 1fr 24px 24px 24px 24px 26px 26px 30px;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  font-size: 12px;
+}
+
+.table-row:last-child { border-bottom: none; }
+.table-row:hover { background: rgba(0, 255, 213, 0.04); }
+
+.table-pos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 900;
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.table-pos-cl { background: rgba(0, 255, 213, 0.15); color: var(--neon); }
+.table-pos-el { background: rgba(96, 239, 255, 0.15); color: #60efff; }
+.table-pos-rl { background: rgba(255, 45, 85, 0.15); color: #ff2d55; }
+
+.table-club {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-weight: 800;
+}
+
+.table-club-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.table-club-logo img { width: 100%; height: 100%; object-fit: contain; }
+
+.table-club-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.table-stat {
+  text-align: center;
+  color: var(--text-dim);
+  font-weight: 700;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.table-pts {
+  text-align: center;
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.table-row:nth-child(-n+3) .table-pts { color: var(--neon); }
+.table-row:nth-child(4) .table-pts,
+.table-row:nth-child(5) .table-pts,
+.table-row:nth-child(6) .table-pts { color: #60efff; }
+
+.table-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  font-size: 9px;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.table-legend span { display: flex; align-items: center; gap: 5px; }
+.table-legend i {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.table-legend-cl { background: var(--neon); }
+.table-legend-el { background: #60efff; }
+.table-legend-rl { background: #ff2d55; }
+
+/* ===== Планшет ===== */
+@media (max-width: 900px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .main-layout-side {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+}
 
 /* ===== Мобилка ===== */
 @media (max-width: 600px) {
@@ -1265,6 +1452,22 @@ body,
     height: 40px;
   }
 
+  /* ===== Main layout на мобилке — одна колонка ===== */
+  .main-layout { grid-template-columns: 1fr; gap: 24px; }
+  .main-layout-side {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .main-layout .match { padding: 14px; gap: 12px; }
+  .main-layout .match-team { font-size: 13px; gap: 6px; }
+  .main-layout .team-logo { width: 26px; height: 26px; padding: 2px; }
+  .main-layout .match-score {
+    min-width: 62px; height: 36px; font-size: 18px; padding: 0 10px;
+  }
+  .main-layout .quality-btn { padding: 2px 8px; font-size: 9px; }
   .scroll-top svg {
     width: 20px;
     height: 20px;
