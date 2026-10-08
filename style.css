@@ -986,42 +986,38 @@ a.match-score:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
-  border-radius: 3px;
-  font-size: 9px;
+  width: 13px;
+  height: 13px;
+  border-radius: 2px;
+  font-size: 7px;
   font-weight: 900;
   line-height: 1;
   letter-spacing: 0;
   color: #fff;
   user-select: none;
   flex-shrink: 0;
+  text-decoration: none;
+  opacity: 0.75;
+  transition: opacity 0.15s, transform 0.15s;
 }
 
-.form-w {
-  background: #16a34a;
-  box-shadow: 0 0 6px rgba(22, 163, 74, 0.35);
+.form-sq:hover {
+  opacity: 1;
+  transform: scale(1.15);
 }
 
-.form-d {
-  background: #eab308;
-  color: #1a1a1a;
-  box-shadow: 0 0 6px rgba(234, 179, 8, 0.3);
-}
+.form-w { background: #16a34a; }
+.form-d { background: #eab308; color: #1a1a1a; }
+.form-l { background: #dc2626; }
 
-.form-l {
-  background: #dc2626;
-  box-shadow: 0 0 6px rgba(220, 38, 38, 0.35);
-}
+body.light .form-w { background: #15803d; }
+body.light .form-d { background: #ca8a04; }
+body.light .form-l { background: #b91c1c; }
 
-body.light .form-w { background: #15803d; box-shadow: none; }
-body.light .form-d { background: #ca8a04; box-shadow: none; }
-body.light .form-l { background: #b91c1c; box-shadow: none; }
-
-/* На мобилке — уменьшаем квадратики */
+/* На мобилке — ещё меньше */
 @media (max-width: 600px) {
-  .form-sq { width: 14px; height: 14px; font-size: 8px; }
-  .match-form { gap: 8px; }
+  .form-sq { width: 11px; height: 11px; font-size: 6px; }
+  .match-form { gap: 6px; margin-top: -6px; }
 }
 
 .past-match { opacity: 0.9; }
