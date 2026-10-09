@@ -814,7 +814,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 11:49 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 12:01 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1056,11 +1056,53 @@
         applyMatchFocus(id, mode);
       }
 
-    // Клик по карточке матча — переключить фокус и запомнить в URL.
+            // Универсальный обработчик кликов по ссылкам внутри карточек матча и таблицы.
+      // Перехватывает ?team= — SPA-навигация без перезагрузки, с плавной прокруткой вверх.
+      // Регистрируется РАНЬШЕ обработчика фокуса карточки — чтобы не было конфликтов.
+      document.addEventListener('click', function(e) {
+        // Ищем ссылку с ?team= в любом месте документа
+        const link = e.target.closest('a[href*="index.html?team="]');
+        if (!link) return;
+
+        // Только на главной
+        const path = window.location.pathname;
+        const isIndexPage = path === '/' || path.endsWith('/index.html') || path.endsWith('/rpl-playlist/');
+        if (!isIndexPage) return;
+
+        const url = new URL(link.href, window.location.origin);
+        const team = url.searchParams.get('team');
+        if (!team) return;
+
+        e.preventDefault();
+
+        // Сбрасываем hash — чтобы не было нативного прыжка к якорю
+        const cleanUrl = url.pathname + url.search;
+
+        try {
+          window.history.pushState(null, '', cleanUrl);
+        } catch (err) { /* ignore */ }
+
+        // Скрываем подсказки ДО того, как поменяем input.value
+        if (typeof hideSuggestions === 'function') hideSuggestions();
+
+        const inputEl = document.getElementById('searchInput');
+        if (inputEl) {
+          window.__suppressSuggestions = true;
+          inputEl.value = team;
+          inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+          window.__suppressSuggestions = false;
+        }
+
+        // Плавная прокрутка вверх — на следующем кадре, чтобы filter() успел перестроить DOM
+        requestAnimationFrame(function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+
+      // Клик по карточке матча (вне ссылок) — переключить фокус и запомнить в URL.
       document.addEventListener('click', function(e) {
         const card = e.target.closest('.match');
         if (!card) {
-          // Клик мимо матча — снять фокус с карточки, не трогая поиск
           const inputEl = document.getElementById('searchInput');
           const isSearchActive = inputEl && inputEl.value.trim() !== '';
           if (!isSearchActive) {
@@ -1070,7 +1112,7 @@
           return;
         }
 
-        // Внутренние ссылки и кнопки не перехватываем — они работают как раньше
+        // Внутренние ссылки и кнопки не перехватываем — SPA-обработчик выше уже с ними разобрался
         if (e.target.closest('a')) return;
         if (e.target.closest('button')) return;
 
@@ -1081,16 +1123,12 @@
         const cardId = card.getAttribute('id') || '';
         if (!cardId) return;
 
-        // Снимаем с прошлой, ставим на текущую
         highlightMatchCard(cardId);
-
         const dataTeams = card.getAttribute('data-teams') || '';
         highlightMatchTeams(dataTeams);
 
-        // Плавно центрируем, если карточка не в удобной зоне
         scrollCardToCenter(cardId, true, 'smooth');
 
-        // Обновляем URL без перезагрузки и без прыжка
         try {
           const newHash = '#' + cardId;
           if (window.location.hash !== newHash) {
@@ -1335,41 +1373,8 @@
         }
         input.focus();
       });
-                   // ===== SPA-навигация: клик по ссылке с ?team= не перезагружает страницу =====
-      // (для ?filter=4k оставляем обычную перезагрузку — так надёжнее)
-      document.addEventListener('click', function(e) {
-        const link = e.target.closest('a[href*="index.html?team="]');
-        if (!link) return;
-
-        // Только на главной (index.html / "/")
-        const path = window.location.pathname;
-        const isIndexPage = path === '/' || path.endsWith('/index.html') || path.endsWith('/rpl-playlist/');
-        if (!isIndexPage) return;
-
-        const url = new URL(link.href, window.location.origin);
-        const team = url.searchParams.get('team');
-        if (!team) return;
-
-        e.preventDefault();
-
-        const input = document.getElementById('searchInput');
-        const suggestBox = document.getElementById('searchSuggestions');
-        const clearBtn = document.getElementById('searchClear');
-
-        if (input) {
-          input.value = team;
-          input.dispatchEvent(new Event('input', { bubbles: true }));
-        }
-
-                // Скрываем выпадашку подсказок после выбора
-        hideSuggestions();
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        try {
-          window.history.pushState(null, '', url.pathname + url.search);
-        } catch (err) { /* ignore */ }
-      });
+                     // ===== SPA-навигация перенесена выше =====
+      // (обработчик ?team= теперь срабатывает раньше фокуса карточки)
 
       const params = new URLSearchParams(window.location.search);
       const teamParam = params.get('team');
