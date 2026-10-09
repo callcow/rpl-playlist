@@ -566,7 +566,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 11:12 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 11:36 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -808,7 +808,7 @@
         applyMatchFocus(id, mode);
       }
 
-      // Клик по карточке матча — переключить фокус и запомнить в URL.
+            // Клик по карточке матча — переключить фокус и запомнить в URL.
       document.addEventListener('click', function(e) {
         const card = e.target.closest('.match');
         if (!card) {
@@ -849,6 +849,12 @@
             window.history.pushState(null, '', window.location.pathname + window.location.search + newHash);
           }
         } catch (err) { /* ignore */ }
+      });
+
+      // Универсальная плавная прокрутка вверх для всех переходов ?team=...
+      // (в т.ч. из карточек матча, таблицы и т.д.)
+      window.addEventListener('popstate', function() {
+        // При навигации назад/вперёд не трогаем скролл
       });
 
         // Экспорт в глобальную область (для вызова из других IIFE)
@@ -1081,7 +1087,7 @@
         }
         input.focus();
       });
-             // ===== SPA-навигация: клик по ссылке с ?team= не перезагружает страницу =====
+                  // ===== SPA-навигация: клик по ссылке с ?team= не перезагружает страницу =====
       // (для ?filter=4k оставляем обычную перезагрузку — так надёжнее)
       document.addEventListener('click', function(e) {
         const link = e.target.closest('a[href*="index.html?team="]');
@@ -1098,23 +1104,25 @@
 
         e.preventDefault();
 
-        const input = document.getElementById('searchInput');
-        const suggestBox = document.getElementById('searchSuggestions');
-        const clearBtn = document.getElementById('searchClear');
+        // Сбрасываем hash, чтобы после клика не оставался старый #match-...
+        // (иначе браузер сначала прыгнет к якорю, а потом уже прокрутит вверх)
+        const cleanUrl = url.pathname + url.search;
 
+        try {
+          window.history.pushState(null, '', cleanUrl);
+        } catch (err) { /* ignore */ }
+
+        // Скрываем подсказки ДО того, как поменяем input.value
+        hideSuggestions();
+
+        const input = document.getElementById('searchInput');
         if (input) {
           input.value = team;
           input.dispatchEvent(new Event('input', { bubbles: true }));
         }
 
-                // Скрываем выпадашку подсказок после выбора
-        hideSuggestions();
-
+        // Плавная прокрутка вверх
         window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        try {
-          window.history.pushState(null, '', url.pathname + url.search);
-        } catch (err) { /* ignore */ }
       });
 
       const params = new URLSearchParams(window.location.search);
