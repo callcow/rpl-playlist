@@ -127,7 +127,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 12:01 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 12:06 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -373,6 +373,7 @@
       // Перехватывает ?team= — SPA-навигация без перезагрузки, с плавной прокруткой вверх.
       // Регистрируется РАНЬШЕ обработчика фокуса карточки — чтобы не было конфликтов.
       document.addEventListener('click', function(e) {
+             document.addEventListener('click', function(e) {
         // Ищем ссылку с ?team= в любом месте документа
         const link = e.target.closest('a[href*="index.html?team="]');
         if (!link) return;
@@ -386,7 +387,9 @@
         const team = url.searchParams.get('team');
         if (!team) return;
 
+        // preventDefault СРАЗУ — до того, как браузер запустит нативную навигацию
         e.preventDefault();
+        e.stopPropagation();
 
         // Сбрасываем hash — чтобы не было нативного прыжка к якорю
         const cleanUrl = url.pathname + url.search;
@@ -410,10 +413,13 @@
         requestAnimationFrame(function() {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-      });
+      }, true);   // ← true = capture-фаза, срабатывает ПЕРВЫМ
 
-      // Клик по карточке матча (вне ссылок) — переключить фокус и запомнить в URL.
+            // Клик по карточке матча (вне ссылок) — переключить фокус и запомнить в URL.
       document.addEventListener('click', function(e) {
+        // Если SPA-обработчик в capture-фазе уже всё сделал — не мешаем
+        if (e.defaultPrevented) return;
+
         const card = e.target.closest('.match');
         if (!card) {
           const inputEl = document.getElementById('searchInput');
