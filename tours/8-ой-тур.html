@@ -566,7 +566,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 13:28 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 13:39 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -831,18 +831,27 @@
 
         if (typeof hideSuggestions === 'function') hideSuggestions();
 
-        const inputEl = document.getElementById('searchInput');
+                const inputEl = document.getElementById('searchInput');
+
+        // 1) СНАЧАЛА стартуем плавный скролл — пока высота документа не изменилась
+        //    от предстоящей фильтрации. Если сделать наоборот, filter() синхронно
+        //    скроет часть .match → высота страницы упадёт → браузер сам сдёрнет
+        //    scrollY вверх (резкий прыжок), и наш smooth-скролл будет не виден.
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // 2) Значение в input ставим сразу (без dispatchEvent — он синхронный).
         if (inputEl) {
           window.__suppressSuggestions = true;
           inputEl.value = team;
-          inputEl.dispatchEvent(new Event('input', { bubbles: true }));
-          window.__suppressSuggestions = false;
         }
 
-        // Плавный скролл вверх: rAF гарантирует, что скролл начнётся
-        // после отработки перерисовки от смены input.value
+        // 3) Фильтрацию запускаем в следующем кадре — scrollTo уже стартовал,
+        //    а к моменту вызова filter() первый кадр анимации прошёл.
         requestAnimationFrame(function() {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          if (inputEl) {
+            inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+          window.__suppressSuggestions = false;
         });
       });
       // ===== Клик по карточке матча (вне ссылок) — фокус + скролл к центру =====
