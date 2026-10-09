@@ -566,7 +566,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 09:40 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 09:45 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -851,58 +851,11 @@
         } catch (err) { /* ignore */ }
       });
 
-      // Экспорт в глобальную область (для вызова из других IIFE)
+        // Экспорт в глобальную область (для вызова из других IIFE)
       window.__highlightFromHash = highlightFromHash;
       window.__highlightMatchTeams = highlightMatchTeams;
-    // Подсветка команд текущего матча в таблице
-      function highlightMatchTeams(dataTeams) {
-        // dataTeams — строка "динамо москва спартак" (lowercase), либо null для сброса
-        const rows = document.querySelectorAll('.table-row');
-        rows.forEach(function(row) {
-          row.classList.remove('table-row-match');
-          if (!dataTeams) return;
 
-          const nameEl = row.querySelector('.table-club-name');
-          if (!nameEl) return;
-
-          const rowTeam = nameEl.textContent.trim().toLowerCase();
-          // Проверяем, входит ли имя команды из таблицы в dataTeams
-          if (rowTeam && dataTeams.indexOf(rowTeam) !== -1) {
-            row.classList.add('table-row-match');
-          }
-        });
-      }
-      // Определяем матч по якорю (#match-...) и подсвечиваем команды
-      function highlightFromHash() {
-        const hash = window.location.hash;
-        // Если открыт поиск по команде — приоритет у поиска, не трогаем матч
-        const inputEl = document.getElementById('searchInput');
-        if (inputEl && inputEl.value.trim() !== '') {
-          highlightMatchTeams(null);
-          return;
-        }
-
-        if (!hash || hash.indexOf('#match-') !== 0) {
-          highlightMatchTeams(null);
-          return;
-        }
-
-        const id = decodeURIComponent(hash.slice(1));
-        const el = document.getElementById(id);
-        if (!el) {
-          highlightMatchTeams(null);
-          return;
-        }
-
-        const dataTeams = el.getAttribute('data-teams') || '';
-        // data-teams = "динамо москва спартак" — точное разбиение невозможно,
-        // поэтому сопоставляем по вхождению каждой команды из таблицы
-        highlightMatchTeams(dataTeams);
-      }
-
-      // Экспортируем в глобальную область, чтобы вызвать из другого IIFE
-      window.__highlightFromHash = highlightFromHash;
-      window.__highlightMatchTeams = highlightMatchTeams;
+      function filter() {
       function filter() {
         const q = input.value.trim().toLowerCase();
         clearBtn.style.display = q ? 'block' : 'none';
@@ -973,7 +926,6 @@
           if (typeof window.__highlightMatchTeams === 'function') {
             window.__highlightMatchTeams(null);
           }
-          // Снимаем рамку с карточек
           document.querySelectorAll('.match-focused').forEach(function(el) {
             el.classList.remove('match-focused');
           });
@@ -982,13 +934,6 @@
           if (typeof window.__highlightFromHash === 'function') {
             window.__highlightFromHash('never');
           }
-        }
-        // Если поиск пуст — возвращаем подсветку команд текущего матча
-        if (!matchedTeam && typeof window.__highlightFromHash === 'function') {
-          window.__highlightFromHash();
-        } else if (matchedTeam && typeof window.__highlightMatchTeams === 'function') {
-          // При активном поиске убираем подсветку матча
-          window.__highlightMatchTeams(null);
         }
 
         if (q === '' || !anyFound) {
