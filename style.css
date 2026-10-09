@@ -1465,6 +1465,52 @@ body.light .table-row-active {
   ) !important;
 }
 
+/* Подсветка строк команд текущего матча */
+.table-row-match {
+  background: linear-gradient(
+    90deg,
+    rgba(168, 85, 247, 0.14) 0%,
+    rgba(0, 255, 213, 0.08) 100%
+  ) !important;
+  border-left: 3px solid var(--neon-3);
+  padding-left: 9px;
+}
+
+.table-row-match .table-club-name {
+  color: var(--neon-3);
+  font-weight: 900;
+}
+
+.table-row-match .table-pos {
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.35);
+}
+
+body.light .table-row-match {
+  background: linear-gradient(
+    90deg,
+    rgba(140, 60, 220, 0.10) 0%,
+    rgba(0, 168, 150, 0.06) 100%
+  ) !important;
+}
+
+/* Если строка и матч, и поиск — приоритет у поиска (неоновый) */
+.table-row-active.table-row-match {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 213, 0.14) 0%,
+    rgba(168, 85, 247, 0.10) 100%
+  ) !important;
+  border-left-color: var(--neon);
+}
+
+.table-row-active.table-row-match .table-club-name {
+  color: var(--neon);
+}
+
+.table-row-active.table-row-match .table-pos {
+  box-shadow: 0 0 12px rgba(0, 255, 213, 0.35);
+}
+
 .table-pos {
   display: flex;
   align-items: center;
