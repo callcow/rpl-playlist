@@ -566,7 +566,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 13:39 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 14:08 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -825,34 +825,38 @@
 
         const cleanUrl = url.pathname + url.search;
 
-        try {
-          window.history.pushState(null, '', cleanUrl);
-        } catch (err) { /* ignore */ }
-
         if (typeof hideSuggestions === 'function') hideSuggestions();
 
-                const inputEl = document.getElementById('searchInput');
+const inputEl = document.getElementById('searchInput');
 
-        // 1) СНАЧАЛА стартуем плавный скролл — пока высота документа не изменилась
-        //    от предстоящей фильтрации. Если сделать наоборот, filter() синхронно
-        //    скроет часть .match → высота страницы упадёт → браузер сам сдёрнет
-        //    scrollY вверх (резкий прыжок), и наш smooth-скролл будет не виден.
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+// 1) ПЛАВНЫЙ СКРОЛЛ ДОЛЖЕН СТАРТОВАТЬ ПЕРВЫМ — до pushState.
+//    pushState с URL, содержащим ?team=..., у некоторых браузеров
+//    вызывает неявный сброс scroll position в 0 (мгновенный прыжок).
+//    Поэтому сначала запускаем smooth-скролл, а URL меняем после.
+window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        // 2) Значение в input ставим сразу (без dispatchEvent — он синхронный).
-        if (inputEl) {
-          window.__suppressSuggestions = true;
-          inputEl.value = team;
-        }
+// 2) Значение в input — сразу, без dispatchEvent.
+if (inputEl) {
+  window.__suppressSuggestions = true;
+  inputEl.value = team;
+}
 
-        // 3) Фильтрацию запускаем в следующем кадре — scrollTo уже стартовал,
-        //    а к моменту вызова filter() первый кадр анимации прошёл.
-        requestAnimationFrame(function() {
-          if (inputEl) {
-            inputEl.dispatchEvent(new Event('input', { bubbles: true }));
-          }
-          window.__suppressSuggestions = false;
-        });
+// 3) pushState — откладываем на следующий тик. К этому моменту
+//    scroll-анимация уже стартовала и её не сорвёт смена URL.
+setTimeout(function() {
+  try {
+    window.history.pushState(null, '', cleanUrl);
+  } catch (err) { /* ignore */ }
+}, 0);
+
+// 4) Фильтрацию — тоже откладываем, чтобы не блокировать первый
+//    кадр scroll-анимации.
+requestAnimationFrame(function() {
+  if (inputEl) {
+    inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+  window.__suppressSuggestions = false;
+});
       });
       // ===== Клик по карточке матча (вне ссылок) — фокус + скролл к центру =====
       document.addEventListener('click', function(e) {
