@@ -869,12 +869,13 @@ a.match-score:hover {
 }
 
 .match-score.match-score-upcoming {
-  background: rgba(100, 116, 139, 0.08);
-  border: 1px solid rgba(100, 116, 139, 0.3);
-  color: var(--text-dim);
-  font-size: 15px;
-  font-weight: 800;
-  padding: 0 14px;
+  background: rgba(100, 116, 139, 0.05);
+  border: 1px solid rgba(100, 116, 139, 0.2);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0 12px;
+  letter-spacing: 2px;
 }
 
 .match-bottom {
@@ -978,7 +979,7 @@ a.match-score:hover {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin-top: -4px;
+  margin-top: -8px;
 }
 
 .match-form-side {
