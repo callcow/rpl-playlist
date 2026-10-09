@@ -600,6 +600,26 @@ body.light .topbar-search .search-suggestions {
 /* ===== Заголовок секции ===== */
 .section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; padding-left: 4px; }
 
+/* Разделитель над секцией «Прошедшие матчи» */
+#pastSection {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+
+/* Неоновая полоска-разделитель по центру линии */
+#pastSection::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon), var(--neon-3), transparent);
+  border-radius: 1px;
+}
+
 .section-head-title {
   font-size: 13px; font-weight: 900; text-transform: uppercase;
   letter-spacing: 2.5px; color: var(--text);
@@ -1728,13 +1748,15 @@ body.light .table-row-match {
   .main-layout .matches { margin-bottom: 20px; }
   .table-card { margin-bottom: 0; }
 
-  /* Отступ между блоками "Будущие матчи" и "Прошедшие матчи" на мобилке */
+   /* Отступ между блоками "Будущие матчи" и "Прошедшие матчи" на мобилке */
   #currentSection,
   #pastSection {
     margin-bottom: 24px;
   }
   #pastSection {
     margin-bottom: 0;
+    margin-top: 24px;
+    padding-top: 20px;
   }
 
   .main-layout .match { padding: 14px; gap: 12px; }
