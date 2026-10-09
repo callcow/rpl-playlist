@@ -814,7 +814,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 13:04 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 13:28 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1056,7 +1056,7 @@
         applyMatchFocus(id, mode);
       }
 
-                 // ===== SPA-навигация по ?team= (плавный скролл вверх, без перезагрузки) =====
+                                 // ===== SPA-навигация по ?team= (плавный скролл вверх, без перезагрузки) =====
       document.addEventListener('click', function(e) {
         const link = e.target.closest('a[href*="index.html?team="]');
         if (!link) return;
@@ -1087,9 +1087,12 @@
           window.__suppressSuggestions = false;
         }
 
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Плавный скролл вверх: rAF гарантирует, что скролл начнётся
+        // после отработки перерисовки от смены input.value
+        requestAnimationFrame(function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
       });
-
       // ===== Клик по карточке матча (вне ссылок) — фокус + скролл к центру =====
       document.addEventListener('click', function(e) {
         if (e.defaultPrevented) return;
