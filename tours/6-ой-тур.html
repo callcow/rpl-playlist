@@ -566,7 +566,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 12:11 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 12:16 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -808,10 +808,16 @@
         applyMatchFocus(id, mode);
       }
 
-            // Универсальный обработчик кликов по ссылкам внутри карточек матча и таблицы.
-      // Перехватывает ?team= — SPA-навигация без перезагрузки, с плавной прокруткой вверх.
-      // Регистрируется РАНЬШЕ обработчика фокуса карточки — чтобы не было конфликтов.
-     document.addEventListener('click', function(e) {
+                // ===== Универсальная SPA-навигация по ?team= (для ПК и мобилки) =====
+      // Работает и на mousedown (ПК), и на click (мобилка, тач).
+      // preventDefault вызывается до нативной навигации — поэтому скролл плавный.
+      function handleTeamNavigation(e) {
+        // Только левая кнопка мыши (для mousedown/click)
+        if (typeof e.button === 'number' && e.button !== 0) return;
+
+        // Не мешаем открытию в новой вкладке (Ctrl/Cmd/Shift/Alt)
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+
         // Ищем ссылку с ?team= в любом месте документа
         const link = e.target.closest('a[href*="index.html?team="]');
         if (!link) return;
@@ -825,7 +831,7 @@
         const team = url.searchParams.get('team');
         if (!team) return;
 
-        // preventDefault СРАЗУ — до того, как браузер запустит нативную навигацию
+        // Отменяем нативный переход и всплытие
         e.preventDefault();
         e.stopPropagation();
 
@@ -851,8 +857,12 @@
         requestAnimationFrame(function() {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-      }, true);   // ← true = capture-фаза, срабатывает ПЕРВЫМ
+      }
 
+      // mousedown — для ПК (срабатывает раньше click, до нативной навигации)
+      document.addEventListener('mousedown', handleTeamNavigation, true);
+      // click — для мобилки и тач-устройств
+      document.addEventListener('click', handleTeamNavigation, true);
             // Клик по карточке матча (вне ссылок) — переключить фокус и запомнить в URL.
       document.addEventListener('click', function(e) {
         // Если SPA-обработчик в capture-фазе уже всё сделал — не мешаем
