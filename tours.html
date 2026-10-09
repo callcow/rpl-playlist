@@ -89,7 +89,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 09:35 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 09:40 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -231,7 +231,7 @@
         });
       }
 
-      // Подсветка карточки матча (рамка + свечение).
+            // Подсветка карточки матча (рамка + свечение).
       // ОДНА карточка одновременно — с остальных снимаем.
       function highlightMatchCard(cardId) {
         const allCards = document.querySelectorAll('.match');
@@ -247,7 +247,7 @@
         }
       }
 
-            // Центрирование карточки по вертикали.
+      // Центрирование карточки по вертикали.
       // scrollIfNeeded=true — скроллим только если карточка не в удобной зоне.
       // behavior — 'auto' (при загрузке с якорем) или 'smooth' (при клике).
       function scrollCardToCenter(cardId, scrollIfNeeded, behavior) {
@@ -273,12 +273,13 @@
         });
       }
 
-          // Применяет подсветку карточки + команд по id.
-      // scrollIntoView:
-      //   false       — не скроллить
-      //   true        — скроллить только если карточка не в удобной зоне (клик)
-      //   'always'    — скроллить всегда (переход по якорю)
-      function applyMatchFocus(cardId, scrollIntoView) {
+      // Применяет подсветку карточки + команд по id.
+      // scrollMode:
+      //   'never'   — не скроллить
+      //   'smart'   — скроллить только если карточка не в удобной зоне (клик)
+      //   'always'  — скроллить всегда (переход по якорю)
+      //   'smooth'  — принудительно плавный скролл всегда (не используется сейчас)
+      function applyMatchFocus(cardId, scrollMode) {
         const inputEl = document.getElementById('searchInput');
         const isSearchActive = inputEl && inputEl.value.trim() !== '';
 
@@ -305,15 +306,17 @@
         const dataTeams = el.getAttribute('data-teams') || '';
         highlightMatchTeams(dataTeams);
 
-        if (scrollIntoView === 'always') {
+        if (scrollMode === 'always') {
           scrollCardToCenter(cardId, false, 'auto');
-        } else if (scrollIntoView === true) {
+        } else if (scrollMode === 'smart') {
           scrollCardToCenter(cardId, true, 'smooth');
         }
       }
 
       // По якорю (#match-...) — находит id и применяет фокус.
-      function highlightFromHash(scrollIntoView) {
+      // scrollMode по умолчанию 'always' — при переходе извне сразу центрируем.
+      function highlightFromHash(scrollMode) {
+        const mode = scrollMode || 'always';
         const hash = window.location.hash;
         if (!hash || hash.indexOf('#match-') !== 0) {
           const inputEl = document.getElementById('searchInput');
@@ -325,10 +328,10 @@
           return;
         }
         const id = decodeURIComponent(hash.slice(1));
-        applyMatchFocus(id, !!scrollIntoView);
+        applyMatchFocus(id, mode);
       }
 
-           // Клик по карточке матча — переключить фокус и запомнить в URL.
+      // Клик по карточке матча — переключить фокус и запомнить в URL.
       document.addEventListener('click', function(e) {
         const card = e.target.closest('.match');
         if (!card) {
@@ -374,7 +377,6 @@
       // Экспорт в глобальную область (для вызова из других IIFE)
       window.__highlightFromHash = highlightFromHash;
       window.__highlightMatchTeams = highlightMatchTeams;
-
     // Подсветка команд текущего матча в таблице
       function highlightMatchTeams(dataTeams) {
         // dataTeams — строка "динамо москва спартак" (lowercase), либо null для сброса
@@ -485,22 +487,25 @@
         if (currentHeaderTeam) currentHeaderTeam.textContent = teamLabel;
         if (pastHeaderTeam) pastHeaderTeam.textContent = teamLabel;
 
-                // Подсветка строки команды в турнирной таблице (поиск)
+               // Подсветка строки команды в турнирной таблице (поиск)
         highlightTableRow(matchedTeam ? matchedTeam.name : null);
 
         // Приоритет: поиск > матч
         if (matchedTeam) {
-          // При активном поиске убираем подсветку матча
+          // При активном поиске убираем подсветку матча (без скролла)
           if (typeof window.__highlightMatchTeams === 'function') {
             window.__highlightMatchTeams(null);
           }
+          // Снимаем рамку с карточек
+          document.querySelectorAll('.match-focused').forEach(function(el) {
+            el.classList.remove('match-focused');
+          });
         } else {
-          // Поиск пуст — возвращаем подсветку матча по якорю (если есть)
+          // Поиск пуст — возвращаем подсветку матча по якорю (без скролла)
           if (typeof window.__highlightFromHash === 'function') {
-            window.__highlightFromHash();
+            window.__highlightFromHash('never');
           }
         }
-
         // Если поиск пуст — возвращаем подсветку команд текущего матча
         if (!matchedTeam && typeof window.__highlightFromHash === 'function') {
           window.__highlightFromHash();
@@ -643,15 +648,15 @@
           hideSuggestions();
         }
       });
-    clearBtn.addEventListener('click', function() {
+      clearBtn.addEventListener('click', function() {
         input.value = '';
         hideSuggestions();
         setSearchLogo('');
         highlightTableRow(null);
         filter();
-        // После очистки поиска — вернуть подсветку матча (если есть якорь)
+        // После очистки поиска — вернуть подсветку матча (без скролла)
         if (typeof window.__highlightFromHash === 'function') {
-          window.__highlightFromHash();
+          window.__highlightFromHash('never');
         }
         input.focus();
       });
@@ -814,34 +819,31 @@
       }
     })();
 
-                  // ===== Прокрутка якорного матча в центр + подсветка команд матча =====
+            // ===== Прокрутка якорного матча в центр + подсветка команд матча =====
     (function() {
       // Отключаем авто-восстановление скролла браузером
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
 
-      function onAnchorChange(scrollIntoView) {
+      function onAnchorChange() {
         if (typeof window.__highlightFromHash === 'function') {
-          window.__highlightFromHash(scrollIntoView);
+          // 'always' — центрируем карточку и подсвечиваем её + команды в таблице
+          window.__highlightFromHash('always');
         }
       }
 
-      // При первой загрузке — если есть #match-..., центрируем и подсвечиваем
+      // При первой загрузке — если есть #match-..., центрируем и подсвечиваем.
+      // Ждём load, чтобы логотипы и шрифты не сдвинули layout после скролла.
       if (document.readyState === 'complete') {
-        onAnchorChange(true);
+        onAnchorChange();
       } else {
-        window.addEventListener('load', function() {
-          onAnchorChange(true);
-        }, { once: true });
+        window.addEventListener('load', onAnchorChange, { once: true });
       }
 
-      // При смене hash (реальный переход, back/forward) — центрируем и подсвечиваем
-      window.addEventListener('hashchange', function() {
-        onAnchorChange(true);
-      });
+      // Смена hash (кнопки назад/вперёд, прямые ссылки) — центрируем и подсвечиваем
+      window.addEventListener('hashchange', onAnchorChange);
       })();
-
     // ===== Таймер до появления ссылок на трансляцию =====
     (function() {
       const STREAM_OPEN_BEFORE_MS = 15 * 60 * 1000; // 15 минут
