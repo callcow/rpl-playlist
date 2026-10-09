@@ -566,7 +566,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 09:27 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 09:35 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -724,17 +724,37 @@
         }
       }
 
-      // Центрирование карточки по вертикали.
-      function scrollCardToCenter(cardId) {
+            // Центрирование карточки по вертикали.
+      // scrollIfNeeded=true — скроллим только если карточка не в удобной зоне.
+      // behavior — 'auto' (при загрузке с якорем) или 'smooth' (при клике).
+      function scrollCardToCenter(cardId, scrollIfNeeded, behavior) {
         if (!cardId) return;
         const el = document.getElementById(cardId);
         if (!el) return;
-        const y = el.getBoundingClientRect().top + window.pageYOffset - (window.innerHeight / 2) + (el.offsetHeight / 2);
-        window.scrollTo({ top: y, behavior: 'auto' });
+
+        const rect = el.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+
+        // Удобная зона: карточка целиком видна и её верх не выше 20% экрана,
+        // а низ не ниже 80%. Тогда скроллить не нужно.
+        if (scrollIfNeeded) {
+          const topOk = rect.top >= vh * 0.10;
+          const bottomOk = rect.bottom <= vh * 0.90;
+          if (topOk && bottomOk) return;
+        }
+
+        const targetY = rect.top + window.pageYOffset - (vh / 2) + (rect.height / 2);
+        window.scrollTo({
+          top: Math.max(0, targetY),
+          behavior: behavior || 'smooth'
+        });
       }
 
-      // Применяет подсветку карточки + команд по id.
-      // При активном поиске — приоритет у поиска, матч не подсвечиваем.
+          // Применяет подсветку карточки + команд по id.
+      // scrollIntoView:
+      //   false       — не скроллить
+      //   true        — скроллить только если карточка не в удобной зоне (клик)
+      //   'always'    — скроллить всегда (переход по якорю)
       function applyMatchFocus(cardId, scrollIntoView) {
         const inputEl = document.getElementById('searchInput');
         const isSearchActive = inputEl && inputEl.value.trim() !== '';
@@ -762,8 +782,10 @@
         const dataTeams = el.getAttribute('data-teams') || '';
         highlightMatchTeams(dataTeams);
 
-        if (scrollIntoView) {
-          scrollCardToCenter(cardId);
+        if (scrollIntoView === 'always') {
+          scrollCardToCenter(cardId, false, 'auto');
+        } else if (scrollIntoView === true) {
+          scrollCardToCenter(cardId, true, 'smooth');
         }
       }
 
@@ -783,7 +805,7 @@
         applyMatchFocus(id, !!scrollIntoView);
       }
 
-      // Клик по карточке матча — переключить фокус и запомнить в URL.
+           // Клик по карточке матча — переключить фокус и запомнить в URL.
       document.addEventListener('click', function(e) {
         const card = e.target.closest('.match');
         if (!card) {
@@ -813,6 +835,9 @@
 
         const dataTeams = card.getAttribute('data-teams') || '';
         highlightMatchTeams(dataTeams);
+
+        // Плавно центрируем, если карточка не в удобной зоне
+        scrollCardToCenter(cardId, true, 'smooth');
 
         // Обновляем URL без перезагрузки и без прыжка
         try {
