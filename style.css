@@ -691,7 +691,7 @@ body.light .topbar-search .search-suggestions {
 .search-suggestion-name { flex: 1; }
 
 /* ===== Подсветка якорного матча ===== */
-.match:target {
+.match.match-focused {
   border-color: var(--neon);
   box-shadow: 0 0 30px rgba(0, 255, 213, 0.5);
   animation: targetPulse 2s ease-in-out;
