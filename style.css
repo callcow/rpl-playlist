@@ -1437,6 +1437,34 @@ body,
 .table-row:hover { background: rgba(0, 255, 213, 0.04); }
 .table-row:hover .table-club-name { color: var(--neon); }
 
+/* Подсветка строки выбранной команды */
+.table-row-active {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 213, 0.14) 0%,
+    rgba(168, 85, 247, 0.10) 100%
+  ) !important;
+  border-left: 3px solid var(--neon);
+  padding-left: 9px; /* было 12px, минус 3px на border-left */
+}
+
+.table-row-active .table-club-name {
+  color: var(--neon);
+  font-weight: 900;
+}
+
+.table-row-active .table-pos {
+  box-shadow: 0 0 12px rgba(0, 255, 213, 0.35);
+}
+
+body.light .table-row-active {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 168, 150, 0.12) 0%,
+    rgba(140, 60, 220, 0.08) 100%
+  ) !important;
+}
+
 .table-pos {
   display: flex;
   align-items: center;
