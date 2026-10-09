@@ -2049,7 +2049,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 09:15 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 09:21 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -2173,6 +2173,95 @@
         });
       }
 
+      // Подсветка команд текущего матча в таблице.
+      // dataTeams — строка вида "динамо москва спартак" (lowercase) или null для сброса.
+      function highlightMatchTeams(dataTeams) {
+        const rows = document.querySelectorAll('.table-row');
+        rows.forEach(function(row) {
+          row.classList.remove('table-row-match');
+          if (!dataTeams) return;
+
+          const nameEl = row.querySelector('.table-club-name');
+          if (!nameEl) return;
+
+          const rowTeam = nameEl.textContent.trim().toLowerCase();
+          if (rowTeam && dataTeams.indexOf(rowTeam) !== -1) {
+            row.classList.add('table-row-match');
+          }
+        });
+      }
+
+      // Определяет матч по якорю (#match-...) и подсвечивает его команды.
+      // При активном поиске — приоритет у поиска, матч не подсвечиваем.
+      function highlightFromHash() {
+        const inputEl = document.getElementById('searchInput');
+        const isSearchActive = inputEl && inputEl.value.trim() !== '';
+
+        if (isSearchActive) {
+          highlightMatchTeams(null);
+          return;
+        }
+
+        const hash = window.location.hash;
+        if (!hash || hash.indexOf('#match-') !== 0) {
+          highlightMatchTeams(null);
+          return;
+        }
+
+        const id = decodeURIComponent(hash.slice(1));
+        const el = document.getElementById(id);
+        if (!el) {
+          highlightMatchTeams(null);
+          return;
+        }
+
+        const dataTeams = el.getAttribute('data-teams') || '';
+        highlightMatchTeams(dataTeams);
+      }
+
+      // Клик по карточке матча — подсветить команды и запомнить матч в URL.
+      document.addEventListener('click', function(e) {
+        const card = e.target.closest('.match');
+        if (!card) {
+          // Клик мимо матча — снять подсветку матча (но не трогать поиск)
+          const inputEl = document.getElementById('searchInput');
+          if (!inputEl || inputEl.value.trim() === '') {
+            highlightMatchTeams(null);
+          }
+          return;
+        }
+
+        // Не перехватываем клики по ссылкам (команды, счёт, качество, 4K, тур)
+        if (e.target.closest('a')) return;
+
+        // Не перехватываем клики внутри кнопок поиска и т.п.
+        if (e.target.closest('button')) return;
+
+        const dataTeams = card.getAttribute('data-teams') || '';
+        const cardId = card.getAttribute('id') || '';
+        const inputEl = document.getElementById('searchInput');
+        const isSearchActive = inputEl && inputEl.value.trim() !== '';
+
+        // Если активен поиск — подсветку матча не включаем
+        if (isSearchActive) return;
+
+        highlightMatchTeams(dataTeams);
+
+        // Обновляем URL (без перезагрузки), чтобы можно было расшарить ссылку
+        if (cardId) {
+          try {
+            const newHash = '#' + cardId;
+            if (window.location.hash !== newHash) {
+              window.history.pushState(null, '', window.location.pathname + window.location.search + newHash);
+            }
+          } catch (err) { /* ignore */ }
+        }
+      });
+
+      // Экспорт в глобальную область (для вызова из других IIFE)
+      window.__highlightFromHash = highlightFromHash;
+      window.__highlightMatchTeams = highlightMatchTeams;
+
     // Подсветка команд текущего матча в таблице
       function highlightMatchTeams(dataTeams) {
         // dataTeams — строка "динамо москва спартак" (lowercase), либо null для сброса
@@ -2283,8 +2372,21 @@
         if (currentHeaderTeam) currentHeaderTeam.textContent = teamLabel;
         if (pastHeaderTeam) pastHeaderTeam.textContent = teamLabel;
 
-               // Подсветка строки команды в турнирной таблице
+                // Подсветка строки команды в турнирной таблице (поиск)
         highlightTableRow(matchedTeam ? matchedTeam.name : null);
+
+        // Приоритет: поиск > матч
+        if (matchedTeam) {
+          // При активном поиске убираем подсветку матча
+          if (typeof window.__highlightMatchTeams === 'function') {
+            window.__highlightMatchTeams(null);
+          }
+        } else {
+          // Поиск пуст — возвращаем подсветку матча по якорю (если есть)
+          if (typeof window.__highlightFromHash === 'function') {
+            window.__highlightFromHash();
+          }
+        }
 
         // Если поиск пуст — возвращаем подсветку команд текущего матча
         if (!matchedTeam && typeof window.__highlightFromHash === 'function') {
@@ -2428,7 +2530,7 @@
           hideSuggestions();
         }
       });
-      clearBtn.addEventListener('click', function() {
+    clearBtn.addEventListener('click', function() {
         input.value = '';
         hideSuggestions();
         setSearchLogo('');
@@ -2599,7 +2701,7 @@
       }
     })();
 
-               // ===== Прокрутка якорного матча в центр экрана + подсветка команд =====
+            // ===== Прокрутка якорного матча в центр + подсветка команд матча =====
     (function() {
       // Отключаем авто-восстановление скролла браузером
       if ('scrollRestoration' in history) {
@@ -2620,25 +2722,21 @@
 
       function onAnchorChange() {
         scrollToAnchor();
-        // Если есть функция подсветки — вызываем её
         if (typeof window.__highlightFromHash === 'function') {
           window.__highlightFromHash();
         }
       }
 
-      // Нативный скролл к якорю отключаем — браузер не должен прыгать сам
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
 
-      // Скроллим один раз, после того как все ресурсы загружены
       if (document.readyState === 'complete') {
         onAnchorChange();
       } else {
         window.addEventListener('load', onAnchorChange, { once: true });
       }
 
-      // На случай перехода по внутренней ссылке уже на открытой странице
       window.addEventListener('hashchange', onAnchorChange);
       })();
 
