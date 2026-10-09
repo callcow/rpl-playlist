@@ -89,7 +89,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 09:50 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 11:12 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -877,12 +877,13 @@
     })();
 
 
-                       // ===== Кнопка "Наверх" =====
+                          // ===== Кнопка "Наверх" =====
     (function() {
       const btn = document.getElementById('scrollTop');
       if (!btn) return;
 
       let ticking = false;
+      let tapTimer = null;
 
       function toggleBtn() {
         const shouldShow = window.scrollY > 300;
@@ -905,7 +906,21 @@
       document.addEventListener('scroll', onScroll, { passive: true });
       toggleBtn();
 
+      // Универсальная подсветка: вешаем класс .tapped на 180 мс
+      // и на touchstart, и на click — чтобы работало и на мобилке, и на десктопе
+      function flash() {
+        btn.classList.add('tapped');
+        if (tapTimer) clearTimeout(tapTimer);
+        tapTimer = setTimeout(function() {
+          btn.classList.remove('tapped');
+          tapTimer = null;
+        }, 180);
+      }
+
+      btn.addEventListener('touchstart', flash, { passive: true });
+      btn.addEventListener('mousedown', flash);
       btn.addEventListener('click', function() {
+        flash();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     })();
