@@ -566,7 +566,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 14:16 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 14:27 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -825,15 +825,37 @@
 
         const cleanUrl = url.pathname + url.search;
 
-                if (typeof hideSuggestions === 'function') hideSuggestions();
+        if (typeof hideSuggestions === 'function') hideSuggestions();
 
         const inputEl = document.getElementById('searchInput');
 
-        // 1) СНАЧАЛА применяем фильтр синхронно. К моменту вызова scrollTo
-        //    DOM уже в финальном состоянии — высота документа стабильна.
-        //    Если сделать наоборот (сначала scrollTo), filter() во время
-        //    анимации сдвинет layout → скролл сорвётся (ПК: прыжок,
-        //    мобилка: нативный smooth отменится).
+      // ===== СНАЧАЛА запускаем СВОЮ анимацию скролла на rAF =====
+        // Никакого scrollTo smooth — он отменяется при изменении высоты
+        // документа. Пишем собственную анимацию через requestAnimationFrame,
+        // которую НИЧЕГО не может отменить, кроме явной остановки.
+        const startY = window.scrollY;
+        const startTime = performance.now();
+        const DURATION = 500;
+
+        function easeOutCubic(t) {
+          return 1 - Math.pow(1 - t, 3);
+        }
+
+        let rafId = 0;
+        function step(now) {
+          const elapsed = now - startTime;
+          const t = Math.min(1, elapsed / DURATION);
+          const y = startY * (1 - easeOutCubic(t));
+          window.scrollTo(0, y);
+          if (t < 1) {
+            rafId = requestAnimationFrame(step);
+          }
+        }
+        rafId = requestAnimationFrame(step);
+
+        // ===== ЗАТЕМ применяем фильтр — параллельно с анимацией =====
+        // Анимация scroll не отменяется изменением display у элементов,
+        // потому что мы сами управляем scrollY в каждом кадре.
         if (inputEl) {
           window.__suppressSuggestions = true;
           inputEl.value = team;
@@ -841,20 +863,9 @@
           window.__suppressSuggestions = false;
         }
 
-        // 2) pushState — после фильтра, тоже на стабильном layout.
         try {
           window.history.pushState(null, '', cleanUrl);
         } catch (err) { /* ignore */ }
-
-        // 3) Плавный скролл — через ДВОЙНОЙ rAF. Первый кадр: браузер
-        //    перерисовывает страницу после filter() (layout уже посчитан).
-        //    Второй кадр: стартуем scrollTo на гарантированно стабильном
-        //    layout — ничего не блокирует и не отменяет анимацию.
-        requestAnimationFrame(function() {
-          requestAnimationFrame(function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          });
-        });
       });
       // ===== Клик по карточке матча (вне ссылок) — фокус + скролл к центру =====
       document.addEventListener('click', function(e) {
