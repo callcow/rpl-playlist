@@ -814,7 +814,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">09.10.2026 09:21 МСК</span><br>
+      Обновлено <span class="neon">09.10.2026 09:27 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -938,7 +938,7 @@
         });
       }
 
-      // Подсветка команд текущего матча в таблице.
+            // Подсветка команд текущего матча в таблице.
       // dataTeams — строка вида "динамо москва спартак" (lowercase) или null для сброса.
       function highlightMatchTeams(dataTeams) {
         const rows = document.querySelectorAll('.table-row');
@@ -956,71 +956,119 @@
         });
       }
 
-      // Определяет матч по якорю (#match-...) и подсвечивает его команды.
+      // Подсветка карточки матча (рамка + свечение).
+      // ОДНА карточка одновременно — с остальных снимаем.
+      function highlightMatchCard(cardId) {
+        const allCards = document.querySelectorAll('.match');
+        allCards.forEach(function(c) {
+          c.classList.remove('match-focused');
+        });
+
+        if (!cardId) return;
+
+        const el = document.getElementById(cardId);
+        if (el) {
+          el.classList.add('match-focused');
+        }
+      }
+
+      // Центрирование карточки по вертикали.
+      function scrollCardToCenter(cardId) {
+        if (!cardId) return;
+        const el = document.getElementById(cardId);
+        if (!el) return;
+        const y = el.getBoundingClientRect().top + window.pageYOffset - (window.innerHeight / 2) + (el.offsetHeight / 2);
+        window.scrollTo({ top: y, behavior: 'auto' });
+      }
+
+      // Применяет подсветку карточки + команд по id.
       // При активном поиске — приоритет у поиска, матч не подсвечиваем.
-      function highlightFromHash() {
+      function applyMatchFocus(cardId, scrollIntoView) {
         const inputEl = document.getElementById('searchInput');
         const isSearchActive = inputEl && inputEl.value.trim() !== '';
 
         if (isSearchActive) {
+          highlightMatchCard(null);
           highlightMatchTeams(null);
           return;
         }
 
-        const hash = window.location.hash;
-        if (!hash || hash.indexOf('#match-') !== 0) {
+        if (!cardId) {
+          highlightMatchCard(null);
           highlightMatchTeams(null);
           return;
         }
 
-        const id = decodeURIComponent(hash.slice(1));
-        const el = document.getElementById(id);
+        const el = document.getElementById(cardId);
         if (!el) {
+          highlightMatchCard(null);
           highlightMatchTeams(null);
           return;
         }
 
+        highlightMatchCard(cardId);
         const dataTeams = el.getAttribute('data-teams') || '';
         highlightMatchTeams(dataTeams);
+
+        if (scrollIntoView) {
+          scrollCardToCenter(cardId);
+        }
       }
 
-      // Клик по карточке матча — подсветить команды и запомнить матч в URL.
+      // По якорю (#match-...) — находит id и применяет фокус.
+      function highlightFromHash(scrollIntoView) {
+        const hash = window.location.hash;
+        if (!hash || hash.indexOf('#match-') !== 0) {
+          const inputEl = document.getElementById('searchInput');
+          const isSearchActive = inputEl && inputEl.value.trim() !== '';
+          if (!isSearchActive) {
+            highlightMatchCard(null);
+            highlightMatchTeams(null);
+          }
+          return;
+        }
+        const id = decodeURIComponent(hash.slice(1));
+        applyMatchFocus(id, !!scrollIntoView);
+      }
+
+      // Клик по карточке матча — переключить фокус и запомнить в URL.
       document.addEventListener('click', function(e) {
         const card = e.target.closest('.match');
         if (!card) {
-          // Клик мимо матча — снять подсветку матча (но не трогать поиск)
+          // Клик мимо матча — снять фокус с карточки, не трогая поиск
           const inputEl = document.getElementById('searchInput');
-          if (!inputEl || inputEl.value.trim() === '') {
+          const isSearchActive = inputEl && inputEl.value.trim() !== '';
+          if (!isSearchActive) {
+            highlightMatchCard(null);
             highlightMatchTeams(null);
           }
           return;
         }
 
-        // Не перехватываем клики по ссылкам (команды, счёт, качество, 4K, тур)
+        // Внутренние ссылки и кнопки не перехватываем — они работают как раньше
         if (e.target.closest('a')) return;
-
-        // Не перехватываем клики внутри кнопок поиска и т.п.
         if (e.target.closest('button')) return;
 
-        const dataTeams = card.getAttribute('data-teams') || '';
-        const cardId = card.getAttribute('id') || '';
         const inputEl = document.getElementById('searchInput');
         const isSearchActive = inputEl && inputEl.value.trim() !== '';
-
-        // Если активен поиск — подсветку матча не включаем
         if (isSearchActive) return;
 
+        const cardId = card.getAttribute('id') || '';
+        if (!cardId) return;
+
+        // Снимаем с прошлой, ставим на текущую
+        highlightMatchCard(cardId);
+
+        const dataTeams = card.getAttribute('data-teams') || '';
         highlightMatchTeams(dataTeams);
 
-        // Обновляем URL (без перезагрузки), чтобы можно было расшарить ссылку
-        if (cardId) {
-          try {
-            const newHash = '#' + cardId;
-            if (window.location.hash !== newHash) {
-              window.history.pushState(null, '', window.location.pathname + window.location.search + newHash);
-            }
-          } catch (err) { /* ignore */ }
-        }
+        // Обновляем URL без перезагрузки и без прыжка
+        try {
+          const newHash = '#' + cardId;
+          if (window.location.hash !== newHash) {
+            window.history.pushState(null, '', window.location.pathname + window.location.search + newHash);
+          }
+        } catch (err) { /* ignore */ }
       });
 
       // Экспорт в глобальную область (для вызова из других IIFE)
@@ -1466,43 +1514,32 @@
       }
     })();
 
-            // ===== Прокрутка якорного матча в центр + подсветка команд матча =====
+                  // ===== Прокрутка якорного матча в центр + подсветка команд матча =====
     (function() {
       // Отключаем авто-восстановление скролла браузером
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
 
-      function scrollToAnchor() {
-        const hash = window.location.hash;
-        if (!hash) return;
-
-        const id = decodeURIComponent(hash.slice(1));
-        const el = document.getElementById(id);
-        if (!el) return;
-
-        const y = el.getBoundingClientRect().top + window.pageYOffset - (window.innerHeight / 2) + (el.offsetHeight / 2);
-        window.scrollTo({ top: y, behavior: 'auto' });
-      }
-
-      function onAnchorChange() {
-        scrollToAnchor();
+      function onAnchorChange(scrollIntoView) {
         if (typeof window.__highlightFromHash === 'function') {
-          window.__highlightFromHash();
+          window.__highlightFromHash(scrollIntoView);
         }
       }
 
-      if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-      }
-
+      // При первой загрузке — если есть #match-..., центрируем и подсвечиваем
       if (document.readyState === 'complete') {
-        onAnchorChange();
+        onAnchorChange(true);
       } else {
-        window.addEventListener('load', onAnchorChange, { once: true });
+        window.addEventListener('load', function() {
+          onAnchorChange(true);
+        }, { once: true });
       }
 
-      window.addEventListener('hashchange', onAnchorChange);
+      // При смене hash (реальный переход, back/forward) — центрируем и подсвечиваем
+      window.addEventListener('hashchange', function() {
+        onAnchorChange(true);
+      });
       })();
 
     // ===== Таймер до появления ссылок на трансляцию =====
