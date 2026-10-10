@@ -50,7 +50,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">10.10.2026 18:03 МСК</span><br>
+      Обновлено <span class="neon">10.10.2026 18:09 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -438,16 +438,35 @@
         const team = url.searchParams.get('team');
         if (!team) return;
         e.preventDefault();
-        const input = document.getElementById('searchInput');
-        if (input) {
-          input.value = team;
-          input.dispatchEvent(new Event('input', { bubbles: true }));
-        }
+
+        const cleanUrl = url.pathname + url.search;
+
         hideSuggestions();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        setTimeout(function() {
-          try { window.history.replaceState(null, '', url.pathname + url.search); } catch (err) { /* ignore */ }
-        }, 400);
+
+        // Своя анимация скролла на rAF — её не может отменить браузер
+        // при изменении высоты документа (в отличие от scrollTo smooth).
+        const startY = window.scrollY;
+        if (startY > 0) {
+          const startTime = performance.now();
+          const DURATION = 500;
+          function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+          function step(now) {
+            const t = Math.min(1, (now - startTime) / DURATION);
+            window.scrollTo(0, startY * (1 - easeOutCubic(t)));
+            if (t < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        }
+
+        // Параллельно применяем фильтр — он раздувает страницу, но наша
+        // анимация это игнорирует, потому что мы каждый кадр ставим scrollY сами.
+        const inputEl = document.getElementById('searchInput');
+        if (inputEl) {
+          inputEl.value = team;
+          inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+
+        try { window.history.pushState(null, '', cleanUrl); } catch (err) { /* ignore */ }
       });
 
       const params = new URLSearchParams(window.location.search);
