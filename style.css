@@ -743,7 +743,12 @@ a.cal-team:hover { color: var(--neon); }
    ============================================================ */
 body, .topbar, .nav-tabs, .nav-tab, .match, .tour-card, .team-card,
 .cal-match, .search-box, .topbar-search input, .theme-toggle,
-.disclaimer, .footer { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+.disclaimer, .footer { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+
+@media (max-width: 600px) {
+  .match, .tour-card, .team-card, .cal-match { transition: none; }
+  .match:hover, .tour-card:hover, .team-card:hover, .cal-match:hover { transform: none; }
+}
 
 /* ============================================================
    ДВУХКОЛОНОЧНЫЙ LAYOUT НА ГЛАВНОЙ
@@ -869,21 +874,21 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
 @media (max-width: 600px) {
   body { padding: 0 12px 14px; }
 
-  .topbar {
+   .topbar {
     position: -webkit-sticky; position: sticky;
     top: 0;
     flex-wrap: wrap; align-items: center; align-content: center;
     padding: 8px 10px;
     z-index: 1000; isolation: isolate;
     background: var(--topbar-bg);
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     border-radius: 0 0 10px 10px;
     margin-left: -12px; margin-right: -12px;
     padding-left: 22px; padding-right: 22px;
     margin-bottom: 12px; margin-top: 0;
     min-height: 44px; gap: 8px;
+    will-change: transform;
+    transform: translateZ(0);
   }
-
   .brand-logo { width: 34px; height: 34px; border-radius: 6px; }
   .brand-name { font-size: 12px; }
   .brand-sub { font-size: 9px; letter-spacing: 1.2px; }
