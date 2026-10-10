@@ -50,7 +50,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">10.10.2026 18:48 МСК</span><br>
+      Обновлено <span class="neon">10.10.2026 19:02 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -700,6 +700,85 @@
         }
       }
       setTimeout(type, 1500);
+    })();
+
+    // ===== LIVE-статус для идущих матчей =====
+    (function() {
+      const MATCH_DURATION_MS = 125 * 60 * 1000;   // 2 часа + перерыв ~5 мин
+      const FIRST_HALF_MS = 45 * 60 * 1000;
+      const BREAK_MS = 15 * 60 * 1000;             // перерыв
+      const SECOND_HALF_START_MS = FIRST_HALF_MS + BREAK_MS;
+
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+      function getMatchMinute(elapsedMs) {
+        if (elapsedMs < 0) return null;
+        if (elapsedMs <= FIRST_HALF_MS) {
+          const m = Math.floor(elapsedMs / 60000);
+          return m < 1 ? '1' : String(m);
+        }
+        if (elapsedMs < SECOND_HALF_START_MS) {
+          return 'перерыв';
+        }
+        const inSecond = elapsedMs - SECOND_HALF_START_MS;
+        if (inSecond <= 45 * 60 * 1000) {
+          const m = 45 + Math.floor(inSecond / 60000);
+          return String(m);
+        }
+        // добавленное время
+        const addedMs = inSecond - 45 * 60 * 1000;
+        const addedMin = Math.floor(addedMs / 60000);
+        if (addedMin >= 1 && addedMin <= 10) return '90+';
+        return '90+';
+      }
+
+      const liveMatches = [];
+      document.querySelectorAll('.match').forEach(function(card) {
+        const timerEl = card.querySelector('.quality-timer[data-match-start]');
+        if (!timerEl) return;
+        const iso = timerEl.getAttribute('data-match-start');
+        if (!iso) return;
+        const startMs = Date.parse(iso);
+        if (isNaN(startMs)) return;
+        // Матч уже завершён (есть счёт и статус "Завершён") — пропускаем
+        if (card.querySelector('.match-status')) return;
+        liveMatches.push({ card: card, startMs: startMs });
+      });
+
+      if (liveMatches.length === 0) return;
+
+      function updateLive() {
+        const now = Date.now();
+        liveMatches.forEach(function(item) {
+          const elapsed = now - item.startMs;
+          const endMs = MATCH_DURATION_MS;
+
+          // Убираем старый бейдж, если был
+          let badge = item.card.querySelector('.match-live-badge');
+
+          if (elapsed < 0 || elapsed > endMs) {
+            if (badge) badge.remove();
+            return;
+          }
+
+          const minute = getMatchMinute(elapsed);
+          if (!badge) {
+            badge = document.createElement('div');
+            badge.className = 'match-live-badge';
+            const scoreBlock = item.card.querySelector('.match-score-block');
+            if (scoreBlock) scoreBlock.appendChild(badge);
+            else item.card.querySelector('.match-top').appendChild(badge);
+          }
+          if (minute === 'перерыв') {
+            badge.innerHTML = '<span class="live-dot"></span>ПЕРЕРЫВ';
+          } else {
+            badge.innerHTML = '<span class="live-dot"></span>LIVE ' + minute + '\\'';
+          }
+        });
+      }
+
+      updateLive();
+      setInterval(updateLive, 30000);
     })();
 
   </script>
