@@ -639,6 +639,7 @@ a.cal-tour-title:hover { background: rgba(168, 85, 247, 0.2); border-color: var(
 a.cal-team:hover { color: var(--neon); }
 .cal-team .team-logo { width: 24px; height: 24px; padding: 2px; flex-shrink: 0; }
 .cal-team-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 14px; font-weight: 800; }
+.cal-attendance { font-size: 10px; color: var(--text-muted); font-weight: 600; margin-top: 2px; letter-spacing: 0.3px; }
 
 .cal-score {
   display: flex; flex-direction: column;
