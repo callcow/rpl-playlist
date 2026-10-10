@@ -855,7 +855,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">10.10.2026 17:42 МСК</span><br>
+      Обновлено <span class="neon">10.10.2026 17:52 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1247,8 +1247,10 @@
           input.dispatchEvent(new Event('input', { bubbles: true }));
         }
         hideSuggestions();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         try { window.history.pushState(null, '', url.pathname + url.search); } catch (err) { /* ignore */ }
+        requestAnimationFrame(function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
       });
 
       const params = new URLSearchParams(window.location.search);
