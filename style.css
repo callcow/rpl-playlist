@@ -466,6 +466,35 @@ a.match-score:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 
   font-size: 15px; font-weight: 800;
 }
 
+/* ===== Блок счёта + статус «Завершён» ===== */
+.match-score-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 76px;
+}
+
+.match-status {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: rgba(100, 116, 139, 0.1);
+  border: 1px solid rgba(100, 116, 139, 0.25);
+  border-radius: 3px;
+  padding: 2px 6px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+body.light .match-status {
+  color: var(--text-dim);
+  background: rgba(100, 116, 139, 0.08);
+  border-color: rgba(100, 116, 139, 0.2);
+}
+
 .match-bottom {
   display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 10px;
