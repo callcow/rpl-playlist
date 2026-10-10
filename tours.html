@@ -50,7 +50,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">10.10.2026 18:09 МСК</span><br>
+      Обновлено <span class="neon">10.10.2026 18:14 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -398,10 +398,11 @@
       }
 
       input.addEventListener('input', function() {
-        showSuggestions(input.value.trim());
+        if (!window.__suppressSuggestions) {
+          showSuggestions(input.value.trim());
+        }
         filter();
       });
-
       input.addEventListener('keydown', function(e) {
         if (e.key !== 'Enter') return;
         e.preventDefault();
@@ -463,8 +464,14 @@
         const inputEl = document.getElementById('searchInput');
         if (inputEl) {
           inputEl.value = team;
+          window.__suppressSuggestions = true;
           inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+          window.__suppressSuggestions = false;
         }
+
+        // Скрываем выпадашку ПОСЛЕ обработки input — иначе input-хендлер
+        // снова её откроет (он вызывает showSuggestions).
+        hideSuggestions();
 
         try { window.history.pushState(null, '', cleanUrl); } catch (err) { /* ignore */ }
       });
