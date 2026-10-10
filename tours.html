@@ -73,7 +73,7 @@
 <a class="tour-card tour-card-large" href="tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html">
         <div class="tour-card-info">
           <div class="tour-name-big">10-ый тур</div>
-          <div class="tour-dates">с 9 по 11 окт</div>
+          <div class="tour-dates">с 10 по 11 окт</div>
         </div>
         <span class="arrow">→</span>
       </a>
@@ -89,7 +89,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">10.10.2026 09:48 МСК</span><br>
+      Обновлено <span class="neon">10.10.2026 09:55 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -331,71 +331,11 @@
         applyMatchFocus(id, mode);
       }
 
-                                 // ===== SPA-навигация по ?team= (плавный скролл вверх, без перезагрузки) =====
+      // Клик по карточке матча — переключить фокус и запомнить в URL.
       document.addEventListener('click', function(e) {
-        const link = e.target.closest('a[href*="index.html?team="]');
-        if (!link) return;
-
-        const path = window.location.pathname;
-        const isIndexPage = path === '/' || path.endsWith('/index.html') || path.endsWith('/rpl-playlist/');
-        if (!isIndexPage) return;
-
-        const url = new URL(link.href, window.location.origin);
-        const team = url.searchParams.get('team');
-        if (!team) return;
-
-        e.preventDefault();
-
-        const cleanUrl = url.pathname + url.search;
-
-        if (typeof hideSuggestions === 'function') hideSuggestions();
-
-        const inputEl = document.getElementById('searchInput');
-
-      // ===== СНАЧАЛА запускаем СВОЮ анимацию скролла на rAF =====
-        // Никакого scrollTo smooth — он отменяется при изменении высоты
-        // документа. Пишем собственную анимацию через requestAnimationFrame,
-        // которую НИЧЕГО не может отменить, кроме явной остановки.
-        const startY = window.scrollY;
-        const startTime = performance.now();
-        const DURATION = 500;
-
-        function easeOutCubic(t) {
-          return 1 - Math.pow(1 - t, 3);
-        }
-
-        let rafId = 0;
-        function step(now) {
-          const elapsed = now - startTime;
-          const t = Math.min(1, elapsed / DURATION);
-          const y = startY * (1 - easeOutCubic(t));
-          window.scrollTo(0, y);
-          if (t < 1) {
-            rafId = requestAnimationFrame(step);
-          }
-        }
-        rafId = requestAnimationFrame(step);
-
-        // ===== ЗАТЕМ применяем фильтр — параллельно с анимацией =====
-        // Анимация scroll не отменяется изменением display у элементов,
-        // потому что мы сами управляем scrollY в каждом кадре.
-        if (inputEl) {
-          window.__suppressSuggestions = true;
-          inputEl.value = team;
-          inputEl.dispatchEvent(new Event('input', { bubbles: true }));
-          window.__suppressSuggestions = false;
-        }
-
-        try {
-          window.history.pushState(null, '', cleanUrl);
-        } catch (err) { /* ignore */ }
-      });
-      // ===== Клик по карточке матча (вне ссылок) — фокус + скролл к центру =====
-      document.addEventListener('click', function(e) {
-        if (e.defaultPrevented) return;
-
         const card = e.target.closest('.match');
         if (!card) {
+          // Клик мимо матча — снять фокус с карточки, не трогая поиск
           const inputEl = document.getElementById('searchInput');
           const isSearchActive = inputEl && inputEl.value.trim() !== '';
           if (!isSearchActive) {
@@ -405,6 +345,7 @@
           return;
         }
 
+        // Внутренние ссылки и кнопки не перехватываем — они работают как раньше
         if (e.target.closest('a')) return;
         if (e.target.closest('button')) return;
 
@@ -415,24 +356,22 @@
         const cardId = card.getAttribute('id') || '';
         if (!cardId) return;
 
+        // Снимаем с прошлой, ставим на текущую
         highlightMatchCard(cardId);
+
         const dataTeams = card.getAttribute('data-teams') || '';
         highlightMatchTeams(dataTeams);
 
+        // Плавно центрируем, если карточка не в удобной зоне
         scrollCardToCenter(cardId, true, 'smooth');
 
+        // Обновляем URL без перезагрузки и без прыжка
         try {
           const newHash = '#' + cardId;
           if (window.location.hash !== newHash) {
             window.history.pushState(null, '', window.location.pathname + window.location.search + newHash);
           }
         } catch (err) { /* ignore */ }
-      });
-
-      // Универсальная плавная прокрутка вверх для всех переходов ?team=...
-      // (в т.ч. из карточек матча, таблицы и т.д.)
-      window.addEventListener('popstate', function() {
-        // При навигации назад/вперёд не трогаем скролл
       });
 
         // Экспорт в глобальную область (для вызова из других IIFE)
@@ -534,9 +473,6 @@
       }
 
       function showSuggestions(query) {
-        // Пока идёт программная установка input.value — не показываем подсказки
-        if (window.__suppressSuggestions) return;
-
         if (!query) {
           hideSuggestions();
           return;
@@ -546,6 +482,7 @@
         const matches = allTeams.filter(function(t) {
           return t.name.toLowerCase().includes(q);
         }).slice(0, 8);
+
         if (matches.length === 0) {
           hideSuggestions();
           return;
@@ -667,8 +604,41 @@
         }
         input.focus();
       });
-                     // ===== SPA-навигация перенесена выше =====
-      // (обработчик ?team= теперь срабатывает раньше фокуса карточки)
+             // ===== SPA-навигация: клик по ссылке с ?team= не перезагружает страницу =====
+      // (для ?filter=4k оставляем обычную перезагрузку — так надёжнее)
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="index.html?team="]');
+        if (!link) return;
+
+        // Только на главной (index.html / "/")
+        const path = window.location.pathname;
+        const isIndexPage = path === '/' || path.endsWith('/index.html') || path.endsWith('/rpl-playlist/');
+        if (!isIndexPage) return;
+
+        const url = new URL(link.href, window.location.origin);
+        const team = url.searchParams.get('team');
+        if (!team) return;
+
+        e.preventDefault();
+
+        const input = document.getElementById('searchInput');
+        const suggestBox = document.getElementById('searchSuggestions');
+        const clearBtn = document.getElementById('searchClear');
+
+        if (input) {
+          input.value = team;
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+
+                // Скрываем выпадашку подсказок после выбора
+        hideSuggestions();
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        try {
+          window.history.pushState(null, '', url.pathname + url.search);
+        } catch (err) { /* ignore */ }
+      });
 
       const params = new URLSearchParams(window.location.search);
       const teamParam = params.get('team');
@@ -907,13 +877,12 @@
     })();
 
 
-                          // ===== Кнопка "Наверх" =====
+                       // ===== Кнопка "Наверх" =====
     (function() {
       const btn = document.getElementById('scrollTop');
       if (!btn) return;
 
       let ticking = false;
-      let tapTimer = null;
 
       function toggleBtn() {
         const shouldShow = window.scrollY > 300;
@@ -936,21 +905,7 @@
       document.addEventListener('scroll', onScroll, { passive: true });
       toggleBtn();
 
-      // Универсальная подсветка: вешаем класс .tapped на 180 мс
-      // и на touchstart, и на click — чтобы работало и на мобилке, и на десктопе
-      function flash() {
-        btn.classList.add('tapped');
-        if (tapTimer) clearTimeout(tapTimer);
-        tapTimer = setTimeout(function() {
-          btn.classList.remove('tapped');
-          tapTimer = null;
-        }, 180);
-      }
-
-      btn.addEventListener('touchstart', flash, { passive: true });
-      btn.addEventListener('mousedown', flash);
       btn.addEventListener('click', function() {
-        flash();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     })();
