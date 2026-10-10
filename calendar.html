@@ -855,7 +855,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">10.10.2026 19:37 МСК</span><br>
+      Обновлено <span class="neon">10.10.2026 19:42 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1452,40 +1452,31 @@
       timers.forEach(function(el) { updateTimer(el, el.startMs); });
     })();
 
-   (function() {
+    (function() {
       const btn = document.getElementById('scrollTop');
       if (!btn) return;
-      let ticking = false;
 
-      // Гистерезис: показываем после 400, скрываем ниже 250.
-      // Плюс — блокируем любые изменения во время нашей анимации скролла.
       const SHOW_AT = 400;
       const HIDE_AT = 250;
-      let locked = false;
+      let animating = false;
 
       function toggleBtn() {
+        if (animating) return;
         const y = window.scrollY || window.pageYOffset || 0;
-        if (!locked) {
-          if (!btn.classList.contains('visible') && y > SHOW_AT) {
-            btn.classList.add('visible');
-          } else if (btn.classList.contains('visible') && y < HIDE_AT) {
-            btn.classList.remove('visible');
-          }
+        if (y > SHOW_AT) {
+          btn.classList.add('visible');
+        } else if (y < HIDE_AT) {
+          btn.classList.remove('visible');
         }
-        ticking = false;
       }
 
-      function onScroll() {
-        if (!ticking) { window.requestAnimationFrame(toggleBtn); ticking = true; }
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('scroll', toggleBtn, { passive: true });
+      document.addEventListener('scroll', toggleBtn, { passive: true });
       toggleBtn();
 
-      btn.addEventListener('click', function() {
-        // Блокируем toggleBtn на время анимации — иначе она мерцает при скролле
-        locked = true;
-        btn.classList.add('visible');
+      function scrollToTop() {
+        if (animating) return;
+        animating = true;
 
         const startY = window.scrollY || window.pageYOffset || 0;
         const startTime = performance.now();
@@ -1495,17 +1486,26 @@
 
         function step(now) {
           const t = Math.min(1, (now - startTime) / DURATION);
-          const y = startY * (1 - easeOutCubic(t));
-          window.scrollTo(0, y);
+          window.scrollTo(0, startY * (1 - easeOutCubic(t)));
           if (t < 1) {
             requestAnimationFrame(step);
           } else {
-            locked = false;
-            // Принудительно прячем кнопку — мы уже на верху
+            animating = false;
             btn.classList.remove('visible');
           }
         }
         requestAnimationFrame(step);
+      }
+
+      // Клик + touch: на мобилке click иногда не срабатывает после CSS :active,
+      // поэтому ловим pointerdown (без задержки) с fallback на click.
+      btn.addEventListener('pointerdown', function(e) {
+        e.preventDefault();
+        scrollToTop();
+      });
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        scrollToTop();
       });
     })();
 
