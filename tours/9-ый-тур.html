@@ -580,7 +580,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">10.10.2026 19:48 МСК</span><br>
+      Обновлено <span class="neon">10.10.2026 19:52 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1222,15 +1222,25 @@
         requestAnimationFrame(step);
       }
 
-      // Клик + touch: на мобилке click иногда не срабатывает после CSS :active,
-      // поэтому ловим pointerdown (без задержки) с fallback на click.
+    // Клик + touch: на мобилке click иногда не срабатывает после CSS :active,
+      // поэтому ловим pointerdown (без задержки) + держим подсветку пока палец на кнопке.
       btn.addEventListener('pointerdown', function(e) {
         e.preventDefault();
+        btn.classList.add('pressed');
         scrollToTop();
+      });
+      btn.addEventListener('pointerup', function() {
+        btn.classList.remove('pressed');
+      });
+      btn.addEventListener('pointercancel', function() {
+        btn.classList.remove('pressed');
+      });
+      btn.addEventListener('pointerleave', function() {
+        btn.classList.remove('pressed');
       });
       btn.addEventListener('click', function(e) {
         e.preventDefault();
-        scrollToTop();
+        if (!animating) scrollToTop();
       });
     })();
 
@@ -1317,6 +1327,39 @@
 
       if (liveMatches.length === 0) return;
 
+      // ===== Поднимаем live-матчи наверх списка =====
+      // Матчи текущего тура лежат в #matchesContainer — внутри него сортируем:
+      // сначала идущие (live), потом остальные, сохраняя исходный порядок.
+      (function reorderLiveMatches() {
+        const now = Date.now();
+        const container = document.getElementById('matchesContainer');
+        if (!container) return;
+
+        const cards = Array.from(container.querySelectorAll('.match'));
+        const liveSet = new Set();
+        cards.forEach(function(card) {
+          const timerEl = card.querySelector('.quality-timer[data-match-start]');
+          if (!timerEl) return;
+          const startMs = Date.parse(timerEl.getAttribute('data-match-start') || '');
+          if (isNaN(startMs)) return;
+          if (now >= startMs && now < startMs + MATCH_DURATION_MS) {
+            liveSet.add(card);
+          }
+        });
+
+        if (liveSet.size === 0) return;
+
+        // Удаляем все карточки и вставляем заново: сначала live, потом остальные
+        const liveArr = cards.filter(function(c) { return liveSet.has(c); });
+        const restArr = cards.filter(function(c) { return !liveSet.has(c); });
+
+        // Сохраняем порядок: live идут в том же порядке, что были
+        // (или можно сортировать по startMs — сейчас сохраняем исходный)
+        container.innerHTML = '';
+        liveArr.concat(restArr).forEach(function(c) {
+          container.appendChild(c);
+        });
+      })();
       function updateLive() {
         const now = Date.now();
         liveMatches.forEach(function(item) {
