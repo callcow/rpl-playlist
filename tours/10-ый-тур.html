@@ -580,7 +580,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">10.10.2026 19:56 МСК</span><br>
+      Обновлено <span class="neon">10.10.2026 20:04 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1285,10 +1285,11 @@
     // ===== LIVE-статус для идущих матчей =====
     (function() {
       const MATCH_DURATION_MS = 125 * 60 * 1000;   // 2 часа + перерыв ~5 мин
+      const LIVE_DELAY_MS = 3 * 60 * 1000;         // LIVE появляется через 3 мин после старта
       const FIRST_HALF_MS = 45 * 60 * 1000;
       const BREAK_MS = 15 * 60 * 1000;             // перерыв
       const SECOND_HALF_START_MS = FIRST_HALF_MS + BREAK_MS;
-
+      
       function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
       function getMatchMinute(elapsedMs) {
@@ -1342,7 +1343,7 @@
           if (!timerEl) return;
           const startMs = Date.parse(timerEl.getAttribute('data-match-start') || '');
           if (isNaN(startMs)) return;
-          if (now >= startMs && now < startMs + MATCH_DURATION_MS) {
+          if (now >= startMs + LIVE_DELAY_MS && now < startMs + MATCH_DURATION_MS) {
             liveSet.add(card);
           }
         });
@@ -1360,6 +1361,7 @@
           container.appendChild(c);
         });
       })();
+      
       function updateLive() {
         const now = Date.now();
         liveMatches.forEach(function(item) {
@@ -1369,11 +1371,13 @@
           // Убираем старый бейдж, если был
           let badge = item.card.querySelector('.match-live-badge');
 
-          if (elapsed < 0 || elapsed > endMs) {
+          // LIVE появляется только через LIVE_DELAY_MS после старта
+          if (elapsed < LIVE_DELAY_MS || elapsed > endMs) {
             if (badge) badge.remove();
             return;
           }
 
+          // Отсчёт минуты ведём от старта матча (не от момента показа бейджа)
           const minute = getMatchMinute(elapsed);
           if (!badge) {
             badge = document.createElement('div');
