@@ -44,7 +44,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">10.10.2026 19:07 МСК</span><br>
+      Обновлено <span class="neon">10.10.2026 19:37 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -641,21 +641,61 @@
       timers.forEach(function(el) { updateTimer(el, el.startMs); });
     })();
 
-    (function() {
+   (function() {
       const btn = document.getElementById('scrollTop');
       if (!btn) return;
       let ticking = false;
+
+      // Гистерезис: показываем после 400, скрываем ниже 250.
+      // Плюс — блокируем любые изменения во время нашей анимации скролла.
+      const SHOW_AT = 400;
+      const HIDE_AT = 250;
+      let locked = false;
+
       function toggleBtn() {
-        btn.classList.toggle('visible', window.scrollY > 300);
+        const y = window.scrollY || window.pageYOffset || 0;
+        if (!locked) {
+          if (!btn.classList.contains('visible') && y > SHOW_AT) {
+            btn.classList.add('visible');
+          } else if (btn.classList.contains('visible') && y < HIDE_AT) {
+            btn.classList.remove('visible');
+          }
+        }
         ticking = false;
       }
+
       function onScroll() {
         if (!ticking) { window.requestAnimationFrame(toggleBtn); ticking = true; }
       }
+
       window.addEventListener('scroll', onScroll, { passive: true });
-      document.addEventListener('scroll', onScroll, { passive: true });
       toggleBtn();
-      btn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+      btn.addEventListener('click', function() {
+        // Блокируем toggleBtn на время анимации — иначе она мерцает при скролле
+        locked = true;
+        btn.classList.add('visible');
+
+        const startY = window.scrollY || window.pageYOffset || 0;
+        const startTime = performance.now();
+        const DURATION = 500;
+
+        function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+        function step(now) {
+          const t = Math.min(1, (now - startTime) / DURATION);
+          const y = startY * (1 - easeOutCubic(t));
+          window.scrollTo(0, y);
+          if (t < 1) {
+            requestAnimationFrame(step);
+          } else {
+            locked = false;
+            // Принудительно прячем кнопку — мы уже на верху
+            btn.classList.remove('visible');
+          }
+        }
+        requestAnimationFrame(step);
+      });
     })();
 
     (function() {
