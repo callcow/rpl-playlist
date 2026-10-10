@@ -534,9 +534,7 @@ body.light .match-status {
 .quality-timer .timer-unit { font-size: 8px; font-weight: 800; letter-spacing: 0; margin-left: 1px; color: #fff; opacity: 0.85; }
 .quality-timer.expiring { background: rgba(0, 255, 213, 0.15); border-color: var(--neon); box-shadow: 0 0 12px rgba(0, 255, 213, 0.35); color: var(--neon); }
 
-.match-meta { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-start; gap: 4px 6px; font-size: 11px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.3px; }
-.match-meta .meta-item { white-space: nowrap; }
-.match-meta .meta-item:first-child { flex: 1 1 100%; }
+.match-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-size: 11px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.3px; }
 .meta-sep { color: var(--text-muted); opacity: 0.5; }
 
 /* ============================================================
