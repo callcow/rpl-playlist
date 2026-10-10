@@ -92,7 +92,15 @@ body {
   }
 }
 @media (hover: none) and (pointer: coarse) {
-  .scroll-top:active { transition: background 0.05s, border-color 0.05s, color 0.05s, box-shadow 0.05s; }
+  .scroll-top:active,
+  .scroll-top.pressed {
+    transform: translateY(0) scale(0.92);
+    background: var(--neon);
+    border-color: var(--neon);
+    color: #05060d;
+    box-shadow: 0 0 24px rgba(0, 255, 213, 0.8);
+    transition: none;
+  }
 }
 
 /* ============================================================
