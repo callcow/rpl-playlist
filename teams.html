@@ -44,7 +44,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">10.10.2026 17:57 МСК</span><br>
+      Обновлено <span class="neon">10.10.2026 18:03 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -260,12 +260,14 @@
         const dataTeams = card.getAttribute('data-teams') || '';
         highlightMatchTeams(dataTeams);
         scrollCardToCenter(cardId, true, 'smooth');
-        try {
-          const newHash = '#' + cardId;
-          if (window.location.hash !== newHash) {
-            window.history.pushState(null, '', window.location.pathname + window.location.search + newHash);
-          }
-        } catch (err) { /* ignore */ }
+        setTimeout(function() {
+          try {
+            const newHash = '#' + cardId;
+            if (window.location.hash !== newHash) {
+              window.history.replaceState(null, '', window.location.pathname + window.location.search + newHash);
+            }
+          } catch (err) { /* ignore */ }
+        }, 500);
       });
 
       window.__highlightFromHash = highlightFromHash;
